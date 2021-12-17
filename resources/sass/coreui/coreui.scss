@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans');
+
+@import "~@coreui/coreui/scss/functions";
+@import "variables";
+@import "~@coreui/coreui/scss/mixins";
+@import "~@coreui/coreui/scss/coreui";
+
+input,input:active,input:focus,
+textarea,textarea:active,textarea:focus,
+.form-control,.form-control:active,.form-control:focus,
+.btn,.btn:active,.btn:focus,
+a,a:active,a:focus
+{
+  box-shadow: none;
+  outline: none;
+}
+
+h1,h2,h3{
+  font-weight: 600;
+}
+
+body{
+  font-family: "Work Sans", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.c-main .container-fluid {
+  padding: auto 16px;
+}
+
+[class^=bg-] {
+  color: initial;
+}
