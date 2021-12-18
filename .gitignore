@@ -6,6 +6,8 @@
 .env
 .env.backup
 .phpunit.result.cache
+/faicons.php
+/faicons0.html
 docker-compose.override.yml
 Homestead.json
 Homestead.yaml

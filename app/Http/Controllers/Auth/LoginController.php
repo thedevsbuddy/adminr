@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -36,5 +37,25 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $fieldType = filter_var($request->get('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if(auth()->attempt(array($fieldType => $request->get('email'), 'password' => $request->get('password'))))
+        {
+            if (auth()->check() && auth()->user()->hasRole(['admin', 'super_admin'])){
+                return redirect()->route(config('app.route_prefix').'.index');
+            } else {
+                return redirect()->route('index');
+            }
+        } else {
+            return back()->with('error','Email-Address And Password Are Wrong.');
+        }
     }
 }

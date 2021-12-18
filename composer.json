@@ -12,7 +12,9 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
-        "thedevsbuddy/adminr-core": "^0.1.0"
+        "spatie/laravel-permission": "^5.4",
+        "thedevsbuddy/adminr-core": "^0.1.0",
+      "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -27,7 +29,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Http/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

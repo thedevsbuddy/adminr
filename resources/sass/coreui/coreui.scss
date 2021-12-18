@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans');
 
 @import "~@coreui/coreui/scss/functions";
@@ -29,4 +30,54 @@ body{
 
 [class^=bg-] {
   color: initial;
+}
+.c-sidebar-nav-icon{
+  display: inline-block;
+  i {
+    display: block;
+    margin-top: -4px;
+  }
+  img {
+    height: 16px;
+    width: 16px;
+    object-fit: cover;
+    object-position: center;
+    display: inline-block;
+    margin-top: -10px;
+  }
+  svg {
+    flex: 0 0 56px;
+    font-size: 1.09375rem;
+    text-align: center;
+    transition: 0.3s;
+    margin-top: -10px;
+    height: 20px;
+    width: 20px;
+  }
+}
+
+select, .custom-control-label {
+  cursor: pointer !important;
+}
+
+.select2-container--default{
+  display: block;
+  width: 100%;
+
+  .select2-selection--single {
+    height: 35px !important;
+    border-color: #d8dbe0 !important;
+
+    .select2-selection__rendered {
+      line-height: 35px !important;
+    }
+    .select2-selection__arrow {
+      height: 35px !important;
+      right: 4px;
+    }
+  }
+  .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: $primary;
+    color: $white;
+  }
 }

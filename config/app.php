@@ -28,6 +28,11 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    /**
+     * Route prefix for AdminR
+     */
+    "route_prefix" => env('ADMINR_ROUTE_PREFIX', 'adminr'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

@@ -14,10 +14,10 @@
     </div>
 </template>
 
-<script setup>
+<script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
+        setup: () => ({
+            greeting: 'Hello World from Vue 3!'
+        })
     }
 </script>
