@@ -18905,3 +18905,7 @@ select, .custom-control-label {
   background-color: #292a3d;
   color: #fff;
 }
+
+#toast-container > .toast-error {
+  background-color: #BD362F;
+}

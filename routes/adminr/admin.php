@@ -15,11 +15,10 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 
-Route::group(['middleware' => ["web", "auth", "admin"], 'as' => 'admin.', 'prefix' => config('app.route_prefix').'/manage'], function (){
-    $liquidRoutes = json_decode(File::get(__DIR__ . '/admin/routes.json'));
-    foreach ($liquidRoutes as $key => $liquidRoute){
-        $routes = json_decode(File::get(__DIR__ . '/admin/' . $key . '/' .$liquidRoute));
-//        dump($routes);
+Route::group(['middleware' => ["web", "auth", "admin"], 'as' => config('app.route_prefix').'.', 'prefix' => config('app.route_prefix').'/manage'], function (){
+    $adminrRoutes = json_decode(File::get(__DIR__ . '/admin/routes.json'));
+    foreach ($adminrRoutes as $key => $adminrRoute){
+        $routes = json_decode(File::get(__DIR__ . '/admin/' . $key . '/' .$adminrRoute));
         foreach ($routes as $index => $route){
             if($route->method == 'get') {
                 Route::get($route->route, [$route->controller, $route->action])

@@ -6,6 +6,7 @@ use App\Models\Setting;
 use Devsbuddy\AdminrCore\Http\Controllers\AdminrController;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 
 
 class SettingController extends AdminrController
@@ -15,9 +16,9 @@ class SettingController extends AdminrController
         try {
             return view('admin.settings.index');
         } catch (\Exception $e){
-            return back()->with('error', 'Error: ' . $e->getMessage());
+            return $this->backError('Error: ' . $e->getMessage());
         } catch (\Error $e){
-            return back()->with('error', 'Error: ' . $e->getMessage());
+            return $this->backError('Error: ' . $e->getMessage());
         }
     }
 
@@ -28,7 +29,7 @@ class SettingController extends AdminrController
                 $setting = Setting::where('option', $key)->first();
                 if ($input instanceof UploadedFile){
                     if($request->hasFile($key)){
-                        $value = $this->uploadFile($input, 'settings')->getFileName();
+                        $value = $this->uploadFile($input, 'settings', Str::snake($key).'_')->getFileName();
                         if($setting){
                             $this->deleteStorageFile($setting->value);
                         }
@@ -51,11 +52,11 @@ class SettingController extends AdminrController
                 }
             }
 
-            return back()->with('success', 'Setting updated successfully');
+            return $this->backSuccess('Setting updated successfully');
         } catch (\Exception $e){
-            return back()->with('error', 'Error: ' . $e->getMessage());
+            return $this->backError('Error: ' . $e->getMessage());
         } catch (\Error $e){
-            return back()->with('error', 'Error: ' . $e->getMessage());
+            return $this->backError('Error: ' . $e->getMessage());
         }
     }
 }

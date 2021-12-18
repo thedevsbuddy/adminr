@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Devsbuddy\AdminrCore\Traits\HasExcludeScope;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,7 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasExcludeScope;
 
     /**
      * The attributes that are mass assignable.
@@ -85,7 +86,7 @@ class User extends Authenticatable
      * Scope the model query to certain roles only.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
+     * @param string|array $roles
      * @param string $guard
      *
      * @return \Illuminate\Database\Eloquent\Builder

@@ -25,9 +25,9 @@ class UserController extends AdminrController
 
             return view('admin.users.index', compact('users'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error : ' . $e->getMessage());
+            return $this->backError('Error : ' . $e->getMessage());
         } catch (\Error $e) {
-            return back()->with('error', 'Error : ' . $e->getMessage());
+            return $this->backError('Error : ' . $e->getMessage());
         }
     }
 
@@ -42,9 +42,9 @@ class UserController extends AdminrController
             $roles = Role::get();
             return view('admin.users.create', compact('roles'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error : ' . $e->getMessage());
+            return $this->backError('Error : ' . $e->getMessage());
         } catch (\Error $e) {
-            return back()->with('error', 'Error : ' . $e->getMessage());
+            return $this->backError('Error : ' . $e->getMessage());
         }
     }
 
@@ -84,12 +84,11 @@ class UserController extends AdminrController
 
             $user->assignRole(role($request->get('role')));
 
-            return redirect()->route(config('app.route_prefix') . '.users.index')
-                ->with('success', 'User created successfully!');
+            return $this->redirectSuccess(route(config('app.route_prefix') . '.users.index'), 'User created successfully!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Error : ' . $e->getMessage());
+            return $this->backError('Error : ' . $e->getMessage());
         } catch (\Error $e) {
-            return back()->with('error', 'Error : ' . $e->getMessage());
+            return $this->backError('Error : ' . $e->getMessage());
         }
     }
 
@@ -106,9 +105,9 @@ class UserController extends AdminrController
             $roles = Role::get();
             return view('admin.users.edit', compact('user', 'roles'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error : ' . $e->getMessage());
+            return $this->backError('Error : ' . $e->getMessage());
         } catch (\Error $e) {
-            return back()->with('error', 'Error : ' . $e->getMessage());
+            return $this->backError('Error : ' . $e->getMessage());
         }
     }
 
@@ -153,11 +152,11 @@ class UserController extends AdminrController
                 ]);
             }
 
-            return redirect()->route(config('app.route_prefix').'.users.index')->with('success', 'User updated successfully!');
+            return $this->redirectSuccess(route(config('app.route_prefix').'.users.index'), 'User updated successfully!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Error : ' . $e->getMessage());
+            return $this->backError('Error : ' . $e->getMessage());
         } catch (\Error $e) {
-            return back()->with('error', 'Error : ' . $e->getMessage());
+            return $this->backError('Error : ' . $e->getMessage());
         }
     }
 
@@ -172,12 +171,12 @@ class UserController extends AdminrController
     {
         try {
             if (!Str::contains($user->avatar, 'default-avatar.png')) {
-                $this->deleteFileFromStorage($user->avatar);
+                $this->deleteStorageFile($user->avatar);
             }
             $user->delete();
-            return back()->with('success', 'User deleted successfully!');
+            return $this->backSuccess('User deleted successfully!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Error : ' . $e->getMessage());
+            return $this->backError('Error : ' . $e->getMessage());
         }
     }
 

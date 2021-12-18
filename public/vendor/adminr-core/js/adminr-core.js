@@ -19454,7 +19454,7 @@ __webpack_require__.r(__webpack_exports__);
       isGenerating: false,
       model: '',
       softdeletes: false,
-      generate_api: false,
+      build_api: false,
       dataTypes: this.datatypes,
       migrations: [{
         data_type: 'string',
@@ -19523,11 +19523,10 @@ __webpack_require__.r(__webpack_exports__);
       var postData = {
         migrations: this.migrations,
         model: this.model,
-        media_type: this.media_type,
         softdeletes: this.softdeletes,
-        media_field: this.mediaField
+        build_api: this.build_api
       };
-      axios.post(BASE_URL + "/adminr/generate", postData).then(function (response) {
+      axios.post(BASE_URL + "/" + ROUTE_PREFIX + "/generate", postData).then(function (response) {
         _this.isGenerating = false;
 
         if (response.data.status === 'success') {
@@ -19537,6 +19536,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (err) {
         _this.isGenerating = false;
+        toastr.error(err);
         console.error(err);
       });
     },
@@ -19783,10 +19783,10 @@ var _hoisted_1 = {
   "class": "create-resource-component"
 };
 var _hoisted_2 = {
-  "class": "row justify-content-between"
+  "class": "row justify-content-start align-items-center"
 };
 var _hoisted_3 = {
-  "class": "col-lg-3"
+  "class": "col-lg-4"
 };
 var _hoisted_4 = {
   "class": "form-group"
@@ -20017,7 +20017,7 @@ var _hoisted_55 = {
 var _hoisted_56 = {
   "class": "custom-control text-center custom-switch"
 };
-var _hoisted_57 = ["onUpdate:modelValue", "id"];
+var _hoisted_57 = ["onUpdate:modelValue", "id", "disabled"];
 var _hoisted_58 = ["for"];
 var _hoisted_59 = {
   "class": "form-group mb-0 text-center"
@@ -20025,7 +20025,7 @@ var _hoisted_59 = {
 var _hoisted_60 = {
   "class": "custom-control text-center custom-switch"
 };
-var _hoisted_61 = ["onUpdate:modelValue", "id"];
+var _hoisted_61 = ["onUpdate:modelValue", "id", "disabled"];
 var _hoisted_62 = ["for"];
 var _hoisted_63 = {
   "class": "form-group mb-0 text-center"
@@ -20033,7 +20033,7 @@ var _hoisted_63 = {
 var _hoisted_64 = {
   "class": "custom-control text-center custom-switch"
 };
-var _hoisted_65 = ["onUpdate:modelValue", "id"];
+var _hoisted_65 = ["onUpdate:modelValue", "id", "disabled"];
 var _hoisted_66 = ["for"];
 var _hoisted_67 = {
   colspan: "5"
@@ -20091,7 +20091,7 @@ var _hoisted_83 = ["onUpdate:modelValue"];
 var _hoisted_84 = {
   "class": "form-group"
 };
-var _hoisted_85 = ["onUpdate:modelValue"];
+var _hoisted_85 = ["onUpdate:modelValue", "disabled"];
 var _hoisted_86 = {
   "class": "d-flex"
 };
@@ -20187,12 +20187,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "checkbox",
     "class": "custom-control-input",
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.generate_api = $event;
+      return $data.build_api = $event;
     }),
     id: "resource_has_media"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.generate_api]]), _hoisted_15])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <div class=\"col-lg-4\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <div v-if=\"has_media\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <div class=\"row\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <div class=\"col-6\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                <div class=\"form-group mb-0\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <label>Media field name</label>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <input type=\"text\" class=\"form-control\" @input=\"validateMediaFieldName\" v-model=\"mediaField\" placeholder=\"Media field\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <div class=\"col-6\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                <div class=\"form-group mb-0 text-center\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <label>Media type (Image)</label>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <select v-model=\"media_type\" class=\"form-control\" :disabled=\"!has_media\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                        <option value=\"\" readonly selected>&#45;&#45;Select Image Type&#45;&#45;</option>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                        <option value=\"image\">Single Image</option>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                                        <option value=\"multiple_image\">Multiple Images</option>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    </select>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </div>")]), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.migrations, function (migration, index) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.build_api]]), _hoisted_15])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                <div class=\"col-lg-4\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    <div v-if=\"has_media\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        <div class=\"row\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <div class=\"col-6\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                <div class=\"form-group mb-0\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <label>Media field name</label>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <input type=\"text\" class=\"form-control\" @input=\"validateMediaFieldName\" v-model=\"mediaField\" placeholder=\"Media field\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            <div class=\"col-6\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                <div class=\"form-group mb-0 text-center\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <label>Media type (Image)</label>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    <select v-model=\"media_type\" class=\"form-control\" :disabled=\"!has_media\">"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                        <option value=\"\" readonly selected>&#45;&#45;Select Image Type&#45;&#45;</option>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                        <option value=\"image\">Single Image</option>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("&lt;!&ndash;                                        <option value=\"multiple_image\">Multiple Images</option>&ndash;&gt;"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                    </select>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                                </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                            </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                        </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                    </div>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("                </div>")]), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.migrations, function (migration, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: index
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -20315,10 +20315,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return migration.show_form = $event;
       },
-      "class": "custom-control-input",
-      id: 'show_form_' + index
-    }, null, 8
-    /* PROPS */
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["custom-control-input", {
+        'disabled': migration.data_type === 'file'
+      }]),
+      id: 'show_form_' + index,
+      disabled: migration.data_type === 'file'
+    }, null, 10
+    /* CLASS, PROPS */
     , _hoisted_57), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, migration.show_form]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
       "class": "custom-control-label initial",
       "for": 'show_form_' + index
@@ -20329,10 +20332,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return migration.can_search = $event;
       },
-      "class": "custom-control-input",
-      id: 'can_search_' + index
-    }, null, 8
-    /* PROPS */
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["custom-control-input", {
+        'disabled': migration.data_type === 'file'
+      }]),
+      id: 'can_search_' + index,
+      disabled: migration.data_type === 'file'
+    }, null, 10
+    /* CLASS, PROPS */
     , _hoisted_61), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, migration.can_search]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
       "class": "custom-control-label initial",
       "for": 'can_search_' + index
@@ -20343,10 +20349,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return migration.unique = $event;
       },
-      "class": "custom-control-input",
-      id: 'unique_' + index
-    }, null, 8
-    /* PROPS */
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["custom-control-input", {
+        'disabled': migration.data_type === 'file'
+      }]),
+      id: 'unique_' + index,
+      disabled: migration.data_type === 'file'
+    }, null, 10
+    /* CLASS, PROPS */
     , _hoisted_65), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, migration.unique]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
       "class": "custom-control-label initial",
       "for": 'unique_' + index
@@ -20415,9 +20424,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return migration["default"] = $event;
       },
-      "class": "form-control"
-    }, null, 8
-    /* PROPS */
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["form-control", {
+        'disabled': migration.data_type === 'file'
+      }]),
+      disabled: migration.data_type === 'file'
+    }, null, 10
+    /* CLASS, PROPS */
     , _hoisted_85), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, migration["default"]]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_87, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-sm btn-icon btn-primary",
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {

@@ -11,8 +11,8 @@
     <link rel="icon" type="image/png" href="{{ asset(getSetting('app_favicon')) }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.9.55/css/materialdesignicons.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link rel="stylesheet" href="{{ asset('adminr/css/coreui.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/adminr-core/css/adminr-core.css') }}">
     <style>
@@ -39,16 +39,14 @@
 <script>
     var BASE_URL = "{{ url('/') }}";
     var BASE_PATH = "{{ base_path() }}";
+    var ROUTE_PREFIX = "{{ config('app.route_prefix') }}";
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@3.4.0/dist/js/coreui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('vendor/adminr-core/js/adminr-core.js') }}"></script>
-<script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script><script>
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -63,6 +61,9 @@
         "extendedTimeOut": "1000",
     }
 </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('vendor/adminr-core/js/adminr-core.js') }}"></script>
+
 @if(session('success'))
     <script>
         toastr.success("{{ session('success') }}")
