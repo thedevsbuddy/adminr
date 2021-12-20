@@ -1,10 +1,10 @@
 @extends('adminr.layouts.master')
 
-@section('title', 'Edit user')
+@section('title', __('Create new user'))
 
 @push('scopedCss')
     <style>
-        .lq-user-avatar-selector {
+        .ar-user-avatar-selector {
             position: relative;
             height: 100px;
             width: 100px;
@@ -26,26 +26,25 @@
 @section('content')
     <div class="container-fluid" id="app">
         <div class="d-sm-flex justify-content-between align-items-center mb-3">
-            <h3 class="text-dark mb-0">Edit user</h3>
+            <h3 class="text-dark mb-0">{{ __('Add new user') }}</h3>
             <div>
                 <a href="{{ route(config('app.route_prefix').'.users.index') }}"
                    class="btn btn-primary btn-sm d-none d-sm-inline-block">
                     <svg class="c-icon mr-1">
                         <use xlink:href="{{ coreUiIcon('cil-user') }}"></use>
                     </svg>
-                    View all users
+                    {{ __('View all users') }}
                 </a>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <form action="{{ route(config('app.route_prefix').'.users.update', $user->id) }}" method="POST"
+                    <form action="{{ route(config('app.route_prefix').'.users.store') }}" method="POST"
                           enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <div class="card-header">
-                            <p class="card-title m-0">Edit user</p>
+                            <p class="card-title m-0">{{ __('Add new User') }}</p>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -53,11 +52,12 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="name">Name <span class="text-danger">*</span></label>
+                                                <label for="name">{{ __('Name') }} <span
+                                                            class="text-danger">*</span></label>
                                                 <input type="text"
                                                        class="form-control @if($errors->has('name')) is-invalid @endif"
-                                                       name="name" id="name" placeholder="Name"
-                                                       value="{{ old('name') ?: $user->name }}" required>
+                                                       name="name" id="name" placeholder="{{ __('Name') }}"
+                                                       value="{{ old('name') }}" required>
                                                 @if($errors->has('name'))
                                                     <span class="text-danger font-weight-bold">{{ $errors->first('name') }}</span>
                                                 @endif
@@ -65,12 +65,12 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="username">Username <span
+                                                <label for="username">{{ __('Username') }} <span
                                                             class="text-danger">*</span></label>
                                                 <input type="text"
                                                        class="form-control @if($errors->has('username')) is-invalid @endif"
-                                                       name="username" id="username" placeholder="Username"
-                                                       value="{{ old('username') ?: $user->username }}" required>
+                                                       name="username" id="username" placeholder="{{ __('Username') }}"
+                                                       value="{{ old('username') }}" required>
                                                 @if($errors->has('username'))
                                                     <span class="text-danger font-weight-bold">{{ $errors->first('username') }}</span>
                                                 @endif
@@ -78,11 +78,11 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="email">Email <span class="text-danger">*</span></label>
+                                                <label for="email">{{ __('Email') }} <span class="text-danger">*</span></label>
                                                 <input type="text"
                                                        class="form-control @if($errors->has('email')) is-invalid @endif"
-                                                       name="email" id="email" placeholder="Email address"
-                                                       value="{{ old('email') ?: $user->email }}" required>
+                                                       name="email" id="email" placeholder="{{ __('Email address') }}"
+                                                       value="{{ old('email') }}" required>
                                                 @if($errors->has('email'))
                                                     <span class="text-danger font-weight-bold">{{ $errors->first('email') }}</span>
                                                 @endif
@@ -90,11 +90,11 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="phone">Phone <span class="text-danger">*</span></label>
+                                                <label for="phone">{{ __('Phone') }} <span class="text-danger">*</span></label>
                                                 <input type="text"
                                                        class="form-control @if($errors->has('phone')) is-invalid @endif"
-                                                       name="phone" id="phone" placeholder="Contact No."
-                                                       value="{{ old('phone') ?: $user->phone }}" required>
+                                                       name="phone" id="phone" placeholder="{{ __('Contact No.') }}"
+                                                       value="{{ old('phone') }}" required>
                                                 @if($errors->has('phone'))
                                                     <span class="text-danger font-weight-bold">{{ $errors->first('phone') }}</span>
                                                 @endif
@@ -102,10 +102,12 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="password">Password</label>
+                                                <label for="password">{{ __('Password') }} <span
+                                                            class="text-danger">*</span></label>
                                                 <input type="password"
                                                        class="form-control @if($errors->has('password')) is-invalid @endif"
-                                                       name="password" id="password" placeholder="Password">
+                                                       name="password" id="password" placeholder="{{ __('Password') }}"
+                                                       required>
                                                 @if($errors->has('password'))
                                                     <span class="text-danger font-weight-bold">{{ $errors->first('password') }}</span>
                                                 @endif
@@ -113,11 +115,12 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="confirm_password">Confirm Password</label>
+                                                <label for="confirm_password">{{ __('Confirm Password') }} <span
+                                                            class="text-danger">*</span></label>
                                                 <input type="password"
                                                        class="form-control @if($errors->has('confirm_password')) is-invalid @endif"
                                                        name="confirm_password" id="confirm_password"
-                                                       placeholder="Confirm  Password">
+                                                       placeholder="{{ __('Confirm  Password') }}" required>
                                                 @if($errors->has('confirm_password'))
                                                     <span class="text-danger font-weight-bold">{{ $errors->first('confirm_password') }}</span>
                                                 @endif
@@ -129,11 +132,11 @@
                                     <div class="form-group">
                                         <label for="role">{{ __('Role') }} <span
                                                     class="text-danger">*</span></label>
-                                        <select class="form-control select2 @if($errors->has('username')) is-invalid @endif"
+                                        <select class="form-control select2 @if($errors->has('role')) is-invalid @endif"
                                                 name="role" id="role" required>
                                             <option value="">--Select Role--</option>
                                             @foreach($roles as $role)
-                                                <option value="{{ $role->id }}" @if($user->roles()->first()->id == $role->id) selected @endif>{{ \Illuminate\Support\Str::replace('_', ' ', \Illuminate\Support\Str::title($role->name)) }}</option>
+                                                <option value="{{ $role->id }}">{{ \Illuminate\Support\Str::replace('_', ' ', \Illuminate\Support\Str::title($role->name)) }}</option>
                                             @endforeach
                                         </select>
                                         @if($errors->has('role'))
@@ -141,18 +144,17 @@
                                         @endif
                                     </div>
                                     <div class="mt-4 text-center">
-                                        <label class="lq-user-avatar-selector mx-auto"
-                                               style="background-image: url({{asset($user->avatar)}})">
-                                            <span class="position-absolute rounded-circle lq-overlay"></span>
+                                        <label class="ar-user-avatar-selector mx-auto">
+                                            <span class="position-absolute rounded-circle d-none lq-overlay"></span>
                                             <input type="file" class="d-none" name="avatar" id="avatar"
-                                                   accept=".jpg, .png, .webp, .gif, .svg">
+                                                   accept="image/*">
                                             <span class="ml-2 mb-2">
-                                        <svg class="mr-1 text-white" style="height: 25px;">
-                                            <use xlink:href="{{ coreUiIcon('cil-user-plus') }}"></use>
-                                        </svg>
-                                    </span>
+                                            <svg class="mr-1 text-muted" style="height: 25px;">
+                                                <use xlink:href="{{ coreUiIcon('cil-user-plus') }}"></use>
+                                            </svg>
+                                        </span>
                                         </label>
-                                        <label for="avatar" class="btn btn-default">Select avatar</label>
+                                        <label for="avatar" class="btn btn-default">{{ __('Select avatar') }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -162,7 +164,7 @@
                                 <svg class="c-icon mr-1">
                                     <use xlink:href="{{ coreUiIcon('cil-save') }}"></use>
                                 </svg>
-                                Save
+                                {{ __('Save') }}
                             </button>
                         </div>
                     </form>
@@ -183,9 +185,9 @@
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('.lq-user-avatar-selector .lq-overlay').removeClass('d-none');
-                    $('.lq-user-avatar-selector svg').removeClass('text-muted').addClass('text-white');
-                    $('.lq-user-avatar-selector').css('background-image', 'url("' + e.target.result + '")');
+                    $('.ar-user-avatar-selector .lq-overlay').removeClass('d-none');
+                    $('.ar-user-avatar-selector svg').removeClass('text-muted').addClass('text-white');
+                    $('.ar-user-avatar-selector').css('background-image', 'url("' + e.target.result + '")');
                 }
                 reader.readAsDataURL(input.files[0]);
             }

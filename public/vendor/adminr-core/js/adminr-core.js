@@ -19332,7 +19332,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       this.isBusy = true;
-      axios.get(BASE_URL + "/adminr/get-resource/" + this.crudid).then(function (response) {
+      axios.get(BASE_URL + "/" + ROUTE_PREFIX + "/get-resource/" + this.crudid).then(function (response) {
         return _this.resource = response.data.data;
       })["catch"](function (err) {
         return console.error(err);
@@ -19342,7 +19342,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getRoles: function getRoles() {
       var _this2 = this;
 
-      axios.get(BASE_URL + "/adminr/get-roles").then(function (response) {
+      axios.get(BASE_URL + "/" + ROUTE_PREFIX + "/get-roles").then(function (response) {
         _this2.roles = response.data.data;
 
         _this2.getPermissions();
@@ -19353,7 +19353,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getPermissions: function getPermissions() {
       var _this3 = this;
 
-      axios.get(BASE_URL + "/adminr/get-permissions/" + this.crudid).then(function (response) {
+      axios.get(BASE_URL + "/" + ROUTE_PREFIX + "/get-permissions/" + this.crudid).then(function (response) {
         _this3.permissions = response.data.data.map(function (p) {
           return _objectSpread(_objectSpread({}, p), {}, {
             roles: p.roles.map(function (r) {
@@ -19382,7 +19382,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     updateApiMiddlewares: function updateApiMiddlewares() {
       var _this5 = this;
 
-      axios.post(BASE_URL + "/adminr/update-api-middleware/" + this.crudid, this.middlewares).then(function (response) {
+      axios.post(BASE_URL + "/" + ROUTE_PREFIX + "/update-api-middleware/" + this.crudid, this.middlewares).then(function (response) {
         toastr.success(response.data.message); // console.log(response.data);
 
         _this5.getResource();
@@ -19419,7 +19419,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.resourcePermissions["\"" + role + "\""].push(permission);
       }
 
-      axios.post(BASE_URL + "/adminr/sync-role-permissions", {
+      axios.post(BASE_URL + "/" + ROUTE_PREFIX + "/sync-role-permissions", {
         resource: this.resource.name,
         permissions: JSON.stringify(_objectSpread({}, this.resourcePermissions))
       }).then(function (response) {
@@ -19454,7 +19454,7 @@ __webpack_require__.r(__webpack_exports__);
       isGenerating: false,
       model: '',
       softdeletes: false,
-      build_api: false,
+      build_api: true,
       dataTypes: this.datatypes,
       migrations: [{
         data_type: 'string',
@@ -19468,8 +19468,6 @@ __webpack_require__.r(__webpack_exports__);
         enum_values: '',
         can_search: false,
         unique: false,
-        related_model: null,
-        relationship_type: null,
         "default": null,
         configuring: false,
         slug_from: null,
@@ -19496,8 +19494,6 @@ __webpack_require__.r(__webpack_exports__);
         can_search: false,
         enum_values: '',
         unique: false,
-        related_model: null,
-        relationship_type: null,
         "default": null,
         configuring: false,
         slug_from: null,
@@ -20041,7 +20037,7 @@ var _hoisted_67 = {
 var _hoisted_68 = {
   "class": "form-group mb-0 text-center position-relative"
 };
-var _hoisted_69 = ["onClick"];
+var _hoisted_69 = ["onClick", "disabled"];
 
 var _hoisted_70 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
@@ -20366,9 +20362,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
         return migration.configuring = !migration.configuring;
       }, ["stop"]),
-      "class": "btn btn-sm btn-primary"
-    }, _hoisted_72, 8
-    /* PROPS */
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn btn-sm btn-primary", {
+        'disabled': migration.data_type === 'file'
+      }]),
+      disabled: migration.data_type === 'file'
+    }, _hoisted_72, 10
+    /* CLASS, PROPS */
     , _hoisted_69), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
       name: "fade"
     }, {
@@ -20721,21 +20720,48 @@ $(document).on('click', '.delete-item', function (e) {
     }
   });
 });
-$(document).on('change', '.file-input', function (e) {
-  readFile(this, $(this).data('target'));
+$(document).on('change', '.file-input', function () {
+  readFile(this);
 });
 
-function readFile(input, target) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
+function readFile(input) {
+  var imageMimes = ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'webp', 'svg'];
+  var ext = $('#' + input.getAttribute('id')).val().split('.').pop().toLowerCase(); //
 
-    reader.onload = function (e) {
-      $(target).css('background-position', 'center').css('background-repeat', 'no-repeat').css('background-size', 'cover').css('background-image', 'url("' + e.target.result + '")');
-      $('#' + input.getAttribute('id')).parent().find('.file-input-icon').fadeOut(200);
-    };
+  if (input.files.length === 1) {
+    if (!arrayContains(ext, imageMimes)) {
+      console.log($('#' + input.getAttribute('id')).val()); // Not an image
 
-    reader.readAsDataURL(input.files[0]);
+      $('#' + input.getAttribute('id')).parent().find('.file-input-label').html(input.files[0].name.substring(0, 24) + '___.' + ext);
+    } else {
+      // Image
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#' + input.getAttribute('id')).closest('.custom-file-button').css('background-image', 'url("' + e.target.result + '")').find('.custom-file-content span').hide();
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  } else if (input.files.length > 1) {
+    $('#' + input.getAttribute('id')).closest('.custom-file-button').css('background-image', 'none').find('.custom-file-content span').show();
+    $('#' + input.getAttribute('id')).closest('.custom-file-button').find('.file-input-label').html(input.files.length + ' Files selected');
   }
+}
+
+function arrayContains(value, arr) {
+  var result = false;
+
+  for (var i = 0; i < arr.length; i++) {
+    var name = arr[i];
+
+    if (name === value) {
+      result = true;
+      break;
+    }
+  }
+
+  return result;
 }
 
 function toggleSidebar(action) {

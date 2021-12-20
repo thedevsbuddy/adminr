@@ -45,26 +45,7 @@
                 </a>
             </li>
         @endcan
-        @can('manage_menus')
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.settings.index') }}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{ coreUiIcon('cil-menu') }}"></use>
-                    </svg>
-                    {{ __('Menu Composer') }}
-                </a>
-            </li>
-        @endcan
-        @can('manage_settings')
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.settings.index') }}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{ coreUiIcon('cil-settings') }}"></use>
-                    </svg>
-                    {{ __('Settings') }}
-                </a>
-            </li>
-        @endcan
+
         <li class="c-sidebar-nav-title">Permissible</li>
         @can('manage_permissions')
             <li class="c-sidebar-nav-item">
@@ -87,7 +68,27 @@
                 </a>
             </li>
         @endcan
-
+        <li class="c-sidebar-nav-title">Configurations</li>
+        @can('mail_templates')
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.settings.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <use xlink:href="{{ coreUiIcon('cil-pen ') }}"></use>
+                    </svg>
+                    {{ __('Email Templates') }}
+                </a>
+            </li>
+        @endcan
+        @can('manage_settings')
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.settings.index') }}">
+                    <svg class="c-sidebar-nav-icon">
+                        <use xlink:href="{{ coreUiIcon('cil-settings') }}"></use>
+                    </svg>
+                    {{ __('Settings') }}
+                </a>
+            </li>
+        @endcan
         <li class="c-sidebar-nav-title">Resources</li>
         @if(isset($resourceMenus) && count($resourceMenus) > 0)
             @foreach($resourceMenus as $menu)

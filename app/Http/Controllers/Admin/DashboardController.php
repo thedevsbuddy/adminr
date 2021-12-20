@@ -12,7 +12,7 @@ class DashboardController extends AdminrController
     {
         try{
             $usersCount = User::notRole(['super_admin', 'admin'])->count();
-            return view('admin.dashboard.index', compact('usersCount'));
+            return view('adminr.dashboard.index', compact('usersCount'));
         } catch (\Exception $e){
             return $this->backError('Error: ' . $e->getMessage());
         } catch (\Error $e) {

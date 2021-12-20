@@ -1,8 +1,8 @@
 .custom-file-button {
   position: relative;
   border: 1px dashed #aaa;
+  aspect-ratio: var(--aspect-ratio);
   width: 100%;
-  padding-top: 56.23%;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -15,19 +15,6 @@
 
 .custom-file-button input {
   display: none;
-}
-
-.custom-file-button .custom-file-content {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.35);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .responsive {
@@ -106,18 +93,6 @@
   line-height: 14px;
 }
 
-.nav-pills .nav-link.active::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 0;
-  width: 0;
-  border-top: 27px solid #fff;
-  border-left: 30px solid var(--primary);
-  border-bottom: 27px solid #fff;
-}
-
 .circle-file-input {
   position: relative;
   height: 100px;
@@ -134,4 +109,19 @@
      object-fit: cover;
   border: 2px dashed #9b9b9b;
   cursor: pointer;
+}
+
+.img-thumb {
+  max-width: 75px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 4px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 1;
+}
+
+.adminr-icon {
+  width: 20px;
+  height: 20px;
 }

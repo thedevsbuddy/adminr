@@ -23,7 +23,7 @@ class UserController extends AdminrController
         try {
             $users = User::notRole(['admin', 'super_admin'])->paginate($this->limit);
 
-            return view('admin.users.index', compact('users'));
+            return view('adminr.users.index', compact('users'));
         } catch (\Exception $e) {
             return $this->backError('Error : ' . $e->getMessage());
         } catch (\Error $e) {
@@ -40,7 +40,7 @@ class UserController extends AdminrController
     {
         try {
             $roles = Role::get();
-            return view('admin.users.create', compact('roles'));
+            return view('adminr.users.create', compact('roles'));
         } catch (\Exception $e) {
             return $this->backError('Error : ' . $e->getMessage());
         } catch (\Error $e) {
@@ -103,7 +103,7 @@ class UserController extends AdminrController
     {
         try {
             $roles = Role::get();
-            return view('admin.users.edit', compact('user', 'roles'));
+            return view('adminr.users.edit', compact('user', 'roles'));
         } catch (\Exception $e) {
             return $this->backError('Error : ' . $e->getMessage());
         } catch (\Error $e) {

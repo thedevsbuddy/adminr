@@ -20,25 +20,28 @@ use Illuminate\Support\Facades\Route;
 /**
  * Add admin routes here if needed
  */
+Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'auth', 'admin'], 'as' => config('app.route_prefix').'.'], function() {
+    Route::redirect('/', config('app.route_prefix').'/dashboard', 301);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
-
-
-Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web'], 'as' => config('app.route_prefix').'.'], function() {
-    Route::group(['middleware' => ['auth', 'admin']], function () {
-
-        Route::get('/', [DashboardController::class, 'index'])->name('index');
-
-
+    Route::group(['prefix' => '/manage'], function () {
         // Manage Users
-        Route::get('/manage/users', [UserController::class, 'index'])->name('users.index');
-        Route::get('/manage/users/create', [UserController::class, 'create'])->name('users.create');
-        Route::get('/manage/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-        Route::post('/manage/users', [UserController::class, 'store'])->name('users.store');
-        Route::put('/manage/users/{user}', [UserController::class, 'update'])->name('users.update');
-        Route::delete('/manage/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
         // Settings routes
         Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
         Route::post('/settings', [SettingController::class, 'store'])->name('settings.store');
     });
+
+    // Send Test Mail
+    Route::post('/test-mail', function (\Illuminate\Http\Request $request){
+        \Illuminate\Support\Facades\Mail::to($request->get('email'))->send(new \App\Mail\TestMail());
+        return back()->with('success', 'Mail send successfully!');
+    })->name('test-mail');
+
 });

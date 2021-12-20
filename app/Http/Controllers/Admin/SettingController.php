@@ -14,7 +14,7 @@ class SettingController extends AdminrController
     public function index()
     {
         try {
-            return view('admin.settings.index');
+            return view('adminr.settings.index');
         } catch (\Exception $e){
             return $this->backError('Error: ' . $e->getMessage());
         } catch (\Error $e){

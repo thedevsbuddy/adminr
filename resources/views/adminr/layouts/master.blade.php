@@ -46,7 +46,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@3.4.0/dist/js/coreui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
     toastr.options = {
         "closeButton": true,
         "debug": false,
@@ -62,6 +63,8 @@
     }
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
 <script src="{{ asset('vendor/adminr-core/js/adminr-core.js') }}"></script>
 
 @if(session('success'))
@@ -79,6 +82,7 @@
     $('.select2').each(function () {
         $(this).select2();
     });
+    $('[data-toggle="tooltip"]').tooltip()
 </script>
 @stack('scopedJs')
 </body>
