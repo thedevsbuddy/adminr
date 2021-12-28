@@ -16,7 +16,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && !auth()->user()->hasAnyRole(['admin', 'super_admin'])){
+        if (auth()->check() && !auth()->user()->hasAnyRole(['developer', 'admin', 'super_admin'])){
             return redirect(url('/'))->with('error', 'You don\'t have permission to access admin routes!s');
         }
         return $next($request);

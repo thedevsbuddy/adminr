@@ -67,7 +67,7 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr><td colspan="6" class="text-center">No Resources generated yet!</td></tr>
+                            <tr><td colspan="6" class="text-center">No Users yet!</td></tr>
                         @endforelse
                         </tbody>
                     </table>

@@ -15,19 +15,21 @@ class RolesAndPermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $superAdmin = Role::create(['name' => 'super_admin']);
+        Role::create(['name' => 'developer']);
+        Role::create(['name' => 'super_admin']);
         $admin = Role::create(['name' => 'admin']);
-        $user = Role::create(['name' => 'user']);
+        Role::create(['name' => 'user']);
 
-        $createCrud = Permission::create(['name' => 'create_crud']);
-        $createRelations = Permission::create(['name' => 'create_relations']);
+        Permission::create(['name' => 'manage_resources']);
         $manageUsers = Permission::create(['name' => 'manage_users']);
         $managePermissions = Permission::create(['name' => 'manage_permissions']);
+        $manageTemplates = Permission::create(['name' => 'manage_mail_templates']);
+        $manageSettings = Permission::create(['name' => 'manage_settings']);
 
-        $superAdmin->givePermissionTo($createCrud);
-        $superAdmin->givePermissionTo($createRelations);
         $admin->givePermissionTo($manageUsers);
         $admin->givePermissionTo($managePermissions);
         $admin->givePermissionTo($manageUsers);
+        $admin->givePermissionTo($manageTemplates);
+        $admin->givePermissionTo($manageSettings);
     }
 }

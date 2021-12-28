@@ -15,6 +15,14 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $developer = User::create([
+            'name' => 'Developer',
+            'email' => 'dev@adminr.com',
+            'username' => 'developer',
+            'phone' => '9999999999',
+            'password' => bcrypt('password'),
+            'email_verified_at' => now()
+        ]);
         $superAdmin = User::create([
             'name' => 'Super Admin',
             'email' => 'super.admin@adminr.com',
@@ -40,6 +48,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now()
         ]);
 
+        $developer->assignRole(Role::where('name', 'developer')->first());
         $superAdmin->assignRole(Role::where('name', 'super_admin')->first());
         $admin->assignRole(Role::where('name', 'admin')->first());
         $user->assignRole(Role::where('name', 'user')->first());

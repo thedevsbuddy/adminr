@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RoleAndPermissionController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\TemplateController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +35,16 @@ Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'a
         Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
         Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
+        // Roles and Permissions routes
+        Route::get('/roles-and-permissions', [RoleAndPermissionController::class, 'index'])->name('roles-and-permissions.index');
+        Route::post('/assign-permission', [RoleAndPermissionController::class, 'assignPermission'])->name('roles-and-permissions.assign');
+        Route::post('/revoke-permission', [RoleAndPermissionController::class, 'revokePermission'])->name('roles-and-permissions.revoke');
+        Route::post('/store-role', [RoleAndPermissionController::class, 'storeRole'])->name('roles-and-permissions.storeRole');
+        Route::post('/store-permission', [RoleAndPermissionController::class, 'storePermission'])->name('roles-and-permissions.storePermission');
+
+        // Mail Templates Routes
+        Route::resource('/templates', TemplateController::class);
+
         // Settings routes
         Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
         Route::post('/settings', [SettingController::class, 'store'])->name('settings.store');
@@ -40,6 +52,9 @@ Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'a
 
     // Send Test Mail
     Route::post('/test-mail', function (\Illuminate\Http\Request $request){
+//        auth()->user()->mail('test-mail', ["{name}" => auth()->user()->name]);
+//        return back()->with('success', 'Mail send successfully!');
+
         \Illuminate\Support\Facades\Mail::to($request->get('email'))->send(new \App\Mail\TestMail());
         return back()->with('success', 'Mail send successfully!');
     })->name('test-mail');

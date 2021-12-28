@@ -33,5 +33,9 @@ class SettingsTableSeeder extends Seeder
             "option" => "meta_description",
             "value" => "A simple yet powerful Admin panel with CRUD generator built on laravel to help you build application faster."
         ]);
+        Setting::firstOrCreate([
+            "option" => "title_separator",
+            "value" => "-"
+        ]);
     }
 }

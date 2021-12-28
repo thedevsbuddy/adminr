@@ -129,6 +129,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
+                                    {{--relation--}}
                                     <div class="form-group">
                                         <label for="role">{{ __('Role') }} <span
                                                     class="text-danger">*</span></label>
@@ -136,6 +137,20 @@
                                                 name="role" id="role" required>
                                             <option value="">--Select Role--</option>
                                             @foreach($roles as $role)
+                                                <option value="{{ $role->id }}">{{ \Illuminate\Support\Str::replace('_', ' ', \Illuminate\Support\Str::title($role->name)) }}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('role'))
+                                            <span class="text-danger font-weight-bold">{{ $errors->first('role') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="role">{{ __('Test Role') }} <span
+                                                    class="text-danger">*</span></label>
+                                        <select class="form-control select2 @if($errors->has('role')) is-invalid @endif"
+                                                name="role" id="role" required>
+                                            <option value="">--Select Role--</option>
+                                            @foreach($role_tests as $role)
                                                 <option value="{{ $role->id }}">{{ \Illuminate\Support\Str::replace('_', ' ', \Illuminate\Support\Str::title($role->name)) }}</option>
                                             @endforeach
                                         </select>

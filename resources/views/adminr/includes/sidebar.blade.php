@@ -27,7 +27,7 @@
                 {{ __('Dashboard') }}
             </a>
         </li>
-        @can('create_crud')
+        @can('manage_resources')
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.builder') }}">
                     <svg class="c-sidebar-nav-icon">
@@ -49,7 +49,7 @@
         <li class="c-sidebar-nav-title">Permissible</li>
         @can('manage_permissions')
             <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="javascript:void(0)" onclick="alert('Coming soon!')">
+                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.roles-and-permissions.index') }}">
                     <svg class="c-sidebar-nav-icon">
                         <use xlink:href="{{ coreUiIcon('cil-star') }}"></use>
                     </svg>
@@ -69,11 +69,11 @@
             </li>
         @endcan
         <li class="c-sidebar-nav-title">Configurations</li>
-        @can('mail_templates')
+        @can('manage_mail_templates')
             <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.settings.index') }}">
+                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.templates.index') }}">
                     <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{ coreUiIcon('cil-pen ') }}"></use>
+                        <use xlink:href="{{ coreUiIcon('cil-pen') }}"></use>
                     </svg>
                     {{ __('Email Templates') }}
                 </a>

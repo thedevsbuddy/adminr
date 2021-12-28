@@ -18906,6 +18906,10 @@ select, .custom-control-label {
   color: #fff;
 }
 
+textarea.form-control {
+  resize: none;
+}
+
 #toast-container > .toast-error {
   background-color: #BD362F;
 }

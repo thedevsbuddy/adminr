@@ -82,4 +82,8 @@ select, .custom-control-label {
   }
 }
 
+textarea.form-control {
+  resize: none;
+}
+
 #toast-container > .toast-error { background-color: #BD362F; }

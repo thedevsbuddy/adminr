@@ -28,9 +28,6 @@
                                     <a class="nav-link" id="email-setting-tab" data-toggle="pill"
                                        href="#email-setting" role="tab" aria-controls="email-setting"
                                        aria-selected="false">Email</a>
-                                    <a class="nav-link" id="payment-setting-tab" data-toggle="pill"
-                                       href="#payment-setting" role="tab" aria-controls="payment-setting"
-                                       aria-selected="false">Payment</a>
                                 </div>
                             </div>
                             <div class="col-9">
@@ -42,10 +39,6 @@
                                     <div class="tab-pane fade" id="email-setting" role="tabpanel"
                                          aria-labelledby="pills-email-tab">
                                         @include('adminr.settings.includes.email')
-                                    </div>
-                                    <div class="tab-pane fade" id="payment-setting" role="tabpanel"
-                                         aria-labelledby="pills-payment-tab">
-                                        @include('adminr.settings.includes.payment')
                                     </div>
                                 </div>
                             </div>
