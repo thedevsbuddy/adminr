@@ -1,0 +1,11 @@
+<?php
+
+namespace {{ namespace }};
+
+use Devsbuddy\AdminrCore\Http\Controllers\AdminrController;
+use Illuminate\Http\Request;
+
+class {{ class }} extends AdminrController
+{
+    //
+}
