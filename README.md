@@ -13,6 +13,20 @@ AdminR is a simple admin panel built on top of [Laravel Framework](https://larav
 
 AdminR help to reduce approx 90% of the work for developers which they do to build a backend or admin panel and the APIs for their apps.
 
+### Support me to add more feature
+<center>
+<a href="https://www.buymeacoffee.com/devsbuddy" target="_blank">
+<img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-2.svg"/>
+</a>
+</center>
+
+
+#### When I will reach to ```$1000``` I will add relationship generator to the project.
+
+| Goal  | Reached |
+|-------|-------|
+| $1000 | $0 |
+
 ## Get Started
 
 Install the project
