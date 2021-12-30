@@ -144,23 +144,9 @@
                                             <span class="text-danger font-weight-bold">{{ $errors->first('role') }}</span>
                                         @endif
                                     </div>
-                                    <div class="form-group">
-                                        <label for="role">{{ __('Test Role') }} <span
-                                                    class="text-danger">*</span></label>
-                                        <select class="form-control select2 @if($errors->has('role')) is-invalid @endif"
-                                                name="role" id="role" required>
-                                            <option value="">--Select Role--</option>
-                                            @foreach($role_tests as $role)
-                                                <option value="{{ $role->id }}">{{ \Illuminate\Support\Str::replace('_', ' ', \Illuminate\Support\Str::title($role->name)) }}</option>
-                                            @endforeach
-                                        </select>
-                                        @if($errors->has('role'))
-                                            <span class="text-danger font-weight-bold">{{ $errors->first('role') }}</span>
-                                        @endif
-                                    </div>
                                     <div class="mt-4 text-center">
                                         <label class="ar-user-avatar-selector mx-auto">
-                                            <span class="position-absolute rounded-circle d-none lq-overlay"></span>
+                                            <span class="position-absolute rounded-circle d-none ar-overlay"></span>
                                             <input type="file" class="d-none" name="avatar" id="avatar"
                                                    accept="image/*">
                                             <span class="ml-2 mb-2">
@@ -200,10 +186,10 @@
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('.ar-user-avatar-selector .lq-overlay').removeClass('d-none');
+                    $('.ar-user-avatar-selector .ar-overlay').removeClass('d-none');
                     $('.ar-user-avatar-selector svg').removeClass('text-muted').addClass('text-white');
                     $('.ar-user-avatar-selector').css('background-image', 'url("' + e.target.result + '")');
-                }
+                };
                 reader.readAsDataURL(input.files[0]);
             }
         }

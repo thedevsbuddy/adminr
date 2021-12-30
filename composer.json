@@ -1,10 +1,14 @@
 {
   "name": "thedevsbuddy/adminr",
+  "version": "0.1.0",
   "type": "project",
   "description": "A simple yet powerful laravel starter with admin panel and CRUD resources generation to help you build application faster.",
   "keywords": [
     "framework",
-    "laravel"
+    "laravel",
+    "Adminr",
+    "api generator",
+    "laravel api generator"
   ],
   "license": "MIT",
   "require": {

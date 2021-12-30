@@ -11,7 +11,7 @@
  
 AdminR is a simple admin panel built on top of [Laravel Framework](https://laravel.com) to help developers create laravel backend and APIs with ease so they can more focus on creating actual web app or any client side apps.
 
-AdminR help to reduce approx 85% of the work for developers which they do to build a backend or admin panel for their apps.
+AdminR help to reduce approx 90% of the work for developers which they do to build a backend or admin panel and the APIs for their apps.
 
 ## Get Started
 
@@ -44,9 +44,8 @@ Link storage folder
 ```bash
 php artisan storage:link
 ```
-By default you will get ```4``` users and role
 
-Users
+By default you will get ```4``` users and role
 ```text
 Developer (developer)
 email: dev@adminr.com
