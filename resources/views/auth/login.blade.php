@@ -53,6 +53,8 @@
                                     </div>
                                 </div>
                             </form>
+                            <p class="text-center mt-3">OR</p>
+                            <a href="{{ route('register') }}" class="btn btn-block btn-light px-4">Create an account</a>
                         </div>
                     </div>
 
