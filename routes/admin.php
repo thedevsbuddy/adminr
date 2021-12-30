@@ -52,9 +52,6 @@ Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'a
 
     // Send Test Mail
     Route::post('/test-mail', function (\Illuminate\Http\Request $request){
-//        auth()->user()->mail('test-mail', ["{name}" => auth()->user()->name]);
-//        return back()->with('success', 'Mail send successfully!');
-
         \Illuminate\Support\Facades\Mail::to($request->get('email'))->send(new \App\Mail\TestMail());
         return back()->with('success', 'Mail send successfully!');
     })->name('test-mail');
