@@ -58,7 +58,7 @@ class UserController extends AdminrController
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'unique:users'],
+            'name' => ['required'],
             'username' => ['required', 'unique:users'],
             'email' => ['required', 'email', 'unique:users'],
             'phone' => ['required', 'unique:users', 'numeric', 'min:10'],

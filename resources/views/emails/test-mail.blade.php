@@ -1,10 +1,10 @@
 @component('mail::message')
-{!! $body !!}
-
+# Test mail
 
 This is a testing mail.
+
 ## Congrats it's working....!
-Thanks,<br>
+Regards,<br>
 {{ getSetting('app_name') }} <br>
 {{ getSetting('app_tagline') }}
 @endcomponent
