@@ -27,7 +27,7 @@ class MailConfigServiceProvider extends ServiceProvider
     public
     function boot()
     {
-        if (DB::connection()->getDatabaseName()) {
+        if (!$this->app->runningInConsole()) {
             $config = array(
                 'driver' => getSetting('mail_driver'),
                 'host' => getSetting('mail_host'),
