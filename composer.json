@@ -20,7 +20,7 @@
     "laravel/tinker": "^2.5",
     "laravel/ui": "^3.4",
     "spatie/laravel-permission": "^5.4",
-    "thedevsbuddy/adminr-core": "^0.1.0",
+    "thedevsbuddy/adminr-core": "^0.1.1",
     "ext-json": "*"
   },
   "require-dev": {
