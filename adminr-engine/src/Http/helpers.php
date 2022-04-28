@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 if(!function_exists('coreUiIcon')){
     function coreUiIcon($id): string
     {
-        return asset('vendor/adminr-core/coreui/free.svg#'.$id);
+        return asset('vendor/adminr-engine/coreui/free.svg#'.$id);
     }
 }
 
@@ -57,4 +57,4 @@ if (!function_exists('returnIfRoutes')) {
     }
 }
 
-const LIQUID_VERSION = "0.1.0";
+const LIQUID_VERSION = "0.2.0";

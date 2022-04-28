@@ -4,8 +4,10 @@ window._ = require('lodash');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-var token = document.head.querySelector('meta[name="csrf-token"]');
-axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+let token = document.head.querySelector('meta[name="csrf-token"]');
+if (token) {
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+}
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import {createApp} from 'vue'
@@ -67,7 +69,7 @@ function readFile(input) {
         if (!arrayContains(ext, imageMimes)) {
             console.log($('#' + input.getAttribute('id')).val());
             // Not an image
-            $('#' + input.getAttribute('id')).parent().find('.file-input-label').html(input.files[0].name.substring(0, 24)+'___.'+ext);
+            $('#' + input.getAttribute('id')).parent().find('.file-input-label').html(input.files[0].name.substring(0, 24) + '___.' + ext);
         } else {
             // Image
             let reader = new FileReader();
@@ -90,12 +92,12 @@ function readFile(input) {
     }
 }
 
-function arrayContains(value, arr){
+function arrayContains(value, arr) {
     let result = false;
 
-    for(let i=0; i < arr.length; i++){
+    for (let i = 0; i < arr.length; i++) {
         let name = arr[i];
-        if(name === value){
+        if (name === value) {
             result = true;
             break;
         }

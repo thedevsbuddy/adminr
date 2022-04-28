@@ -47,7 +47,7 @@ class BuilderController extends Controller
     {
         try {
             $dataTypes = collect(Database::dataTypes())->sort()->toArray();
-            return view('adminr-core::builder.create', compact('dataTypes'));
+            return view('adminr-engine::builder.create', compact('dataTypes'));
         } catch (\Exception $e) {
             return back()->with('error', 'Error: ' . $e->getMessage());
         }

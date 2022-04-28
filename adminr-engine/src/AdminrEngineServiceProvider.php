@@ -2,6 +2,8 @@
 
 namespace Devsbuddy\AdminrEngine;
 
+use Devsbuddy\AdminrEngine\ViewComposers\MenuComposer;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AdminrEngineServiceProvider extends ServiceProvider
@@ -33,6 +35,16 @@ class AdminrEngineServiceProvider extends ServiceProvider
             // Registering package commands.
             // $this->commands([]);
         }
+
+        // Load helpers file
+        if (file_exists(__DIR__ . '/Http/helpers.php')) {
+            require_once __DIR__ . '/Http/helpers.php';
+        }
+
+        /**
+         * Load menus and compose to all views
+         */
+        View::composer('*', MenuComposer::class);
     }
 
     /**

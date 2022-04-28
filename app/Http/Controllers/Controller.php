@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Devsbuddy\AdminrEngine\Traits\CanManageFiles;
-use Devsbuddy\AdminrEngine\Traits\CanSendMail;
-use Devsbuddy\AdminrEngine\Traits\HasResponse;
+use App\Traits\CanManageFiles;
+use App\Traits\CanSendMail;
+use App\Traits\HasResponse;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;

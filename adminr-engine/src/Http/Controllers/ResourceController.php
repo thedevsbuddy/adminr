@@ -5,7 +5,6 @@ namespace Devsbuddy\AdminrEngine\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Devsbuddy\AdminrEngine\Models\Resource;
 use Devsbuddy\AdminrEngine\Services\ResourceService;
-use Devsbuddy\AdminrEngine\Traits\HasResponse;
 use Devsbuddy\AdminrEngine\Traits\HasStubs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +16,7 @@ use Illuminate\View\View;
 
 class ResourceController  extends Controller
 {
-    use HasStubs, HasResponse;
+    use HasStubs;
 
     public Request $request;
     public string $modelName;
@@ -29,7 +28,7 @@ class ResourceController  extends Controller
     public function index(): View
     {
         $resources = Resource::with('menu')->paginate(10);
-        return view('adminr-core::resources.index', compact('resources'));
+        return view('adminr-engine::resources.index', compact('resources'));
     }
 
     public function store(Request $request): void

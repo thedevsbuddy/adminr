@@ -47,6 +47,7 @@ class TemplateController extends Controller
         try{
             MailTemplate::create([
                 'subject' => trim($request->get('subject')),
+                'purpose' => trim($request->get('purpose')),
                 'code' => Str::kebab(trim($request->get('code'))),
                 'content' => $request->get('content'),
             ]);

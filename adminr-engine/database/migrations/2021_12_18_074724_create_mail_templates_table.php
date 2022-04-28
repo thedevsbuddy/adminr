@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('mail_templates', function (Blueprint $table) {
             $table->id();
             $table->string('subject')->unique();
+            $table->string('purpose')->nullable();
             $table->string('code')->unique();
             $table->longText('content');
             $table->timestamps();

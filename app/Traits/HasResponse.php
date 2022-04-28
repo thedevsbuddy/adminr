@@ -34,7 +34,6 @@ trait HasResponse
         return redirect($route)->with($status, $message);
     }
 
-
     public function redirectSuccess(string $route, ?string $message = 'Operation was successful!'): RedirectResponse
     {
         return $this->redirect($route, 'success', $message);
