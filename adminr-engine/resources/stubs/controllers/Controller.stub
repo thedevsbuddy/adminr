@@ -1,0 +1,147 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Models\{{MODEL_CLASS}};
+use Illuminate\Http\Request;
+use Devsbuddy\AdminrEngine\Http\Controllers\AdminrController;
+use Illuminate\Support\Str;
+
+
+class {{CONTROLLER_CLASS}} extends AdminrController
+{
+    private $resultLimit;
+
+    public function __construct(){
+        $this->resultLimit = {{RESULT_LIMIT}};
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return mixed
+     */
+    public function index(Request $request)
+    {
+        try {
+            ${{MODEL_ENTITIES}} = {{MODEL_CLASS}}::query();
+            {{SEARCH_STATEMENTS}}
+            {{TRASHED_FILTER}}
+            ${{MODEL_ENTITIES}} = ${{MODEL_ENTITIES}}->paginate($this->resultLimit);
+
+            return view('adminr.{{MODEL_ENTITIES}}.index', compact('{{MODEL_ENTITIES}}'));
+        } catch(\Exception $e){
+            return $this->backError('Error: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Return single instance of the
+     * requested Model
+     *
+     * @param {{MODEL_CLASS}} ${{MODEL_ENTITY}}
+     * @return mixed
+     */
+    public function show({{MODEL_CLASS}} ${{MODEL_ENTITY}})
+    {
+        try{
+            return view('adminr.{{MODEL_ENTITIES}}.show', compact('{{MODEL_ENTITY}}'));
+        } catch(\Exception $e){
+            return $this->backError("Error: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Return single instance of the
+     * requested Model
+     *
+     * @return mixed
+     */
+    public function create()
+    {
+        try{
+            return view('adminr.{{MODEL_ENTITIES}}.create');
+        } catch(\Exception $e){
+            return $this->backError("Error: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return mixed
+     */
+    public function store(Request $request)
+    {
+        try{
+            {{VALIDATION_STATEMENT}}
+
+            {{FILE_UPLOAD_STATEMENT}}
+            {{MODEL_CLASS}}::create([
+                {{SAVE_DATA_STATEMENT}}
+            ]);
+
+            return $this->redirectSuccess(route(config('app.route_prefix').'.{{MODEL_ENTITIES}}.index'), "{{MODEL_ENTITY}} saved successfully!");
+        } catch(\Exception $e){
+            return $this->backError("Error: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Edit the requested resource
+     *
+     * @param {{MODEL_CLASS}} ${{MODEL_ENTITY}}
+     * @return mixed
+     */
+    public function edit({{MODEL_CLASS}} ${{MODEL_ENTITY}})
+    {
+        try{
+            return view('adminr.{{MODEL_ENTITIES}}.edit', compact('{{MODEL_ENTITY}}'));
+        } catch(\Exception $e){
+            return $this->backError("Error: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param {{MODEL_CLASS}} ${{MODEL_ENTITY}}
+     * @return mixed
+     */
+    public function update(Request $request, {{MODEL_CLASS}} ${{MODEL_ENTITY}})
+    {
+        try{
+            {{UPDATE_VALIDATION_STATEMENT}}
+
+            {{FILE_UPDATE_STATEMENT}}
+            ${{MODEL_ENTITY}}->update([
+                {{UPDATE_DATA_STATEMENT}}
+            ]);
+
+            return $this->redirectSuccess(route(config('app.route_prefix').'.{{MODEL_ENTITIES}}.index'), "{{MODEL_ENTITY}} updated successfully!");
+        } catch(\Exception $e){
+            return $this->backError("Error: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        try{
+            ${{MODEL_ENTITY}} = {{MODEL_CLASS}}::findOrFail($id);
+
+            {{DELETE_FILE_STATEMENT}}
+            ${{MODEL_ENTITY}}->delete();
+            return $this->backSuccess("{{MODEL_ENTITY}} deleted successfully!");
+        } catch(\Exception $e){
+            return $this->backError("Error: " . $e->getMessage());
+        }
+    }
+}

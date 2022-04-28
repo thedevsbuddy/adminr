@@ -3,12 +3,7 @@
 use App\Models\Setting;
 use Spatie\Permission\Models\Role;
 
-/**
- * Returns the setting value by the
- * option provided
- *
- * @param String $option
- */
+
 if (!function_exists('getSetting')) {
     function getSetting($option)
     {
@@ -19,11 +14,6 @@ if (!function_exists('getSetting')) {
 }
 
 
-/**
- * Returns role data for provided name | id
- *
- * @param mixed $identifier
- */
 if (!function_exists('role')) {
     function role($identifier)
     {

@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Http\Controllers\Frontend{{GENERAL_NAMESPACE}};
+
+use {{USE_NAMESPACE}}{{MODEL_CLASS}};
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+
+class {{CONTROLLER_CLASS}} extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return mixed
+     */
+    public function index(Request $request)
+    {
+        try {
+            $page = $request->has('page') ? $request->get('page') : 1;
+            $limit = $request->has('limit') ? $request->get('limit') : {{RESULT_LIMIT}};
+
+            ${{MODEL_ENTITIES}} = {{MODEL_CLASS}}::query();
+
+            {{SEARCH_STATEMENTS}}
+
+            ${{MODEL_ENTITIES}} = ${{MODEL_ENTITIES}}->limit($limit)->offset(($page - 1) * $limit)->get();
+
+            return view('{{MODEL_ENTITIES}}.index', compact('{{MODEL_ENTITIES}}'));
+        } catch(\Exception $e){
+            return back()->with('error', 'Error: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Return single instance of the
+     * requested Model
+     *
+     * @return mixed
+     */
+    public function show($id)
+    {
+        try{
+            ${{MODEL_ENTITY}} = ${{MODEL_CLASS}}::firstOrFail($id);
+
+            return view('{{MODEL_ENTITIES}}.show', compact('{{MODEL_ENTITY}}'));
+        } catch(\Exception $e){
+            return back()->with("error", "Error: " . $e->getMessage());
+        }
+    }
+}

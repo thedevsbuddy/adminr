@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Devsbuddy\AdminrCore\Http\Controllers\AdminrController;
-use Devsbuddy\AdminrCore\Models\MailTemplate;
+use App\Http\Controllers\Controller;
+use Devsbuddy\AdminrEngine\Models\MailTemplate;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
-class TemplateController extends AdminrController
+class TemplateController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return mixed
-     */
-    public function index()
+    public function index(): View|RedirectResponse
     {
         try{
             $templates = MailTemplate::paginate(10);
@@ -26,12 +24,7 @@ class TemplateController extends AdminrController
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return mixed
-     */
-    public function create()
+    public function create(): View|RedirectResponse
     {
         try{
             return view('adminr.templates.create');
@@ -42,13 +35,7 @@ class TemplateController extends AdminrController
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return mixed
-     */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse|RedirectResponse
     {
 
         $request->validate([
@@ -76,27 +63,10 @@ class TemplateController extends AdminrController
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return mixed
-     */
-    public function edit($id)
+    public function edit(MailTemplate $template): View|RedirectResponse
     {
         try{
-            $template = MailTemplate::find($id);
             return view('adminr.templates.edit', compact('template'));
         } catch (\Exception $e){
             return $this->backError('Error: ' . $e->getMessage());
@@ -105,14 +75,8 @@ class TemplateController extends AdminrController
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return mixed
-     */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
             'subject' => ['required'],
@@ -134,13 +98,7 @@ class TemplateController extends AdminrController
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return mixed
-     */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         try{
             MailTemplate::where('id', $id)->delete();

@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Setting;
-use Devsbuddy\AdminrCore\Http\Controllers\AdminrController;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 
-class SettingController extends AdminrController
+class SettingController extends Controller
 {
-    public function index()
+    public function index(): View|RedirectResponse
     {
         try {
             return view('adminr.settings.index');
@@ -22,7 +24,7 @@ class SettingController extends AdminrController
         }
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         try{
             foreach($request->except('_token') as $key => $input) {

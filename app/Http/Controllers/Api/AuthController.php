@@ -3,21 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
-use Devsbuddy\AdminrCore\Http\Controllers\AdminrController;
-use Devsbuddy\AdminrCore\Traits\HasResponse;
+use Devsbuddy\AdminrEngine\Http\Controllers\AdminrController;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class AuthController extends AdminrController
 {
-    use HasResponse;
-
-    /**
-     * @param Request $request
-     * @return mixed
-     */
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         $request->validate([
             'identifier' => 'required|string|',
@@ -36,11 +30,7 @@ class AuthController extends AdminrController
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
         $request->validate([
             'name' => ['required'],
@@ -75,7 +65,7 @@ class AuthController extends AdminrController
         }
     }
 
-    public function forgotPassword(Request $request)
+    public function forgotPassword(Request $request): JsonResponse
     {
         $request->validate([
             "email"     => ["required", "string", "email"],
@@ -99,7 +89,7 @@ class AuthController extends AdminrController
 
     }
 
-    public function logout()
+    public function logout(): JsonResponse
     {
         auth()->user()->tokens()->delete();
 

@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class {{MIGRATION_CLASS}} extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('{{TABLE}}', function (Blueprint $table) {
+            $table->unsignedBigInteger('{{RELATION_FIELD}}')->nullable();
+            $table->foreign('{{RELATION_FIELD}}')->references('id')->on('{{FOREIGN_MODEL}}');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('{{TABLE}}', function (Blueprint $table) {
+            $table->dropColumn('{{RELATION_FIELD}}');
+        });
+    }
+}

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Devsbuddy\AdminrCore\Traits\HasExcludeScope;
-use Devsbuddy\AdminrCore\Traits\HasMailable;
+use Devsbuddy\AdminrEngine\Traits\HasExcludeScope;
+use Devsbuddy\AdminrEngine\Traits\HasMailable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
