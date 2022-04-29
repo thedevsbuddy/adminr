@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Devsbuddy\AdminrCore\Http\Controllers\AdminrController;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class RoleAndPermissionController extends AdminrController
+class RoleAndPermissionController extends Controller
 {
-    public function index()
+    public function index(): View|RedirectResponse
     {
         try{
             $roles = Role::all();
@@ -23,7 +26,7 @@ class RoleAndPermissionController extends AdminrController
         }
     }
 
-    public function assignPermission(Request $request)
+    public function assignPermission(Request $request): JsonResponse
     {
 
         $role = Role::where('id', $request->get('role_id'))->first();
@@ -34,7 +37,8 @@ class RoleAndPermissionController extends AdminrController
         }
         return $this->successMessage('Permission assigned to '.$role->name.' !');
     }
-    public function revokePermission(Request $request)
+
+        public function revokePermission(Request $request): JsonResponse
     {
 
         $role = Role::where('id', $request->get('role_id'))->first();
@@ -47,7 +51,7 @@ class RoleAndPermissionController extends AdminrController
     }
 
 
-    public function storeRole(Request $request)
+    public function storeRole(Request $request): RedirectResponse
     {
         $request->validate([
            'name' => ['required', 'unique:roles'],
@@ -66,7 +70,7 @@ class RoleAndPermissionController extends AdminrController
         }
     }
 
-    public function storePermission(Request $request)
+    public function storePermission(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'unique:permissions'],

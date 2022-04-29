@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Devsbuddy\AdminrCore\Traits\HasExcludeScope;
-use Devsbuddy\AdminrCore\Traits\HasMailable;
+use Devsbuddy\AdminrEngine\Traits\HasExcludeScope;
+use Devsbuddy\AdminrEngine\Traits\HasMailable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,19 +46,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Get avatar attribute with full path
-     *
-     * @param $value
-     * @return string
-     */
-    public function getAvatarAttribute($value)
+    public function avatar(): Attribute
     {
-        $avatar = !is_null($value) ? $value : 'https://ui-avatars.com/api/?name='.$this->name.'&background=random&v=' . rand(0, 999999);
-        if(Str::contains(request()->url(), 'api')){
-          return asset($avatar);
-        }
-        return $avatar;
+        return Attribute::make(
+            get: function($val) {
+                $avatar = !is_null($val) ? $val : 'https://ui-avatars.com/api/?name='.$this->name.'&background=random&v=' . rand(0, 999999);
+                if(Str::contains(request()->url(), 'api')){
+                    return asset($avatar);
+                }
+                return $avatar;
+            }
+        );
     }
 
     /**

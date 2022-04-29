@@ -1,4 +1,4 @@
-# AdminR v0.1.6
+# AdminR v0.2.0-alpha1
 
 <p align="center">
 <a href="https://travis-ci.org/thedevsbuddy/laravel-adminr"><img src="https://travis-ci.org/thedevsbuddy/laravel-adminr.svg" alt="Build Status"></a>
@@ -59,11 +59,8 @@ Link storage folder
 php artisan storage:link
 ```
 
-By default you will get ```4``` users and role
+By default, you will get ```3``` users and role
 ```text
-Developer (developer)
-email: dev@adminr.com
-pwd: password 
 
 Super admin (super.admin)
 email: super.admin@adminr.com

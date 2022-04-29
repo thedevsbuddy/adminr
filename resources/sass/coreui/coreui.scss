@@ -25,7 +25,7 @@ body{
 }
 
 .c-main .container-fluid {
-  padding: auto 16px;
+    padding-inline: 16px;
 }
 
 [class^=bg-] {
@@ -87,3 +87,7 @@ textarea.form-control {
 }
 
 #toast-container > .toast-error { background-color: #BD362F; }
+
+.c-app{
+    background-color: #ebedff !important;
+}

@@ -11,15 +11,13 @@ class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $body;
     /**
      * Create a new message instance.
      *
-     * @param $body
      */
-    public function __construct($body)
+    public function __construct()
     {
-        $this->body = $body;
+
     }
 
     /**
@@ -29,6 +27,6 @@ class TestMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.test-mail')->with('body', $this->body);
+        return $this->markdown('emails.test-mail');
     }
 }

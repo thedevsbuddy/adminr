@@ -1,0 +1,117 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use App\Http\Resources\{{MODEL_CLASS}}Resource;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
+use App\Models\{{MODEL_CLASS}};
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class {{CONTROLLER_CLASS}} extends Controller
+{
+    private int $resultLimit;
+
+    public function __construct(){
+        $this->resultLimit = {{RESULT_LIMIT}};
+    }
+
+
+    public function index(Request $request): JsonResponse|AnonymousResourceCollection
+    {
+        try{
+            $page = $request->has('page') ? $request->get('page') : 1;
+            $limit = $request->has('limit') ? $request->get('limit') : $this->resultLimit;
+
+            ${{MODEL_ENTITIES}} = {{MODEL_CLASS}}::query();
+
+            {{SEARCH_STATEMENTS}}
+            ${{MODEL_ENTITIES}} = ${{MODEL_ENTITIES}}->limit($limit)->offset(($page - 1) * $limit)->get();
+
+            return {{MODEL_CLASS}}Resource::collection(${{MODEL_ENTITIES}});
+        } catch(\Exception $e){
+            return $this->error("Error: " . $e->getMessage());
+        }
+    }
+
+    public function show({{MODEL_CLASS}} ${{MODEL_ENTITY}}): {{MODEL_CLASS}}Resource|JsonResponse
+    {
+        try{
+            return new {{MODEL_CLASS}}Resource(${{MODEL_ENTITY}});
+        } catch(\Exception $e){
+            return $this->error("Error: " . $e->getMessage());
+        }
+    }
+
+    public function store(Request $request): JsonResponse
+    {
+        try{
+            {{VALIDATION_STATEMENT}}
+
+            {{FILE_UPLOAD_API_STATEMENT}}
+            ${{MODEL_ENTITY}} = {{MODEL_CLASS}}::create([
+                {{SAVE_DATA_STATEMENT}}
+            ]);
+
+            return $this->success(["message" => "{{MODEL_ENTITY}} created successfully!", "data" => ${{MODEL_ENTITY}}], 201);
+        } catch(\Exception $e){
+            return $this->error("Error: " . $e->getMessage());
+        }
+    }
+
+    public function update(Request $request, {{MODEL_CLASS}} ${{MODEL_ENTITY}}): JsonResponse
+    {
+        try{
+            {{UPDATE_VALIDATION_STATEMENT}}
+
+            {{FILE_UPDATE_STATEMENT}}
+            ${{MODEL_ENTITY}} = ${{MODEL_ENTITY}}->update([
+                {{UPDATE_DATA_STATEMENT}}
+            ]);
+
+            return $this->success(["message" => "{{MODEL_ENTITY}} updated successfully!", "data" => ${{MODEL_ENTITY}}], 201);
+        } catch(\Exception $e){
+            return $this->error("Error: " . $e->getMessage());
+        }
+    }
+
+    public function destroy($id): JsonResponse
+    {
+        try{
+            ${{MODEL_ENTITY}} = {{MODEL_CLASS}}::findOrFail($id);
+            ${{MODEL_ENTITY}}->delete();
+
+            return $this->successMessage("{{MODEL_ENTITY}} deleted successfully!");
+        } catch(\Exception $e){
+            return $this->error("Error: " . $e->getMessage());
+        }
+    }
+
+    public function restore($id): JsonResponse
+    {
+        try{
+            ${{MODEL_ENTITY}} = {{MODEL_CLASS}}::withTrashed()->find($id);
+            ${{MODEL_ENTITY}}->restore();
+
+            return $this->successMessage("{{MODEL_ENTITY}} restored successfully!");
+        } catch(\Exception $e){
+            return $this->error("Error: " . $e->getMessage());
+        }
+    }
+
+    public function forceDestroy($id): JsonResponse
+    {
+        try{
+            ${{MODEL_ENTITY}} = {{MODEL_CLASS}}::withTrashed()->where('id', $id)->first();
+            {{DELETE_FILE_STATEMENT}}
+            ${{MODEL_ENTITY}}->forceDelete();
+
+            return $this->successMessage("{{MODEL_ENTITY}} deleted successfully!");
+        } catch(\Exception $e){
+            return back()->with("error", "Error: " . $e->getMessage());
+        }
+    }
+
+}
