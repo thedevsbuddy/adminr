@@ -11,41 +11,31 @@ class AdminrEngineService
 {
     use HasStubs, CanManageFiles;
 
-    public $request;
-    public $modelName;
-    public $modelPluralName;
-    public $modelEntity;
-    public $modelEntities;
-    public $controllerName;
-    public $migrationFileName;
-    public $tableName;
-    public $currentOperationId;
-    public $operationDirectory;
+    public Request $request;
+    public string $modelName;
+    public string $modelPluralName;
+    public string $modelEntity;
+    public string $modelEntities;
+    public string $controllerName;
+    public string $migrationFileName;
+    public string $tableName;
+    public string $currentOperationId;
+    public string $operationDirectory;
 
-    public $hasSoftdeletes;
-    public $buildApi;
+    public bool $hasSoftdeletes;
+    public bool $buildApi;
 
-    /**
-     * Prepare the service for resource generation
-     *
-     * @param Request $request
-     * @return $this
-     */
-    public function prepare(Request $request)
+    public function prepare(Request $request): static
     {
         $this->request = $request;
         $this->currentOperationId = Str::random(12);
-        $this->operationDirectory = 'adminr-core/' . date('Y_m_d_his') . '_' . $this->currentOperationId;
+        $this->operationDirectory = 'adminr-engine/' . date('Y_m_d_his') . '_' . $this->currentOperationId;
         $this->stubsDirectory = storage_path($this->operationDirectory . '/stubs');
         $this->initialize();
         return $this;
     }
 
 
-    /**
-     * Initialize the service
-     *
-     */
     public function initialize()
     {
         $this->modelName = Str::studly(Str::singular($this->request->get('model')));
@@ -62,12 +52,6 @@ class AdminrEngineService
         File::copyDirectory(__DIR__ . '/../../resources/stubs/', storage_path($this->operationDirectory . '/stubs'));
     }
 
-    /**
-     * Create a directory on provided path
-     *
-     * @param $path
-     * @param bool $commit
-     */
     protected function makeDirectory($path, $commit = false)
     {
         $permission = $commit ? 0775 : 0775;
@@ -76,11 +60,6 @@ class AdminrEngineService
         }
     }
 
-
-    /**
-     * Clean the working directory
-     *
-     */
     public function cleanUp()
     {
         if (File::isDirectory(dirname(storage_path($this->operationDirectory . '/stubs')))) {
