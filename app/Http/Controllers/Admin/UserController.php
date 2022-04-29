@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
-use Devsbuddy\AdminrCore\Http\Controllers\AdminrController;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
 
 
-class UserController extends AdminrController
+class UserController extends Controller
 {
-    protected $limit;
+    protected int $limit;
 
     public function __construct()
     {
         $this->limit = 10;
     }
 
-    public function index()
+    public function index(): View|RedirectResponse
     {
         try {
             $users = User::notRole(['admin', 'super_admin'])->paginate($this->limit);
@@ -31,12 +33,7 @@ class UserController extends AdminrController
         }
     }
 
-    /**
-     * Create new user
-     *
-     * @return mixed
-     */
-    public function create()
+    public function create(): View|RedirectResponse
     {
         try {
             $roles = Role::get();
@@ -49,13 +46,8 @@ class UserController extends AdminrController
     }
 
 
-    /**
-     * Store new user
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(Request $request)
+
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required'],
@@ -68,7 +60,7 @@ class UserController extends AdminrController
 
         try {
             if ($request->hasFile('avatar')) {
-                $avatar = $this->uploadFile($request->file('avatar'), 'users/avatars')->getFileName();
+                $avatar = $this->uploadFile(file: $request->file('avatar'), dir: 'users/avatars')->getFilePath();
             } else {
                 $avatar = null;
             }
@@ -93,13 +85,7 @@ class UserController extends AdminrController
     }
 
 
-    /**
-     * Edit new user
-     *
-     * @param User $user
-     * @return mixed
-     */
-    public function edit(User $user)
+    public function edit(User $user): View|RedirectResponse
     {
         try {
             $roles = Role::get();
@@ -112,14 +98,8 @@ class UserController extends AdminrController
     }
 
 
-    /**
-     * Store new user
-     *
-     * @param Request $request
-     * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(User $user, Request $request)
+
+    public function update(User $user, Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required'],
@@ -132,7 +112,7 @@ class UserController extends AdminrController
 
         try {
             if ($request->hasFile('avatar')) {
-                $avatar = $this->uploadFile($request->file('avatar'), 'users/avatars')->getFileName();
+                $avatar = $this->uploadFile($request->file('avatar'), 'users/avatars')->getFilePath();
                 $this->deleteStorageFile($user->avatar);
             } else {
                 $avatar = $user->avatar;
@@ -161,13 +141,7 @@ class UserController extends AdminrController
     }
 
 
-    /**
-     * Delete user from database
-     *
-     * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
         try {
             if (!Str::contains($user->avatar, 'default-avatar.png')) {

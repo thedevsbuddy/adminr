@@ -1,0 +1,37 @@
+{
+    "index": {
+        "route": "{{MODEL_ENTITIES}}",
+        "middleware": {{MIDDLEWARES}},
+        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
+        "action": "index",
+        "method": "get"
+    },
+    "show": {
+        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}",
+        "middleware": {{MIDDLEWARES}},
+        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
+        "action": "show",
+        "method": "get"
+    },
+    "store": {
+        "route": "{{MODEL_ENTITIES}}",
+        "middleware": {{MIDDLEWARES}},
+        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
+        "action": "store",
+        "method": "post"
+    },
+    "update": {
+        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}",
+        "middleware": {{MIDDLEWARES}},
+        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
+        "action": "update",
+        "method": "put"
+    },
+    "destroy": {
+        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}",
+        "middleware": {{MIDDLEWARES}},
+        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
+        "action": "destroy",
+        "method": "delete"
+    }
+}

@@ -38,7 +38,7 @@
 															class="text-danger">*</span></label>
 												<input type="text"
 												       class="form-control @if($errors->has('subject')) is-invalid @endif"
-												       name="subject" id="subject" placeholder="{{ __('Subject') }}"
+												       name="subject" id="subject" placeholder="{{ __('Eg: Order placed successfully!') }}"
 												       value="{{ old('subject') }}" required>
 												@if($errors->has('subject'))
 													<span class="text-danger font-weight-bold">{{ $errors->first('subject') }}</span>
@@ -51,13 +51,25 @@
 															class="text-danger">*</span></label>
 												<input type="text"
 												       class="form-control @if($errors->has('code')) is-invalid @endif"
-												       name="code" id="code" placeholder="{{ __('Mail Code') }}"
+												       name="code" id="code" placeholder="{{ __('Eg: order-placed-mail') }}"
 												       value="{{ old('code') }}" required>
 												@if($errors->has('code'))
 													<span class="text-danger font-weight-bold">{{ $errors->first('code') }}</span>
 												@endif
 											</div>
 										</div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label for="subject">{{ __('Purpose') }}</label>
+                                                <input type="text"
+                                                       class="form-control @if($errors->has('purpose')) is-invalid @endif"
+                                                       name="purpose" id="purpose" placeholder="{{ __('Eg: To be sent when order placed.') }}"
+                                                       value="{{ old('purpose') }}">
+                                                @if($errors->has('purpose'))
+                                                    <span class="text-danger font-weight-bold">{{ $errors->first('purpose') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
 										<div class="col-lg-12">
 											<div class="form-group">
 												<label for="content">{{ __('Content') }} <span

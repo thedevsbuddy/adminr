@@ -4,42 +4,29 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request)
+    public function showLoginForm(): View|RedirectResponse
+    {
+        try{
+            return view('auth.login');
+        } catch (\Exception $e){
+            return $this->backError('Error: ' . $e->getMessage());
+        } catch (\Error $e){
+            return $this->backError('Error: ' . $e->getMessage());
+        }
+    }
+
+    public function login(Request $request): RedirectResponse
     {
         $request->validate([
             'email' => 'required',
@@ -50,12 +37,30 @@ class LoginController extends Controller
         if(auth()->attempt(array($fieldType => $request->get('email'), 'password' => $request->get('password'))))
         {
             if (auth()->check() && auth()->user()->hasRole(['developer', 'admin', 'super_admin'])){
-                return redirect()->route(config('app.route_prefix').'.index');
+                return $this->redirectSuccess(route: route(config('app.route_prefix').'.index'), message: "Logged In Successfully!");
             } else {
-                return redirect()->route('index');
+                return $this->redirectSuccess(route: route('index'), message: "Logged In Successfully!");
             }
         } else {
-            return back()->with('error','Email-Address And Password Are Wrong.');
+            return $this->backError('Email-Address And Password Are Wrong.');
+        }
+    }
+
+    public function logout(): RedirectResponse
+    {
+        try{
+            if(auth()->check()){
+                auth()->logout();
+                request()->session()->invalidate();
+
+                request()->session()->regenerateToken();
+            }
+            /// TODO: Think where to redirect after logging out.
+            return $this->redirectSuccess(route: route('auth.login'), message: "You are logged out successfully!");
+        } catch (\Exception $e){
+            return $this->backError('Error: ' . $e->getMessage());
+        } catch (\Error $e){
+            return $this->backError('Error: ' . $e->getMessage());
         }
     }
 }

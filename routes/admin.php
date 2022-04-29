@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MailTestController;
 use App\Http\Controllers\Admin\RoleAndPermissionController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TemplateController;
 use App\Http\Controllers\Admin\UserController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +25,7 @@ use Illuminate\Support\Facades\Route;
  * Add admin routes here if needed
  */
 Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'auth', 'admin'], 'as' => config('app.route_prefix').'.'], function() {
-    Route::redirect('/', config('app.route_prefix').'/dashboard', 301);
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
     Route::group(['prefix' => '/manage'], function () {
@@ -51,9 +53,6 @@ Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'a
     });
 
     // Send Test Mail
-    Route::post('/test-mail', function (\Illuminate\Http\Request $request){
-        \Illuminate\Support\Facades\Mail::to($request->get('email'))->send(new \App\Mail\TestMail());
-        return back()->with('success', 'Mail send successfully!');
-    })->name('test-mail');
+    Route::post('/test-mail', [MailTestController::class, 'send'])->name('test-mail');
 
 });

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
-use Devsbuddy\AdminrCore\Http\Controllers\AdminrController;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
-class DashboardController extends AdminrController
+class DashboardController extends Controller
 {
-    public function index()
+    public function index(): View|RedirectResponse
     {
         try{
             $usersCount = User::notRole(['super_admin', 'admin'])->count();

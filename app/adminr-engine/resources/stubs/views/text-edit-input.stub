@@ -1,0 +1,11 @@
+                            <div class="{{COL_SM}} {{COL_MD}} {{COL_LG}}">
+                                <div class="form-group has-feedback @if($errors->has('{{FIELD_NAME}}')) has-error @endif">
+                                    <label for="{{FIELD_NAME}}">{{FIELD_NAME_LABEL}}</label>
+                                    <input type="text" name="{{FIELD_NAME}}" id="{{FIELD_NAME}}" class="form-control @if($errors->has('{{FIELD_NAME}}')) is-invalid @endif" placeholder="{{FIELD_NAME_LABEL}}" value="{{ old('{{FIELD_NAME}}') ?: ${{MODEL_ENTITY}}->{{FIELD_NAME}} }}" {{REQUIRED_STATEMENT}} />
+                                    @if ($errors->has('{{FIELD_NAME}}'))
+                                        <span class="text-danger">
+                                            <strong>{{ $errors->first('{{FIELD_NAME}}') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>

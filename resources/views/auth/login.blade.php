@@ -1,7 +1,6 @@
 @extends('adminr.layouts.auth')
 
 @section('content')
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-5">
@@ -10,7 +9,7 @@
                         <div class="card-body">
                             <h1>Login</h1>
                             <p class="text-muted">Sign In to your account</p>
-                            <form  method="POST" action="{{ route('login') }}">
+                            <form method="POST" action="{{ route('auth.login') }}">
                                 @csrf
                                 <label for="email">Username or Email*</label>
                                 <div class="input-group mb-3">
@@ -21,7 +20,10 @@
                                             </svg>
                                         </span>
                                     </div>
-                                    <input  id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="off" placeholder="Username or email" autofocus>
+                                    <input id="email" type="text"
+                                           class="form-control @error('email') is-invalid @enderror" name="email"
+                                           value="{{ old('email') }}" required autocomplete="off"
+                                           placeholder="Username or email" autofocus>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -37,7 +39,9 @@
                                             </svg>
                                         </span>
                                     </div>
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="current-password">
+                                    <input id="password" type="password"
+                                           class="form-control @error('password') is-invalid @enderror" name="password"
+                                           placeholder="Password" required autocomplete="current-password">
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -54,7 +58,8 @@
                                 </div>
                             </form>
                             <p class="text-center mt-3">OR</p>
-                            <a href="{{ route('register') }}" class="btn btn-block btn-light px-4">Create an account</a>
+                            <a href="{{ route('auth.register') }}" class="btn btn-block btn-light px-4">Create an
+                                account</a>
                         </div>
                     </div>
 

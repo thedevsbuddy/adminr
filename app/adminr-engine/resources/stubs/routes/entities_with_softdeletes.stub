@@ -1,0 +1,74 @@
+{
+    "index": {
+        "route": "{{MODEL_ENTITIES}}",
+        "middleware": ["web", "permission:{{MODEL_ENTITIES}}_list"],
+        "name": "{{MODEL_ENTITIES}}.index",
+        "controller": "App\\Http\\Controllers\\Admin\\{{CONTROLLER_CLASS}}",
+        "action": "index",
+        "method": "get"
+    },
+    "create": {
+        "route": "{{MODEL_ENTITIES}}/create",
+        "middleware": ["web", "permission:{{MODEL_ENTITIES}}_create"],
+        "name": "{{MODEL_ENTITIES}}.create",
+        "controller": "App\\Http\\Controllers\\Admin\\{{CONTROLLER_CLASS}}",
+        "action": "create",
+        "method": "get"
+    },
+    "store": {
+        "route": "{{MODEL_ENTITIES}}",
+        "middleware": ["web", "permission:{{MODEL_ENTITIES}}_store"],
+        "name": "{{MODEL_ENTITIES}}.store",
+        "controller": "App\\Http\\Controllers\\Admin\\{{CONTROLLER_CLASS}}",
+        "action": "store",
+        "method": "post"
+    },
+    "show": {
+        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}",
+        "middleware": ["web", "permission:{{MODEL_ENTITIES}}_single"],
+        "name": "{{MODEL_ENTITIES}}.show",
+        "controller": "App\\Http\\Controllers\\Admin\\{{CONTROLLER_CLASS}}",
+        "action": "show",
+        "method": "get"
+    },
+    "edit": {
+        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}/edit",
+        "middleware": ["web", "permission:{{MODEL_ENTITIES}}_edit"],
+        "name": "{{MODEL_ENTITIES}}.edit",
+        "controller": "App\\Http\\Controllers\\Admin\\{{CONTROLLER_CLASS}}",
+        "action": "edit",
+        "method": "get"
+    },
+    "update": {
+        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}",
+        "middleware": ["web", "permission:{{MODEL_ENTITIES}}_update"],
+        "name": "{{MODEL_ENTITIES}}.update",
+        "controller": "App\\Http\\Controllers\\Admin\\{{CONTROLLER_CLASS}}",
+        "action": "update",
+        "method": "put"
+    },
+    "destroy": {
+        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}",
+        "middleware": ["web", "permission:{{MODEL_ENTITIES}}_destroy"],
+        "name": "{{MODEL_ENTITIES}}.destroy",
+        "controller": "App\\Http\\Controllers\\Admin\\{{CONTROLLER_CLASS}}",
+        "action": "destroy",
+        "method": "delete"
+    },
+    "restore": {
+        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}/restore",
+        "middleware": ["web", "permission:{{MODEL_ENTITIES}}_restore"],
+        "name": "{{MODEL_ENTITIES}}.restore",
+        "controller": "App\\Http\\Controllers\\Admin\\{{CONTROLLER_CLASS}}",
+        "action": "restore",
+        "method": "post"
+    },
+    "forceDestroy": {
+        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}/force-destroy",
+        "middleware": ["web", "permission:{{MODEL_ENTITIES}}_force_destroy"],
+        "name": "{{MODEL_ENTITIES}}.force-destroy",
+        "controller": "App\\Http\\Controllers\\Admin\\{{CONTROLLER_CLASS}}",
+        "action": "forceDestroy",
+        "method": "delete"
+    }
+}

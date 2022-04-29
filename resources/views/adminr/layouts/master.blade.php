@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link rel="stylesheet" href="{{ asset('adminr/css/coreui.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/adminr-core/css/adminr-core.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/adminr-engine/css/adminr-engine.css') }}">
     <style>
         .h-3 {
             height: .75rem;
@@ -70,7 +70,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
-<script src="{{ asset('vendor/adminr-core/js/adminr-core.js') }}"></script>
+<script src="{{ asset('vendor/adminr-engine/js/adminr-engine.js') }}"></script>
 
 @if(session('success'))
     <script>

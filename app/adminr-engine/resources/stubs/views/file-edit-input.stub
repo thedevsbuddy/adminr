@@ -1,0 +1,15 @@
+<div class="mb-3">
+    <label>{{FIELD_NAME_LABEL}}</label>
+    <label class="custom-file-button" style="--aspect-ratio: 5 / 2">
+        <div class="custom-file-content">
+            <span class="text-dark">
+                <i class="fa fa-upload mr-2"></i>
+                <span class="file-input-label">Select {{FIELD_NAME_LABEL}}</span>
+            </span>
+            <input name="{{FIELD_NAME}}" class="file-input" id="{{FIELD_NAME}}" type="file" accept="{{ACCEPT_FILE_STATEMENT}}" {{MULTIPLE_TYPE_STATEMENT}} />
+        </div>
+    </label>
+    <div class="mt-3">
+        {{OLD_FILE_STATEMENT}}
+    </div>
+</div>

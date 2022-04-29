@@ -1,0 +1,56 @@
+{
+    "name": "thedevsbuddy/adminr-engine",
+    "version": "0.1.0",
+    "description": "A package to generate crud on any laravel project.",
+    "keywords": [
+        "devsbuddy",
+        "adminr-engine"
+    ],
+    "homepage": "https://github.com/thedevsbuddy/adminr",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Shoaib Khan",
+            "email": "shoaib@devsbuddy.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "illuminate/support": "^9.10.1",
+        "squizlabs/php_codesniffer": "3.*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.4.0",
+        "phpunit/phpunit": "^9.5.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Devsbuddy\\AdminrEngine\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Devsbuddy\\AdminrEngine\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Devsbuddy\\AdminrEngine\\AdminrEngineServiceProvider"
+            ],
+            "aliases": {
+                "AdminrEngine": "Devsbuddy\\AdminrEngine\\AdminrEngineFacade"
+            }
+        }
+    }
+}

@@ -1,6 +1,7 @@
 {{--@if(request()->segment(2) != 'manage') c-sidebar-minimized @endif--}}
-<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show @if(activeRoute(config('app.route_prefix').'.builder')) c-sidebar-minimized @endif"
-     id="sidebar">
+<div
+    class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show @if(activeRoute(config('app.route_prefix').'.builder')) c-sidebar-minimized @endif"
+    id="sidebar">
     <div class="c-sidebar-brand d-lg-down-none">
         <span class="c-sidebar-brand-full d-flex align-items-center">
             @if(!is_null(getSetting('app_logo')))
@@ -28,34 +29,39 @@
             </a>
         </li>
         @can('manage_resources')
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.builder') }}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{ coreUiIcon('cil-diamond') }}"></use>
-                    </svg>
-                    {{ __('Builder') }}
-                </a>
-            </li>
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.resources.index') }}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{ coreUiIcon('cil-apps') }}"></use>
-                    </svg>
-                    {{ __('Generated Resources') }}
-                </a>
-            </li>
+            @if(config('app.env') == 'local')
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.builder') }}">
+                        <svg class="c-sidebar-nav-icon">
+                            <use xlink:href="{{ coreUiIcon('cil-diamond') }}"></use>
+                        </svg>
+                        {{ __('Builder') }}
+                    </a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.resources.index') }}">
+                        <svg class="c-sidebar-nav-icon">
+                            <use xlink:href="{{ coreUiIcon('cil-apps') }}"></use>
+                        </svg>
+                        {{ __('Generated Resources') }}
+                    </a>
+                </li>
+            @endif
         @endcan
 
         <li class="c-sidebar-nav-title">Permissible</li>
         @can('manage_permissions')
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.roles-and-permissions.index') }}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{ coreUiIcon('cil-star') }}"></use>
-                    </svg>
-                    {{ __('Roles & Permissions') }}
-                </a>
-            </li>
+            @if(config('app.env') == 'local')
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link"
+                       href="{{ route(config('app.route_prefix').'.roles-and-permissions.index') }}">
+                        <svg class="c-sidebar-nav-icon">
+                            <use xlink:href="{{ coreUiIcon('cil-star') }}"></use>
+                        </svg>
+                        {{ __('Roles & Permissions') }}
+                    </a>
+                </li>
+            @endif
         @endcan
         @can('manage_users')
             <li class="c-sidebar-nav-item">
@@ -92,9 +98,9 @@
         <li class="c-sidebar-nav-title">Resources</li>
         @if(isset($resourceMenus) && count($resourceMenus) > 0)
             @foreach($resourceMenus as $menu)
-                @can(strtolower($menu->resource) . '_show_list')
+                @can(strtolower($menu->adminrResource->name) . '_list')
                     <li class="c-sidebar-nav-item">
-                        <a class="c-sidebar-nav-link {{ returnIfRoutes([config('app.route_prefix').'.'.strtolower($menu->resource).'.index', config('app.route_prefix').'.'.strtolower($menu->resource).'.create', config('app.route_prefix').'.'.strtolower($menu->resource).'.edit'], 'c-active') }}"
+                        <a class="c-sidebar-nav-link {{ returnIfRoutes([config('app.route_prefix').'.'.strtolower($menu->adminrResource->name).'.index', config('app.route_prefix').'.'.strtolower($menu->adminrResource->name).'.create', config('app.route_prefix').'.'.strtolower($menu->adminrResource->name).'.edit'], 'c-active') }}"
                            href="{{ route(config('app.route_prefix').'.'.$menu->route) }}">
                             @if($menu->icon_type == 'svg')
                                 <span class="c-sidebar-nav-icon">
@@ -119,15 +125,19 @@
                 @endcan
             @endforeach
         @else
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link"
-                   href="{{ route(config('app.route_prefix').'.builder') }}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{ coreUiIcon('cil-plus') }}"></use>
-                    </svg>
-                    {{ __('Add new') }}
-                </a>
-            </li>
+            @can('manage_resources')
+                @if(config('app.env') == 'local')
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link"
+                           href="{{ route(config('app.route_prefix').'.builder') }}">
+                            <svg class="c-sidebar-nav-icon">
+                                <use xlink:href="{{ coreUiIcon('cil-plus') }}"></use>
+                            </svg>
+                            {{ __('Add new') }}
+                        </a>
+                    </li>
+                @endif
+            @endcan
         @endif
 
         {{--        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">--}}

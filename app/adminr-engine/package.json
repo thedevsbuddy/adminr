@@ -1,0 +1,26 @@
+{
+    "name": "adminr-engine",
+    "version": "0.1.0",
+    "description": "[![Latest Version on Packagist](https://img.shields.io/packagist/v/devsbuddy/adminr-core.svg?style=flat-square)](https://packagist.org/packages/devsbuddy/adminr-core) [![Total Downloads](https://img.shields.io/packagist/dt/devsbuddy/adminr-core.svg?style=flat-square)](https://packagist.org/packages/devsbuddy/adminr-core) ![GitHub Actions](https://github.com/devsbuddy/adminr-core/actions/workflows/main.yml/badge.svg)",
+    "main": "webpack.mix.js",
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.24.0",
+        "vue": "^3.2.26"
+    },
+    "devDependencies": {
+        "laravel-mix": "^6.0.39",
+        "vue-loader": "^17.0.0"
+    }
+}

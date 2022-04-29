@@ -1,0 +1,4 @@
+    /*================================================
+    	{{MODEL_CLASS}} Relations Route
+    ================================================*/
+    Route::get('/{{MODEL_ENTITY}}/{{{MODEL_ENTITY}}}/{{RELATION_ENTITIES}}', '{{CONTROLLER_CLASS}}@get{{RELATION_CLASS_PLURAL}}Index')->name('{{MODEL_ENTITY}}.{{RELATION_ENTITIES}}');

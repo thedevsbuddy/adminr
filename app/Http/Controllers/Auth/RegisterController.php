@@ -8,93 +8,64 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function showRegisterForm(): View|RedirectResponse
     {
-        return Validator::make($data, [
-            'name' => ['required'],
-            'username' => ['required', 'unique:users'],
-            'email' => ['required', 'email', 'unique:users'],
-            'phone' => ['required', 'unique:users', 'numeric', 'min:10'],
-            'password' => ['required', 'min:6'],
-        ]);
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'username' => $data['username'],
-            'phone' => $data['phone'],
-            'password' => bcrypt($data['password']),
-        ]);
+        try {
+            return view('auth.register');
+        } catch (\Exception $e) {
+            return $this->backError('Error: ' . $e->getMessage());
+        } catch (\Error $e) {
+            return $this->backError('Error: ' . $e->getMessage());
+        }
     }
 
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->create($request->all())));
+        $request->validate([
+            'name' => ['required'],
+            'username' => ['required', 'unique:users'],
+            'email' => ['required', 'email', 'unique:users'],
+            'phone' => ['required', 'unique:users'],
+            'password' => ['required', 'confirm'],
+        ]);
 
-        $user->syncRoles(Role::where('name', 'user')->first()->id);
+        try {
+            $user = User::create([
+                'name' => $request->get('name'),
+                'username' => $request->get('username'),
+                'email' => $request->get('email'),
+                'phone' => $request->get('phone'),
+                'password' => bcrypt($request->get('password')),
+            ]);
 
-        $this->guard()->login($user);
+            $user->syncRoles(Role::where('name', 'user')->first()->id);
 
-        if ($response = $this->registered($request, $user)) {
-            return $response;
+            auth()->login($user);
+
+            return $request->wantsJson()
+                ? $this->successMessage(message: "Registered successfully!")
+                : $this->redirectSuccess(route: route('index'), message: "Registered successfully!");
+
+        } catch (\Exception $e) {
+            return $this->backError('Error: ' . $e->getMessage());
+        } catch (\Error $e) {
+            return $this->backError('Error: ' . $e->getMessage());
         }
 
-        return $request->wantsJson()
-            ? response()->json(['message' => "User registered successfully!"], 201)
-            : redirect($this->redirectPath());
     }
 }
