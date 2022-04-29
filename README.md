@@ -1,4 +1,4 @@
-# AdminR v0.2.0-alpha1
+# AdminR v0.2.0
 
 <p align="center">
 <a href="https://travis-ci.org/thedevsbuddy/laravel-adminr"><img src="https://travis-ci.org/thedevsbuddy/laravel-adminr.svg" alt="Build Status"></a>
