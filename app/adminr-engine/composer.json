@@ -28,10 +28,7 @@
     "autoload": {
         "psr-4": {
             "Devsbuddy\\AdminrEngine\\": "src"
-        },
-        "files": [
-            "src/Http/helpers.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
