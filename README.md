@@ -59,11 +59,8 @@ Link storage folder
 php artisan storage:link
 ```
 
-By default you will get ```4``` users and role
+By default, you will get ```3``` users and role
 ```text
-Developer (developer)
-email: dev@adminr.com
-pwd: password 
 
 Super admin (super.admin)
 email: super.admin@adminr.com
