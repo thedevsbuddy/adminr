@@ -4,7 +4,7 @@
 
 ==================================================
 
-## Release 0.2.0 - Apr xx, 2022
+## Release v0.2.0-alpha1 - Apr 30, 2022
 
 - Now it is using ```Laravel v9.x``` and ```php v8.1.x```.
 - Renamed ```adminr-core``` to ```adminr-engine```.
