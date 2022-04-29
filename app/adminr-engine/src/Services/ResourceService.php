@@ -18,7 +18,7 @@ class ResourceService
 
     public $id;
 
-    public function store(Request $request)
+    public function store(Request $request): static
     {
         $resource = Resource::firstOrcreate([
             'name' => Str::title(Str::plural($request->get('model'))),
@@ -72,13 +72,13 @@ class ResourceService
         return $this;
     }
 
-    public function update(array $data)
+    public function update(array $data): static
     {
         Resource::where('id', $this->id)->update($data);
         return $this;
     }
 
-    public function rollback($id = null)
+    public function rollback($id = null): static
     {
         if ($id == null) {
             $id = $this->id;

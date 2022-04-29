@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use App\Http\Resources\{{MODEL_CLASS}}Resource;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use App\Models\{{MODEL_CLASS}};
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
 
 class {{CONTROLLER_CLASS}} extends Controller
 {
@@ -17,7 +19,7 @@ class {{CONTROLLER_CLASS}} extends Controller
     }
 
 
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): JsonResponse|AnonymousResourceCollection
     {
         try{
             $page = $request->has('page') ? $request->get('page') : 1;
@@ -29,16 +31,16 @@ class {{CONTROLLER_CLASS}} extends Controller
 
             ${{MODEL_ENTITIES}} = ${{MODEL_ENTITIES}}->limit($limit)->offset(($page - 1) * $limit)->get();
 
-            return $this->success(${{MODEL_ENTITIES}});
+            return {{MODEL_CLASS}}Resource::collection(${{MODEL_ENTITIES}});
         } catch(\Exception $e){
             return $this->error("Error: " . $e->getMessage());
         }
     }
 
-    public function show({{MODEL_CLASS}} ${{MODEL_ENTITY}}): JsonResponse
+    public function show({{MODEL_CLASS}} ${{MODEL_ENTITY}}): {{MODEL_CLASS}}Resource|JsonResponse
     {
         try{
-            return $this->success(${{MODEL_ENTITY}});
+            return new {{MODEL_CLASS}}Resource(${{MODEL_ENTITY}});
         } catch(\Exception $e){
             return $this->error("Error: " . $e->getMessage());
         }
@@ -54,7 +56,7 @@ class {{CONTROLLER_CLASS}} extends Controller
                 {{SAVE_DATA_STATEMENT}}
             ]);
 
-            return $this->success(${{MODEL_ENTITY}}, 201);
+            return $this->success(["message" => "{{MODEL_ENTITY}} created successfully!", "data" => ${{MODEL_ENTITY}}], 201);
         } catch(\Exception $e){
             return $this->error("Error: " . $e->getMessage());
         }
@@ -70,7 +72,7 @@ class {{CONTROLLER_CLASS}} extends Controller
                 {{UPDATE_DATA_STATEMENT}}
             ]);
 
-            return $this->success(${{MODEL_ENTITY}}, 201);
+            return $this->success(["message" => "{{MODEL_ENTITY}} updated successfully!", "data" => ${{MODEL_ENTITY}}], 201);
         } catch(\Exception $e){
             return $this->error("Error: " . $e->getMessage());
         }

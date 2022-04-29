@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Devsbuddy\AdminrEngine\Models\Menu;
 use Devsbuddy\AdminrEngine\Models\Resource;
 use Devsbuddy\AdminrEngine\Database;
+use Devsbuddy\AdminrEngine\Services\BuildApiResourceService;
 use Devsbuddy\AdminrEngine\Services\BuildControllersService;
 use Devsbuddy\AdminrEngine\Services\BuildMigrationService;
 use Devsbuddy\AdminrEngine\Services\BuildModelService;
@@ -32,6 +33,7 @@ class BuilderController extends Controller
     public BuildMigrationService $buildMigrationService;
     public BuildRoutesService $buildRouteService;
     public BuildViewsService $buildViewsService;
+    public BuildApiResourceService $buildApiResourceService;
 
     #[Pure] public function __construct()
     {
@@ -41,6 +43,7 @@ class BuilderController extends Controller
         $this->buildMigrationService = new BuildMigrationService();
         $this->buildRouteService = new BuildRoutesService();
         $this->buildViewsService = new BuildViewsService();
+        $this->buildApiResourceService = new BuildApiResourceService();
     }
 
     public function index(): View|RedirectResponse
@@ -122,6 +125,13 @@ class BuilderController extends Controller
                 ->buildCreateView()
                 ->buildEditView()
                 ->cleanUp();
+
+            if($request->get('build_api')){
+                $this->buildApiResourceService
+                    ->prepare($request)
+                    ->buildApiResource()
+                    ->cleanUp();
+            }
 
             Menu::firstOrCreate([
                 'name' => 'resource',

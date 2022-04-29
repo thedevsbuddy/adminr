@@ -6,21 +6,15 @@ use Devsbuddy\AdminrEngine\Database;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use JetBrains\PhpStorm\Pure;
 
 class BuildViewsService extends AdminrEngineService
 {
-    protected $viewIndexTargetPath;
-    protected $viewCreateTargetPath;
-    protected $viewEditTargetPath;
+    protected string $viewIndexTargetPath;
+    protected string $viewCreateTargetPath;
+    protected string $viewEditTargetPath;
 
-
-    /**
-     * Prepares the service to generate views
-     *
-     * @param Request $request
-     * @return $this|AdminrEngineService
-     */
-    public function prepare(Request $request)
+    public function prepare(Request $request): BuildViewsService|static
     {
         parent::prepare($request);
         $this->viewIndexTargetPath = base_path() . "/resources/views/adminr/$this->modelEntities/index.blade.php";
@@ -30,13 +24,7 @@ class BuildViewsService extends AdminrEngineService
     }
 
 
-    /**
-     * Generates index view
-     *
-     * @return $this
-     * @throws \Exception
-     */
-    public function buildIndexView()
+    public function buildIndexView(): static
     {
         try {
             $indexStub = $this->getViewStub('index');
@@ -48,20 +36,12 @@ class BuildViewsService extends AdminrEngineService
             File::copy($stubPath, $this->viewIndexTargetPath);
 
             return $this;
-        } catch (\Exception $e) {
-            throw $e;
-        } catch (\Error $e) {
+        } catch (\Exception | \Error $e) {
             throw $e;
         }
     }
 
-    /**
-     * Generates create view
-     *
-     * @return $this
-     * @throws \Exception
-     */
-    public function buildCreateView()
+    public function buildCreateView(): static
     {
         try {
             $createStub = $this->getViewStub('create');
@@ -73,20 +53,12 @@ class BuildViewsService extends AdminrEngineService
             File::copy($stubPath, $this->viewCreateTargetPath);
 
             return $this;
-        } catch (\Exception $e) {
-            throw $e;
-        } catch (\Error $e) {
+        } catch (\Exception | \Error $e) {
             throw $e;
         }
     }
 
-    /**
-     * Generates edit view
-     *
-     * @return $this
-     * @throws \Exception
-     */
-    public function buildEditView()
+    public function buildEditView(): static
     {
         try {
             $editView = $this->getViewStub('edit');
@@ -98,20 +70,12 @@ class BuildViewsService extends AdminrEngineService
             File::copy($stubPath, $this->viewEditTargetPath);
 
             return $this;
-        } catch (\Exception $e) {
-            throw $e;
-        } catch (\Error $e) {
+        } catch (\Exception | \Error $e) {
             throw $e;
         }
     }
 
-    /**
-     * Processes stubs
-     *
-     * @param $stub
-     * @return mixed
-     */
-    public function processStub($stub)
+    public function processStub($stub): array|string
     {
         $stub = str_replace('{{FORM_STATEMENT}}', $this->getFormStatement(), $stub);
         $stub = str_replace('{{FORM_EDIT_STATEMENT}}', $this->getEditFormStatement(), $stub);
@@ -123,18 +87,10 @@ class BuildViewsService extends AdminrEngineService
         $stub = str_replace('{{CKEDITOR_STATEMENT}}', $this->getCkeditorStatement(), $stub);
         $stub = str_replace('{{IMAGE_UPLOAD_STATEMENT}}', $this->getImageUploadStatement(), $stub);
         $stub = str_replace('{{IMAGE_UPDATE_STATEMENT}}', $this->getImageUpdateStatement(), $stub);
-        $stub = str_replace('{{TRASHED_BUTTONS}}', $this->getTrashedButtonsStatement(), $stub);
-
-        return $stub;
+        return str_replace('{{TRASHED_BUTTONS}}', $this->getTrashedButtonsStatement(), $stub);
     }
 
-
-    /**
-     * Generate form for create
-     *
-     * @return string
-     */
-    private function getFormStatement()
+    private function getFormStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -151,12 +107,7 @@ class BuildViewsService extends AdminrEngineService
         return $formStmt;
     }
 
-    /**
-     * Generate form for edit
-     *
-     * @return string
-     */
-    private function getEditFormStatement()
+    private function getEditFormStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -173,12 +124,6 @@ class BuildViewsService extends AdminrEngineService
         return $formStmt;
     }
 
-    /**
-     * Generates input fields for create
-     *
-     * @param $migration
-     * @return mixed
-     */
     private function getInputField($migration)
     {
         $isLongText = in_array($migration['data_type'], Database::longTextDataTypes());
@@ -191,12 +136,6 @@ class BuildViewsService extends AdminrEngineService
         }
     }
 
-    /**
-     * Generates input fields for edit
-     *
-     * @param $migration
-     * @return mixed
-     */
     private function getEditInputField($migration)
     {
         $isLongText = in_array($migration['data_type'], Database::longTextDataTypes());
@@ -209,14 +148,7 @@ class BuildViewsService extends AdminrEngineService
         }
     }
 
-    /**
-     * Processes input stubs
-     *
-     * @param $stub
-     * @param $migration
-     * @return mixed
-     */
-    private function processInputStubs($stub, $migration)
+    private function processInputStubs($stub, $migration): array|string
     {
         $stub = str_replace('{{MODEL_ENTITY}}', $this->modelEntity, $stub);
         $stub = str_replace('{{FIELD_NAME}}', Str::snake($migration['field_name']), $stub);
@@ -240,12 +172,7 @@ class BuildViewsService extends AdminrEngineService
     }
 
 
-    /**
-     * Generates CKEDITOR for rich text type field
-     *
-     * @return string
-     */
-    private function getCkeditorStatement()
+    private function getCkeditorStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -264,7 +191,7 @@ class BuildViewsService extends AdminrEngineService
 
 
 
-    private function getOldFileStatement()
+    private function getOldFileStatement(): string
     {
         $oldFileStmt = "";
         foreach ($this->request->get('migrations') as $migration){
@@ -279,7 +206,7 @@ class BuildViewsService extends AdminrEngineService
         return $oldFileStmt;
     }
 
-    private function getOptionsStmt($migration)
+    #[Pure] private function getOptionsStmt($migration): string
     {
         $optionsStmt = "";
         if($migration['data_type'] == 'enum'){
@@ -291,12 +218,8 @@ class BuildViewsService extends AdminrEngineService
 
         return $optionsStmt;
     }
-    /**
-     * Generates image upload statement
-     *
-     * @return string
-     */
-    private function getImageUploadStatement()
+
+    private function getImageUploadStatement(): string
     {
         $migrations = $this->request->get('migrations');
         $imageUploadStmt = "\n";
@@ -308,13 +231,7 @@ class BuildViewsService extends AdminrEngineService
         return $imageUploadStmt;
     }
 
-
-    /**
-     * Generates image update statement
-     *
-     * @return string
-     */
-    private function getImageUpdateStatement()
+    private function getImageUpdateStatement(): string
     {
         $migrations = $this->request->get('migrations');
         $imageUploadStmt = "";
@@ -326,11 +243,7 @@ class BuildViewsService extends AdminrEngineService
         return $imageUploadStmt;
     }
 
-    /**
-     * Generate table head statement and
-     * return statement lines
-     */
-    protected function getListTableHeadStatement()
+    protected function getListTableHeadStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -344,11 +257,7 @@ class BuildViewsService extends AdminrEngineService
         return $tableHeadStmt;
     }
 
-    /**
-     * Generate table body statement and
-     * return statement lines
-     */
-    protected function getEntitiesListStatement()
+    protected function getEntitiesListStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -370,11 +279,7 @@ class BuildViewsService extends AdminrEngineService
         return $tableBodyStmt;
     }
 
-    /**
-     * Generate table body statement and
-     * return statement lines
-     */
-    protected function getEmptyDataStatement()
+    protected function getEmptyDataStatement(): string
     {
         $migrations = collect($this->request->get('migrations'))->filter(function ($migr) {
             return $migr['show_index'];
@@ -382,11 +287,7 @@ class BuildViewsService extends AdminrEngineService
         return "<tr><td colspan=\"" . (count($migrations) + 4) . "\" class=\"text-center\">No data available for " . Str::ucfirst($this->modelEntities) . "</td></tr>";
     }
 
-    /**
-     * Generate Trashed Buttons statement and
-     * return statement lines
-     */
-    protected function getTrashedButtonsStatement()
+    protected function getTrashedButtonsStatement(): ?string
     {
         $trashedButtonsStmt = "<a href=\"{{ route(config('app.route_prefix').'." . $this->modelEntities . ".index') }}\" class=\"btn btn-sm btn-primary m-0 mr-3\">
                              <svg class=\"h-3 w-3\">
@@ -404,7 +305,7 @@ class BuildViewsService extends AdminrEngineService
         return $this->hasSoftdeletes ? $trashedButtonsStmt : null;
     }
 
-    public function rollback()
+    public function rollback(): static
     {
         if (isset($this->modelEntities) && !is_null($this->modelEntities)) {
             $this->deleteDir(base_path() . '/resources/views/adminr/' . $this->modelEntities);

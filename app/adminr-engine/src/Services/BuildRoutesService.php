@@ -12,18 +12,12 @@ use Illuminate\Support\Str;
 
 class BuildRoutesService extends AdminrEngineService
 {
-    protected $apiRouteTargetPath;
-    protected $apiRoutePath;
-    protected $adminRouteTargetPath;
-    protected $adminRoutePath;
+    protected string $apiRouteTargetPath;
+    protected string $apiRoutePath;
+    protected string $adminRouteTargetPath;
+    protected string $adminRoutePath;
 
-    /**
-     * Prepares the service to generate resource
-     *
-     * @param Request $request
-     * @return $this|AdminrEngineService
-     */
-    public function prepare(Request $request)
+    public function prepare(Request $request): BuildRoutesService|static
     {
         parent::prepare($request);
         $this->apiRouteTargetPath = base_path() . "/routes/adminr/api/" . $this->modelEntities . "/" . $this->modelEntities . ".json";
@@ -33,14 +27,7 @@ class BuildRoutesService extends AdminrEngineService
         return $this;
     }
 
-
-    /**
-     * Generates api routes
-     *
-     * @return $this
-     * @throws \Exception
-     */
-    public function buildApiRoute()
+    public function buildApiRoute(): static
     {
         try {
             if ($this->buildApi) {
@@ -70,20 +57,12 @@ class BuildRoutesService extends AdminrEngineService
                 File::put($this->apiRoutePath, json_encode((object)$apiRoutesStorage));
             }
             return $this;
-        } catch (\Exception $e) {
-            throw $e;
-        } catch (\Error $e) {
+        } catch (\Exception | \Error $e) {
             throw $e;
         }
     }
 
-    /**
-     * Generates admin routes
-     *
-     * @return $this
-     * @throws \Exception
-     */
-    public function buildAdminRoute()
+    public function buildAdminRoute(): static
     {
         try {
             if ($this->hasSoftdeletes) {
@@ -111,21 +90,13 @@ class BuildRoutesService extends AdminrEngineService
             File::put($this->adminRoutePath, json_encode((object)$adminRoutesStorage));
 
             return $this;
-        } catch (\Exception $e) {
-            throw $e;
-        } catch (\Error $e) {
+        } catch (\Exception | \Error $e) {
             throw $e;
         }
     }
 
 
-    /**
-     * Processes stubs
-     *
-     * @param $stub
-     * @return mixed
-     */
-    public function processStub($stub)
+    public function processStub($stub): array|string
     {
         $stub = str_replace('{{MODEL_CLASS}}', $this->modelName, $stub);
         $stub = str_replace('{{MODEL_ENTITIES}}', $this->modelEntities, $stub);
@@ -133,42 +104,27 @@ class BuildRoutesService extends AdminrEngineService
         $stub = str_replace('{{API_CONTROLLER_NAMESPACE}}', $this->getApiControllerNamespaceStatement(), $stub);
         $stub = str_replace('{{CONTROLLER_NAMESPACE}}', $this->getControllerNamespaceStatement(), $stub);
         $stub = str_replace('{{CONTROLLER_CLASS}}', $this->controllerName, $stub);
-        $stub = str_replace('{{MIDDLEWARES}}', $this->getMiddlewaresStatement(), $stub);
-        return $stub;
+        return str_replace('{{MIDDLEWARES}}', $this->getMiddlewaresStatement(), $stub);
     }
 
 
-    protected function getApiControllerNamespaceStatement()
+    protected function getApiControllerNamespaceStatement(): string
     {
         return "App\\Http\\Controllers\\Api\\";
     }
 
-    /**
-     * Returns middlewares for api routes
-     *
-     * @return string
-     */
-    protected function getMiddlewaresStatement()
+    protected function getMiddlewaresStatement(): string
     {
         return "[\"api\", \"auth:api\"]";
     }
 
-    /**
-     * Return admin controller namespace
-     * @return string
-     */
-    protected function getControllerNamespaceStatement()
+    protected function getControllerNamespaceStatement(): string
     {
         return "\\App\\Http\\Controllers\\Admin";
     }
 
 
-    /**
-     * Rollbacks generated files
-     *
-     * @return $this
-     */
-    public function rollback()
+    public function rollback(): static
     {
         if (isset($this->modelEntities) && !is_null($this->modelEntities)) {
             $this->deleteDir(base_path() . '/routes/adminr/admin/' . $this->modelEntities);

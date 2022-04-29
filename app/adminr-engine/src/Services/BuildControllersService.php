@@ -8,16 +8,10 @@ use Illuminate\Support\Str;
 
 class BuildControllersService extends AdminrEngineService
 {
-    protected $apiControllerTargetPath;
-    protected $adminControllerTargetPath;
+    protected string $apiControllerTargetPath;
+    protected string $adminControllerTargetPath;
 
-    /**
-     * Prepares the service to generate resource
-     *
-     * @param Request $request
-     * @return $this|AdminrEngineService
-     */
-    public function prepare(Request $request)
+    public function prepare(Request $request): BuildControllersService|static
     {
         parent::prepare($request);
         $this->apiControllerTargetPath = base_path() . "/app/Http/Controllers/Api/$this->controllerName.php";
@@ -25,13 +19,7 @@ class BuildControllersService extends AdminrEngineService
         return $this;
     }
 
-    /**
-     * Build api controller
-     *
-     * @return $this
-     * @throws \Exception
-     */
-    public function buildApiController()
+    public function buildApiController(): static
     {
         try {
             if ($this->buildApi) {
@@ -51,21 +39,13 @@ class BuildControllersService extends AdminrEngineService
                 File::copy($stubPath, $this->apiControllerTargetPath);
             }
             return $this;
-        } catch (\Exception $e) {
-            throw $e;
-        } catch (\Error $e) {
+        } catch (\Exception | \Error $e) {
             throw $e;
         }
 
     }
 
-    /**
-     * Build admin controller
-     *
-     * @return $this
-     * @throws \Exception
-     */
-    public function buildController()
+    public function buildController(): static
     {
         try {
             $controllerStub = $this->hasSoftdeletes
@@ -83,29 +63,19 @@ class BuildControllersService extends AdminrEngineService
             File::copy($stubPath, $this->adminControllerTargetPath);
 
             return $this;
-        } catch (\Exception $e) {
-            throw $e;
-        } catch (\Error $e) {
+        } catch (\Exception | \Error $e) {
             throw $e;
         }
 
     }
 
-
-    /**
-     * Processes stubs
-     *
-     * @param $stub
-     * @return mixed
-     */
-
-    public function processStub($stub)
+    public function processStub($stub): array|string
     {
         $stub = str_replace('{{MODEL_CLASS}}', $this->modelName, $stub);
         $stub = str_replace('{{CONTROLLER_CLASS}}', $this->controllerName, $stub);
         $stub = str_replace('{{MODEL_ENTITY}}', $this->modelEntity, $stub);
         $stub = str_replace('{{MODEL_ENTITIES}}', $this->modelEntities, $stub);
-        $stub = str_replace('{{RESULT_LIMIT}}', config('liquid.api.result_limit') ?: 10, $stub);
+        $stub = str_replace('{{RESULT_LIMIT}}', config('adminr.api.result_limit') ?: 10, $stub);
         $stub = str_replace('{{SEARCH_STATEMENTS}}', $this->getSearchStatement(), $stub);
         $stub = str_replace('{{VALIDATION_STATEMENT}}', $this->getValidationStatement(), $stub);
         $stub = str_replace('{{UPDATE_VALIDATION_STATEMENT}}', $this->getUpdateValidationStatement(), $stub);
@@ -120,11 +90,7 @@ class BuildControllersService extends AdminrEngineService
         return $stub;
     }
 
-    /**
-     * Generate search statement and
-     * return statement lines
-     */
-    protected function getSearchStatement()
+    protected function getSearchStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -142,11 +108,7 @@ class BuildControllersService extends AdminrEngineService
         return $searchStmt;
     }
 
-    /**
-     * Generate trashed filter statement and
-     * return statement lines
-     */
-    protected function getTrashedFilterStatement()
+    protected function getTrashedFilterStatement(): string
     {
         $trashedFilterStmt = "";
         if ($this->hasSoftdeletes) {
@@ -158,11 +120,7 @@ class BuildControllersService extends AdminrEngineService
         return $trashedFilterStmt;
     }
 
-    /**
-     * Generate validation statement and
-     * return statement lines
-     */
-    protected function getValidationStatement()
+    protected function getValidationStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -186,11 +144,7 @@ class BuildControllersService extends AdminrEngineService
         return $validationStmt;
     }
 
-    /**
-     * Generate update validation statement and
-     * return statement lines
-     */
-    protected function getUpdateValidationStatement()
+    protected function getUpdateValidationStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -210,11 +164,7 @@ class BuildControllersService extends AdminrEngineService
         return $validationStmt;
     }
 
-    /**
-     * Generate File upload statement and
-     * return statement lines
-     */
-    protected function getFileUploadStatement()
+    protected function getFileUploadStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -224,42 +174,26 @@ class BuildControllersService extends AdminrEngineService
             if ($migration['data_type'] == 'file') {
                 if ($migration['file_type'] == 'single') {
                     $fileUploadStmt .= "if(\$request->hasFile(\"" . Str::snake($migration['field_name']) . "\")){\n\t\t\t\t";
-                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFile(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFileName();\n\t\t\t";
-                    $fileUploadStmt .= "}";
-                    if (!$migration['nullable']) {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "return \$this->backError(\"Please select an image for " . Str::title(Str::replace('_', ' ', $migration['field_name'])) . "\");\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    } else {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = null;\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    }
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFile(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFilePath();\n\t\t\t";
                 } else {
                     $fileUploadStmt .= "if(\$request->file(\"" . Str::snake($migration['field_name']) . "\")){\n\t\t\t\t";
-                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFiles(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFileNames();\n\t\t\t";
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFiles(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFilePaths();\n\t\t\t";
                     $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = json_encode(\$" . Str::snake($migration['field_name']) . ");\n\t\t\t";
-                    $fileUploadStmt .= "}";
-                    if (!$migration['nullable']) {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "return \$this->backError(\"Please select an image for " . Str::title(Str::replace('_', ' ', $migration['field_name'])) . "\");\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    } else {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = null;\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    }
                 }
+                $fileUploadStmt .= "}";
+                $fileUploadStmt .= " else {\n\t\t\t\t";
+                if (!$migration['nullable']) {
+                    $fileUploadStmt .= "return \$this->backError(\"Please select an image for " . Str::title(Str::replace('_', ' ', $migration['field_name'])) . "\");\n\t\t\t";
+                } else {
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = null;\n\t\t\t";
+                }
+                $fileUploadStmt .= "}\n";
             }
         }
         return $fileUploadStmt;
     }
 
-    /**
-     * Generate File upload for API statement and
-     * return statement lines
-     */
-    protected function getFileUploadApiStatement()
+    protected function getFileUploadApiStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -269,33 +203,21 @@ class BuildControllersService extends AdminrEngineService
             if ($migration['data_type'] == 'file') {
                 if ($migration['file_type'] == 'single') {
                     $fileUploadStmt .= "if(\$request->hasFile(\"" . Str::snake($migration['field_name']) . "\")){\n\t\t\t\t";
-                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFile(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFileName();\n\t\t\t";
-                    $fileUploadStmt .= "}";
-                    if (!$migration['nullable']) {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "return \$this->error(\"Please select an image for " . Str::title(Str::replace('_', ' ', $migration['field_name'])) . "\");\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    } else {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = null;\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    }
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFile(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFilePath();\n\t\t\t";
                 } else {
                     $fileUploadStmt .= "if(\$request->file(\"" . Str::snake($migration['field_name']) . "\")){\n\t\t\t\t";
-                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFiles(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFileNames();\n\t\t\t";
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFiles(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFilePaths();\n\t\t\t";
                     $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = json_encode(\$" . Str::snake($migration['field_name']) . ");\n\t\t\t";
-                    $fileUploadStmt .= "}";
-                    if (!$migration['nullable']) {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "return \$this->error(\"Please select an image for " . Str::title(Str::replace('_', ' ', $migration['field_name'])) . "\");\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    } else {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = null;\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    }
 
                 }
+                $fileUploadStmt .= "}";
+                $fileUploadStmt .= " else {\n\t\t\t\t";
+                if (!$migration['nullable']) {
+                    $fileUploadStmt .= "return \$this->error(\"Please select an image for " . Str::title(Str::replace('_', ' ', $migration['field_name'])) . "\");\n\t\t\t";
+                } else {
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = null;\n\t\t\t";
+                }
+                $fileUploadStmt .= "}\n";
             }
         }
 
@@ -303,11 +225,7 @@ class BuildControllersService extends AdminrEngineService
     }
 
 
-    /**
-     * Generate File update statement and
-     * return statement lines
-     */
-    protected function getFileUpdateStatement()
+    protected function getFileUpdateStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -316,45 +234,29 @@ class BuildControllersService extends AdminrEngineService
             if ($migration['data_type'] == 'file') {
                 if ($migration['file_type'] == 'single') {
                     $fileUploadStmt .= "if(\$request->hasFile(\"" . Str::snake($migration['field_name']) . "\")){\n\t\t\t\t";
-                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFile(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFileName();\n\t\t\t\t";
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFile(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFilePath();\n\t\t\t\t";
                     $fileUploadStmt .= "\$this->deleteStorageFile($" . $this->modelEntity . "->" . Str::snake($migration['field_name']) . ");\n\t\t\t";
-                    $fileUploadStmt .= "}";
-                    if (!$migration['nullable']) {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$" . $this->modelEntity . "->" . Str::snake($migration['field_name']) . ";\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    } else {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = null;\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    }
                 } else {
                     $fileUploadStmt .= "if(\$request->hasFile(\"" . Str::snake($migration['field_name']) . "\")){\n\t\t\t\t";
-                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFiles(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFileNames();\n\t\t\t\t";
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFiles(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->modelEntities . "\")->getFilePaths();\n\t\t\t\t";
                     $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = json_encode(\$" . Str::snake($migration['field_name']) . ");\n\t\t\t";
                     $fileUploadStmt .= "\$this->deleteStorageFiles(json_decode($" . $this->modelEntity . "->" . Str::snake($migration['field_name']) . "));\n\t\t\t";
-                    $fileUploadStmt .= "}";
-                    if (!$migration['nullable']) {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$" . $this->modelEntity . "->" . Str::snake($migration['field_name']) . ";\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    } else {
-                        $fileUploadStmt .= " else {\n\t\t\t\t";
-                        $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = null;\n\t\t\t";
-                        $fileUploadStmt .= "}\n";
-                    }
                 }
+                $fileUploadStmt .= "}";
+                $fileUploadStmt .= " else {\n\t\t\t\t";
+                if (!$migration['nullable']) {
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$" . $this->modelEntity . "->" . Str::snake($migration['field_name']) . ";\n\t\t\t";
+                } else {
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = null;\n\t\t\t";
+                }
+                $fileUploadStmt .= "}\n";
             }
         }
 
         return $fileUploadStmt;
     }
 
-    /**
-     * Generate save data statement and
-     * return statement lines
-     */
-    protected function getSaveDataStatement()
+    protected function getSaveDataStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -373,11 +275,7 @@ class BuildControllersService extends AdminrEngineService
         return $saveDataStmt;
     }
 
-    /**
-     * Generate update data statement and
-     * return statement lines
-     */
-    protected function getUpdateDataStatement()
+    protected function getUpdateDataStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -397,11 +295,7 @@ class BuildControllersService extends AdminrEngineService
         return $saveDataStmt;
     }
 
-    /**
-     * Generate delete file statement and
-     * return statement lines
-     */
-    protected function getDeleteFileStatement()
+    protected function getDeleteFileStatement(): string
     {
         $migrations = $this->request->get('migrations');
 
@@ -418,12 +312,7 @@ class BuildControllersService extends AdminrEngineService
         return $deleteFileStmt;
     }
 
-    /**
-     * Rollbacks generated files
-     *
-     * @return $this
-     */
-    public function rollback()
+    public function rollback(): static
     {
         if (isset($this->controllerName) && !is_null($this->controllerName)) {
             if (isset($this->adminControllerTargetPath) && !is_null($this->adminControllerTargetPath)) {

@@ -2,20 +2,13 @@
 
 namespace Devsbuddy\AdminrEngine\Traits;
 
-
-use Devsbuddy\Models\Media;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 trait HasStubs {
-    public $stubsDirectory = __DIR__ . '/../../resources/stubs';
+    public string $stubsDirectory = __DIR__ . '/../../resources/stubs';
 
-    /**
-     * @param $controller
-     * @param bool $getPath
-     * @return string|null
-     */
-    public function getControllerStub($controller, $getPath = false)
+    public function getControllerStub($controller, $getPath = false): ?string
     {
         if(File::exists($this->stubsDirectory . '/controllers/' . $controller . '.stub')){
             if($getPath){
@@ -26,12 +19,7 @@ trait HasStubs {
         return null;
     }
 
-    /**
-     * @param $model
-     * @param bool $getPath
-     * @return string|null
-     */
-    public function getModelStub($model, $getPath = false)
+    public function getModelStub($model, $getPath = false): ?string
     {
         if(File::exists($this->stubsDirectory . '/models/' . $model . '.stub')){
             if($getPath){
@@ -42,12 +30,7 @@ trait HasStubs {
         return null;
     }
 
-    /**
-     * @param $migration
-     * @param bool $getPath
-     * @return string|null
-     */
-    public function getMigrationStub($migration, $getPath = false)
+    public function getMigrationStub($migration, $getPath = false): ?string
     {
         if(File::exists($this->stubsDirectory . '/database/migrations/' . $migration . '.stub')){
             if($getPath){
@@ -58,12 +41,7 @@ trait HasStubs {
         return null;
     }
 
-    /**
-     * @param $view
-     * @param bool $getPath
-     * @return string|null
-     */
-    public function getViewStub($view, $getPath = false)
+    public function getViewStub($view, $getPath = false): ?string
     {
         if(File::exists($this->stubsDirectory . '/views/' . $view . '.stub')){
             if($getPath){
@@ -74,12 +52,7 @@ trait HasStubs {
         return null;
     }
 
-    /**
-     * @param $route
-     * @param bool $getPath
-     * @return string|null
-     */
-    public function getRouteStub($route, $getPath = false)
+    public function getRouteStub($route, $getPath = false): ?string
     {
         if(File::exists($this->stubsDirectory . '/routes/' . $route . '.stub')){
             if($getPath){
@@ -90,12 +63,18 @@ trait HasStubs {
         return null;
     }
 
-    /**
-     * @param $relationFile
-     * @param bool $getPath
-     * @return string|null
-     */
-    public function getRelationStub($relationFile, $getPath = false)
+    public function getResourceStub($resourceFile, $getPath = false): ?string
+    {
+        if(File::exists($this->stubsDirectory . '/resources/' . $resourceFile . '.stub')){
+            if($getPath){
+                return $this->stubsDirectory . '/resources/' . $resourceFile . '.stub';
+            }
+            return File::get($this->stubsDirectory . '/resources/' . $resourceFile . '.stub');
+        }
+        return null;
+    }
+
+    public function getRelationStub($relationFile, $getPath = false): ?string
     {
         if(File::exists($this->stubsDirectory . '/relations/' . $relationFile . '.stub')){
             if($getPath){

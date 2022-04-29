@@ -12,28 +12,16 @@ use Illuminate\Support\Str;
 
 class BuildMigrationService extends AdminrEngineService
 {
-    protected $migrationTargetPath;
+    protected string $migrationTargetPath;
 
-    /**
-     * Prepares the service to generate resource
-     *
-     * @param Request $request
-     * @return $this|AdminrEngineService
-     */
-    public function prepare(Request $request)
+    public function prepare(Request $request): BuildMigrationService|static
     {
         parent::prepare($request);
         $this->migrationTargetPath = database_path() . "/migrations/$this->migrationFileName.php";
         return $this;
     }
 
-    /**
-     * Build migration file
-     *
-     * @return $this
-     * @throws \Exception
-     */
-    public function buildMigration()
+    public function buildMigration(): static
     {
         try {
             $migrationStub = $this->getMigrationStub('migration');
@@ -44,36 +32,19 @@ class BuildMigrationService extends AdminrEngineService
             File::copy($stubPath, $this->migrationTargetPath);
 
             return $this;
-        } catch (\Exception $e) {
-            throw $e;
-        } catch (\Error $e) {
+        } catch (\Exception | \Error $e) {
             throw $e;
         }
     }
 
-
-    /**
-     * Processes stubs
-     *
-     * @param $stub
-     * @return mixed
-     */
-    public function processStub($stub)
+    public function processStub($stub): array|string
     {
         $stub = str_replace('{{PLURAL_MODEL_NAME}}', $this->modelPluralName, $stub);
         $stub = str_replace('{{TABLE_NAME}}', $this->tableName, $stub);
-        $stub = str_replace('{{MIGRATION_STATEMENT}}', $this->getMigrationStatement(), $stub);
-
-        return $stub;
+        return str_replace('{{MIGRATION_STATEMENT}}', $this->getMigrationStatement(), $stub);
     }
 
-
-    /**
-     * Prepare migration file statement
-     *
-     * @return string
-     */
-    protected function getMigrationStatement()
+    protected function getMigrationStatement(): string
     {
         $migrations = $this->request->get('migrations');
         $numericDatatypes = Database::numericTypes();
@@ -141,12 +112,7 @@ class BuildMigrationService extends AdminrEngineService
         return $migrationFileStmt;
     }
 
-    /**
-     * Rollbacks generated files
-     *
-     * @return $this
-     */
-    public function rollback()
+    public function rollback(): static
     {
         if (isset($this->migrationFileName) && !is_null($this->migrationFileName)) {
             if (isset($this->migrationTargetPath) && !is_null($this->migrationTargetPath)) {
