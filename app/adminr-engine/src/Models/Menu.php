@@ -30,4 +30,9 @@ class Menu extends Model
         return $this->belongsTo(Menu::class, 'parent');
     }
 
+    public function adminrResource(): BelongsTo
+    {
+        return $this->belongsTo(AdminrResource::class, 'resource');
+    }
+
 }

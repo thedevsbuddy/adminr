@@ -4,7 +4,7 @@ namespace Devsbuddy\AdminrEngine\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Devsbuddy\AdminrEngine\Models\Menu;
-use Devsbuddy\AdminrEngine\Models\Resource;
+use Devsbuddy\AdminrEngine\Models\AdminrResource;
 use Devsbuddy\AdminrEngine\Database;
 use Devsbuddy\AdminrEngine\Services\BuildApiResourceService;
 use Devsbuddy\AdminrEngine\Services\BuildControllersService;
@@ -155,7 +155,7 @@ class BuilderController extends Controller
 
     private function resourceExists(Request $request): bool
     {
-        $resource = Resource::where('name', Str::snake($request->get('model')))->where('model', $request->get('model'))->first();
+        $resource = AdminrResource::where('name', Str::snake($request->get('model')))->where('model', $request->get('model'))->first();
         $model = File::exists(app_path() . "/Models/" . Str::title($request->get('model')) . ".php");
         if (!is_null($resource)) {
             return true;

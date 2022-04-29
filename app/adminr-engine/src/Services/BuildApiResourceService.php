@@ -14,7 +14,7 @@ class BuildApiResourceService extends AdminrEngineService
 {
     protected string $apiResourceTargetPath;
 
-    public function prepare(Request $request): BuildApiResourceService|static
+    public function prepare(Request $request): static
     {
         parent::prepare($request);
         $this->apiResourceTargetPath = app_path() . "/Http/Resources/".$this->modelName."Resource.php";

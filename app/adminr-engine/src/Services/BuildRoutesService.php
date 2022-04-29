@@ -17,7 +17,7 @@ class BuildRoutesService extends AdminrEngineService
     protected string $adminRouteTargetPath;
     protected string $adminRoutePath;
 
-    public function prepare(Request $request): BuildRoutesService|static
+    public function prepare(Request $request): static
     {
         parent::prepare($request);
         $this->apiRouteTargetPath = base_path() . "/routes/adminr/api/" . $this->modelEntities . "/" . $this->modelEntities . ".json";

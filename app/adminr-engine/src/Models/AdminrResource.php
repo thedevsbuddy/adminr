@@ -4,8 +4,9 @@ namespace Devsbuddy\AdminrEngine\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Resource extends Model
+class AdminrResource extends Model
 {
     use HasFactory;
 
@@ -19,7 +20,7 @@ class Resource extends Model
         'table_structure' => 'object',
     ];
 
-    public function menu()
+    public function menu(): HasOne
     {
         return $this->hasOne(Menu::class, 'resource');
     }

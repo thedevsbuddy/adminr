@@ -11,7 +11,7 @@ class BuildControllersService extends AdminrEngineService
     protected string $apiControllerTargetPath;
     protected string $adminControllerTargetPath;
 
-    public function prepare(Request $request): BuildControllersService|static
+    public function prepare(Request $request): static
     {
         parent::prepare($request);
         $this->apiControllerTargetPath = base_path() . "/app/Http/Controllers/Api/$this->controllerName.php";
@@ -151,12 +151,14 @@ class BuildControllersService extends AdminrEngineService
         $validationStmt = "\$request->validate([\n\t\t\t\t";
         foreach ($migrations as $migration) {
             $lastTabs = ",\n\t\t\t\t";
-            if ($migration['data_type'] != 'slug' || $migration['data_type'] != 'file') {
-                if ($migration == $migrations[count($migrations) - 1]) {
-                    $lastTabs = "\n\t\t\t";
-                }
-                if ($migration['nullable'] == false) {
-                    $validationStmt .= "\"" . Str::snake($migration['field_name']) . "\" => [\"required\"]" . $lastTabs . "";
+            if ($migration['data_type'] != 'slug') {
+                if ($migration['data_type'] != 'file') {
+                    if ($migration == $migrations[count($migrations) - 1]) {
+                        $lastTabs = "\n\t\t\t";
+                    }
+                    if ($migration['nullable'] == false) {
+                        $validationStmt .= "\"" . Str::snake($migration['field_name']) . "\" => [\"required\"]" . $lastTabs . "";
+                    }
                 }
             }
         }

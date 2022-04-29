@@ -9,7 +9,24 @@ use Illuminate\Support\Facades\Mail;
 trait CanSendMail
 {
 
-    public function sendMailTo($email, $template, array $replaceable): static
+    /**
+     * Helps to send email from templates easily
+     *
+     * @param array|string $emails
+     * You can pass user's email as string
+     * or array of emails.
+     *
+     * @param MailTemplate|string|int $template
+     * $template is the [MailTemplate] object itself or
+     * you can pass it's id or code
+     *
+     * @param array $replaceable
+     * Replaceable is the array of variables and their values
+     * which is already defined in the template content
+     *
+     * @return static
+     */
+    public function sendMailTo(array|string $emails, MailTemplate|string|int $template, array $replaceable): static
     {
         $mailTemplate = new MailTemplate();
         if (is_integer($template)) {
@@ -33,12 +50,12 @@ trait CanSendMail
         $mailBody = str_replace('{app.url}', url('/'), $mailBody);
 
         // Send the mail to provided email
-        if (is_array($email)) {
-            foreach ($email as $e) {
+        if (is_array($emails)) {
+            foreach ($emails as $e) {
                 Mail::to($e)->send(new DynamicMail($mailTemplate->subject, $mailBody));
             }
         } else {
-            Mail::to($email)->send(new DynamicMail($mailTemplate->subject, $mailBody));
+            Mail::to($emails)->send(new DynamicMail($mailTemplate->subject, $mailBody));
         }
 
         return $this;

@@ -10,7 +10,7 @@ class BuildModelService extends AdminrEngineService
 {
     protected string $modelTargetPath;
 
-    public function prepare(Request $request): BuildModelService|static
+    public function prepare(Request $request): static
     {
         parent::prepare($request);
         $this->modelTargetPath = base_path() . "/app/Models/$this->modelName.php";
@@ -53,7 +53,7 @@ class BuildModelService extends AdminrEngineService
         foreach ($this->request->get('migrations') as $migration) {
             if ($migration['data_type'] == 'file') {
                 if ($migration['file_type'] == 'single') {
-                    $mediaAttributeStmt .= "public function " . Str::camel($migration['field_name']) . "(\$value): Attribute\n\t";
+                    $mediaAttributeStmt .= "public function " . Str::camel($migration['field_name']) . "(): Attribute\n\t";
                     $mediaAttributeStmt .= "{\n\t\t";
                     $mediaAttributeStmt .= "return Attribute::make(\n\t\t\t";
                     $mediaAttributeStmt .= "get: function (\$value) {\n\t\t\t\t";
@@ -62,7 +62,7 @@ class BuildModelService extends AdminrEngineService
                     $mediaAttributeStmt .= "}\n\t\t\t\t";
                     $mediaAttributeStmt .= "return \$value;\n\t\t\t";
                 } else {
-                    $mediaAttributeStmt .= "public function " . Str::camel($migration['field_name']) . "(\$value): Attribute\n\t";
+                    $mediaAttributeStmt .= "public function " . Str::camel($migration['field_name']) . "(): Attribute\n\t";
                     $mediaAttributeStmt .= "{\n\t\t";
                     $mediaAttributeStmt .= "return Attribute::make(\n\t\t\t";
                     $mediaAttributeStmt .= "get: function (\$value) {\n\t\t\t\t\t";

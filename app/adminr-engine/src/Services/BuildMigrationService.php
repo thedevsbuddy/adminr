@@ -14,7 +14,7 @@ class BuildMigrationService extends AdminrEngineService
 {
     protected string $migrationTargetPath;
 
-    public function prepare(Request $request): BuildMigrationService|static
+    public function prepare(Request $request): static
     {
         parent::prepare($request);
         $this->migrationTargetPath = database_path() . "/migrations/$this->migrationFileName.php";

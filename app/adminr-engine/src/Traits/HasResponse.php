@@ -2,14 +2,12 @@
 
 namespace Devsbuddy\AdminrEngine\Traits;
 
+use Illuminate\Http\JsonResponse;
+
 trait HasResponse
 {
-    /**
-     * @param $data
-     * @param int $statusCode
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function success($data, $statusCode = 200)
+
+    public function success($data, $statusCode = 200): JsonResponse
     {
         if (is_array($data)) {
             return response()->json($data, $statusCode);
@@ -20,7 +18,7 @@ trait HasResponse
     /**
      * @param string $message
      * @param int $statusCode
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function successMessage($message, $statusCode = 200)
     {
@@ -31,7 +29,7 @@ trait HasResponse
     /**
      * @param $message
      * @param int $statusCode
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function error($message, $statusCode = 500)
     {

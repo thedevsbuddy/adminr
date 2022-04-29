@@ -14,7 +14,7 @@ class BuildViewsService extends AdminrEngineService
     protected string $viewCreateTargetPath;
     protected string $viewEditTargetPath;
 
-    public function prepare(Request $request): BuildViewsService|static
+    public function prepare(Request $request): static
     {
         parent::prepare($request);
         $this->viewIndexTargetPath = base_path() . "/resources/views/adminr/$this->modelEntities/index.blade.php";
@@ -136,7 +136,7 @@ class BuildViewsService extends AdminrEngineService
         }
     }
 
-    private function getEditInputField($migration)
+    private function getEditInputField($migration): array|string
     {
         $isLongText = in_array($migration['data_type'], Database::longTextDataTypes());
         if ($isLongText) {
@@ -197,7 +197,7 @@ class BuildViewsService extends AdminrEngineService
         foreach ($this->request->get('migrations') as $migration){
             if($migration['data_type'] == 'file'){
                 if($migration['file_type'] == 'single'){
-                    $oldFileStmt .= "{{ explode('/', $" . $this->modelEntity . "->" . Str::snake($migration['field_name']) . ")[count(explode('/', $" . $this->modelEntity . "->" . Str::snake($migration['field_name']) . ")) - 1] }}";
+                    $oldFileStmt .= "{{ collect(explode('/', $" . $this->modelEntity . "->" . Str::snake($migration['field_name']) . "))->last() }}";
                 } else {
                     $oldFileStmt .= "{{ count(json_decode($" . $this->modelEntity . "->" . Str::snake($migration['field_name']) . ")) }} files";
                 }

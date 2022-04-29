@@ -2,8 +2,9 @@
 
 namespace Devsbuddy\AdminrEngine\Services;
 
+use App\Models\User;
 use Devsbuddy\AdminrEngine\Models\Menu;
-use Devsbuddy\AdminrEngine\Models\Resource;
+use Devsbuddy\AdminrEngine\Models\AdminrResource;
 use Devsbuddy\AdminrEngine\Traits\CanManageFiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -20,7 +21,7 @@ class ResourceService
 
     public function store(Request $request): static
     {
-        $resource = Resource::firstOrcreate([
+        $resource = AdminrResource::firstOrcreate([
             'name' => Str::title(Str::plural($request->get('model'))),
             'model' => Str::studly(Str::singular($request->get('model'))),
             'table_structure' => $request->get('migrations'),
@@ -67,14 +68,21 @@ class ResourceService
             ]);
         }
 
+        $permissions = Permission::where('resource', $resource->id)->get();
+        $admin = Role::where('name', 'admin')->first();
+        foreach ($permissions as $permission){
+            $admin->givePermissionTo($permission);
+        }
+
         $this->id = $resource->id;
+
 
         return $this;
     }
 
     public function update(array $data): static
     {
-        Resource::where('id', $this->id)->update($data);
+        AdminrResource::where('id', $this->id)->update($data);
         return $this;
     }
 
@@ -83,7 +91,7 @@ class ResourceService
         if ($id == null) {
             $id = $this->id;
         }
-        $resource = Resource::where('id', $id)->first();
+        $resource = AdminrResource::where('id', $id)->first();
 
         if (isset($resource) && !is_null($resource)) {
             if (isset($resource->payload->model) && !is_null($resource->payload->model)) {

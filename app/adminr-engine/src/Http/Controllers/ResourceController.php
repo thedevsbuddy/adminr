@@ -3,7 +3,7 @@
 namespace Devsbuddy\AdminrEngine\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Devsbuddy\AdminrEngine\Models\Resource;
+use Devsbuddy\AdminrEngine\Models\AdminrResource;
 use Devsbuddy\AdminrEngine\Services\ResourceService;
 use Devsbuddy\AdminrEngine\Traits\HasStubs;
 use Illuminate\Http\JsonResponse;
@@ -27,7 +27,7 @@ class ResourceController  extends Controller
 
     public function index(): View
     {
-        $resources = Resource::with('menu')->paginate(10);
+        $resources = AdminrResource::with('menu')->paginate(10);
         return view('adminr-engine::resources.index', compact('resources'));
     }
 
@@ -40,7 +40,7 @@ class ResourceController  extends Controller
         $this->modelEntities = Str::snake($this->modelPluralName);
         $this->modelEntity = Str::snake($this->modelName);
 
-        Resource::create([
+        AdminrResource::create([
             'name' => $this->modelPluralName,
             'model' => $this->modelName,
             'controllers' => [
@@ -58,7 +58,7 @@ class ResourceController  extends Controller
     {
         try{
             $id = decrypt($id);
-            $resource = Resource::findOrFail($id);
+            $resource = AdminrResource::findOrFail($id);
             $routes = json_decode(File::get(base_path() . '/routes/adminr/api/' . $resource->payload->routes->api));
             return view('adminr-engine::resources.configure', compact('resource', 'routes'));
         } catch (\Exception $e){
@@ -70,7 +70,7 @@ class ResourceController  extends Controller
     public function getResource($id): JsonResponse
     {
         try{
-            $resource = Resource::where('id', $id)->first();
+            $resource = AdminrResource::where('id', $id)->first();
             return $this->success($resource, 200);
         } catch (\Exception $e){
             return $this->error($e->getMessage(), 500);
@@ -81,8 +81,8 @@ class ResourceController  extends Controller
 
     public function updateApiMiddlewares($id, Request $request): JsonResponse
     {
-        $resource = Resource::where('id', $id)->first();
-        if($this->updateRouteFile($resource, $request)){
+        $resource = AdminrResource::where('id', $id)->first();
+        if($this->updateRouteFile($id, $request)){
             return $this->successMessage("API public routes permission updated!", 200);
         } else {
             return $this->error("Something went wrong!", 500);
@@ -91,7 +91,7 @@ class ResourceController  extends Controller
 
     private function updateRouteFile($id, Request $request): bool
     {
-        $resource = Resource::where('id', $id)->first();
+        $resource = AdminrResource::where('id', $id)->first();
         $routeFile = (array) json_decode(File::get(base_path() . '/routes/adminr/api/'.Str::lower($resource->name) . '/' . Str::lower($resource->name) .'.json'));
 
         foreach ($request->all() as $key => $method){
@@ -115,7 +115,7 @@ class ResourceController  extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        $resource = Resource::where('id', $id)->first();
+        $resource = AdminrResource::where('id', $id)->first();
         $resourceService = new ResourceService();
         $resourceService->rollback($resource->id);
         $resource->delete();

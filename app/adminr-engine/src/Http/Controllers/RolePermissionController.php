@@ -3,8 +3,7 @@
 namespace Devsbuddy\AdminrEngine\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Devsbuddy\AdminrEngine\Models\Resource;
-use Devsbuddy\AdminrEngine\Traits\HasResponse;
+use Devsbuddy\AdminrEngine\Models\AdminrResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -14,8 +13,6 @@ use Spatie\Permission\Models\Role;
 
 class RolePermissionController extends Controller
 {
-    use HasResponse;
-
     public function getRoles(): JsonResponse
     {
         return $this->success(Role::select('id', 'name')
@@ -25,7 +22,7 @@ class RolePermissionController extends Controller
 
     public function getPermissions($id): JsonResponse
     {
-        $resource = Resource::where('id', $id)->first();
+        $resource = AdminrResource::where('id', $id)->first();
         $permissions = $this->success(Permission::select('id', 'name')
             ->where('resource', strtolower($resource->id))
             ->orderBy('name', 'ASC')
