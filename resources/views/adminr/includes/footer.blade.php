@@ -5,7 +5,7 @@
                 <a href="https://devsbuddy.com">Devsbuddy</a>
                 {{ date('Y') }}. All rights reserved.
             </span>
-            <span>Version: <strong>v{{ LIQUID_VERSION }}</strong></span>
+            <span>Version: <strong>v{{ ADMINR_VERSION }}</strong></span>
         </div>
     </div>
 </footer>

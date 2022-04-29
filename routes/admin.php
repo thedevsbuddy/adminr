@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
  * Add admin routes here if needed
  */
 Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'auth', 'admin'], 'as' => config('app.route_prefix').'.'], function() {
-    Route::redirect('/', config('app.route_prefix').'/dashboard', 301);
+
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
     Route::group(['prefix' => '/manage'], function () {

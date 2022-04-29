@@ -22,7 +22,7 @@
         <div class="container mx-auto py-2 px-3 max-w-screen-lg flex items-center justify-between">
             <div>
                 <a href="#" class="text-2xl font-bold text-indigo-500">{{ getSetting('app_name') }}</a>
-                <span class="text-xs text-gray-600 font-bold">v0.1</span>
+                <span class="text-xs text-gray-600 font-bold">v{{ADMINR_VERSION}}</span>
             </div>
             <nav>
                 <ul class="flex items-center">

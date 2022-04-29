@@ -61,23 +61,25 @@ class BuildModelService extends AdminrEngineService
                     $mediaAttributeStmt .= "return asset(\$value);\n\t\t\t\t";
                     $mediaAttributeStmt .= "}\n\t\t\t\t";
                     $mediaAttributeStmt .= "return \$value;\n\t\t\t";
-                    $mediaAttributeStmt .= "}\n\t\t";
                 } else {
-                    $mediaAttributeStmt .= "public function get" . Str::camel($migration['field_name']) . "Attribute(\$value)\n\t";
+                    $mediaAttributeStmt .= "public function " . Str::camel($migration['field_name']) . "(\$value): Attribute\n\t";
                     $mediaAttributeStmt .= "{\n\t\t";
-                    $mediaAttributeStmt .= "if (Str::contains(request()->url(), 'api')){\n\t\t\t";
+                    $mediaAttributeStmt .= "return Attribute::make(\n\t\t\t";
+                    $mediaAttributeStmt .= "get: function (\$value) {\n\t\t\t\t\t";
                     $mediaAttributeStmt .= "\$return = [];\n\t\t\t";
-                    $mediaAttributeStmt .= "foreach(json_decode(\$value) as \$val){\n\t\t\t\t";
-                    $mediaAttributeStmt .= "\$return[] = asset(\$val);\n\t\t\t";
+                    $mediaAttributeStmt .= "if (Str::contains(request()->url(), 'api')){\n\t\t\t\t\t";
+                    $mediaAttributeStmt .= "foreach(json_decode(\$value) as \$val){\n\t\t\t\t\t\t";
+                    $mediaAttributeStmt .= "\$return[] = asset(\$val);\n\t\t\t\t\t";
+                    $mediaAttributeStmt .= "}\n\t\t\t\t\t";
+                    $mediaAttributeStmt .= "return \$return;\n\t\t\t\t";
                     $mediaAttributeStmt .= "}\n\t\t\t";
-                    $mediaAttributeStmt .= "return \$return;\n\t\t";
-                    $mediaAttributeStmt .= "}\n\t\t";
-                    $mediaAttributeStmt .= "\$return = [];\n\t\t";
-                    $mediaAttributeStmt .= "foreach(json_decode(\$value) as \$val){\n\t\t\t";
-                    $mediaAttributeStmt .= "\$return[] = \$val;\n\t\t";
-                    $mediaAttributeStmt .= "}\n\t\t";
-                    $mediaAttributeStmt .= "return \$return;\n\t";
+                    $mediaAttributeStmt .= "\$return = [];\n\t\t\t\t";
+                    $mediaAttributeStmt .= "foreach(json_decode(\$value) as \$val){\n\t\t\t\t\t";
+                    $mediaAttributeStmt .= "\$return[] = \$val;\n\t\t\t\t";
+                    $mediaAttributeStmt .= "}\n\t\t\t\t";
+                    $mediaAttributeStmt .= "return \$return;\n\t\t\t";
                 }
+                $mediaAttributeStmt .= "}\n\t\t";
                 $mediaAttributeStmt .= ");\n\t";
                 $mediaAttributeStmt .= "}\n\n\t";
             }
