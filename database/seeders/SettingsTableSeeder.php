@@ -37,5 +37,29 @@ class SettingsTableSeeder extends Seeder
             "option" => "title_separator",
             "value" => "-"
         ]);
+        Setting::firstOrCreate([
+            "option" => "mail_from_name",
+            "value" => "AdminR"
+        ]);
+        Setting::firstOrCreate([
+            "option" => "mail_from_email",
+            "value" => "adminr@devsbuddy.com"
+        ]);
+        Setting::firstOrCreate([
+            "option" => "mail_driver",
+            "value" => "smtp"
+        ]);
+        Setting::firstOrCreate([
+            "option" => "mail_encryption",
+            "value" => "tls"
+        ]);
+        Setting::firstOrCreate([
+            "option" => "mail_host",
+            "value" => "smtp.mailtrap.io"
+        ]);
+        Setting::firstOrCreate([
+            "option" => "mail_port",
+            "value" => "2525"
+        ]);
     }
 }

@@ -45,4 +45,22 @@ class LoginController extends Controller
             return $this->backError('Email-Address And Password Are Wrong.');
         }
     }
+
+    public function logout(): RedirectResponse
+    {
+        try{
+            if(auth()->check()){
+                auth()->logout();
+                request()->session()->invalidate();
+
+                request()->session()->regenerateToken();
+            }
+            /// TODO: Think where to redirect after logging out.
+            return $this->redirectSuccess(route: route('auth.login'), message: "You are logged out successfully!");
+        } catch (\Exception $e){
+            return $this->backError('Error: ' . $e->getMessage());
+        } catch (\Error $e){
+            return $this->backError('Error: ' . $e->getMessage());
+        }
+    }
 }

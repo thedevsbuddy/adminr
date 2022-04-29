@@ -29,7 +29,7 @@ class AdminrEngineServiceProvider extends ServiceProvider
             // Publishing assets.
             $this->publishes([
                 __DIR__.'/../resources/assets' => public_path('vendor/adminr-engine'),
-            ], 'assets');
+            ], 'laravel-assets');
 
 
             // Registering package commands.

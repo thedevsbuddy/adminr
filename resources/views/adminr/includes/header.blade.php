@@ -41,15 +41,22 @@
                     Updates<span class="badge badge-info ml-auto">42</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="javascript:void(0)" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                <x-link class="dropdown-item" href="{{ route('auth.logout') }}" as="form" method="POST">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{coreUiIcon('cil-account-logout') }}"></use>
                     </svg>
-                    {{ __('Logout') }}</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
+                    {{ __('Logout') }}
+                </x-link>
+{{--                <a class="dropdown-item" href="javascript:void(0)" onclick="event.preventDefault();--}}
+{{--                                                     document.getElementById('logout-form').submit();">--}}
+{{--                    <svg class="c-icon mr-2">--}}
+{{--                        <use xlink:href="{{coreUiIcon('cil-account-logout') }}"></use>--}}
+{{--                    </svg>--}}
+{{--                    {{ __('Logout') }}--}}
+{{--                </a>--}}
+{{--                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
+{{--                    @csrf--}}
+{{--                </form>--}}
             </div>
         </li>
     </ul>

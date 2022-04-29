@@ -60,7 +60,7 @@ class UserController extends Controller
 
         try {
             if ($request->hasFile('avatar')) {
-                $avatar = $this->uploadFile($request->file('avatar'), 'users/avatars')->getFileName();
+                $avatar = $this->uploadFile(file: $request->file('avatar'), dir: 'users/avatars')->getFilePath();
             } else {
                 $avatar = null;
             }
@@ -112,7 +112,7 @@ class UserController extends Controller
 
         try {
             if ($request->hasFile('avatar')) {
-                $avatar = $this->uploadFile($request->file('avatar'), 'users/avatars')->getFileName();
+                $avatar = $this->uploadFile($request->file('avatar'), 'users/avatars')->getFilePath();
                 $this->deleteStorageFile($user->avatar);
             } else {
                 $avatar = $user->avatar;

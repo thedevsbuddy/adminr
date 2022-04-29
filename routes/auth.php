@@ -10,6 +10,6 @@ Route::group(['middleware' => 'guest', 'as' => 'auth.'], function (){
     Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
 });
 
-Route::group(['middleware' => 'auth'], function (){
-    Route::post('/logout', [LoginController::class, 'showLoginForm'])->name('logout');
+Route::group(['middleware' => 'auth', 'as' => 'auth.'], function (){
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

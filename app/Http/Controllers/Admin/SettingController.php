@@ -31,7 +31,7 @@ class SettingController extends Controller
                 $setting = Setting::where('option', $key)->first();
                 if ($input instanceof UploadedFile){
                     if($request->hasFile($key)){
-                        $value = $this->uploadFile($input, 'settings', Str::snake($key).'_')->getFileName();
+                        $value = $this->uploadFile($input, 'settings', Str::snake($key).'_')->getFilePath();
                         if($setting){
                             $this->deleteStorageFile($setting->value);
                         }

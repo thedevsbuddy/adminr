@@ -12,8 +12,6 @@
         @if(strtoupper($method) == 'POST' || strtoupper($method) == 'PUT')
             @csrf
         @endif
+        <button {{ $attributes->merge(["type" => "submit"]) }}>{{ $slot }}</button>
     </form>
-    <a {{ $attributes->merge(['href' => $href]) }}>
-        {{ $slot }}
-    </a>
 @endif

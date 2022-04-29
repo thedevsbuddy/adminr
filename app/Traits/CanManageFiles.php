@@ -25,7 +25,7 @@ trait CanManageFiles
 
         $fileName = Str::random(64);
         $fileExtension = $this->file->getClientOriginalExtension();
-        $uploadHomeDir = "/";
+        $uploadHomeDir = "uploads/";
 
         $this->saveFileName = $fileNamePrefix . $fileName . "." . strtolower($fileExtension);
         $this->dir = $this->dir ? $uploadHomeDir . $this->dir . "/" : $uploadHomeDir . "/";
@@ -45,7 +45,7 @@ trait CanManageFiles
         foreach ($files as $file) {
             $fileName = Str::random(64);
             $fileExtension = $file->getClientOriginalExtension();
-            $uploadHomeDir = "/";
+            $uploadHomeDir = "uploads/";
 
             $this->saveFileName = $fileNamePrefix . $fileName . "." . strtolower($fileExtension);
             $this->dir = $this->dir ? $uploadHomeDir . $this->dir . "/" : $uploadHomeDir . "/";

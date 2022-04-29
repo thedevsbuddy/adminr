@@ -47,7 +47,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "adminr-engine"
+            "url": "app/adminr-engine"
         }
     ],
     "scripts": {

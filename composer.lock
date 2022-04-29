@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb41c20fa116054c601041e5fed40dc9",
+    "content-hash": "482eefb61e2030775142e040fff0cef7",
     "packages": [
         {
             "name": "brick/math",
@@ -4981,8 +4981,8 @@
             "version": "0.1.0",
             "dist": {
                 "type": "path",
-                "url": "adminr-engine",
-                "reference": "d52312445fc14f21f93d0bb8bf07fb1ca69f5630"
+                "url": "app/adminr-engine",
+                "reference": "2fa50e8748614ebc1d23be67ab20c124ab063ffc"
             },
             "require": {
                 "illuminate/support": "^9.10.1",
@@ -5006,7 +5006,10 @@
             "autoload": {
                 "psr-4": {
                     "Devsbuddy\\AdminrEngine\\": "src"
-                }
+                },
+                "files": [
+                    "src/Http/helpers.php"
+                ]
             },
             "autoload-dev": {
                 "psr-4": {
