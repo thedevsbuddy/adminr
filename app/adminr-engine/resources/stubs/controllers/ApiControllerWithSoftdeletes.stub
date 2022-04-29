@@ -4,27 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\{{MODEL_CLASS}};
 use Illuminate\Http\Request;
-use Devsbuddy\AdminrEngine\Http\Controllers\AdminrController;
-use Devsbuddy\AdminrEngine\Traits\HasResponse;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 
-class {{CONTROLLER_CLASS}} extends AdminrController
+class {{CONTROLLER_CLASS}} extends Controller
 {
-    use HasResponse;
-
-    private $resultLimit;
+    private int $resultLimit;
 
     public function __construct(){
         $this->resultLimit = {{RESULT_LIMIT}};
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index(Request $request)
+
+    public function index(Request $request): JsonResponse
     {
         try{
             $page = $request->has('page') ? $request->get('page') : 1;
@@ -41,13 +34,7 @@ class {{CONTROLLER_CLASS}} extends AdminrController
         }
     }
 
-    /**
-     * Return single instance of the requested resource
-     *
-     * @param {{MODEL_CLASS}} ${{MODEL_ENTITY}}
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function show({{MODEL_CLASS}} ${{MODEL_ENTITY}})
+    public function show({{MODEL_CLASS}} ${{MODEL_ENTITY}}): JsonResponse
     {
         try{
             return $this->success(${{MODEL_ENTITY}});
@@ -56,13 +43,7 @@ class {{CONTROLLER_CLASS}} extends AdminrController
         }
     }
 
-    /**
-     * Store a newly created resource.
-     *
-     * @param  Request  $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         try{
             {{VALIDATION_STATEMENT}}
@@ -78,14 +59,7 @@ class {{CONTROLLER_CLASS}} extends AdminrController
         }
     }
 
-    /**
-     * Update resource.
-     *
-     * @param Request $request
-     * @param {{MODEL_CLASS}} ${{MODEL_ENTITY}}
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function update(Request $request, {{MODEL_CLASS}} ${{MODEL_ENTITY}})
+    public function update(Request $request, {{MODEL_CLASS}} ${{MODEL_ENTITY}}): JsonResponse
     {
         try{
             {{UPDATE_VALIDATION_STATEMENT}}
@@ -101,13 +75,7 @@ class {{CONTROLLER_CLASS}} extends AdminrController
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         try{
             ${{MODEL_ENTITY}} = {{MODEL_CLASS}}::findOrFail($id);
@@ -119,13 +87,7 @@ class {{CONTROLLER_CLASS}} extends AdminrController
         }
     }
 
-    /**
-     * Restore the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function restore($id)
+    public function restore($id): JsonResponse
     {
         try{
             ${{MODEL_ENTITY}} = {{MODEL_CLASS}}::withTrashed()->find($id);
@@ -137,13 +99,7 @@ class {{CONTROLLER_CLASS}} extends AdminrController
         }
     }
 
-    /**
-     * Remove the specified resource permanently.
-     *
-     * @param  int  $id
-     * @return mixed
-     */
-    public function forceDestroy($id)
+    public function forceDestroy($id): JsonResponse
     {
         try{
             ${{MODEL_ENTITY}} = {{MODEL_CLASS}}::withTrashed()->where('id', $id)->first();

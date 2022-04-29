@@ -60,7 +60,7 @@ class ResourceController  extends Controller
             $id = decrypt($id);
             $resource = Resource::findOrFail($id);
             $routes = json_decode(File::get(base_path() . '/routes/adminr/api/' . $resource->payload->routes->api));
-            return view('adminr-core::resources.configure', compact('resource', 'routes'));
+            return view('adminr-engine::resources.configure', compact('resource', 'routes'));
         } catch (\Exception $e){
             return back()->with('error', 'Error: ' . $e->getMessage());
         }

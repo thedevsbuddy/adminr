@@ -3407,3 +3407,225 @@
 #47 E:\\PROJECTS\\Laravel\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\esources\\server.php(16): require_once('E:\\\\PROJECTS\\\\Lar...')
 #48 {main}
 "} 
+[2022-04-29 09:43:45] local.ERROR: Route [adminr.articles.index] not defined. {"view":{"view":"E:\\PROJECTS\\DevsBuddy\\adminr\esources\\views\\adminr\\includes\\sidebar.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-888702357 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#1274</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
+</samp>}
+</pre><script>Sfdump(\"sf-dump-888702357\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","dataTypes":"<pre class=sf-dump id=sf-dump-841980021 data-indent-pad=\"  \"><span class=sf-dump-note>array:20</span> [<samp data-depth=1 class=sf-dump-expanded>
+  <span class=sf-dump-key>2</span> => \"<span class=sf-dump-str title=\"13 characters\">bigIncrements</span>\"
+  <span class=sf-dump-key>13</span> => \"<span class=sf-dump-str title=\"7 characters\">boolean</span>\"
+  <span class=sf-dump-key>16</span> => \"<span class=sf-dump-str title=\"4 characters\">date</span>\"
+  <span class=sf-dump-key>17</span> => \"<span class=sf-dump-str title=\"8 characters\">dateTime</span>\"
+  <span class=sf-dump-key>12</span> => \"<span class=sf-dump-str title=\"6 characters\">double</span>\"
+  <span class=sf-dump-key>14</span> => \"<span class=sf-dump-str title=\"4 characters\">enum</span>\"
+  <span class=sf-dump-key>4</span> => \"<span class=sf-dump-str title=\"4 characters\">file</span>\"
+  <span class=sf-dump-key>1</span> => \"<span class=sf-dump-str title=\"10 characters\">increments</span>\"
+  <span class=sf-dump-key>7</span> => \"<span class=sf-dump-str title=\"7 characters\">integer</span>\"
+  <span class=sf-dump-key>15</span> => \"<span class=sf-dump-str title=\"4 characters\">json</span>\"
+  <span class=sf-dump-key>6</span> => \"<span class=sf-dump-str title=\"8 characters\">longText</span>\"
+  <span class=sf-dump-key>0</span> => \"<span class=sf-dump-str title=\"4 characters\">slug</span>\"
+  <span class=sf-dump-key>3</span> => \"<span class=sf-dump-str title=\"6 characters\">string</span>\"
+  <span class=sf-dump-key>5</span> => \"<span class=sf-dump-str title=\"4 characters\">text</span>\"
+  <span class=sf-dump-key>18</span> => \"<span class=sf-dump-str title=\"4 characters\">time</span>\"
+  <span class=sf-dump-key>19</span> => \"<span class=sf-dump-str title=\"9 characters\">timestamp</span>\"
+  <span class=sf-dump-key>8</span> => \"<span class=sf-dump-str title=\"11 characters\">tinyInteger</span>\"
+  <span class=sf-dump-key>11</span> => \"<span class=sf-dump-str title=\"18 characters\">unsignedBigInteger</span>\"
+  <span class=sf-dump-key>9</span> => \"<span class=sf-dump-str title=\"15 characters\">unsignedInteger</span>\"
+  <span class=sf-dump-key>10</span> => \"<span class=sf-dump-str title=\"19 characters\">unsignedTinyInteger</span>\"
+</samp>]
+</pre><script>Sfdump(\"sf-dump-841980021\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","resourceMenus":"<pre class=sf-dump id=sf-dump-890777458 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Database\\Eloquent\\Collection</span> {<a class=sf-dump-ref>#1377</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">items</span>: <span class=sf-dump-note>array:1</span> [<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-index>0</span> => <span class=sf-dump-note title=\"Devsbuddy\\AdminrEngine\\Models\\Menu
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">Devsbuddy\\AdminrEngine\\Models</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Menu</span> {<a class=sf-dump-ref>#1376</a><samp data-depth=3 class=sf-dump-compact>
+      #<span class=sf-dump-protected title=\"Protected property\">connection</span>: \"<span class=sf-dump-str title=\"5 characters\">mysql</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">table</span>: \"<span class=sf-dump-str title=\"12 characters\">adminr_menus</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">primaryKey</span>: \"<span class=sf-dump-str title=\"2 characters\">id</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">keyType</span>: \"<span class=sf-dump-str title=\"3 characters\">int</span>\"
+      +<span class=sf-dump-public title=\"Public property\">incrementing</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">with</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">withCount</span>: []
+      +<span class=sf-dump-public title=\"Public property\">preventsLazyLoading</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">perPage</span>: <span class=sf-dump-num>15</span>
+      +<span class=sf-dump-public title=\"Public property\">exists</span>: <span class=sf-dump-const>true</span>
+      +<span class=sf-dump-public title=\"Public property\">wasRecentlyCreated</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+      #<span class=sf-dump-protected title=\"Protected property\">attributes</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">original</span>: <span class=sf-dump-note>array:11</span> [ &#8230;11]
+      #<span class=sf-dump-protected title=\"Protected property\">changes</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">casts</span>: <span class=sf-dump-note>array:2</span> [ &#8230;2]
+      #<span class=sf-dump-protected title=\"Protected property\">classCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">attributeCastCache</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dates</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dateFormat</span>: <span class=sf-dump-const>null</span>
+      #<span class=sf-dump-protected title=\"Protected property\">appends</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">dispatchesEvents</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">observables</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">relations</span>: <span class=sf-dump-note>array:1</span> [ &#8230;1]
+      #<span class=sf-dump-protected title=\"Protected property\">touches</span>: []
+      +<span class=sf-dump-public title=\"Public property\">timestamps</span>: <span class=sf-dump-const>true</span>
+      #<span class=sf-dump-protected title=\"Protected property\">hidden</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">visible</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">fillable</span>: []
+      #<span class=sf-dump-protected title=\"Protected property\">guarded</span>: <span class=sf-dump-note>array:1</span> [ &#8230;1]
+    </samp>}
+  </samp>]
+  #<span class=sf-dump-protected title=\"Protected property\">escapeWhenCastingToString</span>: <span class=sf-dump-const>false</span>
+</samp>}
+</pre><script>Sfdump(\"sf-dump-890777458\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+"}},"userId":2,"exception":"[object] (Spatie\\LaravelIgnition\\Exceptions\\ViewException(code: 0): Route [adminr.articles.index] not defined. at E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\UrlGenerator.php:466)
+[stacktrace]
+#0 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(739): Illuminate\\Routing\\UrlGenerator->route('adminr.articles...', Array, true)
+#1 E:\\PROJECTS\\DevsBuddy\\adminr\\storage\\framework\\views\\71b8baae152f513012e6b9454ab40b33a5fa2f8c.php(106): route('adminr.articles...')
+#2 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(107): require('E:\\\\PROJECTS\\\\Dev...')
+#3 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(108): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('E:\\\\PROJECTS\\\\Dev...', Array)
+#5 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(61): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('E:\\\\PROJECTS\\\\Dev...', Array)
+#6 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(139): Illuminate\\View\\Engines\\CompilerEngine->get('E:\\\\PROJECTS\\\\Dev...', Array)
+#7 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(122): Illuminate\\View\\View->getContents()
+#8 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(91): Illuminate\\View\\View->renderContents()
+#9 E:\\PROJECTS\\DevsBuddy\\adminr\\storage\\framework\\views\\4d1d9cd599689ea858f8a202bd5b4250ba8ffef1.php(29): Illuminate\\View\\View->render()
+#10 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(107): require('E:\\\\PROJECTS\\\\Dev...')
+#11 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(108): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#12 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('E:\\\\PROJECTS\\\\Dev...', Array)
+#13 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(61): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('E:\\\\PROJECTS\\\\Dev...', Array)
+#14 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(139): Illuminate\\View\\Engines\\CompilerEngine->get('E:\\\\PROJECTS\\\\Dev...', Array)
+#15 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(122): Illuminate\\View\\View->getContents()
+#16 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(91): Illuminate\\View\\View->renderContents()
+#17 E:\\PROJECTS\\DevsBuddy\\adminr\\storage\\framework\\views\\be5561f9f177867401c08f0f7501ae5d8fc9b0ef.php(41): Illuminate\\View\\View->render()
+#18 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(107): require('E:\\\\PROJECTS\\\\Dev...')
+#19 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(108): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#20 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('E:\\\\PROJECTS\\\\Dev...', Array)
+#21 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(61): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('E:\\\\PROJECTS\\\\Dev...', Array)
+#22 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(139): Illuminate\\View\\Engines\\CompilerEngine->get('E:\\\\PROJECTS\\\\Dev...', Array)
+#23 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(122): Illuminate\\View\\View->getContents()
+#24 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(91): Illuminate\\View\\View->renderContents()
+#25 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(69): Illuminate\\View\\View->render()
+#26 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#27 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(833): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 200, Array)
+#28 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(802): Illuminate\\Routing\\Router::toResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#29 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(725): Illuminate\\Routing\\Router->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#30 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#31 E:\\PROJECTS\\DevsBuddy\\adminr\\app\\Http\\Middleware\\IsAdmin.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): App\\Http\\Middleware\\IsAdmin->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#40 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#42 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#43 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(726): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#50 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(703): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#51 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(667): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#52 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(656): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#53 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(167): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#54 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#55 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#60 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#63 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#64 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#65 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\fruitcake\\laravel-cors\\src\\HandleCors.php(38): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#66 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Fruitcake\\Cors\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#67 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#68 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#69 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#70 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(142): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#71 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#72 E:\\PROJECTS\\DevsBuddy\\adminr\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#73 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\esources\\server.php(16): require_once('E:\\\\PROJECTS\\\\Dev...')
+#74 {main}
+
+[previous exception] [object] (Symfony\\Component\\Routing\\Exception\\RouteNotFoundException(code: 0): Route [adminr.articles.index] not defined. at E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\UrlGenerator.php:466)
+[stacktrace]
+#0 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\helpers.php(739): Illuminate\\Routing\\UrlGenerator->route('adminr.articles...', Array, true)
+#1 E:\\PROJECTS\\DevsBuddy\\adminr\\storage\\framework\\views\\71b8baae152f513012e6b9454ab40b33a5fa2f8c.php(106): route('adminr.articles...')
+#2 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(107): require('E:\\\\PROJECTS\\\\Dev...')
+#3 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(108): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#4 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('E:\\\\PROJECTS\\\\Dev...', Array)
+#5 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(61): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('E:\\\\PROJECTS\\\\Dev...', Array)
+#6 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(139): Illuminate\\View\\Engines\\CompilerEngine->get('E:\\\\PROJECTS\\\\Dev...', Array)
+#7 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(122): Illuminate\\View\\View->getContents()
+#8 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(91): Illuminate\\View\\View->renderContents()
+#9 E:\\PROJECTS\\DevsBuddy\\adminr\\storage\\framework\\views\\4d1d9cd599689ea858f8a202bd5b4250ba8ffef1.php(29): Illuminate\\View\\View->render()
+#10 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(107): require('E:\\\\PROJECTS\\\\Dev...')
+#11 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(108): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#12 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('E:\\\\PROJECTS\\\\Dev...', Array)
+#13 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(61): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('E:\\\\PROJECTS\\\\Dev...', Array)
+#14 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(139): Illuminate\\View\\Engines\\CompilerEngine->get('E:\\\\PROJECTS\\\\Dev...', Array)
+#15 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(122): Illuminate\\View\\View->getContents()
+#16 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(91): Illuminate\\View\\View->renderContents()
+#17 E:\\PROJECTS\\DevsBuddy\\adminr\\storage\\framework\\views\\be5561f9f177867401c08f0f7501ae5d8fc9b0ef.php(41): Illuminate\\View\\View->render()
+#18 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(107): require('E:\\\\PROJECTS\\\\Dev...')
+#19 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(108): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#20 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('E:\\\\PROJECTS\\\\Dev...', Array)
+#21 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(61): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('E:\\\\PROJECTS\\\\Dev...', Array)
+#22 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(139): Illuminate\\View\\Engines\\CompilerEngine->get('E:\\\\PROJECTS\\\\Dev...', Array)
+#23 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(122): Illuminate\\View\\View->getContents()
+#24 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(91): Illuminate\\View\\View->renderContents()
+#25 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(69): Illuminate\\View\\View->render()
+#26 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#27 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(833): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 200, Array)
+#28 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(802): Illuminate\\Routing\\Router::toResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#29 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(725): Illuminate\\Routing\\Router->prepareResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\View))
+#30 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(141): Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Illuminate\\Http\\Request))
+#31 E:\\PROJECTS\\DevsBuddy\\adminr\\app\\Http\\Middleware\\IsAdmin.php(22): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#32 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): App\\Http\\Middleware\\IsAdmin->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#33 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\SubstituteBindings.php(50): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#34 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Routing\\Middleware\\SubstituteBindings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#35 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Auth\\Middleware\\Authenticate.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#36 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Auth\\Middleware\\Authenticate->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#37 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken.php(78): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#38 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#39 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Middleware\\ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#40 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#41 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(121): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#42 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Session\\Middleware\\StartSession.php(64): Illuminate\\Session\\Middleware\\StartSession->handleStatefulRequest(Object(Illuminate\\Http\\Request), Object(Illuminate\\Session\\Store), Object(Closure))
+#43 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Session\\Middleware\\StartSession->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#44 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#45 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#46 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Cookie\\Middleware\\EncryptCookies.php(67): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#47 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#48 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#49 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(726): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#50 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(703): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Illuminate\\Http\\Request))
+#51 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(667): Illuminate\\Routing\\Router->runRoute(Object(Illuminate\\Http\\Request), Object(Illuminate\\Routing\\Route))
+#52 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Router.php(656): Illuminate\\Routing\\Router->dispatchToRoute(Object(Illuminate\\Http\\Request))
+#53 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(167): Illuminate\\Routing\\Router->dispatch(Object(Illuminate\\Http\\Request))
+#54 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(141): Illuminate\\Foundation\\Http\\Kernel->Illuminate\\Foundation\\Http\\{closure}(Object(Illuminate\\Http\\Request))
+#55 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#56 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull.php(31): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#57 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#58 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest.php(21): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#59 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\TrimStrings.php(40): Illuminate\\Foundation\\Http\\Middleware\\TransformsRequest->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#60 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\TrimStrings->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#61 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize.php(27): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#62 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#63 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance.php(86): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#64 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#65 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\fruitcake\\laravel-cors\\src\\HandleCors.php(38): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#66 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Fruitcake\\Cors\\HandleCors->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#67 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Middleware\\TrustProxies.php(39): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#68 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(180): Illuminate\\Http\\Middleware\\TrustProxies->handle(Object(Illuminate\\Http\\Request), Object(Closure))
+#69 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Pipeline\\Pipeline.php(116): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))
+#70 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(142): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))
+#71 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(111): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#72 E:\\PROJECTS\\DevsBuddy\\adminr\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#73 E:\\PROJECTS\\DevsBuddy\\adminr\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\esources\\server.php(16): require_once('E:\\\\PROJECTS\\\\Dev...')
+#74 {main}
+"} 
