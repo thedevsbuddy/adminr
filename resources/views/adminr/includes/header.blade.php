@@ -10,10 +10,15 @@
     </a>
     <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar"
             data-class="c-sidebar-lg-show" responsive="true">
-        <span class="c-icon  c-icon-lg">
+            <span class="c-icon  c-icon-lg">
                 <i class="mdi mdi-menu"></i>
             </span>
     </button>
+    <a href="{{ route('index') }}" target="_blank" class="d-flex align-items-center justify-content-center c-header-toggler  d-md-down-none">
+            <span class="c-icon c-icon-lg" style="margin-top: -12px">
+                <i class="mdi mdi-home-outline"></i>
+            </span>
+    </a>
 {{--    <ul class="c-header-nav d-md-down-none">--}}
 {{--        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Dashboard</a></li>--}}
 {{--        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Users</a></li>--}}

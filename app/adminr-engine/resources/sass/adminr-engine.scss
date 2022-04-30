@@ -135,3 +135,11 @@
   width: 20px;
   height: 20px;
 }
+
+/**
+* Make Markdown editor on top of all elements
+* if it is in full screen mode
+*/
+.editor-toolbar.fullscreen, .EasyMDEContainer .CodeMirror-fullscreen, .editor-preview-side {
+    z-index: 1099 !important;
+}

@@ -75,7 +75,7 @@ class BuildControllersService extends AdminrEngineService
         $stub = str_replace('{{CONTROLLER_CLASS}}', $this->controllerName, $stub);
         $stub = str_replace('{{MODEL_ENTITY}}', $this->modelEntity, $stub);
         $stub = str_replace('{{MODEL_ENTITIES}}', $this->modelEntities, $stub);
-        $stub = str_replace('{{RESULT_LIMIT}}', config('adminr.api.result_limit') ?: 10, $stub);
+        $stub = str_replace('{{RESULT_LIMIT}}', config('adminr-engine.api.result_limit') ?: 10, $stub);
         $stub = str_replace('{{SEARCH_STATEMENTS}}', $this->getSearchStatement(), $stub);
         $stub = str_replace('{{VALIDATION_STATEMENT}}', $this->getValidationStatement(), $stub);
         $stub = str_replace('{{UPDATE_VALIDATION_STATEMENT}}', $this->getUpdateValidationStatement(), $stub);
