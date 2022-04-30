@@ -81,7 +81,6 @@ class TemplateController extends Controller
     {
         $request->validate([
             'subject' => ['required'],
-            'code' => ['required'],
             'content' => ['required'],
         ]);
 
@@ -89,7 +88,6 @@ class TemplateController extends Controller
             MailTemplate::where('id', $id)->update([
                 'subject' => trim($request->get('subject')),
                 'purpose' => trim($request->get('purpose')),
-                'code' => Str::kebab(trim($request->get('code'))),
                 'content' => $request->get('content'),
             ]);
             return $this->backSuccess('Mail template updated successfully!');
