@@ -57,4 +57,4 @@ if (!function_exists('returnIfRoutes')) {
     }
 }
 
-const ADMINR_VERSION = "0.2.0";
+const ADMINR_VERSION = "0.2.1";

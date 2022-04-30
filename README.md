@@ -1,10 +1,10 @@
-# AdminR v0.2.0
+# AdminR v0.2.1
 
 <p align="center">
-<a href="https://travis-ci.org/thedevsbuddy/laravel-adminr"><img src="https://travis-ci.org/thedevsbuddy/laravel-adminr.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/thedevsbuddy/laravel-adminr"><img src="https://img.shields.io/packagist/dt/thedevsbuddy/laravel-adminr" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/thedevsbuddy/laravel-adminr"><img src="https://img.shields.io/packagist/v/thedevsbuddy/laravel-adminr" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/thedevsbuddy/laravel-adminr"><img src="https://img.shields.io/packagist/l/thedevsbuddy/laravel-adminr" alt="License"></a>
+<a href="https://travis-ci.org/thedevsbuddy/adminr"><img src="https://travis-ci.org/thedevsbuddy/adminr.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/dt/thedevsbuddy/adminr" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/v/thedevsbuddy/adminr" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/l/thedevsbuddy/adminr" alt="License"></a>
 </p>
 
 ## About AdminR

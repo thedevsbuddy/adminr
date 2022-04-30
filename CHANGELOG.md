@@ -1,14 +1,21 @@
 # Changelog
 
 **All notable changes to `AdminR` will be documented in this file**
+
+==================================================
+
+## Release v0.2.1 - May 01, 2022
+
+- Added default landing page
+
 ==================================================
 
 ## Release v0.2.0 - Apr 30, 2022
 
-    - Now it is using ```Laravel v9.x``` and ```php v8.1.x```.
-    - Renamed ```adminr-core``` to ```adminr-engine```.
-    - ```adminr-engine``` is no more an additional ```package```.
-    - ```adminr-engine``` is now a ```core``` code build in ```AdminR```.
+- Now it is using ```Laravel v9.x``` and ```php v8.1.x```.
+- Renamed ```adminr-core``` to ```adminr-engine```.
+- ```adminr-engine``` is no more an additional ```package```.
+- ```adminr-engine``` is now a ```core``` code build in ```AdminR```.
 
 ==================================================
 
