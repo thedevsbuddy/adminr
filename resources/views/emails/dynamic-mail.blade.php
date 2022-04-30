@@ -2,6 +2,6 @@
 {!! $body !!}
 
 Regards,<br>
-{{ getSetting('app_name') }} <br>
+<a href="{{ url('/') }}">{{ getSetting('app_name') }}</a> <br>
 {{ getSetting('app_tagline') }}
 @endcomponent

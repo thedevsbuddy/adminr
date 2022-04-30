@@ -3,7 +3,7 @@
 @section('title', __('Edit template'))
 
 @push('scopedCss')
-    <link rel="stylesheet" href="{{ asset('adminr/css/bs-md-editor.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
 @endpush
 
 @section('content')
@@ -37,7 +37,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label for="subject">{{ __('Subject') }} <span
-                                                            class="text-danger">*</span></label>
+                                                        class="text-danger">*</span></label>
                                                 <input type="text"
                                                        class="form-control @if($errors->has('subject')) is-invalid @endif"
                                                        name="subject" id="subject" placeholder="{{ __('Subject') }}"
@@ -50,13 +50,25 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label for="code">{{ __('Code') }} <span
-                                                            class="text-danger">*</span></label>
+                                                        class="text-danger">*</span></label>
                                                 <input type="text"
                                                        class="form-control @if($errors->has('code')) is-invalid @endif"
                                                        name="code" id="code" placeholder="{{ __('Mail Code') }}"
                                                        value="{{ $template->code ?? old('code') }}" required>
                                                 @if($errors->has('code'))
                                                     <span class="text-danger font-weight-bold">{{ $errors->first('code') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label for="subject">{{ __('Purpose') }}</label>
+                                                <input type="text"
+                                                       class="form-control @if($errors->has('purpose')) is-invalid @endif"
+                                                       name="purpose" id="purpose" placeholder="{{ __('Eg: To be sent when order placed.') }}"
+                                                       value="{{ $template->purpose ?? old('purpose') }}">
+                                                @if($errors->has('purpose'))
+                                                    <span class="text-danger font-weight-bold">{{ $errors->first('purpose') }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -108,20 +120,41 @@
 @endsection
 
 @push('scopedJs')
-    <script src="{{ asset('adminr/js/bs-md-editor.js') }}"></script>
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <script>
-
-        $(function () {
-            $('#content').markdownEditor();
-        });
-
         $(document).on('input', '#subject', function (e) {
             var subject = $(this).val();
             $('#code').val(subject.split(" ").map(function (e) {
                 return e.toLowerCase();
             }).join('-'));
-
         });
+        const easyMDE = new EasyMDE({element: document.getElementById('content')});
+        // easyMDE.value();
 
+        $('#template-form').on('submit', function (e) {
+            e.preventDefault();
+            $('button[type="submit"]').attr('disabled', true);
+            $.ajax({
+                url: $(this).attr('action'),
+                method: "PUT",
+                data: {
+                    "subject": $('#subject').val(),
+                    "purpose": $('#purpose').val(),
+                    "code": $('#code').val(),
+                    "content": easyMDE.value(),
+                },
+                success: function (res) {
+                    toastr.success(res.message);
+                    $('#subject').val('');
+                    $('#code').val('');
+                    easyMDE.value('');
+                    setTimeout(function () {
+                        $('button[type="submit"]').removeAttribute('disabled');
+                        window.location.href = "{{ route(config('app.route_prefix').'.templates.index') }}";
+                    }, 2000);
+                },
+            });
+
+        })
     </script>
 @endpush

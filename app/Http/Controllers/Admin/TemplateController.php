@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Devsbuddy\AdminrEngine\Models\MailTemplate;
+use App\Models\MailTemplate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -88,10 +88,11 @@ class TemplateController extends Controller
         try{
             MailTemplate::where('id', $id)->update([
                 'subject' => trim($request->get('subject')),
+                'purpose' => trim($request->get('purpose')),
                 'code' => Str::kebab(trim($request->get('code'))),
                 'content' => $request->get('content'),
             ]);
-            return $this->backSuccess('Mail template created successfully!');
+            return $this->backSuccess('Mail template updated successfully!');
         } catch (\Exception $e){
             return $this->backError('Error: ' . $e->getMessage());
         } catch (\Error $e){

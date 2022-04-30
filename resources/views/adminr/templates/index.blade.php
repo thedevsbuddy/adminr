@@ -31,6 +31,7 @@
                         <tr>
                             <th class="text-center" style="width: 50px">#</th>
                             <th>Subject</th>
+                            <th>Purpose</th>
                             <th>Code</th>
                             <th>Content</th>
                             <th>Actions</th>
@@ -41,6 +42,7 @@
                             <tr>
                                 <td class="text-center">{{++$index}}</td>
                                 <td>{{ $template->subject }}</td>
+                                <td>{{ $template->purpose }}</td>
                                 <td>{{ $template->code }}</td>
                                 <td>{{ strip_tags($template->content) }}</td>
                                 <td>
