@@ -143,3 +143,9 @@
 .editor-toolbar.fullscreen, .EasyMDEContainer .CodeMirror-fullscreen, .editor-preview-side {
     z-index: 1099 !important;
 }
+
+.editor-preview pre{
+    padding-block: 16px;
+    padding-inline: 12px;
+    border-radius: 4px;
+}
