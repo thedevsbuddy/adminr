@@ -49,12 +49,12 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <label for="code">{{ __('Code') }} <span
-                                                        class="text-danger">*</span></label>
+                                                <label for="code">{{ __('Code') }} (<small
+                                                        class="text-danger">Can not be changed</small>)</label>
                                                 <input type="text"
                                                        class="form-control @if($errors->has('code')) is-invalid @endif"
                                                        name="code" id="code" placeholder="{{ __('Mail Code') }}"
-                                                       value="{{ $template->code ?? old('code') }}" required>
+                                                       value="{{ $template->code ?? old('code') }}" readonly disabled>
                                                 @if($errors->has('code'))
                                                     <span class="text-danger font-weight-bold">{{ $errors->first('code') }}</span>
                                                 @endif
