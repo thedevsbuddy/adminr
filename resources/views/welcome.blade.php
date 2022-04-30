@@ -54,10 +54,10 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="active " href="index.html">Home</a></li>
-                <li><a href="features.html">Features</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a class="active " href="{{ route('index') }}">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="https://devsbuddy.com/blog">Blog</a></li>
+                <li><a href="https://devsbuddy.com/contact-us">Contact Us</a></li>
                 <li>
                     <a href="https://github.com/thedevsbuddy/adminr" target="_blank">
                         <svg fill="currentColor" style="width: 24px; height: 24px" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 28 28">
@@ -103,7 +103,7 @@
                                 more</a>
                         </p>
                         <p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500">
-                            <a href="#" class="btn btn-outline-white">Get Started</a>
+                            <a href="#features" class="btn btn-outline-white">Know More</a>
                         </p>
                     </div>
                     <div class="col-lg-5 iphone-wrap text-right">
@@ -168,7 +168,7 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="features">
 
         <div class="container">
             <div class="row justify-content-center text-center mb-5">
