@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 use App\Mail\DynamicMail;
-use Devsbuddy\AdminrEngine\Models\MailTemplate;
+use App\Models\MailTemplate;
 use Illuminate\Support\Facades\Mail;
 
 trait CanSendMail

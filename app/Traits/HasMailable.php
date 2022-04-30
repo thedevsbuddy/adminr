@@ -3,12 +3,12 @@
 namespace App\Traits;
 
 use App\Mail\DynamicMail;
-use Devsbuddy\AdminrEngine\Models\MailTemplate;
+use App\Models\MailTemplate;
 use Illuminate\Support\Facades\Mail;
 
 trait HasMailable
 {
-    public function mail($template, array $replaceable): static
+    public function mail(MailTemplate|string|int $template, array $replaceable): static
     {
         $mailTemplate = new MailTemplate();
         if(is_integer($template)){
