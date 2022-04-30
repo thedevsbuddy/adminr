@@ -61,5 +61,9 @@ class SettingsTableSeeder extends Seeder
             "option" => "mail_port",
             "value" => "2525"
         ]);
+        Setting::firstOrCreate([
+            "option" => "email_verification_enabled",
+            "value" => "1"
+        ]);
     }
 }
