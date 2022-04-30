@@ -33,7 +33,7 @@ class RegisterController extends Controller
         }
     }
 
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse|RedirectResponse
     {
 
         $request->validate([
@@ -53,7 +53,17 @@ class RegisterController extends Controller
                 'password' => bcrypt($request->get('password')),
             ]);
 
-            $user->syncRoles(Role::where('name', 'user')->first()->id);
+            $user->syncRoles(Role::where('name', 'user')->value('id'));
+
+            // Check if verification enabled and send verification mail
+            if(getSetting('email_verification_enabled') == "1"){
+                $user->mail(template: "registration-email-verification-mail", replaceable: [
+                    "{name}" => $user->name,
+                    "{username}" => $user->username,
+                    "{email}" => $user->email,
+                    "{verify_link}" => route('auth.verify-email'),
+                ]);
+            }
 
             auth()->login($user);
 
@@ -68,4 +78,5 @@ class RegisterController extends Controller
         }
 
     }
+
 }
