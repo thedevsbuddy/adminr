@@ -36,7 +36,7 @@ class UserController extends Controller
     public function create(): View|RedirectResponse
     {
         try {
-            $roles = Role::get();
+            $roles = Role::where('name', '!=', 'super_admin')->get();
             return view('adminr.users.create', compact('roles'));
         } catch (\Exception $e) {
             return $this->backError('Error : ' . $e->getMessage());
@@ -74,7 +74,7 @@ class UserController extends Controller
                 'password' => bcrypt($request->get('password')),
             ]);
 
-            $user->assignRole(role($request->get('role')));
+            $user->assignRole(Role::where('id', $request->get('role'))->first());
 
             return $this->redirectSuccess(route(config('app.route_prefix') . '.users.index'), 'User created successfully!');
         } catch (\Exception $e) {
@@ -88,7 +88,7 @@ class UserController extends Controller
     public function edit(User $user): View|RedirectResponse
     {
         try {
-            $roles = Role::get();
+            $roles = Role::where('name', '!=', 'super_admin')->get();
             return view('adminr.users.edit', compact('user', 'roles'));
         } catch (\Exception $e) {
             return $this->backError('Error : ' . $e->getMessage());
@@ -111,6 +111,12 @@ class UserController extends Controller
         ]);
 
         try {
+            // Validate if username admin entered is of
+            // selected user or any one else took it
+            if(User::where('username', $request->get('username'))->where('id', '!=', $user->id)->value('id') != null){
+                return  $this->backError(message: "Username is already taken!");
+            }
+
             if ($request->hasFile('avatar')) {
                 $avatar = $this->uploadFile($request->file('avatar'), 'users/avatars')->getFilePath();
                 $this->deleteStorageFile($user->avatar);
@@ -131,6 +137,9 @@ class UserController extends Controller
                     'password' => bcrypt($request->get('password'))
                 ]);
             }
+
+            // Update User role if selected new
+            $user->syncRoles(Role::where('id', $request->get('role'))->first());
 
             return $this->redirectSuccess(route(config('app.route_prefix').'.users.index'), 'User updated successfully!');
         } catch (\Exception $e) {
