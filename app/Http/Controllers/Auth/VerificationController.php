@@ -13,24 +13,58 @@ class VerificationController extends Controller
 
     public function index(): View|RedirectResponse
     {
-        try{
+        try {
             return view('auth.verify');
-        } catch (\Exception | \Error $e){
-            return $this->backError('Error: ' . $e->getMessage());
+        } catch (\Exception | \Error $e) {
+            info($e->getMessage());
+            return $this->backError('Something went wrong!');
         }
     }
 
-    public function sendVerificationMail(): RedirectResponse
+    public function sendEmailVerificationMail(): RedirectResponse
     {
-        try{
+        try {
             $user = User::where('email', request('email'))->first();
 
-            $user->mail(template: "registration-welcome-mail", replaceable: []);
+            if (!$user) {
+                return $this->backError(message: "Provided email is not registered with us.");
+            }
 
-            return  $this->backSuccess(message: "Verification mail is sent to your email " . request('email'));
+            $user->mail(template: "email-verification-mail", replaceable: [
+                "{email}" => $user->email,
+                "{verify_link}" => route('auth.verify-email') . "?token=" . $this->generateTokenForUser(user: $user)->token,
+            ]);
 
-        } catch (\Exception | \Error $e){
-            return $this->backError('Error: ' . $e->getMessage());
+            return $this->backSuccess(message: "Verification mail is sent to your email " . request('email'));
+
+        } catch (\Exception | \Error $e) {
+            info($e->getMessage());
+            return $this->backError('Something went wrong!');
+        }
+
+    }
+
+    public function sendOtpVerificationMail(): RedirectResponse
+    {
+        try {
+            $user = User::where('email', request('email'))->first();
+
+            if (!$user) {
+                return $this->backError(message: "Provided email is not registered with us.");
+            }
+
+            $user->mail(template: "email-verification-otp-mail", replaceable: [
+                "{email}" => $user->email,
+                "{otp}" => $this->generateOtpForUser(user: $user),
+            ]);
+
+            $user->mail(template: "email-verification-otp-mail", replaceable: []);
+
+            return $this->backSuccess(message: "Verification mail is sent to your email " . request('email'));
+
+        } catch (\Exception | \Error $e) {
+            info($e->getMessage());
+            return $this->backError('Something went wrong!');
         }
 
     }
@@ -40,10 +74,10 @@ class VerificationController extends Controller
         $verifyUser = VerificationToken::where('token', request('token'))
             ->with('user')
             ->first();
-
-        if(!is_null($verifyUser) ){
+        
+        if (!is_null($verifyUser)) {
             $user = $verifyUser->user;
-            if(is_null($user->email_verified_at)) {
+            if (is_null($user->email_verified_at)) {
 
                 $user->update([
                     "email_verified_at" => now(),
@@ -62,9 +96,32 @@ class VerificationController extends Controller
             $verifyUser->delete();
 
         } else {
-            return $this->redirectError(route: route('auth.login'), message: 'Sorry your email cannot be identified.');
+            return $this->redirectError(route: route('auth.login'), message: "Sorry your email cannot be identified.");
         }
         return $this->redirectSuccess(route: route('auth.login'), message: $message);
+    }
+
+    public function verifyOtp(): RedirectResponse
+    {
+        $user = User::where('email', request('email'))->first();
+
+        if (!$user) {
+            return $this->backError(message: "Provided email is not registered with us.");
+        }
+
+        if ($user->otp != request('otp')) {
+            return $this->backError(message: "Verification code is invalid.");
+        }
+
+        $user->update([
+            "email_verified_at" => now(),
+        ]);
+
+        $user->mail(template: "email-verification-success-mail", replaceable: [
+            "{login_link}" => route('auth.login'),
+        ]);
+
+        return $this->redirectSuccess(route: route('auth.login'), message: "Account verified successfully");
     }
 
 }
