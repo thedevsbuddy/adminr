@@ -45,7 +45,7 @@
                                 <td>{{ $template->purpose }}</td>
                                 <td>{{ $template->code }}</td>
                                 <td>{{ strip_tags($template->content) }}</td>
-                                <td>
+                                <td style="min-width: 120px">
                                     <a href="{{ route(config('app.route_prefix').'.templates.edit', $template) }}" class="btn btn-sm btn-icon btn-primary mr-2" title="Edit">
                                         <svg class="h-3 w-3">
                                             <use xlink:href="{{ coreUiIcon('cil-pen') }}"></use>
