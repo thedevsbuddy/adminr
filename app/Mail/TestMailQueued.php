@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class TestMail extends Mailable
+class TestMailQueued extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -18,7 +18,7 @@ class TestMail extends Mailable
 
     public function build(): static
     {
-        return $this->subject('This is a test mail.')
+        return $this->subject('This is a test mail with Queue')
             ->markdown('emails.test-mail');
     }
 }
