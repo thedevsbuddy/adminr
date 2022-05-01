@@ -12,9 +12,10 @@ Route::group(['middleware' => 'guest', 'as' => 'auth.'], function (){
 
     // Register related routes
     Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
     // Verification related routes
-    Route::post('/verify-email', [VerificationController::class, 'verifyEmail'])->name('verify-email');
+    Route::get('/verify-email', [VerificationController::class, 'verifyEmail'])->name('verify-email');
 });
 
 Route::group(['middleware' => 'auth', 'as' => 'auth.'], function (){

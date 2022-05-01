@@ -28,7 +28,7 @@ Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'a
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
-    Route::group(['prefix' => '/manage'], function () {
+    Route::group(['prefix' => 'manage'], function () {
         // Manage Users
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
