@@ -2,6 +2,16 @@
 
 **All notable changes to `AdminR` will be documented in this file**
 
+
+==================================================
+
+## Release v0.2.5 - May 02, 2022
+
+- Added Default mail templates.
+- Added registration email verifications.
+- Added Queues for sending emails.
+- Added Settings for features like toggle ```email verification``` and toggle ```Email Queue```
+
 ==================================================
 
 ## Release v0.2.1 - May 01, 2022
