@@ -17,10 +17,39 @@ class SettingController extends Controller
     {
         try {
             return view('adminr.settings.index');
-        } catch (\Exception $e){
-            return $this->backError('Error: ' . $e->getMessage());
-        } catch (\Error $e){
-            return $this->backError('Error: ' . $e->getMessage());
+        } catch (\Exception | \Error $e){
+            info($e->getMessage());
+            return $this->backError('Something went wrong!');
+        }
+    }
+
+    public function general(): View|RedirectResponse
+    {
+        try {
+            return view('adminr.settings.general');
+        } catch (\Exception | \Error $e){
+            info($e->getMessage());
+            return $this->backError('Something went wrong!');
+        }
+    }
+    
+    public function email(): View|RedirectResponse
+    {
+        try {
+            return view('adminr.settings.email');
+        } catch (\Exception | \Error $e){
+            info($e->getMessage());
+            return $this->backError('Something went wrong!');
+        }
+    }
+
+    public function features(): View|RedirectResponse
+    {
+        try {
+            return view('adminr.settings.features');
+        } catch (\Exception | \Error $e){
+            info($e->getMessage());
+            return $this->backError('Something went wrong!');
         }
     }
 

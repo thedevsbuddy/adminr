@@ -48,8 +48,12 @@ Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'a
         Route::resource('/templates', TemplateController::class);
 
         // Settings routes
-        Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
-        Route::post('/settings', [SettingController::class, 'store'])->name('settings.store');
+        Route::group(['prefix' => 'settings', 'as' => 'settings.'], function (){
+            Route::post('/', [SettingController::class, 'store'])->name('store');
+            Route::get('/general', [SettingController::class, 'general'])->name('general');
+            Route::get('/email', [SettingController::class, 'email'])->name('email');
+            Route::get('/features', [SettingController::class, 'features'])->name('features');
+        });
     });
 
     // Send Test Mail

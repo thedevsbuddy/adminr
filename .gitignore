@@ -9,7 +9,7 @@
 Homestead.json
 Homestead.yaml
 npm-debug.log
-laravel.log
+storage/logs
 yarn-error.log
 /.idea
 /.vscode
