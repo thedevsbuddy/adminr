@@ -62,6 +62,10 @@ class SettingsTableSeeder extends Seeder
             "value" => "2525"
         ]);
         Setting::firstOrCreate([
+            "option" => "mail_queue_enabled",
+            "value" => "1"
+        ]);
+        Setting::firstOrCreate([
             "option" => "email_verification_enabled",
             "value" => "1"
         ]);
