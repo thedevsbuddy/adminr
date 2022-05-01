@@ -3,11 +3,21 @@
 namespace App\Traits;
 
 use App\Mail\DynamicMail;
-use Devsbuddy\AdminrEngine\Models\MailTemplate;
+use App\Mail\DynamicMailQueued;
+use App\Models\MailTemplate;
 use Illuminate\Support\Facades\Mail;
 
 trait CanSendMail
 {
+    protected mixed $cc;
+    protected mixed $bcc;
+
+    public function __construct()
+    {
+        $this->cc = null;
+        $this->bcc = null;
+    }
+
 
     /**
      * Helps to send email from templates easily
@@ -52,12 +62,43 @@ trait CanSendMail
         // Send the mail to provided email
         if (is_array($emails)) {
             foreach ($emails as $e) {
-                Mail::to($e)->send(new DynamicMail($mailTemplate->subject, $mailBody));
+                $mail = Mail::to($e)
+                    ->cc($this->cc)
+                    ->bcc($this->bcc);
+
+                if ((int)getSetting('mail_queue_enabled')) {
+                    $mail->send(new DynamicMailQueued($mailTemplate->subject, $mailBody));
+                } else {
+                    $mail->send(new DynamicMail($mailTemplate->subject, $mailBody));
+                }
             }
         } else {
-            Mail::to($emails)->send(new DynamicMail($mailTemplate->subject, $mailBody));
+            $mail = Mail::to($emails)
+                ->cc($this->cc)
+                ->bcc($this->bcc);
+
+            if ((int)getSetting('mail_queue')) {
+                $mail->send(new DynamicMailQueued($mailTemplate->subject, $mailBody));
+            } else {
+                $mail->send(new DynamicMail($mailTemplate->subject, $mailBody));
+            }
         }
 
         return $this;
     }
+
+
+    public function cc(mixed $users): static
+    {
+        $this->cc = $users;
+        return $this;
+    }
+
+
+    public function bcc(mixed $users): static
+    {
+        $this->bcc = $users;
+        return $this;
+    }
+
 }

@@ -1,4 +1,4 @@
-@extends('adminr.layouts.auth')
+@extends('layouts.auth')
 
 @section('content')
 	<div class="container">
@@ -9,7 +9,7 @@
 						<div class="card-body">
 							<h1>Register</h1>
 							<p class="text-muted">Create a new account</p>
-							<form method="POST" action="{{ route('register') }}">
+							<form method="POST" action="{{ route('auth.register') }}">
 								@csrf
 								<div class="row">
 									<div class="col-lg-6">
@@ -125,7 +125,7 @@
 										<button class="btn btn-block btn-primary px-4" type="submit">Register</button>
 									</div>
 									<div class="col-6">
-										<a href="{{ route('login') }}" class="btn btn-block btn-light px-4">Login here</a>
+										<a href="{{ route('auth.login') }}" class="btn btn-block btn-light px-4">Login here</a>
 									</div>
 								</div>
 							</form>

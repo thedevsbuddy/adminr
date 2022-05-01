@@ -29,12 +29,6 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('landing/assets/css/style.css') }}" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: SoftLand - v4.7.0
-    * Template URL: https://bootstrapmade.com/softland-bootstrap-app-landing-page-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 
 <body>
@@ -47,10 +41,8 @@
             <h1 class="position-relative">
                 <a href="{{ route('index') }}">{{ getSetting('app_name') }}</a>
                 <span style="font-size: 12px; top: -4px; right: -32px"
-                      class="text-white position-absolute">v{{ ADMINR_VERSION }}</span>
+                      class="text-white position-absolute">{{ getVersion(prefix: "v") }}</span>
             </h1>
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
         </div>
 
         <nav id="navbar" class="navbar">

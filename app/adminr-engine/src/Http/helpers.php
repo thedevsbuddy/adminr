@@ -57,4 +57,10 @@ if (!function_exists('returnIfRoutes')) {
     }
 }
 
-const ADMINR_VERSION = "0.2.1";
+if (!function_exists('getVersion')) {
+    function getVersion(string $prefix = null)
+    {
+        $file = \Illuminate\Support\Facades\File::get(base_path() . '/composer.json');
+        return $prefix . '' . json_decode($file)->version;
+    }
+}

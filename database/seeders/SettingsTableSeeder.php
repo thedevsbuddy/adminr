@@ -31,7 +31,7 @@ class SettingsTableSeeder extends Seeder
 
         Setting::firstOrCreate([
             "option" => "meta_description",
-            "value" => "A simple yet powerful Admin panel with CRUD generator built on laravel to help you build application faster."
+            "value" => "A simple yet powerful Admin panel with a CRUD generator built on laravel to help you build applications faster."
         ]);
         Setting::firstOrCreate([
             "option" => "title_separator",
@@ -60,6 +60,14 @@ class SettingsTableSeeder extends Seeder
         Setting::firstOrCreate([
             "option" => "mail_port",
             "value" => "2525"
+        ]);
+        Setting::firstOrCreate([
+            "option" => "mail_queue_enabled",
+            "value" => "1"
+        ]);
+        Setting::firstOrCreate([
+            "option" => "email_verification_enabled",
+            "value" => "1"
         ]);
     }
 }

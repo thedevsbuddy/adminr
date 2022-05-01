@@ -9,6 +9,7 @@
 Homestead.json
 Homestead.yaml
 npm-debug.log
+/storage/logs/*.log
 yarn-error.log
 /.idea
 /.vscode

@@ -3,19 +3,29 @@
 namespace App\Traits;
 
 use App\Mail\DynamicMail;
-use Devsbuddy\AdminrEngine\Models\MailTemplate;
+use App\Mail\DynamicMailQueued;
+use App\Models\MailTemplate;
 use Illuminate\Support\Facades\Mail;
 
 trait HasMailable
 {
-    public function mail($template, array $replaceable): static
+    protected mixed $cc;
+    protected mixed $bcc;
+
+    public function __construct()
+    {
+        $this->cc = null;
+        $this->bcc = null;
+    }
+
+    public function mail(MailTemplate|string|int $template, array $replaceable): static
     {
         $mailTemplate = new MailTemplate();
-        if(is_integer($template)){
+        if (is_integer($template)) {
             $mailTemplate = MailTemplate::where('id', $template)->first();
-        } else if(is_string($template)){
+        } else if (is_string($template)) {
             $mailTemplate = MailTemplate::where('code', $template)->first();
-        } else if(gettype($template) == MailTemplate::class){
+        } else if (gettype($template) == MailTemplate::class) {
             $mailTemplate = $template;
         }
         $mailBody = $mailTemplate->content;
@@ -33,8 +43,31 @@ trait HasMailable
 
         // Send the mail to provided user
         // With provided mail template
-        Mail::to($this->email)->send(new DynamicMail($mailTemplate->subject, $mailBody));
+        $mail = Mail::to($this->email)
+            ->cc($this->cc)
+            ->bcc($this->bcc);
 
+        if ((int)getSetting('mail_queue_enabled')) {
+            $mail->send(new DynamicMailQueued($mailTemplate->subject, $mailBody));
+        } else {
+            $mail->send(new DynamicMail($mailTemplate->subject, $mailBody));
+        }
+
+        return $this;
+    }
+
+
+
+    public function cc(mixed $users): static
+    {
+        $this->cc = $users;
+        return $this;
+    }
+
+
+    public function bcc(mixed $users): static
+    {
+        $this->bcc = $users;
         return $this;
     }
 }

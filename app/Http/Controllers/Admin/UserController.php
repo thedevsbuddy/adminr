@@ -71,6 +71,7 @@ class UserController extends Controller
                 'email' => $request->get('email'),
                 'phone' => $request->get('phone'),
                 'avatar' => $avatar,
+                'email_verified_at' => now(),
                 'password' => bcrypt($request->get('password')),
             ]);
 

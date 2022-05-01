@@ -28,7 +28,7 @@ Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'a
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
-    Route::group(['prefix' => '/manage'], function () {
+    Route::group(['prefix' => 'manage'], function () {
         // Manage Users
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
@@ -48,8 +48,12 @@ Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'a
         Route::resource('/templates', TemplateController::class);
 
         // Settings routes
-        Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
-        Route::post('/settings', [SettingController::class, 'store'])->name('settings.store');
+        Route::group(['prefix' => 'settings', 'as' => 'settings.'], function (){
+            Route::post('/', [SettingController::class, 'store'])->name('store');
+            Route::get('/general', [SettingController::class, 'general'])->name('general');
+            Route::get('/email', [SettingController::class, 'email'])->name('email');
+            Route::get('/features', [SettingController::class, 'features'])->name('features');
+        });
     });
 
     // Send Test Mail

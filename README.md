@@ -1,4 +1,4 @@
-# AdminR v0.2.1
+# AdminR v0.2.5
 
 <p align="center">
 <a href="https://travis-ci.org/thedevsbuddy/adminr"><img src="https://travis-ci.org/thedevsbuddy/adminr.svg" alt="Build Status"></a>

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
-use Devsbuddy\AdminrEngine\Http\Controllers\AdminrController;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
-class AuthController extends AdminrController
+class AuthController extends Controller
 {
     public function login(Request $request): JsonResponse
     {

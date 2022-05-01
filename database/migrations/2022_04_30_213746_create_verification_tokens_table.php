@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mail_templates', function (Blueprint $table) {
+        Schema::create('verification_tokens', function (Blueprint $table) {
             $table->id();
-            $table->string('subject');
-            $table->string('purpose')->nullable();
-            $table->string('code')->unique();
-            $table->longText('content');
+            $table->foreignId('user_id');
+            $table->text('token');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mail_templates');
+        Schema::dropIfExists('verification_tokens');
     }
 };

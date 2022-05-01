@@ -13,19 +13,23 @@ trait HasResponse
         if (is_array($data)) {
             return response()->json($data, $statusCode);
         }
-        return response()->json(['message' => "success", 'data' => $data], $statusCode);
+        return response()->json(["status" => "success", 'message' => "success", 'data' => $data], $statusCode);
     }
 
 
     public function successMessage($message, $statusCode = 200): JsonResponse
     {
-        return response()->json(['message' => $message], $statusCode);
+        return response()->json(["status" => "success", 'message' => $message], $statusCode);
     }
-
 
     public function error($message, $statusCode = 500): JsonResponse
     {
-        return response()->json(['message' => $message], $statusCode);
+        return response()->json(["status" => "error", 'message' => $message], $statusCode);
+    }
+
+    public function errorMessage($message, $statusCode = 500): JsonResponse
+    {
+        return response()->json(["status" => "error", 'message' => $message], $statusCode);
     }
 
 

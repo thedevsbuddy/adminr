@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class MailConfigServiceProvider extends ServiceProvider
@@ -27,7 +28,7 @@ class MailConfigServiceProvider extends ServiceProvider
     public
     function boot()
     {
-        if (!$this->app->runningInConsole()) {
+        if (Schema::hasTable('settings')) {
             $config = array(
                 'driver' => getSetting('mail_driver'),
                 'host' => getSetting('mail_host'),
