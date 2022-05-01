@@ -31,7 +31,7 @@ class SettingsTableSeeder extends Seeder
 
         Setting::firstOrCreate([
             "option" => "meta_description",
-            "value" => "A simple yet powerful Admin panel with CRUD generator built on laravel to help you build application faster."
+            "value" => "A simple yet powerful Admin panel with a CRUD generator built on laravel to help you build applications faster."
         ]);
         Setting::firstOrCreate([
             "option" => "title_separator",

@@ -14,8 +14,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <p class="card-title m-0">{{ __('Email Settings') }}</p>
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#sendTestMailModal">
+                            Send test mail
+                        </button>
                     </div>
                     <div class="card-body">
                         <form action="{{ route(config('app.route_prefix').'.settings.store') }}" method="POST" enctype="multipart/form-data">
