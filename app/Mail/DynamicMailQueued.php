@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class DynamicMail extends Mailable
+class DynamicMailQueued extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -21,10 +21,11 @@ class DynamicMail extends Mailable
     }
 
 
-    public function build(): DynamicMail
+    public function build(): DynamicMailQueued
     {
         return $this->subject($this->subject)
             ->markdown('emails.dynamic-mail')
             ->with('body', $this->body);
     }
 }
+

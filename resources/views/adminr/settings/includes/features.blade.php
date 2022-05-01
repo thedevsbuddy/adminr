@@ -7,18 +7,27 @@
         @csrf
         <div class="pr-4">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="email_verification_enabled">Enable Email Verification</label>
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" value="1"
-                                   name="email_verification_enabled"
-                                   id="email_verification_enabled"
-                                   @if(getSetting('email_verification_enabled') == "1") checked @endif>
-                            <label class="custom-control-label" for="email_verification_enabled">Enabled</label>
-                        </div>
+                        <select name="email_verification_enabled" id="email_verification_enabled" class="form-control select2">
+                            <option value="1" @if(getSetting('email_verification_enabled') == "1") selected @endif>Enabled</option>
+                            <option value="0" @if(getSetting('email_verification_enabled') == "0") selected @endif>Disabled</option>
+                        </select>
                         @if($errors->has('email_verification_enabled'))
                             <span class="text-danger">{{ $errors->first('email_verification_enabled') }}</span>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="mail_queue_enabled">Enable Email Queues</label>
+                        <select name="mail_queue_enabled" id="mail_queue_enabled" class="form-control select2">
+                            <option value="1" @if(getSetting('mail_queue_enabled') == "1") selected @endif>Enabled</option>
+                            <option value="0" @if(getSetting('mail_queue_enabled') == "0") selected @endif>Disabled</option>
+                        </select>
+                        @if($errors->has('mail_queue_enabled'))
+                            <span class="text-danger">{{ $errors->first('mail_queue_enabled') }}</span>
                         @endif
                     </div>
                 </div>
