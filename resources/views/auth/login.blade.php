@@ -11,7 +11,7 @@
                             <p class="text-muted">Sign In to your account</p>
                             <form method="POST" action="{{ route('auth.login') }}">
                                 @csrf
-                                <label for="email">Username or Email*</label>
+                                <label for="email">Username or Email <span class="text-danger">*</span></label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
@@ -23,14 +23,14 @@
                                     <input id="email" type="text"
                                            class="form-control @error('email') is-invalid @enderror" name="email"
                                            value="{{ old('email') }}" required autocomplete="off"
-                                           placeholder="Username or email" autofocus>
+                                           placeholder="E.g: johndoe / johndoe@adminr.com" autofocus>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <label for="password">Password*</label>
+                                <label for="password">Password <span class="text-danger">*</span></label>
                                 <div class="input-group mb-4">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
