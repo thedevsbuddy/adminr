@@ -142,7 +142,7 @@ class BuilderController extends Controller
 
             Artisan::call('migrate');
 
-            return response()->json(['status' => 'success', 'message' => 'Resource generated Successfully!'], 200);
+            return response()->json(['status' => 'success', 'message' => 'Resource generated Successfully!', 'entities' => $this->buildControllersService->modelEntities], 200);
         } catch (\Exception $e) {
             $this->rollbackAll();
             return response()->json(['status' => 'error', 'message' => 'Error: ' . $e->getMessage()], 200);

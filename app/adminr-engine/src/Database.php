@@ -7,36 +7,31 @@ use Illuminate\Database\Eloquent\Model;
 class Database extends Model
 {
 
-    /**
-     * Currently supported datatype
-     * */
-    static public function dataTypes()
+    static public function dataTypes(): array
     {
         return [
-            'slug',
-            'increments',
-            'bigIncrements',
+            'integer',
+            'foreignId',
+            'tinyInteger',
+            'unsignedInteger',
+            'unsignedTinyInteger',
+            'unsignedBigInteger',
+            'double',
+            'boolean',
             'string',
-            'file',
+            'slug',
             'text',
             'longText',
-            'integer',
-            'tinyInteger',
-            'unsignedInteger',
-            'unsignedTinyInteger',
-            'unsignedBigInteger',
-            'double',
-            'boolean',
             'enum',
-            'json',
             'date',
             'dateTime',
             'time',
             'timestamp',
+            'file',
         ];
     }
 
-    static public function timeTypes()
+    static public function timeTypes(): array
     {
         return [
             'date',
@@ -46,7 +41,7 @@ class Database extends Model
         ];
     }
 
-    static public function numericTypes()
+    static public function numericTypes(): array
     {
         return [
             'integer',
@@ -60,7 +55,7 @@ class Database extends Model
         ];
     }
 
-    static public function integerTypes()
+    static public function integerTypes(): array
     {
         return [
             'integer',
@@ -73,7 +68,7 @@ class Database extends Model
         ];
     }
 
-    static public function incrementTypes()
+    static public function incrementTypes(): array
     {
         return [
             'increments',
@@ -82,7 +77,7 @@ class Database extends Model
     }
 
 
-    static public function longTextDataTypes()
+    static public function longTextDataTypes(): array
     {
         return [
             'text',
@@ -90,7 +85,7 @@ class Database extends Model
         ];
     }
 
-    static public function relationshipIdentifiers()
+    static public function relationshipIdentifiers(): array
     {
         return [
             'hasOne',
@@ -101,11 +96,13 @@ class Database extends Model
         ];
     }
 
-    static public function htmlDataType($type = null){
+    static public function htmlDataType($type = null): array|string
+    {
         $types = [
             'slug' => 'text',
-            'increments' => 'number',
-            'bigIncrements' => 'number',
+            'foreignId' => 'select',
+//            'increments' => 'number',
+//            'bigIncrements' => 'number',
             'string' => 'text',
             'file' => 'file',
             'text' => 'textarea',
@@ -118,7 +115,7 @@ class Database extends Model
             'double' => 'number',
             'boolean' => 'checkbox',
             'enum' => 'select',
-            'json' => 'text',
+//            'json' => 'text',
             'date' => 'date',
             'dateTime' => 'datetime_local',
             'time' => 'time',

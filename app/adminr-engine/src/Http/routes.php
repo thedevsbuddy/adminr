@@ -20,5 +20,8 @@ Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web'], '
         Route::get('/get-roles', [RolePermissionController::class, 'getRoles']);
         Route::get('/get-permissions/{id}', [RolePermissionController::class, 'getPermissions']);
         Route::post('/sync-role-permissions', [RolePermissionController::class, 'assignPermissionsToRoles']);
+
+        Route::get('/get-model-list', [ResourceController::class, 'getModelList']);
+        Route::post('/get-model-columns', [ResourceController::class, 'getModelColumns']);
     });
 });

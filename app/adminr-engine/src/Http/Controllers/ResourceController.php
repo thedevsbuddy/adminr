@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 
-class ResourceController  extends Controller
+class ResourceController extends Controller
 {
     use HasStubs;
 
@@ -56,12 +56,12 @@ class ResourceController  extends Controller
 
     public function configure($id): View|RedirectResponse
     {
-        try{
+        try {
             $id = decrypt($id);
             $resource = AdminrResource::findOrFail($id);
             $routes = json_decode(File::get(base_path() . '/routes/adminr/api/' . $resource->payload->routes->api));
             return view('adminr-engine::resources.configure', compact('resource', 'routes'));
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return back()->with('error', 'Error: ' . $e->getMessage());
         }
     }
@@ -69,12 +69,12 @@ class ResourceController  extends Controller
 
     public function getResource($id): JsonResponse
     {
-        try{
+        try {
             $resource = AdminrResource::where('id', $id)->first();
             return $this->success($resource, 200);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return $this->error($e->getMessage(), 500);
-        } catch (\Error $e){
+        } catch (\Error $e) {
             return $this->error($e->getMessage(), 500);
         }
     }
@@ -82,7 +82,7 @@ class ResourceController  extends Controller
     public function updateApiMiddlewares($id, Request $request): JsonResponse
     {
         $resource = AdminrResource::where('id', $id)->first();
-        if($this->updateRouteFile($id, $request)){
+        if ($this->updateRouteFile($id, $request)) {
             return $this->successMessage("API public routes permission updated!", 200);
         } else {
             return $this->error("Something went wrong!", 500);
@@ -92,11 +92,11 @@ class ResourceController  extends Controller
     private function updateRouteFile($id, Request $request): bool
     {
         $resource = AdminrResource::where('id', $id)->first();
-        $routeFile = (array) json_decode(File::get(base_path() . '/routes/adminr/api/'.Str::lower($resource->name) . '/' . Str::lower($resource->name) .'.json'));
+        $routeFile = (array)json_decode(File::get(base_path() . '/routes/adminr/api/' . Str::lower($resource->name) . '/' . Str::lower($resource->name) . '.json'));
 
-        foreach ($request->all() as $key => $method){
-            if($method){
-                if(!in_array("auth:api", $routeFile[$key]->middleware)){
+        foreach ($request->all() as $key => $method) {
+            if ($method) {
+                if (!in_array("auth:api", $routeFile[$key]->middleware)) {
                     array_push($routeFile[$key]->middleware, "auth:api");
                 }
             } else {
@@ -107,7 +107,7 @@ class ResourceController  extends Controller
         }
 
 
-        File::put(base_path() . '/routes/adminr/api/' . Str::lower($resource->name) . '/' . Str::lower($resource->name) . '.json',  json_encode((object) $routeFile));
+        File::put(base_path() . '/routes/adminr/api/' . Str::lower($resource->name) . '/' . Str::lower($resource->name) . '.json', json_encode((object)$routeFile));
 
         return true;
     }
@@ -121,5 +121,47 @@ class ResourceController  extends Controller
         $resource->delete();
         return back()->with('success', 'Resource deleted successfully!');
     }
+
+
+    public function getModelList(): JsonResponse
+    {
+        $models = File::allFiles(base_path() . '/app/Models');
+
+        $modelList = [];
+
+        foreach ($models as $model) {
+            array_push($modelList, (object)[
+                "file" => $model->getFilename(),
+                "name" => collect(explode('.', $model->getFilename()))->first(),
+            ]);
+        }
+
+        return response()->json($modelList, 200);
+    }
+
+    public function getModelColumns(): JsonResponse
+    {
+        $model = ("\\App\\Models\\" . request('model'));
+        $model = new $model();
+        $columns = \Schema::getColumnListing($model->getTable());
+
+        $columnsBlackList = [
+            "id",
+            "avatar",
+            "otp",
+            "password",
+            "email_verified_at",
+            "remember_token",
+            "created_at",
+            "updated_at",
+        ];
+
+        $columns = collect($columns)->filter(function ($column) use ($columnsBlackList) {
+            return !in_array($column, $columnsBlackList);
+        })->toArray();
+
+        return response()->json($columns);
+    }
+
 }
 
