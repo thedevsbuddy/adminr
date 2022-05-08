@@ -77,7 +77,14 @@ class BuildMigrationService extends AdminrEngineService
                 } else {
                     $data_type = $migration['data_type'];
                 }
-                $migrationFileStmt .= "\$table->" . $data_type . "(\"" . Str::snake($migration['field_name']) . "\"" . $enumValues . ")";
+
+                if ($migration['data_type'] == 'foreignId') {
+                    $data_type = "foreignId";
+                    $constrained = "->constrained()->cascadeOnDelete()";
+                } else {
+                    $constrained = "";
+                }
+                $migrationFileStmt .= "\$table->" . $data_type . "(\"" . Str::snake($migration['field_name']) . "\"" . $enumValues . ")" . $constrained;
                 if ($migration['unique']) {
                     $migrationFileStmt .= "->unique()";
                 }

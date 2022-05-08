@@ -85,9 +85,11 @@ class BuildControllersService extends AdminrEngineService
         $stub = str_replace('{{SAVE_DATA_STATEMENT}}', $this->getSaveDataStatement(), $stub);
         $stub = str_replace('{{UPDATE_DATA_STATEMENT}}', $this->getUpdateDataStatement(), $stub);
         $stub = str_replace('{{DELETE_FILE_STATEMENT}}', $this->getDeleteFileStatement(), $stub);
-        $stub = str_replace('{{TRASHED_FILTER}}', $this->getTrashedFilterStatement(), $stub);
-
-        return $stub;
+        $stub = str_replace('{{FOREIGN_ENTITY_USE}}', $this->getForeignEntityUseStatement(), $stub);
+        $stub = str_replace('{{FOREIGN_ENTITY_DATA}}', $this->getForeignEntityDataStatement(), $stub);
+        $stub = str_replace('{{FOREIGN_ENTITY}}', $this->getForeignEntityStatement(), $stub);
+        $stub = str_replace('{{FOREIGN_ENTITY_CREATE}}', $this->getForeignEntityCreateStatement(), $stub);
+        return str_replace('{{TRASHED_FILTER}}', $this->getTrashedFilterStatement(), $stub);
     }
 
     protected function getSearchStatement(): string
@@ -226,7 +228,6 @@ class BuildControllersService extends AdminrEngineService
         return $fileUploadStmt;
     }
 
-
     protected function getFileUpdateStatement(): string
     {
         $migrations = $this->request->get('migrations');
@@ -312,6 +313,60 @@ class BuildControllersService extends AdminrEngineService
             }
         }
         return $deleteFileStmt;
+    }
+
+    protected function getForeignEntityUseStatement(): string
+    {
+        $migrations = $this->request->get('migrations');
+
+        $foreignEntityUseStmt = '';
+        foreach ($migrations as $migration) {
+            if ($migration['data_type'] == 'foreignId') {
+                $foreignEntityUseStmt .= "use \\App\\Models\\".Str::ucfirst($migration['related_model']).";\n";
+            }
+        }
+        return $foreignEntityUseStmt;
+    }
+
+    protected function getForeignEntityDataStatement(): string
+    {
+        $migrations = $this->request->get('migrations');
+
+        $foreignEntityDataStmt = '';
+        foreach ($migrations as $migration) {
+            if ($migration['data_type'] == 'foreignId') {
+                $foreignEntityDataStmt .= "$".Str::snake(Str::plural($migration['related_model'])) . " = ".Str::ucfirst($migration['related_model'])."::select('id', '".$migration['related_model_label']."')->get();\n\t\t\t\t";
+            }
+        }
+        return $foreignEntityDataStmt;
+    }
+
+    protected function getForeignEntityStatement(): string
+    {
+        $migrations = $this->request->get('migrations');
+
+        $foreignEntityDataStmt = '';
+        foreach ($migrations as $migration) {
+            if ($migration['data_type'] == 'foreignId') {
+                $foreignEntityDataStmt .= ", '" . Str::snake(Str::plural($migration['related_model'])) . "'";
+            }
+        }
+        return $foreignEntityDataStmt;
+    }
+
+    protected function getForeignEntityCreateStatement(): string
+    {
+        $migrations = $this->request->get('migrations');
+        $hasForeignId = false;
+        $foreignEntityDataStmt = ", compact(";
+        foreach ($migrations as $migration) {
+            if ($migration['data_type'] == 'foreignId') {
+                $foreignEntityDataStmt .= "'" . Str::snake(Str::plural($migration['related_model'])) . "', ";
+                $hasForeignId = true;
+            }
+        }
+        $foreignEntityDataStmt .= ")";
+        return $hasForeignId ? $foreignEntityDataStmt : "";
     }
 
     public function rollback(): static
