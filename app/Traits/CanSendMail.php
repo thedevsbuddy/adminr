@@ -47,10 +47,12 @@ trait CanSendMail
             $mailTemplate = $template;
         }
         $mailBody = $mailTemplate->content;
+        $mailSubject = $mailTemplate->subject;
 
         // Replace User Defined Variables
         foreach (array_keys($replaceable) as $key) {
             $mailBody = str_replace($key, $replaceable[$key], $mailBody);
+            $mailSubject = str_replace($key, $replaceable[$key], $mailSubject);
         }
 
         // Replace default Variables
@@ -58,6 +60,9 @@ trait CanSendMail
         $mailBody = str_replace('{br}', '<br>', $mailBody);
         $mailBody = str_replace('{app.name}', getSetting('app_name'), $mailBody);
         $mailBody = str_replace('{app.url}', url('/'), $mailBody);
+        // Replace variables from Subject
+        $mailSubject = str_replace('{app.name}', getSetting('app_name'), $mailSubject);
+        $mailSubject = str_replace('{app.url}', url('/'), $mailSubject);
 
         // Send the mail to provided email
         if (is_array($emails)) {
@@ -67,9 +72,9 @@ trait CanSendMail
                     ->bcc($this->bcc);
 
                 if ((int)getSetting('mail_queue_enabled')) {
-                    $mail->send(new DynamicMailQueued($mailTemplate->subject, $mailBody));
+                    $mail->send(new DynamicMailQueued($mailSubject, $mailBody));
                 } else {
-                    $mail->send(new DynamicMail($mailTemplate->subject, $mailBody));
+                    $mail->send(new DynamicMail($mailSubject, $mailBody));
                 }
             }
         } else {
@@ -78,9 +83,9 @@ trait CanSendMail
                 ->bcc($this->bcc);
 
             if ((int)getSetting('mail_queue')) {
-                $mail->send(new DynamicMailQueued($mailTemplate->subject, $mailBody));
+                $mail->send(new DynamicMailQueued($mailSubject, $mailBody));
             } else {
-                $mail->send(new DynamicMail($mailTemplate->subject, $mailBody));
+                $mail->send(new DynamicMail($mailSubject, $mailBody));
             }
         }
 

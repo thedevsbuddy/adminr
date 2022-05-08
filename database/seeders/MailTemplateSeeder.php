@@ -19,10 +19,10 @@ class MailTemplateSeeder extends Seeder
          * Create registration welcome template
          */
         MailTemplate::create([
-            "subject" => "Welcome to AdminR.",
+            "subject" => "Welcome to {app.name}.",
             "purpose" => "To be sent when user registers and verification is disabled.",
             "code" => "registration-welcome-mail",
-            "content" => "## Welcome to AdminR
+            "content" => "## Welcome to {app.name}
 
 You are successfully registered with us,
 please login to start using our platform.
@@ -39,10 +39,10 @@ Password: `your selected password` {br}",
          * Create registration email verification template
          */
         MailTemplate::create([
-            "subject" => "Welcome to AdminR.",
+            "subject" => "Welcome to {app.name}.",
             "purpose" => "To be sent when user registers and verification is enabled.",
             "code" => "registration-email-verification-mail",
-            "content" => "## Welcome to AdminR Please verify your email: {email}
+            "content" => "## Welcome to {app.name} Please verify your email: {email}
 
 You are successfully registered with us please verify your email
 to continue using our platform.
@@ -66,10 +66,10 @@ You can click below link to verify your account.
          * Create registration email verification by OTP template
          */
         MailTemplate::create([
-            "subject" => "Welcome to AdminR.",
-            "purpose" => "To be sent when user registers and verification is enabled with OTP method.",
+            "subject" => "Welcome to {app.name}.",
+            "purpose" => "To be sent when user registers and verification is enabled with OTP method typically it will be for api auth.",
             "code" => "registration-email-verification-with-otp-mail",
-            "content" => "## Welcome to AdminR Please verify your email: {email}
+            "content" => "## Welcome to {app.name} Please verify your email: {email}
 
 You are successfully registered with us please verify your email
 to continue using our platform.

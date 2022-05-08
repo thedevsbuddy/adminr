@@ -29,10 +29,12 @@ trait HasMailable
             $mailTemplate = $template;
         }
         $mailBody = $mailTemplate->content;
+        $mailSubject = $mailTemplate->subject;
 
         // Replace User Defined Variables
         foreach (array_keys($replaceable) as $key) {
             $mailBody = str_replace($key, $replaceable[$key], $mailBody);
+            $mailSubject = str_replace($key, $replaceable[$key], $mailSubject);
         }
 
         // Replace default Variables
@@ -40,6 +42,9 @@ trait HasMailable
         $mailBody = str_replace('{br}', '<br>', $mailBody);
         $mailBody = str_replace('{app.name}', getSetting('app_name'), $mailBody);
         $mailBody = str_replace('{app.url}', url('/'), $mailBody);
+        // Replace variables from Subject
+        $mailSubject = str_replace('{app.name}', getSetting('app_name'), $mailSubject);
+        $mailSubject = str_replace('{app.url}', url('/'), $mailSubject);
 
         // Send the mail to provided user
         // With provided mail template
@@ -48,15 +53,13 @@ trait HasMailable
             ->bcc($this->bcc);
 
         if ((int)getSetting('mail_queue_enabled')) {
-            $mail->send(new DynamicMailQueued($mailTemplate->subject, $mailBody));
+            $mail->send(new DynamicMailQueued($mailSubject, $mailBody));
         } else {
-            $mail->send(new DynamicMail($mailTemplate->subject, $mailBody));
+            $mail->send(new DynamicMail($mailSubject, $mailBody));
         }
 
         return $this;
     }
-
-
 
     public function cc(mixed $users): static
     {
