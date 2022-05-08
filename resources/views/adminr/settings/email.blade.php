@@ -23,7 +23,7 @@
                     </div>
                     <div class="card-body">
                         <div class="alert alert-info">
-                            You can use the <a href="https://mailtrap.io" target="_blank">mailtrap.io</a> service for testing emails
+                            You can use the <a href="https://mailtrap.io" style="text-decoration: underline" target="_blank">mailtrap.io <x-cicon name="external-link" style="width: 10px" /></a> service for testing emails
                         </div>
                         <form action="{{ route(config('app.route_prefix').'.settings.store') }}" method="POST"
                               enctype="multipart/form-data">
