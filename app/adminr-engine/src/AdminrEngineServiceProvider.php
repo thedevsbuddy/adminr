@@ -44,7 +44,7 @@ class AdminrEngineServiceProvider extends ServiceProvider
         /**
          * Load menus and compose to all views
          */
-        View::composer('*', MenuComposer::class);
+        View::composer('adminr.includes.sidebar', MenuComposer::class);
     }
 
     /**

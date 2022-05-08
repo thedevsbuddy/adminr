@@ -46,7 +46,9 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label for="code">{{ __('Code') }} <span
-                                                        class="text-danger">*</span></label>
+                                                        class="text-danger">*</span>
+                                                    <i class="mdi mdi-help-circle ml-2" data-toggle="tooltip" title="Create unique code as it can not be changed after saving."></i>
+                                                </label>
                                                 <input type="text"
                                                        class="form-control @if($errors->has('code')) is-invalid @endif"
                                                        name="code" id="code" placeholder="{{ __('Eg: order-placed-mail') }}"

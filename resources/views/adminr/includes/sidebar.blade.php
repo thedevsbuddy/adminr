@@ -7,17 +7,17 @@
             @if(!is_null(getSetting('app_logo')))
                 <img src="{{ asset(getSetting('app_logo')) }}" class="mr-2 rounded"
                      style="max-height: 35px; width: auto" alt="">
+            @else
+                <h4 class="m-0">{{ getSetting('app_name') }}</h4>
             @endif
-            <h4 class="m-0">{{ getSetting('app_name') }}</h4>
+
         </span>
         <span class="c-sidebar-brand-minimized">
             @if(!is_null(getSetting('app_logo')))
                 <img src="{{ asset(getSetting('app_logo')) }}" class="rounded" style="max-height: 30px; width: auto"
                      alt="">
-            @else
-                {{ config('app.shortname') }}
             @endif
-            </span>
+        </span>
     </div>
 
     <ul class="c-sidebar-nav ps ps--active-y">
@@ -77,7 +77,8 @@
                 </a>
                 <ul class="c-sidebar-nav-dropdown-items">
                     <li class="c-sidebar-nav-item">
-                        <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.settings.general') }}">
+                        <a class="c-sidebar-nav-link"
+                           href="{{ route(config('app.route_prefix').'.settings.general') }}">
                             General
                         </a>
                     </li>
@@ -87,25 +88,24 @@
                         </a>
                     </li>
                     <li class="c-sidebar-nav-item">
-                        <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.settings.features') }}">
+                        <a class="c-sidebar-nav-link"
+                           href="{{ route(config('app.route_prefix').'.settings.features') }}">
                             Features
                         </a>
                     </li>
                 </ul>
             </li>
-{{--            <li class="c-sidebar-nav-item">--}}
-{{--                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.settings.index') }}">--}}
-{{--                    <svg class="c-sidebar-nav-icon">--}}
-{{--                        <use xlink:href="{{ coreUiIcon('cil-settings') }}"></use>--}}
-{{--                    </svg>--}}
-{{--                    {{ __('Settings') }}--}}
-{{--                </a>--}}
-{{--            </li>--}}
+            {{--            <li class="c-sidebar-nav-item">--}}
+            {{--                <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.settings.index') }}">--}}
+            {{--                    <svg class="c-sidebar-nav-icon">--}}
+            {{--                        <use xlink:href="{{ coreUiIcon('cil-settings') }}"></use>--}}
+            {{--                    </svg>--}}
+            {{--                    {{ __('Settings') }}--}}
+            {{--                </a>--}}
+            {{--            </li>--}}
         @endcan
         <li class="c-sidebar-nav-title">Resources</li>
         @include('adminr.includes.sidebar-resources-menu')
-
-
 
 
     </ul>
