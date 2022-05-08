@@ -7,8 +7,8 @@ use Spatie\Permission\Models\Role;
 if (!function_exists('getSetting')) {
     function getSetting($option): ?string
     {
-        return Setting::where('option', $option)->first()
-            ? Setting::where('option', $option)->first()->value
+        return Setting::where('option', $option)->count() > 0
+            ? Setting::where('option', $option)->value('value')
             : null;
     }
 }
