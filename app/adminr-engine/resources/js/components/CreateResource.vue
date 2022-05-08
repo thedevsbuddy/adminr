@@ -141,17 +141,17 @@
                                     </small>
                                 </th>
                                 <th>
-                                    <small title="This field will be shown in index if ticked." data-toggle="tooltip">
+                                    <small title="This field will be shown in create and edit if ticked." data-toggle="tooltip">
                                         In Form
                                     </small>
                                 </th>
                                 <th>
-                                    <small title="This field will be optional if ticked." data-toggle="tooltip">
+                                    <small title="This field will be searchable if ticked." data-toggle="tooltip">
                                         Can Search
                                     </small>
                                 </th>
                                 <th>
-                                    <small title="This field will be optional if ticked." data-toggle="tooltip">
+                                    <small title="This field will be unique if ticked." data-toggle="tooltip">
                                         Unique
                                     </small>
                                 </th>
@@ -164,7 +164,7 @@
                                     <div class="form-group mb-0 text-center">
                                         <div class="custom-control text-center custom-switch">
                                             <input type="checkbox" v-model="migration.nullable" class="custom-control-input"
-                                                   :id="'nullable_' + index">
+                                                   :id="'nullable_' + index" :disabled="migration.data_type === 'foreignId'">
                                             <label class="custom-control-label initial"
                                                    :for="'nullable_' + index"></label>
                                         </div>
@@ -199,8 +199,8 @@
                                         <div class="custom-control text-center custom-switch">
                                             <input type="checkbox" v-model="migration.can_search"
                                                    class="custom-control-input" :id="'can_search_' + index"
-                                                   :class="{'disabled': migration.data_type === 'file'}"
-                                                   :disabled="migration.data_type === 'file'">
+                                                   :class="{'disabled': migration.data_type === 'file' || migration.data_type === 'foreignId'}"
+                                                   :disabled="migration.data_type === 'file' || migration.data_type === 'foreignId'">
                                             <label class="custom-control-label initial"
                                                    :for="'can_search_' + index"></label>
                                         </div>
@@ -211,8 +211,8 @@
                                         <div class="custom-control text-center custom-switch">
                                             <input type="checkbox" v-model="migration.unique" class="custom-control-input"
                                                    :id="'unique_' + index"
-                                                   :class="{'disabled': migration.data_type === 'file'}"
-                                                   :disabled="migration.data_type === 'file'">
+                                                   :class="{'disabled': migration.data_type === 'file' || migration.data_type === 'foreignId'}"
+                                                   :disabled="migration.data_type === 'file' || migration.data_type === 'foreignId'">
                                             <label class="custom-control-label initial"
                                                    :for="'unique_' + index"></label>
                                         </div>
@@ -409,7 +409,7 @@ export default {
                         toastr.error(response.data.message);
                     }
                     setTimeout(()=>{
-                        window.location.href = BASE_URL + "/" + ROUTE_PREFIX + "/" + response.data.entities;
+                        window.location.href = BASE_URL + "/" + ROUTE_PREFIX + "/manage/" + response.data.entities;
                     }, 1500);
                 })
                 .catch(err => {
