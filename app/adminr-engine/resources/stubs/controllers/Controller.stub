@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+{{FOREIGN_ENTITY_USE}}
 
 class {{CONTROLLER_CLASS}} extends Controller
 {
@@ -24,7 +25,6 @@ class {{CONTROLLER_CLASS}} extends Controller
             {{SEARCH_STATEMENTS}}
             {{TRASHED_FILTER}}
             ${{MODEL_ENTITIES}} = ${{MODEL_ENTITIES}}->paginate($this->resultLimit);
-
             return view('adminr.{{MODEL_ENTITIES}}.index', compact('{{MODEL_ENTITIES}}'));
         } catch(\Exception $e){
             return $this->backError('Error: ' . $e->getMessage());
@@ -43,7 +43,8 @@ class {{CONTROLLER_CLASS}} extends Controller
     public function create(): View|RedirectResponse
     {
         try{
-            return view('adminr.{{MODEL_ENTITIES}}.create');
+            {{FOREIGN_ENTITY_DATA}}
+            return view('adminr.{{MODEL_ENTITIES}}.create'{{FOREIGN_ENTITY_CREATE}});
         } catch(\Exception $e){
             return $this->backError("Error: " . $e->getMessage());
         }
@@ -68,7 +69,8 @@ class {{CONTROLLER_CLASS}} extends Controller
     public function edit({{MODEL_CLASS}} ${{MODEL_ENTITY}}): View|RedirectResponse
     {
         try{
-            return view('adminr.{{MODEL_ENTITIES}}.edit', compact('{{MODEL_ENTITY}}'));
+            {{FOREIGN_ENTITY_DATA}}
+            return view('adminr.{{MODEL_ENTITIES}}.edit', compact('{{MODEL_ENTITY}}'{{FOREIGN_ENTITY}}));
         } catch(\Exception $e){
             return $this->backError("Error: " . $e->getMessage());
         }
