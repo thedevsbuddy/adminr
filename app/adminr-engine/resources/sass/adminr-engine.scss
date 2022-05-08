@@ -149,3 +149,7 @@
     padding-inline: 12px;
     border-radius: 4px;
 }
+
+button:focus, button:active{
+    outline: none !important;
+}
