@@ -19,18 +19,7 @@
                 <i class="mdi mdi-home-outline"></i>
             </span>
     </a>
-{{--    <ul class="c-header-nav d-md-down-none">--}}
-{{--        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Dashboard</a></li>--}}
-{{--        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Users</a></li>--}}
-{{--        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Settings</a></li>--}}
-{{--    </ul>--}}
     <ul class="c-header-nav ml-auto mr-4">
-{{--        <li class="c-header-nav-item d-md-down-none mx-2"><a class="c-header-nav-link" href="{{ route(config('app.route_prefix').'.settings.index') }}">--}}
-{{--                <svg class="c-icon">--}}
-{{--                    <use xlink:href="{{ coreUiIcon('cil-cog') }}"></use>--}}
-{{--                </svg>--}}
-{{--            </a>--}}
-{{--        </li>--}}
         <li class="c-header-nav-item dropdown">
             <a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <div class="c-avatar">
@@ -40,28 +29,14 @@
             <div class="dropdown-menu dropdown-menu-right pt-0">
                 <div class="dropdown-header bg-light py-2"><strong>Account</strong></div>
                 <a class="dropdown-item" href="#">
-                    <svg class="c-icon mr-2">
-                        <use xlink:href="{{ coreUiIcon('cil-bell') }}"></use>
-                    </svg>
-                    Updates<span class="badge badge-info ml-auto">42</span>
+                    <x-cicon name="bell" class="c-icon mr-2" />
+                    Profile <span class="badge badge-info ml-auto">42</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <x-link class="dropdown-item" href="{{ route('auth.logout') }}" as="form" method="POST">
-                    <svg class="c-icon mr-2">
-                        <use xlink:href="{{coreUiIcon('cil-account-logout') }}"></use>
-                    </svg>
+                    <x-cicon name="account-logout" class="c-icon mr-2" />
                     {{ __('Logout') }}
                 </x-link>
-{{--                <a class="dropdown-item" href="javascript:void(0)" onclick="event.preventDefault();--}}
-{{--                                                     document.getElementById('logout-form').submit();">--}}
-{{--                    <svg class="c-icon mr-2">--}}
-{{--                        <use xlink:href="{{coreUiIcon('cil-account-logout') }}"></use>--}}
-{{--                    </svg>--}}
-{{--                    {{ __('Logout') }}--}}
-{{--                </a>--}}
-{{--                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
-{{--                    @csrf--}}
-{{--                </form>--}}
             </div>
         </li>
     </ul>
