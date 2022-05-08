@@ -12,9 +12,7 @@
         <h3 class="text-dark mb-0">Manage mail templates</h3>
         <div>
             <a href="{{ route(config('app.route_prefix').'.templates.create') }}" class="btn btn-primary btn-sm d-none d-sm-inline-block">
-                <svg class="c-icon mr-1">
-                    <use xlink:href="{{ coreUiIcon('cil-plus') }}"></use>
-                </svg>
+                <x-cicon name="plus" class="c-icon mr-1" />
                 Add new template
             </a>
         </div>
@@ -46,20 +44,12 @@
                                 <td>{{ $template->code }}</td>
                                 <td>{{ strip_tags($template->content) }}</td>
                                 <td style="min-width: 120px">
-                                    <a href="{{ route(config('app.route_prefix').'.templates.edit', $template) }}" class="btn btn-sm btn-icon btn-primary mr-2" title="Edit">
-                                        <svg class="h-3 w-3">
-                                            <use xlink:href="{{ coreUiIcon('cil-pen') }}"></use>
-                                        </svg>
+                                    <a href="{{ route(config('app.route_prefix').'.templates.edit', encrypt($template->id)) }}" class="btn btn-sm btn-icon btn-primary mr-2" title="Edit">
+                                        <x-cicon name="pen" />
                                     </a>
-                                    <a href="#" data-form="user_{{ $template->id }}" class="btn btn-sm btn-icon btn-danger delete-item" title="Delete">
-                                        <svg class="h-3 w-3">
-                                            <use xlink:href="{{ coreUiIcon('cil-trash') }}"></use>
-                                        </svg>
-                                    </a>
-                                    <form class="d-none" id="user_{{ $template->id }}" action="{{ route(config('app.route_prefix').'.templates.destroy', $template->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
+                                    <x-link as="form" method="DELETE" class="btn btn-sm btn-icon btn-danger" formClass="delete-form" href="{{ route(config('app.route_prefix').'.templates.destroy', $template->id) }}">
+                                        <x-cicon name="trash" />
+                                    </x-link>
                                 </td>
                             </tr>
                         @empty

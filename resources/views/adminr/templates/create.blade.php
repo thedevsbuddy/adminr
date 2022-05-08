@@ -13,9 +13,7 @@
             <div>
                 <a href="{{ route(config('app.route_prefix').'.templates.index') }}"
                    class="btn btn-primary btn-sm d-none d-sm-inline-block">
-                    <svg class="c-icon mr-1">
-                        <use xlink:href="{{ coreUiIcon('cil-list') }}"></use>
-                    </svg>
+                    <x-cicon name="list" class="c-icon mr-1" />
                     {{ __('View all templates') }}
                 </a>
             </div>
@@ -86,31 +84,13 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
-                                    <h3>Important Information</h3>
-                                    <div>
-                                        <h5>Default Variables</h5>
-                                        <ul>
-                                            <li><code>{br}</code> or <code>{nl}</code>: For line break</li>
-                                            <li><code>{app.name}</code>: For app name</li>
-                                            <li><code>{app.url}</code>: For app root url</li>
-                                        </ul>
-                                        <h5>Styling mail template</h5>
-                                        <p>We are allowing you to use <code>markdown</code> to style and compose your
-                                            mail template.</p>
-                                        <p><strong>Example:</strong></p>
-                                        <p>You can use <code>markdown</code> as <code># this is the h1 heading</code> to
-                                            create <code>h1</code> heading.</p>
-                                        <p><strong>Note: Please note that you can use markdown only in the content
-                                                section.</strong></p>
-                                    </div>
+                                    @include('adminr.templates.partials.information')
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
                             <button class="btn btn-primary" type="submit">
-                                <svg class="c-icon mr-1">
-                                    <use xlink:href="{{ coreUiIcon('cil-save') }}"></use>
-                                </svg>
+                                <x-cicon name="save" class="c-icon mr-1" />
                                 {{ __('Save') }}
                             </button>
                         </div>
