@@ -65,9 +65,10 @@ class TemplateController extends Controller
     }
 
 
-    public function edit(MailTemplate $template): View|RedirectResponse
+    public function edit($id): View|RedirectResponse
     {
         try{
+            $template = MailTemplate::where('id', decrypt($id))->first();
             return view('adminr.templates.edit', compact('template'));
         } catch (\Exception $e){
             return $this->backError('Error: ' . $e->getMessage());
