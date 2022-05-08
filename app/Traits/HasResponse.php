@@ -43,10 +43,21 @@ trait HasResponse
         return $this->redirect($route, 'success', $message);
     }
 
+    public function intendedSuccess(string $route, ?string $message = 'Operation was successful!'): RedirectResponse
+    {
+        return redirect()->intended($route)->with('success', $message);
+    }
+
     public function redirectError(string $route, ?string $message = 'Operation was unsuccessful!'): RedirectResponse
     {
         return $this->redirect($route, 'error', $message);
     }
+
+    public function intendedError(string $route, ?string $message = 'Operation was unsuccessful!'): RedirectResponse
+    {
+        return redirect()->intended($route)->with('error', $message);
+    }
+
 
 
     public function backSuccess(?string $message = 'Operation was successful!'): RedirectResponse

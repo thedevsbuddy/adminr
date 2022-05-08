@@ -37,9 +37,9 @@ class LoginController extends Controller
         if(auth()->attempt(array($fieldType => $request->get('email'), 'password' => $request->get('password'))))
         {
             if (auth()->check() && auth()->user()->hasRole(['developer', 'admin', 'super_admin'])){
-                return $this->redirectSuccess(route: route(config('app.route_prefix').'.index'), message: "Logged In Successfully!");
+                return $this->intendedSuccess(route: route(config('app.route_prefix').'.index'), message: "Logged In Successfully!");
             } else {
-                return $this->redirectSuccess(route: route('index'), message: "Logged In Successfully!");
+                return $this->intendedSuccess(route: route('index'), message: "Logged In Successfully!");
             }
         } else {
             return $this->backError('Email-Address And Password Are Wrong.');
