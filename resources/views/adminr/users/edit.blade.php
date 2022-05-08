@@ -30,9 +30,7 @@
             <div>
                 <a href="{{ route(config('app.route_prefix').'.users.index') }}"
                    class="btn btn-primary btn-sm d-none d-sm-inline-block">
-                    <svg class="c-icon mr-1">
-                        <use xlink:href="{{ coreUiIcon('cil-user') }}"></use>
-                    </svg>
+                    <x-cicon name="user" class="c-icon mr-1" />
                     View all users
                 </a>
             </div>
@@ -159,9 +157,7 @@
                         </div>
                         <div class="card-footer">
                             <button class="btn btn-primary" type="submit">
-                                <svg class="c-icon mr-1">
-                                    <use xlink:href="{{ coreUiIcon('cil-save') }}"></use>
-                                </svg>
+                                <x-cicon name="save" class="c-icon mr-1" />
                                 Save
                             </button>
                         </div>

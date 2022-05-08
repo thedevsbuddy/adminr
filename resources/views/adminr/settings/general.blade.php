@@ -80,10 +80,8 @@
                                                    style="--aspect-ratio: 1; width: 100px; background-image: url({{ asset(getSetting('app_logo')) }})">
                                                 <div class="custom-file-content">
                                     <span class="text-dark">
-                                       <svg class="text-dark w-100 file-input-icon"
-                                            style="height: 25px;">
-                                            <use xlink:href="{{ coreUiIcon('cil-camera') }}"></use>
-                                       </svg>
+                                        <x-cicon name="camera" class="text-dark w-100 file-input-icon"
+                                                 style="height: 25px;"/>
                                     </span>
                                                     <input name="app_logo" class="file-input" id="app_logo" type="file"
                                                            accept=".png, .svg, .jpg, .jpeg, .webp"/>
@@ -99,10 +97,8 @@
                                                    style="--aspect-ratio: 1; width: 100px; background-image: url({{ asset(getSetting('app_logo')) }})">
                                                 <div class="custom-file-content">
                                     <span class="text-dark">
-                                       <svg class="text-dark w-100 file-input-icon"
-                                            style="height: 25px;">
-                                            <use xlink:href="{{ coreUiIcon('cil-camera') }}"></use>
-                                       </svg>
+                                        <x-cicon name="camera" class="text-dark w-100 file-input-icon"
+                                                 style="height: 25px;"/>
                                     </span>
                                                     <input name="app_favicon" class="file-input" id="app_favicon" type="file"
                                                            accept=".png, .ico, .jpg"/>

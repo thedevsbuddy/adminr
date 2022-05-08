@@ -12,9 +12,7 @@
         <h3 class="text-dark mb-0">Manage Users</h3>
         <div>
             <a href="{{ route(config('app.route_prefix').'.users.create') }}" class="btn btn-primary btn-sm d-none d-sm-inline-block">
-                <svg class="c-icon mr-1">
-                    <use xlink:href="{{ coreUiIcon('cil-user-plus') }}"></use>
-                </svg>
+                <x-cicon name="plus" class="c-icon mr-1" />
                 Add new user
             </a>
         </div>
@@ -51,19 +49,11 @@
                                 <td>{{ $user->phone }}</td>
                                 <td>
                                     <a href="{{ route(config('app.route_prefix').'.users.edit', $user) }}" class="btn btn-sm btn-icon btn-primary mr-2" title="Edit">
-                                        <svg class="h-3 w-3">
-                                            <use xlink:href="{{ coreUiIcon('cil-pen') }}"></use>
-                                        </svg>
+                                        <x-cicon name="pen" />
                                     </a>
-                                    <a href="#" data-form="user_{{ $user->id }}" class="btn btn-sm btn-icon btn-danger delete-item" title="Delete">
-                                        <svg class="h-3 w-3">
-                                            <use xlink:href="{{ coreUiIcon('cil-trash') }}"></use>
-                                        </svg>
-                                    </a>
-                                    <form class="d-none" id="user_{{ $user->id }}" action="{{ route(config('app.route_prefix').'.users.destroy', $user->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
+                                    <x-link as="form" method="DELETE" class="btn btn-sm btn-icon btn-danger" formClass="delete-form" href="{{ route(config('app.route_prefix').'.users.destroy', $user->id) }}">
+                                        <x-cicon name="trash" />
+                                    </x-link>
                                 </td>
                             </tr>
                         @empty

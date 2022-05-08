@@ -17,9 +17,7 @@
             <div class="card text-white bg-primary">
                 <div class="card-body">
                     <div class="text-muted text-right mb-4">
-                        <svg class="c-icon c-icon-2xl">
-                            <use xlink:href="{{ coreUiIcon('cil-people') }}"></use>
-                        </svg>
+                        <x-cicon name="people" class="c-icon c-icon-2xl" />
                     </div>
                     <div class="text-value-lg">{{ $usersCount }}</div>
                     <small class="text-muted text-uppercase font-weight-bold">Users Registered</small>
