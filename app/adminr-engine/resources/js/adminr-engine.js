@@ -56,6 +56,28 @@ $(document).on('click', '.delete-item', function (e) {
 
 });
 
+$(document).on('submit', '.delete-form', function (e) {
+    e.preventDefault();
+    let message = $(this).data('message');
+    let title = $(this).data('title');
+    let icon = $(this).data('icon');
+    let confirm = $(this).data('confirm');
+    Swal.fire({
+        title: title ?? 'Are you sure?',
+        text: message ?? "You won't be able to revert this!",
+        icon: icon ?? 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#292a3d',
+        cancelButtonColor: '#d33',
+        confirmButtonText: confirm ?? 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            e.target.submit();
+        }
+    })
+
+});
+
 $(document).on('change', '.file-input', function () {
     readFile(this);
 });
