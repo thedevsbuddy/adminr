@@ -1,7 +1,6 @@
-# AdminR v0.2.5
+# AdminR v0.3.0
 
 <p align="center">
-<a href="https://travis-ci.org/thedevsbuddy/adminr"><img src="https://travis-ci.org/thedevsbuddy/adminr.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/dt/thedevsbuddy/adminr" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/v/thedevsbuddy/adminr" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/l/thedevsbuddy/adminr" alt="License"></a>

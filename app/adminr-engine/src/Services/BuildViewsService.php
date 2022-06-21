@@ -206,7 +206,7 @@ class BuildViewsService extends AdminrEngineService
         return $oldFileStmt;
     }
 
-    #[Pure] private function getOptionsStmt($migration): string
+    private function getOptionsStmt($migration): string
     {
         $optionsStmt = "";
         if($migration['data_type'] == 'enum'){
@@ -214,6 +214,11 @@ class BuildViewsService extends AdminrEngineService
             foreach (preg_split('/[,\s?]+/', $migration['enum_values']) as $val){
                 $optionsStmt .= "<option value=\"".strtolower($val)."\">".Str::title($val)."</option>\n\t\t";
             }
+        } else if($migration['data_type'] == 'foreignId'){
+            $optionsStmt .= "<option value=\"\">--Select ".Str::title($migration['related_model'])."--</option>\n\t\t\t\t\t\t\t\t\t\t";
+            $optionsStmt .= "@foreach($".Str::camel(Str::plural($migration['related_model']))." as \$index => $".Str::camel(Str::singular($migration['related_model'])).")\n\t\t\t\t\t\t\t\t\t\t\t";
+            $optionsStmt .= "<option value=\"{{\$".Str::camel(Str::singular($migration['related_model']))."->id}}\">{{\$".Str::camel(Str::singular($migration['related_model']))."->".Str::snake($migration['related_model_label'])."}}</option>\n\t\t\t\t\t\t\t\t\t\t";
+            $optionsStmt .= "@endforeach";
         }
 
         return $optionsStmt;

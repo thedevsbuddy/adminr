@@ -1,10 +1,12 @@
 # Changelog
 
-**All notable changes to `AdminR` will be documented in this file**
-
-
 ==================================================
 
+## Release v0.3.0 - Jun 21, 2022
+
+- Added ```foreignId``` data type.
+
+==================================================
 ## Release v0.2.5 - May 02, 2022
 
 - Added Default mail templates.
