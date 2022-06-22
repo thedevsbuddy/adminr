@@ -15,7 +15,7 @@ AdminR help to reduce approx 90% of the work for developers which they do to bui
 ### Support me to add more feature
 <center>
 <a href="https://www.buymeacoffee.com/devsbuddy" target="_blank">
-<img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-2.svg"/>
+<img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-2.svg" style="height: 75px"/>
 </a>
 </center>
 
