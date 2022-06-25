@@ -15,16 +15,9 @@ AdminR help to reduce approx 90% of the work for developers which they do to bui
 ### Support me to add more feature
 <center>
 <a href="https://www.buymeacoffee.com/devsbuddy" target="_blank">
-<img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-2.svg" style="height: 45px; border-radius: 12px"/>
+    <img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-2.svg" style="height: 45px; border-radius: 12px"/>
 </a>
 </center>
-
-
-#### When I will reach to ```$1000``` I will add relationship generator to the project.
-
-| Goal  | Reached |
-|-------|-------|
-| $1000 | $0 |
 
 ## Get Started
 
