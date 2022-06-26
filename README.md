@@ -1,4 +1,4 @@
-# AdminR v0.3.1
+# AdminR v0.3.2
 
 <p align="center">
 <a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/dt/thedevsbuddy/adminr" alt="Total Downloads"></a>

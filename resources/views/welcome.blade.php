@@ -46,7 +46,7 @@
             <ul>
                 <li><a class="active " href="{{ route('index') }}">Home</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="https://docsyard.devsbuddy.com/devsbuddy/adminr/v0.2">Docs</a></li>
+                <li><a href="https://devsbuddy.com/open-source/adminr?ref={{ request()->url() }}">Docs</a></li>
                 <li><a href="https://devsbuddy.com/blog">Blog</a></li>
                 <li><a href="https://devsbuddy.com/contact-us">Contact Us</a></li>
                 <li>

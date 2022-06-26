@@ -2,6 +2,12 @@
 
 ==================================================
 
+## Release v0.3.2 - Jun 26, 2022
+
+- Fixed adminr home reference url in landing page.
+
+==================================================
+
 ## Release v0.3.1 - Jun 26, 2022
 
 - Fixed issue [#5](https://github.com/thedevsbuddy/adminr/issues/5).
