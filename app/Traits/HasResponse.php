@@ -8,12 +8,9 @@ use Illuminate\Http\RedirectResponse;
 trait HasResponse
 {
 
-    public function success($data, $statusCode = 200): JsonResponse
+    public function success($data, $statusCode = 200, $status = "success", $message = "Success"): JsonResponse
     {
-        if (is_array($data)) {
-            return response()->json($data, $statusCode);
-        }
-        return response()->json(["status" => "success", 'message' => "success", 'data' => $data], $statusCode);
+        return response()->json(["status" => $status, 'message' => $message, 'data' => $data], $statusCode);
     }
 
 
