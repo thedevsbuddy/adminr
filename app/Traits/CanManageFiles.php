@@ -141,5 +141,4 @@ trait CanManageFiles
         $this->uploadedFilePath = null;
         $this->uploadedFileExt = null;
     }
-    
 }
