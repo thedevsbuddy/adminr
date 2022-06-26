@@ -150,6 +150,23 @@ now you can login and use our platform.
 ",
         ]);
 
+        /**
+         * Password updated email template
+         */
+        MailTemplate::create([
+            "subject" => "Your password updated successfully for {email}!",
+            "purpose" => "To be sent when password updated.",
+            "code" => "password-updated-mail",
+            "content" => "## Password updated successfully
+
+Congratulations! Your password has been reset successfully for your account
+associated with email **{email}** now you can login to your account.
+
+[Login Now]({login_link})
+
+",
+        ]);
+
 
     }
 }
