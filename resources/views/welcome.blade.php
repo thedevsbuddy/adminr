@@ -401,8 +401,8 @@
                     <div class="col-md-4 mb-4 mb-md-0">
                         <h3>Useful Links</h3>
                         <ul class="list-unstyled">
-                            <li><a href="https://docsyard.devsbuddy.com">Docsyard</a></li>
-                            <li><a href="https://devsbuddy.com/open-source">Open Source</a></li>
+                            <li><a href="https://docspace.dev" target="_blank">Docspace</a></li>
+                            <li><a href="https://devsbuddy.com/open-source">Other Open Projects</a></li>
                             <li><a href="https://devsbuddy.com/terms-and-conditions">Terms & conditions</a></li>
                             <li><a href="https://devsbuddy.com/privacy-policy">Privacy Policy</a></li>
                         </ul>
