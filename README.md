@@ -84,4 +84,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The AdminR is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The AdminR is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
