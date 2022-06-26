@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Traits;
 
 use Illuminate\Http\UploadedFile;
@@ -8,15 +7,16 @@ use Illuminate\Support\Str;
 
 trait CanManageFiles
 {
-    public $file;
-    public $dir;
-    public $saveFileName;
-    public $uploadedFilePath;
-    public $uploadedFileName;
-    public $uploadedFilePaths;
-    public $uploadedFileNames;
-    public $destination;
-
+    public UploadedFile|null $file;
+    public string|null $dir;
+    public string|null $saveFileName;
+    public string|null $uploadedFileName;
+    public string|null $uploadedFilePath;
+    public string|null $uploadedFileExt;
+    public array|null $uploadedFileNames;
+    public array|null $uploadedFilePaths;
+    public array|null $uploadedFileExts;
+    public string|null $destination;
 
     public function uploadFile($file, $dir = null, $fileNamePrefix = null): static
     {
@@ -25,33 +25,35 @@ trait CanManageFiles
 
         $fileName = Str::random(64);
         $fileExtension = $this->file->getClientOriginalExtension();
-        $uploadHomeDir = "uploads/";
+        $uploadsHome = "uploads/";
 
         $this->saveFileName = $fileNamePrefix . $fileName . "." . strtolower($fileExtension);
-        $this->dir = $this->dir ? $uploadHomeDir . $this->dir . "/" : $uploadHomeDir . "/";
+        $this->dir = $this->dir ? $uploadsHome . $this->dir . "/" : $uploadsHome . "/";
         $this->destination = storage_path() . '/app/public/' . $this->dir;
-        $this->uploadedFilePath = 'storage/' . $this->dir . $this->saveFileName;
         $this->uploadedFileName = $this->saveFileName;
+        $this->uploadedFilePath = 'storage/' . $this->dir . $this->saveFileName;
+        $this->uploadedFileExt = $fileExtension;
 
         $this->file->move($this->destination, $this->saveFileName);
 
         return $this;
     }
 
+
     public function uploadFiles($files, $dir = null, $fileNamePrefix = null): static
     {
         $this->dir = $dir;
+        $uploadsHome = "uploads/";
+        $this->dir = $this->dir ? $uploadsHome . $this->dir . "/" : $uploadsHome . "/";
 
         foreach ($files as $file) {
             $fileName = Str::random(64);
             $fileExtension = $file->getClientOriginalExtension();
-            $uploadHomeDir = "uploads/";
-
             $this->saveFileName = $fileNamePrefix . $fileName . "." . strtolower($fileExtension);
-            $this->dir = $this->dir ? $uploadHomeDir . $this->dir . "/" : $uploadHomeDir . "/";
             $this->destination = storage_path() . '/app/public/' . $this->dir;
-            $this->uploadedFilePaths[] = 'storage/' . $this->dir . $this->saveFileName;
             $this->uploadedFileNames[] = $this->saveFileName;
+            $this->uploadedFilePaths[] = 'storage/' . $this->dir . $this->saveFileName;
+            $this->uploadedFileExts[] = $fileExtension;
 
             $file->move($this->destination, $this->saveFileName);
         }
@@ -59,15 +61,25 @@ trait CanManageFiles
         return $this;
     }
 
+    public function getFileName(): ?string
+    {
+        return $this->uploadedFileName;
+    }
 
     public function getFilePath(): ?string
     {
         return $this->uploadedFilePath;
     }
 
-    public function getFileName(): ?string
+    public function getFileExt(): ?string
     {
-        return $this->uploadedFileName;
+        return $this->uploadedFileExt;
+    }
+
+
+    public function getFileNames(): ?array
+    {
+        return $this->uploadedFileNames;
     }
 
     public function getFilePaths(): ?array
@@ -75,13 +87,12 @@ trait CanManageFiles
         return $this->uploadedFilePaths;
     }
 
-    public function getFileNames(): ?array
+    public function getFileExts(): ?array
     {
-        return $this->uploadedFileNames;
+        return $this->uploadedFileExts;
     }
 
-
-    public function deleteFile($path): static
+    public function deleteFile($path)
     {
         if (File::exists($path)) {
             File::delete($path);
@@ -89,14 +100,13 @@ trait CanManageFiles
         return $this;
     }
 
-
     public function deleteStorageFile($path): static
     {
         if (!is_null($path)) {
             if (explode('/', $path)[0] == 'storage') {
-                $this->deleteFile(storage_path() . '/app/public/' . Str::replace('storage/', '', $path));
+                $this->deleteFile(base_path() . '/storage/app/public/' . Str::replace('storage/', '', $path));
             } else {
-                $this->deleteFile(storage_path() . '/app/public/' . $path);
+                $this->deleteFile(base_path() . '/storage/app/public/' . $path);
             }
         }
         return $this;
@@ -112,15 +122,24 @@ trait CanManageFiles
         return $this;
     }
 
-
     public function deleteDir($path): static
     {
-        $storageDirs = [storage_path(), storage_path().'/app', storage_path().'/framework'];
-        if (File::isDirectory($path) && !in_array(File::isDirectory($path), $storageDirs)) {
+        if (File::isDirectory($path)) {
             File::deleteDirectory($path);
         }
         return $this;
     }
 
-
+    public function clean()
+    {
+        $this->file = null;
+        $this->dir = null;
+        $this->saveFileName = null;
+        $this->dir = null;
+        $this->destination = null;
+        $this->uploadedFileName = null;
+        $this->uploadedFilePath = null;
+        $this->uploadedFileExt = null;
+    }
+    
 }
