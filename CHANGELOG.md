@@ -2,6 +2,15 @@
 
 ==================================================
 
+## Release v0.3.1 - Jun 26, 2022
+
+- Fixed issue [#5](https://github.com/thedevsbuddy/adminr/issues/5).
+- Added some required methods in `AuthController` for api.
+- Added api auth related routes in `api.php` route file.
+- Added password updated mail template in seeder.
+
+==================================================
+
 ## Release v0.3.0 - Jun 21, 2022
 
 - Added ```foreignId``` data type.
