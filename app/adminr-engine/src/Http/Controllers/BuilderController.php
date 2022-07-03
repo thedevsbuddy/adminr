@@ -3,25 +3,21 @@
 namespace Devsbuddy\AdminrEngine\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Devsbuddy\AdminrEngine\Models\Menu;
-use Devsbuddy\AdminrEngine\Models\AdminrResource;
+use Devsbuddy\AdminrEngine\Models\{Menu, AdminrResource};
 use Devsbuddy\AdminrEngine\Database;
-use Devsbuddy\AdminrEngine\Services\BuildApiResourceService;
-use Devsbuddy\AdminrEngine\Services\BuildControllersService;
-use Devsbuddy\AdminrEngine\Services\BuildMigrationService;
-use Devsbuddy\AdminrEngine\Services\BuildModelService;
-use Devsbuddy\AdminrEngine\Services\BuildRoutesService;
-use Devsbuddy\AdminrEngine\Services\BuildViewsService;
-use Devsbuddy\AdminrEngine\Services\ResourceService;
+use Devsbuddy\AdminrEngine\Services\{BuildApiResourceService,
+    BuildControllersService,
+    BuildMigrationService,
+    BuildModelService,
+    BuildRoutesService,
+    BuildViewsService,
+    ResourceService,
+};
 use Devsbuddy\AdminrEngine\Traits\HasStubs;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\File;
+use Illuminate\Http\{JsonResponse, RedirectResponse, Request};
+use Illuminate\Support\Facades\{File,Artisan};
 use Illuminate\Support\Str;
-use JetBrains\PhpStorm\Pure;
 
 class BuilderController extends Controller
 {
@@ -35,7 +31,7 @@ class BuilderController extends Controller
     public BuildViewsService $buildViewsService;
     public BuildApiResourceService $buildApiResourceService;
 
-    #[Pure] public function __construct()
+    public function __construct()
     {
         $this->resourceService = new ResourceService();
         $this->buildControllersService = new BuildControllersService();
@@ -126,7 +122,7 @@ class BuilderController extends Controller
                 ->buildEditView()
                 ->cleanUp();
 
-            if($request->get('build_api')){
+            if ($request->get('build_api')) {
                 $this->buildApiResourceService
                     ->prepare($request)
                     ->buildApiResource()

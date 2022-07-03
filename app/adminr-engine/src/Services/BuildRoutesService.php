@@ -2,28 +2,22 @@
 
 namespace Devsbuddy\AdminrEngine\Services;
 
-use Devsbuddy\AdminrEngine\Database;
-use Devsbuddy\AdminrEngine\Traits\CanManageFiles;
-use Devsbuddy\AdminrEngine\Traits\HasStubs;
-use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class BuildRoutesService extends AdminrEngineService
 {
-    protected string $apiRouteTargetPath;
     protected string $apiRoutePath;
-    protected string $adminRouteTargetPath;
     protected string $adminRoutePath;
+    protected string $adminRouteProcessedStub;
+    protected string $apiRouteProcessedStub;
 
     public function prepare(Request $request): static
     {
         parent::prepare($request);
-        $this->apiRouteTargetPath = base_path() . "/routes/adminr/api/" . $this->modelEntities . "/" . $this->modelEntities . ".json";
-        $this->apiRoutePath = base_path() . '/routes/adminr/api/routes.json';
-        $this->adminRouteTargetPath = base_path() . "/routes/adminr/admin/" . $this->modelEntities . "/" . $this->modelEntities . ".json";
-        $this->adminRoutePath = base_path() . '/routes/adminr/admin/routes.json';
+        $this->apiRoutePath = base_path() . '/routes/adminr/api.php';
+        $this->adminRoutePath = base_path() . '/routes/adminr/admin.php';
         return $this;
     }
 
@@ -37,24 +31,12 @@ class BuildRoutesService extends AdminrEngineService
                     $routeFile = $this->getRouteStub('api_entities');
                 }
 
-                $stubPath = $this->hasSoftdeletes
-                    ? $this->getRouteStub('api_entities_with_softdeletes', true)
-                    : $this->getRouteStub('api_entities', true);
-
                 $routeFile = $this->processStub($routeFile);
+                $this->apiRouteProcessedStub = $routeFile;
+                $apiRoutesStorage = File::get($this->apiRoutePath);
 
-                $apiRoutesStorage = (array)json_decode(File::get($this->apiRoutePath));
-
-                if (!isset($apiRoutesStorage[$this->modelEntities])) {
-                    $apiRoutesStorage[$this->modelEntities] = $this->modelEntities . ".json";
-                }
-
-                $this->makeDirectory($this->apiRouteTargetPath);
-
-                File::put($stubPath, $routeFile);
-                File::copy($stubPath, $this->apiRouteTargetPath);
-                File::put($this->apiRouteTargetPath, $routeFile);
-                File::put($this->apiRoutePath, json_encode((object)$apiRoutesStorage));
+                $apiRoutesStorage = $apiRoutesStorage . "\n" . $routeFile;
+                File::put($this->apiRoutePath, $apiRoutesStorage);
             }
             return $this;
         } catch (\Exception | \Error $e) {
@@ -70,25 +52,13 @@ class BuildRoutesService extends AdminrEngineService
             } else {
                 $routeFile = $this->getRouteStub('entities');
             }
-            $stubPath = $this->hasSoftdeletes
-                ? $this->getRouteStub('entities_with_softdeletes', true)
-                : $this->getRouteStub('entities', true);
 
             $routeFile = $this->processStub($routeFile);
+            $this->adminRouteProcessedStub = $routeFile;
+            $adminRoutesStorage = File::get($this->adminRoutePath);
 
-            $adminRoutesStorage = (array)json_decode(File::get($this->adminRoutePath));
-
-            if (!isset($adminRoutesStorage[$this->modelEntities])) {
-                $adminRoutesStorage[$this->modelEntities] = $this->modelEntities . ".json";
-            }
-
-            $this->makeDirectory($this->adminRouteTargetPath);
-            File::put($stubPath, $routeFile);
-            File::copy($stubPath, $this->adminRouteTargetPath);
-
-            File::put($this->adminRouteTargetPath, $routeFile);
-            File::put($this->adminRoutePath, json_encode((object)$adminRoutesStorage));
-
+            $adminRoutesStorage = $adminRoutesStorage . "\n" . $routeFile;
+            File::put($this->adminRoutePath, $adminRoutesStorage);
             return $this;
         } catch (\Exception | \Error $e) {
             throw $e;
@@ -123,27 +93,19 @@ class BuildRoutesService extends AdminrEngineService
         return "\\App\\Http\\Controllers\\Admin";
     }
 
-
     public function rollback(): static
     {
         if (isset($this->modelEntities) && !is_null($this->modelEntities)) {
-            $this->deleteDir(base_path() . '/routes/adminr/admin/' . $this->modelEntities);
-            $this->deleteDir(base_path() . '/routes/adminr/api/' . $this->modelEntities);
-
             if (isset($this->adminRoutePath) && !is_null($this->adminRoutePath)) {
-                $adminRoutesStorage = (array)json_decode(File::get($this->adminRoutePath));
-                if (isset($adminRoutesStorage[$this->modelEntities])) {
-                    unset($adminRoutesStorage[$this->modelEntities]);
-                }
-                File::put($this->adminRoutePath, json_encode((object)$adminRoutesStorage));
+                $adminRoutesStorage = File::get($this->adminRoutePath);
+                $previousFile = Str::replace(search: $this->adminRouteProcessedStub, replace: "", subject: $adminRoutesStorage);
+                File::put($this->adminRoutePath, $previousFile);
             }
 
             if (isset($this->apiRoutePath) && !is_null($this->apiRoutePath)) {
-                $apiRoutesStorage = (array)json_decode(File::get($this->apiRoutePath));
-                if (isset($apiRoutesStorage[$this->modelEntities])) {
-                    unset($apiRoutesStorage[$this->modelEntities]);
-                }
-                File::put($this->apiRoutePath, json_encode((object)$apiRoutesStorage));
+                $apiRoutesStorage = File::get($this->apiRoutePath);
+                $previousFile = Str::replace(search: $this->adminRouteProcessedStub, replace: "", subject: $apiRoutesStorage);
+                File::put($this->apiRoutePath, $previousFile);
             }
         }
         return $this;

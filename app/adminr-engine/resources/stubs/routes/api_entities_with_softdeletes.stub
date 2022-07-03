@@ -1,51 +1,11 @@
-{
-    "index": {
-        "route": "{{MODEL_ENTITIES}}",
-        "middleware": {{MIDDLEWARES}},
-        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
-        "action": "index",
-        "method": "get"
-    },
-    "show": {
-        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}",
-        "middleware": {{MIDDLEWARES}},
-        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
-        "action": "show",
-        "method": "get"
-    },
-    "store": {
-        "route": "{{MODEL_ENTITIES}}",
-        "middleware": {{MIDDLEWARES}},
-        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
-        "action": "store",
-        "method": "post"
-    },
-    "update": {
-        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}",
-        "middleware": {{MIDDLEWARES}},
-        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
-        "action": "update",
-        "method": "put"
-    },
-    "destroy": {
-        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}",
-        "middleware": {{MIDDLEWARES}},
-        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
-        "action": "destroy",
-        "method": "delete"
-    },
-    "restore": {
-        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}/restore",
-        "middleware": {{MIDDLEWARES}},
-        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
-        "action": "restore",
-        "method": "post"
-    },
-    "forceDestroy": {
-        "route": "{{MODEL_ENTITIES}}/{{{MODEL_ENTITY}}}/force-destroy",
-        "middleware": {{MIDDLEWARES}},
-        "controller": "App\\Http\\Controllers\\Api\\{{CONTROLLER_CLASS}}",
-        "action": "forceDestroy",
-        "method": "delete"
-    }
-}
+Route::group(['prefix' => config('app.route_prefix') . '/manage/{{MODEL_ENTITIES}}'], function () {
+    Route::get('/', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'index'])->middleware({{MIDDLEWARES}});
+    Route::get('/create', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'create'])->middleware({{MIDDLEWARES}});
+    Route::post('/store', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'store'])->middleware({{MIDDLEWARES}});
+    Route::get('/{{{MODEL_ENTITY}}}', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'show'])->middleware({{MIDDLEWARES}});
+    Route::get('/{{{MODEL_ENTITY}}}/edit', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'edit'])->middleware({{MIDDLEWARES}});
+    Route::put('/{{{MODEL_ENTITY}}}', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'update'])->middleware({{MIDDLEWARES}});
+    Route::delete('/{{{MODEL_ENTITY}}}', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'destroy'])->middleware({{MIDDLEWARES}});
+    Route::post('/{{{MODEL_ENTITY}}}/restore', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'restore'])->middleware({{MIDDLEWARES}});
+    Route::delete('/{{{MODEL_ENTITY}}}/force-destroy', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'forceDestroy'])->middleware({{MIDDLEWARES}});
+});

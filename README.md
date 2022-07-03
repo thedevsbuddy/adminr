@@ -1,4 +1,4 @@
-# AdminR v0.3.2
+# AdminR v0.3.5
 
 <p align="center">
 <a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/dt/thedevsbuddy/adminr" alt="Total Downloads"></a>
@@ -13,11 +13,9 @@ AdminR is a simple admin panel built on top of [Laravel Framework](https://larav
 AdminR help to reduce approx 90% of the work for developers which they do to build a backend or admin panel and the APIs for their apps.
 
 ### Support me to add more feature
-<center>
 <a href="https://www.buymeacoffee.com/devsbuddy" target="_blank">
     <img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-2.svg" style="height: 45px; border-radius: 12px"/>
 </a>
-</center>
 
 ## Get Started
 
