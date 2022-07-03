@@ -20,28 +20,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, HasExcludeScope, HasMailable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
     protected $guarded = ['id'];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -51,7 +36,7 @@ class User extends Authenticatable
         return Attribute::make(
             get: function($val) {
                 $avatar = !is_null($val) ? $val : 'https://ui-avatars.com/api/?name='.$this->name.'&background=random&v=' . rand(0, 999999);
-                if(Str::contains(request()->url(), 'api')){
+                if(Str::contains(request()->url(), '/api')){
                     return asset($avatar);
                 }
                 return $avatar;
@@ -59,39 +44,26 @@ class User extends Authenticatable
         );
     }
 
-    /**
-     * Stores username by transforming to lower case.
-     *
-     * @param $value
-     * @return string
-     */
-    public function setUsernameAttribute($value)
+    public function username(): Attribute
     {
-        $this->attributes['username'] = Str::lower($value);
+        return Attribute::make(
+            set: function($val) {
+                return Str::lower($val);
+            },
+        );
     }
 
-    /**
-     * Stores name by transforming to title case.
-     *
-     * @param $value
-     * @return string
-     */
-    public function setNameAttribute($value)
+    public function name(): Attribute
     {
-        $this->attributes['name'] = Str::title($value);
+        return Attribute::make(
+            set: function($val) {
+            return Str::title($val);
+        },
+        );
     }
 
 
-    /**
-     * Scope the model query to certain roles only.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string|array $roles
-     * @param string $guard
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeNotRole(Builder $query, $roles, $guard = null)
+    public function scopeNotRole(Builder $query, $roles, $guard = null): Builder
     {
         if ($roles instanceof Collection) {
             $roles = $roles->all();
