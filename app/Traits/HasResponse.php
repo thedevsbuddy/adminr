@@ -7,12 +7,10 @@ use Illuminate\Http\RedirectResponse;
 
 trait HasResponse
 {
-
     public function success($data, $statusCode = 200, $status = "success", $message = "Success"): JsonResponse
     {
         return response()->json(["status" => $status, 'message' => $message, 'data' => $data], $statusCode);
     }
-
 
     public function successMessage($message, $statusCode = 200): JsonResponse
     {
@@ -20,6 +18,11 @@ trait HasResponse
     }
 
     public function error($message, $statusCode = 500): JsonResponse
+    {
+        return response()->json(["status" => "error", 'message' => $message], $statusCode);
+    }
+
+    public function errorOk($message, $statusCode = 200): JsonResponse
     {
         return response()->json(["status" => "error", 'message' => $message], $statusCode);
     }
