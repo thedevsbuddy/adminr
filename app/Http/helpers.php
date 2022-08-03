@@ -1,13 +1,19 @@
 <?php
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 
 
 if (!function_exists('getSetting')) {
     function getSetting($option): ?string
     {
-        return Setting::where('option', $option)->value('value');
+        return Cache::remember(
+            key: 'getSetting' . Str::studly($option),
+            ttl: now()->addYear(),
+            callback: fn() => Setting::where('option', $option)->value('value')
+        );
     }
 }
 
@@ -15,11 +21,11 @@ if (!function_exists('getSetting')) {
 if (!function_exists('role')) {
     function role($identifier): ?Role
     {
-        if(is_string($identifier)){
+        if (is_string($identifier)) {
             return Role::where('name', $identifier)->first()
                 ? Role::where('name', $identifier)->first()
                 : null;
-        } elseif (is_integer($identifier)){
+        } elseif (is_integer($identifier)) {
             return Role::where('id', $identifier)->first()
                 ? Role::where('id', $identifier)->first()
                 : null;
