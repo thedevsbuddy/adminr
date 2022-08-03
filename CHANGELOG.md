@@ -8,7 +8,6 @@
 - Added new config file for adminr only.
 - Added caching for the dynamic setting values.
 - Added session driver as database by default.
-- 
 
 ==================================================
 
