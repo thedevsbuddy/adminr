@@ -3,6 +3,7 @@
 namespace Devsbuddy\AdminrEngine;
 
 use Devsbuddy\AdminrEngine\ViewComposers\MenuComposer;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -57,7 +58,10 @@ class AdminrEngineServiceProvider extends ServiceProvider
 
         // Register the main class to use with the facade
         $this->app->singleton('adminr-engine', function () {
-            return new AdminrEngine;
+            return new Adminr;
         });
+
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Adminr', Adminr::class);
     }
 }
