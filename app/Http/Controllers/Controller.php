@@ -4,25 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\VerificationToken;
-use App\Traits\CanManageFiles;
-use App\Traits\CanSendMail;
-use App\Traits\HasResponse;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+use App\Traits\{CanManageFiles, HasMetaHead, CanSendMail, HasResponse};
+use Illuminate\Foundation\{Auth\Access\AuthorizesRequests, Bus\DispatchesJobs, Validation\ValidatesRequests};
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Str;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    use CanSendMail, HasResponse, CanManageFiles;
+    use CanSendMail, HasResponse, CanManageFiles, HasMetaHead;
 
     protected function generateTokenForUser(User $user)
     {
         $token = Str::random(64);
-
-//        $vt = VerificationToken::where('user_id', $user->id)->first();
         $vt = $user->verificationToken()->first();
 
         if(!is_null($vt)){
