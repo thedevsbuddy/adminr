@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * Add admin routes here if needed
  */
-Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web', 'auth', 'admin'], 'as' => config('app.route_prefix').'.'], function() {
+Route::group(['prefix' => config('adminr.route_prefix'), 'middleware' => ['web', 'auth', 'admin'], 'as' => config('adminr.route_prefix').'.'], function() {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
