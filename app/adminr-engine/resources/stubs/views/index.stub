@@ -19,7 +19,7 @@
 
                     <div class="d-flex align-items-center">
                         {{TRASHED_BUTTONS}}
-                        <a href="{{ route(config('app.route_prefix').'.{{MODEL_ENTITIES}}.create') }}" class="btn btn-sm btn-primary m-0">
+                        <a href="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.create') }}" class="btn btn-sm btn-primary m-0">
                              <svg class="h-3 w-3">
                                  <use xlink:href="{{ coreUiIcon('cil-plus') }}"></use>
                              </svg>
@@ -50,7 +50,7 @@
                                                     <use xlink:href="{{ coreUiIcon('cil-reload') }}"></use>
                                                 </svg>
                                             </a>
-                                            <form class="d-none" id="{{MODEL_ENTITY}}_restore_{{ ${{MODEL_ENTITY}}->id }}" action="{{ route(config('app.route_prefix').'.{{MODEL_ENTITIES}}.restore', ${{MODEL_ENTITY}}->id) }}" method="POST">
+                                            <form class="d-none" id="{{MODEL_ENTITY}}_restore_{{ ${{MODEL_ENTITY}}->id }}" action="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.restore', ${{MODEL_ENTITY}}->id) }}" method="POST">
                                                 @csrf
                                             </form>
                                             <a href="#" data-form="{{MODEL_ENTITY}}_forceDelete_{{ ${{MODEL_ENTITY}}->id }}" class="btn btn-sm mr-2 btn-icon btn-danger delete-item" title="Delete permanently">
@@ -58,12 +58,12 @@
                                                     <use xlink:href="{{ coreUiIcon('cil-trash') }}"></use>
                                                 </svg>
                                             </a>
-                                            <form class="d-none" id="{{MODEL_ENTITY}}_forceDelete_{{ ${{MODEL_ENTITY}}->id }}" action="{{ route(config('app.route_prefix').'.{{MODEL_ENTITIES}}.force-destroy', ${{MODEL_ENTITY}}->id) }}" method="POST">
+                                            <form class="d-none" id="{{MODEL_ENTITY}}_forceDelete_{{ ${{MODEL_ENTITY}}->id }}" action="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.force-destroy', ${{MODEL_ENTITY}}->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
                                         @else
-                                            <a href="{{ route(config('app.route_prefix').'.{{MODEL_ENTITIES}}.edit', ${{MODEL_ENTITY}}->id) }}" class="btn btn-sm mr-2 btn-icon btn-primary" title="Edit">
+                                            <a href="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.edit', ${{MODEL_ENTITY}}->id) }}" class="btn btn-sm mr-2 btn-icon btn-primary" title="Edit">
                                                 <svg class="h-3 w-3">
                                                     <use xlink:href="{{ coreUiIcon('cil-pen') }}"></use>
                                                 </svg>
@@ -73,7 +73,7 @@
                                                     <use xlink:href="{{ coreUiIcon('cil-trash') }}"></use>
                                                 </svg>
                                             </a>
-                                            <form class="d-none" id="{{MODEL_ENTITY}}_{{ ${{MODEL_ENTITY}}->id }}" action="{{ route(config('app.route_prefix').'.{{MODEL_ENTITIES}}.destroy', ${{MODEL_ENTITY}}->id) }}" method="POST">
+                                            <form class="d-none" id="{{MODEL_ENTITY}}_{{ ${{MODEL_ENTITY}}->id }}" action="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.destroy', ${{MODEL_ENTITY}}->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

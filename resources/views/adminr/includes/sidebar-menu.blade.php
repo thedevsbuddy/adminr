@@ -1,7 +1,7 @@
 @can('manage_resources')
-    @if(config('app.env') == 'local')
+    @if(Adminr::isInDev())
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.builder') }}">
+            <a class="c-sidebar-nav-link" href="{{ route(config('adminr.route_prefix').'.builder') }}">
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{ coreUiIcon('cil-diamond') }}"></use>
                 </svg>
@@ -9,7 +9,7 @@
             </a>
         </li>
         <li class="c-sidebar-nav-item">
-            <a class="c-sidebar-nav-link" href="{{ route(config('app.route_prefix').'.resources.index') }}">
+            <a class="c-sidebar-nav-link" href="{{ route(config('adminr.route_prefix').'.resources.index') }}">
                 <svg class="c-sidebar-nav-icon">
                     <use xlink:href="{{ coreUiIcon('cil-apps') }}"></use>
                 </svg>

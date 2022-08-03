@@ -5,8 +5,8 @@ use Devsbuddy\AdminrEngine\Http\Controllers\ResourceController;
 use Devsbuddy\AdminrEngine\Http\Controllers\RolePermissionController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => config('app.route_prefix'), 'middleware' => ['web'], 'as' => config('app.route_prefix').'.'], function(){
-    Route::redirect('/', config('app.route_prefix').'/dashboard', 301);
+Route::group(['prefix' => config('adminr.route_prefix'), 'middleware' => ['web'], 'as' => config('adminr.route_prefix').'.'], function(){
+    Route::redirect('/', config('adminr.route_prefix').'/dashboard', 301);
     Route::group(['middleware' => ['auth', 'admin']], function (){
         Route::get('/builder', [BuilderController::class, 'index'])->name('builder');
         Route::post('/generate', [BuilderController::class, 'build']);

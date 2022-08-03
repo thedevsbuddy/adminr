@@ -1,4 +1,4 @@
-Route::group(['prefix' => config('app.route_prefix') . '/manage/{{MODEL_ENTITIES}}'], function () {
+Route::group(['prefix' => config('adminr.route_prefix') . '/manage/{{MODEL_ENTITIES}}'], function () {
     Route::get('/', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'index'])->middleware({{MIDDLEWARES}});
     Route::get('/create', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'create'])->middleware({{MIDDLEWARES}});
     Route::post('/store', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'store'])->middleware({{MIDDLEWARES}});

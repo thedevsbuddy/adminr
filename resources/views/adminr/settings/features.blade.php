@@ -18,7 +18,7 @@
                         <p class="card-title m-0">{{ __('Features Settings') }}</p>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route(config('app.route_prefix').'.settings.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route(config('adminr.route_prefix').'.settings.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="pr-4">
                                 <div class="row">

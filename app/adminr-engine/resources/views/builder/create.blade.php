@@ -11,7 +11,7 @@
     <div class="d-sm-flex justify-content-between align-items-center mb-3">
         <h3 class="text-dark mb-0">{{ __('Generate Resource') }}</h3>
         <div>
-            <a href="{{ route(config('app.route_prefix').'.resources.index') }}" class="btn btn-primary btn-sm d-none d-sm-inline-block">
+            <a href="{{ route(config('adminr.route_prefix').'.resources.index') }}" class="btn btn-primary btn-sm d-none d-sm-inline-block">
                 <svg class="c-icon mr-1">
                     <use xlink:href="{{ coreUiIcon('cil-list') }}"></use>
                 </svg>

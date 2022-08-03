@@ -7,6 +7,7 @@ use App\Models\Setting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -81,6 +82,11 @@ class SettingController extends Controller
                         "value" => $value
                     ]);
                 }
+
+                /// Clear all the setting cache
+                /// To get latest updated data
+
+                Cache::forget('getSetting'.Str::studly($key));
             }
 
             return $this->backSuccess('Setting updated successfully');

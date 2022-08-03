@@ -37,7 +37,7 @@ class LoginController extends Controller
         if(auth()->attempt(array($fieldType => $request->get('email'), 'password' => $request->get('password'))))
         {
             if (auth()->check() && auth()->user()->hasRole(['admin', 'super_admin'])){
-                return $this->intendedSuccess(route: route(config('app.route_prefix').'.index'), message: "Logged In Successfully!");
+                return $this->intendedSuccess(route: route(config('adminr.route_prefix').'.index'), message: "Logged In Successfully!");
             } else {
                 return $this->intendedSuccess(route: route('index'), message: "Logged In Successfully!");
             }

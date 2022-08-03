@@ -11,7 +11,7 @@
     <div class="d-sm-flex justify-content-between align-items-center mb-3">
         <h3 class="text-dark mb-0">{{ __('Manage Resources') }}</h3>
         <div>
-            <a href="{{ route(config('app.route_prefix').'.builder') }}" class="btn btn-primary btn-sm d-none d-sm-inline-block">
+            <a href="{{ route(config('adminr.route_prefix').'.builder') }}" class="btn btn-primary btn-sm d-none d-sm-inline-block">
                 <svg class="c-icon mr-1">
                     <use xlink:href="{{ coreUiIcon('cil-library-add') }}"></use>
                 </svg>
@@ -61,7 +61,7 @@
 {{--                                            <use xlink:href="{{ coreUiIcon('cil-pen') }}"></use>--}}
 {{--                                        </svg>--}}
 {{--                                    </a>--}}
-                                    <a href="{{ route(config('app.route_prefix').'.resources.configure', encrypt($resource->id)) }}" class="btn btn-sm mr-2 btn-icon btn-primary" title="Configure Permissions">
+                                    <a href="{{ route(config('adminr.route_prefix').'.resources.configure', encrypt($resource->id)) }}" class="btn btn-sm mr-2 btn-icon btn-primary" title="Configure Permissions">
                                         <svg class="h-3 w-3">
                                             <use xlink:href="{{ coreUiIcon('cil-cog') }}"></use>
                                         </svg>
@@ -71,7 +71,7 @@
 {{--                                            <use xlink:href="{{ coreUiIcon('cil-trash') }}"></use>--}}
 {{--                                        </svg>--}}
 {{--                                    </a>--}}
-{{--                                    <form class="d-none" id="resource_{{ $resource->id }}" action="{{ route(config('app.route_prefix').'.resources.destroy', $resource->id) }}" method="POST">--}}
+{{--                                    <form class="d-none" id="resource_{{ $resource->id }}" action="{{ route(config('adminr.route_prefix').'.resources.destroy', $resource->id) }}" method="POST">--}}
 {{--                                        @csrf--}}
 {{--                                        @method('DELETE')--}}
 {{--                                    </form>--}}

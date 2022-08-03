@@ -40,7 +40,7 @@
 <script>
     var BASE_URL = "{{ url('/') }}";
     var BASE_PATH = "{{ base_path() }}";
-    var ROUTE_PREFIX = "{{ config('app.route_prefix') }}";
+    var ROUTE_PREFIX = "{{ config('adminr.route_prefix') }}";
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

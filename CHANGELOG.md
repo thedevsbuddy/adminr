@@ -2,6 +2,16 @@
 
 ==================================================
 
+## Release v0.3.8 - Aug 04, 2022
+
+- Added `sendgrid` and `smtp` mail driver in email settings.
+- Added new config file for adminr only.
+- Added caching for the dynamic setting values.
+- Added session driver as database by default.
+- 
+
+==================================================
+
 ## Release v0.3.5 - Jul 03, 2022
 
 - Fixed routes generation service.

@@ -28,7 +28,7 @@
         <div class="d-sm-flex justify-content-between align-items-center mb-3">
             <h3 class="text-dark mb-0">Edit user</h3>
             <div>
-                <a href="{{ route(config('app.route_prefix').'.users.index') }}"
+                <a href="{{ route(config('adminr.route_prefix').'.users.index') }}"
                    class="btn btn-primary btn-sm d-none d-sm-inline-block">
                     <x-cicon name="user" class="c-icon mr-1" />
                     View all users
@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <form action="{{ route(config('app.route_prefix').'.users.update', $user->id) }}" method="POST"
+                    <form action="{{ route(config('adminr.route_prefix').'.users.update', $user->id) }}" method="POST"
                           enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

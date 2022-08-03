@@ -177,7 +177,7 @@
                             which can generate a CRUD for you within minutes, And save you a lot of time which you
                             invest while writing code by yourself.
                         </p>
-                        <p><a href="{{ route(config('app.route_prefix'). '.builder') }}" class="btn btn-primary">Start
+                        <p><a href="{{ route(config('adminr.route_prefix'). '.builder') }}" class="btn btn-primary">Start
                                 Generating</a></p>
                     </div>
                     <div class="col-md-6" data-aos="fade-left">
@@ -211,7 +211,7 @@
                             AdminR provides you easy to use GUI to manage permissions for each and every resource
                             you generate so you can provide appropriate permissions to each user role.
                         </p>
-{{--                        <p><a href="{{ route(config('app.route_prefix'). '.builder') }}" class="btn btn-primary">Start--}}
+{{--                        <p><a href="{{ route(config('adminr.route_prefix'). '.builder') }}" class="btn btn-primary">Start--}}
 {{--                                Generating</a></p>--}}
                     </div>
                     <div class="col-md-6" data-aos="fade-left">
@@ -360,7 +360,7 @@
                 </div>
                 <div class="col-md-5 text-center text-md-end">
                     <p>
-                        <a href="{{ route(config('app.route_prefix').'.builder') }}" class="btn d-inline-flex align-items-center"><i class="bi bi-chevron-right"></i><span class="ms-2">Start Now</span></a>
+                        <a href="{{ route(config('adminr.route_prefix').'.builder') }}" class="btn d-inline-flex align-items-center"><i class="bi bi-chevron-right"></i><span class="ms-2">Start Now</span></a>
 
                     </p>
                 </div>
