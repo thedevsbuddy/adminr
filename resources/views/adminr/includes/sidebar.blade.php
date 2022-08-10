@@ -28,13 +28,11 @@
                 {{ __('Dashboard') }}
             </a>
         </li>
-        @include('adminr.includes.sidebar-menu')
-
         <li class="c-sidebar-nav-title">Resources</li>
         @include('adminr.includes.sidebar-resources-menu')
         <li class="c-sidebar-nav-title">Permissible</li>
         @can('manage_permissions')
-            @if(config('app.env') == 'local')
+            @if(Adminr::isInDev())
                 <li class="c-sidebar-nav-item">
                     <a class="c-sidebar-nav-link"
                        href="{{ route(config('adminr.route_prefix').'.roles-and-permissions.index') }}">
@@ -55,46 +53,6 @@
                     </svg>
                     {{ __('Users') }}
                 </a>
-            </li>
-        @endcan
-        <li class="c-sidebar-nav-title">Configurations</li>
-        @can('manage_mail_templates')
-            <li class="c-sidebar-nav-item">
-                <a class="c-sidebar-nav-link" href="{{ route(config('adminr.route_prefix').'.templates.index') }}">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{ coreUiIcon('cil-pen') }}"></use>
-                    </svg>
-                    {{ __('Email Templates') }}
-                </a>
-            </li>
-        @endcan
-        @can('manage_settings')
-            <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
-                <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="javascript:void(0)">
-                    <svg class="c-sidebar-nav-icon">
-                        <use xlink:href="{{ coreUiIcon('cil-settings') }}"></use>
-                    </svg>
-                    {{ __('Settings') }}
-                </a>
-                <ul class="c-sidebar-nav-dropdown-items">
-                    <li class="c-sidebar-nav-item">
-                        <a class="c-sidebar-nav-link"
-                           href="{{ route(config('adminr.route_prefix').'.settings.general') }}">
-                            General
-                        </a>
-                    </li>
-                    <li class="c-sidebar-nav-item">
-                        <a class="c-sidebar-nav-link" href="{{ route(config('adminr.route_prefix').'.settings.email') }}">
-                            Email
-                        </a>
-                    </li>
-                    <li class="c-sidebar-nav-item">
-                        <a class="c-sidebar-nav-link"
-                           href="{{ route(config('adminr.route_prefix').'.settings.features') }}">
-                            Features
-                        </a>
-                    </li>
-                </ul>
             </li>
         @endcan
     </ul>

@@ -1,4 +1,10 @@
 # Changelog
+==================================================
+
+## Release v0.4.0 - Aug 10, 2022
+
+- Moved Builder and resources Links to header.
+- Updated UI.
 
 ==================================================
 
