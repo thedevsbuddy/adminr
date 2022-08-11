@@ -6,6 +6,9 @@
 <a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/l/thedevsbuddy/adminr" alt="License"></a>
 </p>
 
+![Screenshot1](./public/screenshots/1.png)
+![Screenshot2](./public/screenshots/2.png)
+
 ## About AdminR
  
 AdminR is a simple admin panel built on top of [Laravel Framework](https://laravel.com) to help developers create laravel backend and APIs with ease so they can more focus on creating actual web app or any client side apps.
