@@ -16,15 +16,15 @@ AdminR is a simple admin panel built on top of [Laravel Framework](https://larav
 AdminR help to reduce approx 90% of the work for developers which they do to build a backend or admin panel and the APIs for their apps.
 
 
-### Known Issues
-#### I am aware of
+## Known Issues
+### I am aware of
 * The issue where there is error for `Generated Resources` section for managing them.
 * Routes are generating with wrong controller namespace.
 * You are unable to manage API routes permissions.
 * etc.
 
-### Future plans
-#### I am preparing to add
+## Future plans
+### I am preparing to add
 * `uuid` field option for resource generation.
 * `indexing` option for resource generation (on `SQL` level).
 * DataTable option for every resource
