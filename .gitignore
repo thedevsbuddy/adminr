@@ -13,3 +13,7 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/packages
+composer.lock
+composer_local.json
+composer_server.json
