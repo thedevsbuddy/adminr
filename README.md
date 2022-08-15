@@ -1,4 +1,4 @@
-# AdminR v0.4.0
+# AdminR v0.4.5
 
 <p align="center">
 <a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/dt/thedevsbuddy/adminr" alt="Total Downloads"></a>
@@ -17,10 +17,11 @@ AdminR help to reduce approx 90% of the work for developers which they do to bui
 
 
 ## Known Issues
-### I am aware of
+### I am aware of (and fixing them)
 * The issue where there is error for `Generated Resources` section for managing them.
 * Routes are generating with wrong controller namespace.
 * You are unable to manage API routes permissions.
+* Api auth is not working.
 * etc.
 
 ## Future plans
@@ -99,7 +100,7 @@ For the admin panel UI we have used [coreui](https://coreui.io) which is an awes
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Devsbuddy via [adminr@devsbuddy.com](mailto:adminr@devsbuddy.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within AdminR, please send an e-mail to Devsbuddy via [adminr@devsbuddy.com](mailto:adminr@devsbuddy.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
