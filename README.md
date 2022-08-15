@@ -18,11 +18,8 @@ AdminR help to reduce approx 90% of the work for developers which they do to bui
 
 ## Known Issues
 ### I am aware of (and fixing them)
-* The issue where there is error for `Generated Resources` section for managing them.
-* Routes are generating with wrong controller namespace.
-* You are unable to manage API routes permissions.
-* Api auth is not working.
-* etc.
+* No issue known.
+* **Please report issues in issue tab if found any issue** 
 
 ## Future plans
 ### I am preparing to add
