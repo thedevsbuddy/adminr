@@ -11,7 +11,7 @@ if (!function_exists('getSetting')) {
     {
         return Cache::remember(
             key: 'getSetting' . Str::studly($option),
-            ttl: now()->addYear(),
+            ttl: config('adminr.cache_remember_time'),
             callback: fn() => Setting::where('option', $option)->value('value')
         );
     }

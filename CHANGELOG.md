@@ -1,4 +1,14 @@
-# Changelog
+Changelog
+==================================================
+
+## Release v0.4.5 - Aug 15, 2022
+
+- Fixed generated resources management.
+- Fixed controller namespace issue.
+- Fixed api middlewares management.
+- Added `uuid` option in resource generate.
+- fixed some bugs
+
 ==================================================
 
 ## Release v0.4.0 - Aug 10, 2022
