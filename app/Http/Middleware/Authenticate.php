@@ -7,10 +7,11 @@ use Illuminate\Http\RedirectResponse;
 
 class Authenticate extends Middleware
 {
-    protected function redirectTo($request): string
+    protected function redirectTo($request): ?string
     {
         if (! $request->expectsJson()) {
             return route('auth.login');
         }
+        return  null;
     }
 }
