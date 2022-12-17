@@ -6,8 +6,7 @@
 <a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/l/thedevsbuddy/adminr" alt="License"></a>
 </p>
 
-![Screenshot1](./public/screenshots/1.png)
-![Screenshot2](./public/screenshots/2.png)
+![AdminR](./public/screenshots/AdminR.svg)
 
 ## About AdminR
  
