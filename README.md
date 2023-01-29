@@ -39,6 +39,7 @@ If you found this package helpful you can show support by clicking on the follow
 <a href="https://www.buymeacoffee.com/iamspydey" target="_blank">
     <img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-2.svg" style="height: 45px; border-radius: 12px"/>
 </a>
+
 ---
 
 ## Get Started
