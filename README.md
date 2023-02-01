@@ -30,10 +30,17 @@ AdminR help to reduce approx 90% of the work for developers which they do to bui
 * Search option for resources.
 * Many more features.
 
-### Support me to add more feature
-<a href="https://www.buymeacoffee.com/devsbuddy" target="_blank">
+---
+
+## Support me
+
+If you found this package helpful you can show support by clicking on the following button below and donating some amount to help me work on these projects frequently.
+
+<a href="https://www.buymeacoffee.com/iamspydey" target="_blank">
     <img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-2.svg" style="height: 45px; border-radius: 12px"/>
 </a>
+
+---
 
 ## Get Started
 
