@@ -1,6 +1,6 @@
 {
     "name": "thedevsbuddy/adminr",
-    "version": "0.4.5",
+    "version": "0.4.6",
     "type": "project",
     "description": "A simple yet powerful laravel starter with admin panel and CRUD resources generator to help you build application faster.",
     "keywords": [

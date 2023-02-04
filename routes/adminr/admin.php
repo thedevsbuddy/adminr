@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Dynamic routes generation
  * We are generating dynamic routes for
@@ -10,4 +11,3 @@
  */
 
 use Illuminate\Support\Facades\{Route};
-

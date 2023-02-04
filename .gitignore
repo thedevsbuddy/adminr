@@ -17,3 +17,5 @@ yarn-error.log
 composer.lock
 composer_local.json
 composer_server.json
+composer.prod.json
+composer.dev.json
