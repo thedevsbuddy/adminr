@@ -1,5 +1,9 @@
 # Changelog
 
+## Release v0.4.7 - Feb 02, 2023
+
+-   Fixed `adminr-engine` version to use latest version.
+
 ## Release v0.4.6 - Feb 02, 2023
 
 -   Added `auth` option for foriegn IDs.
