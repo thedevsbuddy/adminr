@@ -1,5 +1,6 @@
 <?php
 
+use Adminr\System\Adminr;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
@@ -12,7 +13,7 @@ if (!function_exists('getSetting')) {
         return Cache::remember(
             key: 'getSetting' . Str::studly($option),
             ttl: config('adminr.cache_remember_time'),
-            callback: fn() => Setting::where('option', $option)->value('value')
+            callback: fn () => Setting::where('option', $option)->value('value')
         );
     }
 }

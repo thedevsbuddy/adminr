@@ -33,12 +33,11 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex justify-content-between align-items-center">
-
         <div class="logo">
             <h1 class="position-relative">
                 <a href="{{ route('index') }}">{{ getSetting('app_name') }}</a>
                 <span style="font-size: 12px; top: -4px; right: -32px"
-                      class="text-white position-absolute">{{ getVersion(prefix: "v") }}</span>
+                      class="text-white position-absolute">{{ adminr('version', prefix: 'v') }}</span>
             </h1>
         </div>
 
@@ -67,7 +66,6 @@
 
 <!-- ======= Hero Section ======= -->
 <section class="hero-section" id="hero">
-
     <div class="wave">
 
         <svg width="100%" height="355px" viewBox="0 0 1920 355" version="1.1" xmlns="http://www.w3.org/2000/svg"

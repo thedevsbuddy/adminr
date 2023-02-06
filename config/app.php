@@ -186,6 +186,8 @@ return [
         /*
          * Package Service Providers...
          */
+        /// System provider to provide AdminR services
+        Adminr\System\Providers\AdminrServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -15,31 +15,40 @@
         "php": "^8.1.1",
         "fruitcake/laravel-cors": "^3.0.0",
         "guzzlehttp/guzzle": "^7.5.0",
-        "laravel/framework": "^9.43.0",
-        "laravel/sanctum": "^3.0.1",
-        "laravel/tinker": "^2.7.3",
-        "spatie/laravel-permission": "^5.7.0",
+        "laravel/framework": "^9.50.0",
+        "laravel/sanctum": "^3.2.1",
+        "laravel/tinker": "^2.8.0",
+        "spatie/laravel-permission": "^5.8.0",
         "thedevsbuddy/adminr-engine": "^0.1.7"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.7.0",
-        "fakerphp/faker": "^1.20.0",
-        "laravel/sail": "^1.16.3",
+        "barryvdh/laravel-debugbar": "^3.8.0",
+        "fakerphp/faker": "^1.21.0",
+        "laravel/sail": "^1.19.0",
         "mockery/mockery": "^1.5.1",
-        "nunomaduro/collision": "^6.3.1",
-        "phpunit/phpunit": "^9.5.27",
-        "spatie/laravel-ignition": "^1.6.2"
+        "nunomaduro/collision": "^6.4.0",
+        "phpunit/phpunit": "^9.6.3",
+        "spatie/laravel-ignition": "^1.6.4"
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Adminr\\Resource\\": "modules/",
+            "Adminr\\System\\": "system/"
         },
         "files": [
-            "app/Http/helpers.php"
+            "app/Http/helpers.php",
+            "system/Http/helpers.php"
         ]
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/adminr-engine"
+        }
+    ],
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
