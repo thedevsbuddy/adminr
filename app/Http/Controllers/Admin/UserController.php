@@ -114,7 +114,7 @@ class UserController extends Controller
         try {
             // Validate if username admin entered is of
             // selected user or any one else took it
-            if(User::where('username', $request->get('username'))->where('id', '!=', $user->id)->value('id') != null){
+            if (User::where('username', $request->get('username'))->where('id', '!=', $user->id)->value('id') != null) {
                 return  $this->backError(message: "Username is already taken!");
             }
 
@@ -142,7 +142,7 @@ class UserController extends Controller
             // Update User role if selected new
             $user->syncRoles(Role::where('id', $request->get('role'))->first());
 
-            return $this->redirectSuccess(route(config('adminr.route_prefix').'.users.index'), 'User updated successfully!');
+            return $this->redirectSuccess(route('adminr.users.index'), 'User updated successfully!');
         } catch (\Exception $e) {
             return $this->backError('Error : ' . $e->getMessage());
         } catch (\Error $e) {
@@ -163,7 +163,4 @@ class UserController extends Controller
             return $this->backError('Error : ' . $e->getMessage());
         }
     }
-
-
 }
-

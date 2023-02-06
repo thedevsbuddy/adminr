@@ -1,4 +1,4 @@
-@extends('adminr.layouts.master')
+@extends('adminr::layouts.master')
 
 @section('title', __('Create new template'))
 
@@ -11,7 +11,7 @@
         <div class="d-sm-flex justify-content-between align-items-center mb-3">
             <h3 class="text-dark mb-0">{{ __('Add new template') }}</h3>
             <div>
-                <a href="{{ route(config('adminr.route_prefix').'.templates.index') }}"
+                <a href="{{ route('adminr.templates.index') }}"
                    class="btn btn-primary btn-sm d-none d-sm-inline-block">
                     <x-cicon name="list" class="c-icon mr-1" />
                     {{ __('View all templates') }}
@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <form action="{{ route(config('adminr.route_prefix').'.templates.store') }}" method="POST"
+                    <form action="{{ route('adminr.templates.store') }}" method="POST"
                           enctype="multipart/form-data" id="template-form">
                         <div class="card-header">
                             <p class="card-title m-0">{{ __('Add new mail template') }}</p>
@@ -134,7 +134,7 @@
                     easyMDE.value('');
                     setTimeout(function () {
                         $('button[type="submit"]').removeAttribute('disabled');
-                        window.location.href = "{{ route(config('adminr.route_prefix').'.templates.index') }}";
+                        window.location.href = "{{ route('adminr.templates.index') }}";
                     }, 2000);
                 },
             });

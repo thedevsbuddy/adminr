@@ -1,11 +1,11 @@
 <?php
 
-namespace Devsbuddy\AdminrEngine\Services;
+namespace Adminr\System\Services;
 
 use App\Models\User;
-use Devsbuddy\AdminrEngine\Models\Menu;
-use Devsbuddy\AdminrEngine\Models\AdminrResource;
-use Devsbuddy\AdminrEngine\Traits\CanManageFiles;
+use Adminr\System\Models\Menu;
+use Adminr\System\Models\AdminrResource;
+use Adminr\System\Traits\CanManageFiles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;

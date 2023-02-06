@@ -1,0 +1,14 @@
+<div class="form-group">
+	<label for="{{RELATION_ENTITIES}}">{{RELATION_ENTITIES}} <span class="text-danger">*</span></label>
+    <select name="{{RELATION_FIELD}}" class="form-control select2" id ="{{RELATION_ENTITIES}}">
+        <option value="">--Select a {{RELATION_ENTITY}}--</option>
+        @foreach(${{RELATION_ENTITIES}} as ${{RELATION_ENTITY}})
+            <option value="{{ ${{RELATION_ENTITY}}->id }}">{{ ${{RELATION_ENTITY}}->{{ENTITY_LABEL}} }}</option>
+        @endforeach
+    </select>
+    @if ($errors->has("{{RELATION_FIELD}}"))
+        <span class="text-danger font-weight-bold">
+            <strong>{{ $errors->first("{{RELATION_FIELD}}") }}</strong>
+        </span>
+    @endif
+</div>

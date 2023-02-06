@@ -17,11 +17,11 @@ class LoginController extends Controller
 
     public function showLoginForm(): View|RedirectResponse
     {
-        try{
+        try {
             return view('auth.login');
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return $this->backError('Error: ' . $e->getMessage());
-        } catch (\Error $e){
+        } catch (\Error $e) {
             return $this->backError('Error: ' . $e->getMessage());
         }
     }
@@ -34,10 +34,9 @@ class LoginController extends Controller
         ]);
 
         $fieldType = filter_var($request->get('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        if(auth()->attempt(array($fieldType => $request->get('email'), 'password' => $request->get('password'))))
-        {
-            if (auth()->check() && auth()->user()->hasRole(['admin', 'super_admin'])){
-                return $this->intendedSuccess(route: route(config('adminr.route_prefix').'.index'), message: "Logged In Successfully!");
+        if (auth()->attempt(array($fieldType => $request->get('email'), 'password' => $request->get('password')))) {
+            if (auth()->check() && auth()->user()->hasRole(['admin', 'super_admin'])) {
+                return $this->intendedSuccess(route: route('adminr.index'), message: "Logged In Successfully!");
             } else {
                 return $this->intendedSuccess(route: route('index'), message: "Logged In Successfully!");
             }
@@ -48,8 +47,8 @@ class LoginController extends Controller
 
     public function logout(): RedirectResponse
     {
-        try{
-            if(auth()->check()){
+        try {
+            if (auth()->check()) {
                 auth()->logout();
                 request()->session()->invalidate();
 
@@ -57,9 +56,9 @@ class LoginController extends Controller
             }
             /// TODO: Think where to redirect after logging out.
             return $this->redirectSuccess(route: route('auth.login'), message: "You are logged out successfully!");
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             return $this->backError('Error: ' . $e->getMessage());
-        } catch (\Error $e){
+        } catch (\Error $e) {
             return $this->backError('Error: ' . $e->getMessage());
         }
     }

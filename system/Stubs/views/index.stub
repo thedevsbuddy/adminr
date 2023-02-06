@@ -1,0 +1,100 @@
+@extends('adminr.layouts.master')
+
+@section('title', 'Manage {{MODEL_ENTITIES}}')
+
+@push('scopedCss')
+
+@endpush
+
+@section('content')
+<div class="container-fluid">
+    <div class="d-sm-flex justify-content-between align-items-center mb-3">
+        <h3 class="text-dark mb-0">{{ ucfirst('{{MODEL_ENTITIES}} management') }}</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <p class="card-title m-0">All {{ ucfirst('{{MODEL_ENTITIES}} list') }}</p>
+
+                    <div class="d-flex align-items-center">
+                        {{TRASHED_BUTTONS}}
+                        <a href="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.create') }}" class="btn btn-sm btn-primary m-0">
+                             <svg class="h-3 w-3">
+                                 <use xlink:href="{{ coreUiIcon('cil-plus') }}"></use>
+                             </svg>
+                             Add new
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-bordered table-responsive-sm table-striped m-0">
+                        <thead>
+                            <tr>
+                                {{LIST_TABLE_HEAD_STATEMENT}}
+                                <th>Created At</th>
+                                <th>Last Updated At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse(${{MODEL_ENTITIES}} as $index => ${{MODEL_ENTITY}})
+                                <tr>
+                                    {{ENTITIES_LIST_STATEMENT}}
+                                    <td>{{ ${{MODEL_ENTITY}}->created_at->format('jS M, Y') }}</td>
+                                    <td>{{ ${{MODEL_ENTITY}}->updated_at->format('jS M, Y') }}</td>
+                                    <td>
+                                        @if(request()->has('trashed') && request()->get('trashed') == "true")
+                                            <a href="javascript:void(0)" onclick="event.preventDefault();document.getElementById('{{MODEL_ENTITY}}_restore_{{ ${{MODEL_ENTITY}}->id }}').submit();" class="btn btn-sm mr-2 btn-icon btn-success" title="Restore">
+                                                <svg class="h-3 w-3" style="transform: rotateY(180deg)">
+                                                    <use xlink:href="{{ coreUiIcon('cil-reload') }}"></use>
+                                                </svg>
+                                            </a>
+                                            <form class="d-none" id="{{MODEL_ENTITY}}_restore_{{ ${{MODEL_ENTITY}}->id }}" action="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.restore', ${{MODEL_ENTITY}}->id) }}" method="POST">
+                                                @csrf
+                                            </form>
+                                            <a href="#" data-form="{{MODEL_ENTITY}}_forceDelete_{{ ${{MODEL_ENTITY}}->id }}" class="btn btn-sm mr-2 btn-icon btn-danger delete-item" title="Delete permanently">
+                                                <svg class="h-3 w-3">
+                                                    <use xlink:href="{{ coreUiIcon('cil-trash') }}"></use>
+                                                </svg>
+                                            </a>
+                                            <form class="d-none" id="{{MODEL_ENTITY}}_forceDelete_{{ ${{MODEL_ENTITY}}->id }}" action="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.force-destroy', ${{MODEL_ENTITY}}->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        @else
+                                            <a href="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.edit', ${{MODEL_ENTITY}}->id) }}" class="btn btn-sm mr-2 btn-icon btn-primary" title="Edit">
+                                                <svg class="h-3 w-3">
+                                                    <use xlink:href="{{ coreUiIcon('cil-pen') }}"></use>
+                                                </svg>
+                                            </a>
+                                            <a href="#" data-form="{{MODEL_ENTITY}}_{{ ${{MODEL_ENTITY}}->id }}" class="btn btn-sm mr-2 btn-icon btn-danger delete-item" title="Delete">
+                                                <svg class="h-3 w-3">
+                                                    <use xlink:href="{{ coreUiIcon('cil-trash') }}"></use>
+                                                </svg>
+                                            </a>
+                                            <form class="d-none" id="{{MODEL_ENTITY}}_{{ ${{MODEL_ENTITY}}->id }}" action="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.destroy', ${{MODEL_ENTITY}}->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+                                {{EMPTY_DATA_STATEMENT}}
+                            @endforelse
+                        </tbody>
+                        <tfoot>
+                            {!! ${{MODEL_ENTITIES}}->appends($_GET)->links() !!}
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('scopedJs')
+
+@endpush

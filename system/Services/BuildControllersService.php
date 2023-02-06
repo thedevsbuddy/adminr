@@ -1,12 +1,12 @@
 <?php
 
-namespace Devsbuddy\AdminrEngine\Services;
+namespace Adminr\System\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class BuildControllersService extends AdminrEngineService
+class BuildControllersService extends AdminrBuilderService
 {
     protected string $apiControllerTargetPath;
     protected string $adminControllerTargetPath;

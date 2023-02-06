@@ -1,0 +1,11 @@
+Route::group(['as' => config('adminr.route_prefix') . '.{{MODEL_ENTITIES}}.', 'prefix' => config('adminr.route_prefix') . '/manage/{{MODEL_ENTITIES}}'], function () {
+    Route::get('/', [{{CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'index'])->middleware("permission:{{MODEL_ENTITIES}}_list")->name("index");
+    Route::get('/create', [{{CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'create'])->middleware("permission:{{MODEL_ENTITIES}}_create")->name("create");
+    Route::post('/store', [{{CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'store'])->middleware("permission:{{MODEL_ENTITIES}}_store")->name("store");
+    Route::get('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'show'])->middleware("permission:{{MODEL_ENTITIES}}_single")->name("show");
+    Route::get('/{{{MODEL_ENTITY}}}/edit', [{{CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'edit'])->middleware("permission:{{MODEL_ENTITIES}}_edit")->name("edit");
+    Route::put('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'update'])->middleware("permission:{{MODEL_ENTITIES}}_update")->name("update");
+    Route::delete('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'destroy'])->middleware("permission:{{MODEL_ENTITIES}}_destroy")->name("destroy");
+    Route::post('/{{{MODEL_ENTITY}}}/restore', [{{CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'restore'])->middleware("permission:{{MODEL_ENTITIES}}_restore")->name("restore");
+    Route::delete('/{{{MODEL_ENTITY}}}/force-destroy', [{{CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'forceDestroy'])->middleware("permission:{{MODEL_ENTITIES}}_force_destroy")->name("force-destroy");
+});

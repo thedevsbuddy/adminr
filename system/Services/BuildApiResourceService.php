@@ -1,23 +1,18 @@
 <?php
 
-namespace Devsbuddy\AdminrEngine\Services;
+namespace Adminr\System\Services;
 
-use Devsbuddy\AdminrEngine\Database;
-use Devsbuddy\AdminrEngine\Traits\CanManageFiles;
-use Devsbuddy\AdminrEngine\Traits\HasStubs;
-use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
-class BuildApiResourceService extends AdminrEngineService
+class BuildApiResourceService extends AdminrBuilderService
 {
     protected string $apiResourceTargetPath;
 
     public function prepare(Request $request): static
     {
         parent::prepare($request);
-        $this->apiResourceTargetPath = app_path() . "/Http/Resources/".$this->modelName."Resource.php";
+        $this->apiResourceTargetPath = app_path() . "/Http/Resources/" . $this->modelName . "Resource.php";
         return $this;
     }
 
@@ -51,5 +46,4 @@ class BuildApiResourceService extends AdminrEngineService
         }
         return $this;
     }
-
 }

@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="icon" type="image/png" href="{{ asset(getSetting('app_favicon')) }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.9.55/css/materialdesignicons.min.css"/>
-    <link rel="stylesheet" href="{{ asset('adminr/css/coreui.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/adminr-engine/css/adminr-engine.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminr/css/system.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('vendor/adminr-engine/css/adminr-engine.css') }}"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
     @stack('scopedCss')
 </head>
@@ -21,7 +21,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui-pro@3.4.0/dist/js/coreui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="{{ asset('vendor/adminr-engine/js/adminr-engine.js') }}"></script>
+{{-- <script src="{{ asset('vendor/adminr-engine/js/adminr-engine.js') }}"></script> --}}
+<script src="{{ asset('adminr/js/system.js') }}"></script>
 
 <script>
     toastr.options = {

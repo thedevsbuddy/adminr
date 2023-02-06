@@ -1,4 +1,4 @@
-@extends('adminr.layouts.master')
+@extends('adminr::layouts.master')
 
 @section('title', __('General Settings'))
 
@@ -18,7 +18,7 @@
                         <p class="card-title m-0">{{ __('General Settings') }}</p>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route(config('adminr.route_prefix').'.settings.store') }}" method="POST"
+                        <form action="{{ route('adminr.settings.store') }}" method="POST"
                               enctype="multipart/form-data">
                             @csrf
                             <div class="row">

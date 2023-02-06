@@ -1,8 +1,8 @@
 <?php
 
-namespace Devsbuddy\AdminrEngine\Services;
+namespace Adminr\System\Services;
 
-use Devsbuddy\AdminrEngine\Database;
+use Adminr\System\Database;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -297,13 +297,13 @@ class BuildViewsService extends AdminrEngineService
 
     protected function getTrashedButtonsStatement(): ?string
     {
-        $trashedButtonsStmt = "<a href=\"{{ route(config('adminr.route_prefix').'." . $this->modelEntities . ".index') }}\" class=\"btn btn-sm btn-primary m-0 mr-3\">
+        $trashedButtonsStmt = "<a href=\"{{ route('adminr." . $this->modelEntities . ".index') }}\" class=\"btn btn-sm btn-primary m-0 mr-3\">
                              <svg class=\"h-3 w-3\">
                                  <use xlink:href=\"{{ coreUiIcon('cil-apps') }}\"></use>
                              </svg>
                              View all
                         </a>
-                        <a href=\"{{ route(config('adminr.route_prefix').'." . $this->modelEntities . ".index') }}?trashed=true\" class=\"btn btn-sm btn-primary m-0 mr-3\">
+                        <a href=\"{{ route('adminr." . $this->modelEntities . ".index') }}?trashed=true\" class=\"btn btn-sm btn-primary m-0 mr-3\">
                              <svg class=\"h-3 w-3\">
                                  <use xlink:href=\"{{ coreUiIcon('cil-trash') }}\"></use>
                              </svg>

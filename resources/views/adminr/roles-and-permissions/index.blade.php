@@ -1,4 +1,4 @@
-@extends('adminr.layouts.master')
+@extends('adminr::layouts.master')
 
 @section('title', 'Roles and permissions management')
 
@@ -36,7 +36,7 @@
 					</div>
 					<div class="card-body p-0">
 						<div class="table-responsive">
-							<table class="table table-bordered table-responsive-sm table-striped m-0">
+							<table class="table table-striped m-0">
 								<thead>
 								<tr>
 									<th style="width: 50px">Permissions</th>
@@ -94,7 +94,7 @@
 	<div class="modal fade" id="addNewRoleModal" data-backdrop="static" data-keyboard="false" aria-labelledby="addNewRoleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
-				<form action="{{ route(config('adminr.route_prefix').'.roles-and-permissions.storeRole') }}" method="POST">
+				<form action="{{ route('adminr.roles-and-permissions.storeRole') }}" method="POST">
 					@csrf
 					<div class="modal-header">
 						<h5 class="modal-title" id="addNewRoleModalLabel">Create new role</h5>
@@ -121,7 +121,7 @@
 	<div class="modal fade" id="addNewPermissionModal" data-backdrop="static" data-keyboard="false" aria-labelledby="addNewPermissionModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
-				<form action="{{ route(config('adminr.route_prefix').'.roles-and-permissions.storePermission') }}" method="POST">
+				<form action="{{ route('adminr.roles-and-permissions.storePermission') }}" method="POST">
 					@csrf
 					<div class="modal-header">
 						<h5 class="modal-title" id="addNewPermissionModalLabel">Create new permission</h5>
@@ -154,7 +154,7 @@
             var permissionId = val.split('||')[1];
             if ($this.is(':checked')) {
                 $.ajax({
-                    url: "{{ route(config('adminr.route_prefix').'.roles-and-permissions.assign') }}",
+                    url: "{{ route('adminr.roles-and-permissions.assign') }}",
                     method: "POST",
                     data: {"role_id": roleId, "permission_id": permissionId},
                     success: function (res) {
@@ -163,7 +163,7 @@
                 });
             } else {
                 $.ajax({
-                    url: "{{ route(config('adminr.route_prefix').'.roles-and-permissions.revoke') }}",
+                    url: "{{ route('adminr.roles-and-permissions.revoke') }}",
                     method: "POST",
                     data: {"role_id": roleId, "permission_id": permissionId},
                     success: function (res) {

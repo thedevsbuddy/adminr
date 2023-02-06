@@ -1,10 +1,10 @@
 <?php
 
-namespace Devsbuddy\AdminrEngine\Services;
+namespace Adminr\System\Services;
 
-use Devsbuddy\AdminrEngine\Database;
-use Devsbuddy\AdminrEngine\Traits\CanManageFiles;
-use Devsbuddy\AdminrEngine\Traits\HasStubs;
+use Adminr\System\Database;
+use Adminr\System\Traits\CanManageFiles;
+use Adminr\System\Traits\HasStubs;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;

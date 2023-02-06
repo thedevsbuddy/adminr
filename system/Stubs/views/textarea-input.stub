@@ -1,0 +1,11 @@
+                            <div class="{{COL_SM}} {{COL_MD}} {{COL_LG}}">
+                                <div class="form-group has-feedback @if($errors->has('{{FIELD_NAME}}')) has-error @endif">
+                                    <label for="{{FIELD_NAME}}">{{FIELD_NAME_LABEL}}</label>
+                                    <textarea rows="5" name="{{FIELD_NAME}}" id="{{FIELD_NAME}}" class="form-control {{CKEDITOR_CLASS}} @if($errors->has('{{FIELD_NAME}}')) is-invalid @endif" placeholder="{{FIELD_NAME_LABEL}}" {{REQUIRED_STATEMENT}}>{{ old('{{FIELD_NAME}}') }}</textarea>
+                                    @if ($errors->has('{{FIELD_NAME}}'))
+                                        <span class="text-danger">
+                                            <strong>{{ $errors->first('{{FIELD_NAME}}') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>

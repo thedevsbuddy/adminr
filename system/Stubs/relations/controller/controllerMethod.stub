@@ -1,0 +1,5 @@
+public function get{{RELATION_CLASS_PLURAL}}Index({{MODEL_CLASS}} ${{MODEL_ENTITY}})
+{
+    $products = ${{MODEL_ENTITY}}->{{RELATION_ENTITIES}}()->paginate(20);
+    return view('backend.{{RELATION_ENTITIES}}.index', compact('{{RELATION_ENTITIES}}'));
+}

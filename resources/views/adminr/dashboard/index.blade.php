@@ -1,4 +1,4 @@
-@extends('adminr.layouts.master')
+@extends('adminr::layouts.master')
 
 @section('title', 'AdminR')
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Devsbuddy\AdminrEngine\Services;
+namespace Adminr\System\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;

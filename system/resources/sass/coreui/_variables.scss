@@ -1,0 +1,114 @@
+$white: #fff;
+$black: #000015;
+
+$gray-base: #3c4b64;
+$gray-100: #ebedef;
+$gray-200: #d8dbe0;
+$gray-300: #c4c9d0;
+$gray-400: #b1b7c1;
+$gray-500: #9da5b1;
+$gray-600: #8a93a2;
+$gray-700: #768192;
+$gray-800: #636f83;
+$gray-900: #4f5d73;
+
+$grays: ();
+// stylelint-disable-next-line scss/dollar-variable-default
+$grays: map-merge(
+  (
+    "100": $gray-100,
+    "200": $gray-200,
+    "300": $gray-300,
+    "400": $gray-400,
+    "500": $gray-500,
+    "600": $gray-600,
+    "700": $gray-700,
+    "800": $gray-800,
+    "900": $gray-900
+  ),
+  $grays
+);
+
+$primary-base: #292a3d;
+$primary-100: #fff9e5;
+$primary-200: #ffecb3;
+$primary-300: #ffe080;
+$primary-400: #ffd44d;
+$primary-500: #ffc71a;
+$primary-600: #e6ae00;
+$primary-700: #b38700;
+$primary-800: #806100;
+$primary-900: #4d3a00;
+
+$primary-dark: #171825;
+$primary: #292a3d;
+$primary-50: rgba(57, 41, 50, 0.5);
+$primary-25: rgba(57, 41, 50, 0.25);
+
+
+$secondary-base: #3c4b64;
+
+$secondary-100: #ebedef;
+$secondary-200: #d8dbe0;
+$secondary-300: #c4c9d0;
+$secondary-400: #b1b7c1;
+$secondary-500: #9da5b1;
+$secondary-600: #8a93a2;
+$secondary-700: #768192;
+$secondary-800: #636f83;
+$secondary-900: #4f5d73;
+
+$secondary-dark: #212233;
+$secondary: #3c4b64;
+$secondary-50: #9da5b1;
+$secondary-25: #ced2d8;
+
+
+$danger-dark: #d93737;
+$danger: #e55353;
+$danger-50: #f2a9a9;
+$danger-25: #f9d4d4;
+
+$info-dark: #2982cc;
+$info: #39f;
+$info-50: #80c6ff;
+$info-25: #c0e6ff;
+
+$success-dark: #1b9e3e;
+$success: #2eb85c;
+$success-50: #96dbad;
+$success-25: #cbedd6;
+
+$warning-dark: #f6960b;
+$warning: #f9b115;
+$warning-50: #fcd88a;
+$warning-25: #feecc5;
+
+$light: $gray-100;
+$dark: $gray-800;
+
+$pink: #e83e8c;
+
+// scss-docs-start theme-colors-map
+$theme-colors: ();
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+    (
+            "primary": $primary,
+            "secondary": $secondary-25,
+            "success": $success,
+            "info": $info,
+            "warning": $warning,
+            "danger": $danger,
+            "light": $light,
+            "dark": $dark
+    ),
+    $theme-colors
+);
+
+
+// fusv-disable
+$primary-dark: #b68700;
+$primary-base: #ffc100;
+$primary-50: rgba(255, 193, 0, 0.5);
+$primary-25: rgba(255, 193, 0, 0.25);

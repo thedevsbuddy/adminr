@@ -1,6 +1,6 @@
 <?php
 
-namespace Devsbuddy\AdminrEngine;
+namespace Adminr\System;
 
 use Illuminate\Database\Eloquent\Model;
 

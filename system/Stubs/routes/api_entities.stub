@@ -1,0 +1,7 @@
+Route::group(['prefix' => '{{MODEL_ENTITIES}}'], function () {
+    Route::get('/', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'index'])->middleware(getRouteMiddlewares(method: 'index', resourceName: '{{MODEL_ENTITIES}}'));
+    Route::post('/store', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'store'])->middleware(getRouteMiddlewares(method: 'store', resourceName: '{{MODEL_ENTITIES}}'));
+    Route::get('/{{{MODEL_ENTITY}}}', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'show'])->middleware(getRouteMiddlewares(method: 'show', resourceName: '{{MODEL_ENTITIES}}'));
+    Route::put('/{{{MODEL_ENTITY}}}', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'update'])->middleware(getRouteMiddlewares(method: 'update', resourceName: '{{MODEL_ENTITIES}}'));
+    Route::delete('/{{{MODEL_ENTITY}}}', [{{API_CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}}::class, 'destroy'])->middleware(getRouteMiddlewares(method: 'destroy', resourceName: '{{MODEL_ENTITIES}}'));
+});

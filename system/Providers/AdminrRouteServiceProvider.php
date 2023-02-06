@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
+use Adminr\System\Http\Helpers\ModuleHelper;
 
 class AdminrRouteServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $moduleArray = json_decode(File::get(__DIR__ . "/../modules.json"));
+        $moduleArray = ModuleHelper::getModules();
 
         $this->routes(function () use ($moduleArray) {
             foreach ($moduleArray as $module) {

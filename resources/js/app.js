@@ -4,13 +4,12 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import { createApp } from 'vue'
-
+import { createApp } from "vue";
 
 const app = createApp({});
 
-require('./bootstrap');
-
+/// Not actually Bootstrap
+require("./bootstrap");
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,10 +19,17 @@ require('./bootstrap');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-const files = require.context('./', true, /\.vue$/i);
-files.keys().map(key => app.component(key.split('/').pop().split('.')[0], files(key).default));
+const files = require.context("./", true, /\.vue$/i);
+files
+    .keys()
+    .map((key) =>
+        app.component(key.split("/").pop().split(".")[0], files(key).default)
+    );
 
-app.component('example-component', require('./components/ExampleComponent.vue').default);
+app.component(
+    "example-component",
+    require("./components/ExampleComponent.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31,4 +37,4 @@ app.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-app.mount('#app');
+app.mount("#app");

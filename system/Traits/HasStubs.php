@@ -1,6 +1,6 @@
 <?php
 
-namespace Devsbuddy\AdminrEngine\Traits;
+namespace Adminr\System\Traits;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;

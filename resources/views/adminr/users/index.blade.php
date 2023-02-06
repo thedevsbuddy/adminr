@@ -1,4 +1,4 @@
-@extends('adminr.layouts.master')
+@extends('adminr::layouts.master')
 
 @section('title', 'Users management')
 
@@ -11,7 +11,7 @@
     <div class="d-sm-flex justify-content-between align-items-center mb-3">
         <h3 class="text-dark mb-0">Manage Users</h3>
         <div>
-            <a href="{{ route(config('adminr.route_prefix').'.users.create') }}" class="btn btn-primary btn-sm d-none d-sm-inline-block">
+            <a href="{{ route('adminr.users.create') }}" class="btn btn-primary btn-sm d-none d-sm-inline-block">
                 <x-cicon name="plus" class="c-icon mr-1" />
                 Add new user
             </a>
@@ -48,10 +48,10 @@
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
                                 <td>
-                                    <a href="{{ route(config('adminr.route_prefix').'.users.edit', $user) }}" class="btn btn-sm btn-icon btn-primary mr-2" title="Edit">
+                                    <a href="{{ route('adminr.users.edit', $user) }}" class="btn btn-sm btn-icon btn-primary mr-2" title="Edit">
                                         <x-cicon name="pen" />
                                     </a>
-                                    <x-link as="form" method="DELETE" class="btn btn-sm btn-icon btn-danger" formClass="delete-form" href="{{ route(config('adminr.route_prefix').'.users.destroy', $user->id) }}">
+                                    <x-link as="form" method="DELETE" class="btn btn-sm btn-icon btn-danger" formClass="delete-form" href="{{ route('adminr.users.destroy', $user->id) }}">
                                         <x-cicon name="trash" />
                                     </x-link>
                                 </td>

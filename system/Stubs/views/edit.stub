@@ -1,0 +1,52 @@
+@extends('adminr.layouts.master')
+
+@section('title', 'Edit {{MODEL_ENTITY}}')
+
+@push('scopedCss')
+
+@endpush
+
+@section('content')
+<div class="container-fluid">
+    <div class="d-sm-flex justify-content-between align-items-center mb-3">
+        <h3 class="text-dark mb-0">Create new {{ ucfirst('{{MODEL_ENTITY}}') }}</h3>
+    </div>
+    <div class="card">
+        <form method="POST" action="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.update', ${{MODEL_ENTITY}}->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <p class="card-title m-0">Add new {{ ucfirst('{{MODEL_ENTITY}}') }}</p>
+                <a href="{{ route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.index') }}" class="btn btn-sm btn-primary m-0">
+                     <svg class="h-3 w-3">
+                         <use xlink:href="{{ coreUiIcon('cil-list-rich') }}"></use>
+                     </svg>
+                     View all
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-8">
+                        {{FORM_EDIT_STATEMENT}}
+                    </div>
+                    <div class="col-lg-4">
+                        {{IMAGE_UPDATE_STATEMENT}}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-sm btn-primary m-0">
+                     <svg class="h-3 w-3">
+                         <use xlink:href="{{ coreUiIcon('cil-save') }}"></use>
+                     </svg>
+                     Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
+
+@push('scopedJs')
+    {{CKEDITOR_STATEMENT}}
+@endpush

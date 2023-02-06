@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\View;
 use Adminr\System\ViewComposers\MenuComposer;
 use Adminr\System\Adminr;
 use Adminr\System\Facades\AdminrFacade;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Adminr\System\Http\Helpers\ModuleHelper;
 
 class AdminrServiceProvider extends ServiceProvider
 {
@@ -24,11 +27,12 @@ class AdminrServiceProvider extends ServiceProvider
 
         $loader = AliasLoader::getInstance();
         $loader->alias('Adminr', AdminrFacade::class);
+        $loader->alias('ModuleHelper', ModuleHelper::class);
     }
 
     public function boot(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../views', 'adminr');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'adminr');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
@@ -39,5 +43,16 @@ class AdminrServiceProvider extends ServiceProvider
         Blade::directive('adminrResources', function () {
             return "<?php echo \$__env->make('adminr::adminr-resource-menus')->render(); ?>";
         });
+
+
+        /// Loading all the views from modules
+        $moduleArray = ModuleHelper::getModules();
+        foreach ($moduleArray as $module) {
+            $viewPath = module_path($module->name . '/Views');
+
+            if (File::isDirectory($viewPath)) {
+                $this->loadViewsFrom($viewPath, Str::snake($module->name));
+            }
+        }
     }
 }

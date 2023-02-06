@@ -1,6 +1,6 @@
 <?php
 
-namespace Devsbuddy\AdminrEngine\Traits;
+namespace Adminr\System\Traits;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
@@ -115,12 +115,10 @@ trait CanManageFiles
 
     public function deleteDir($path): static
     {
-        $storageDirs = [storage_path(), storage_path().'/app', storage_path().'/framework'];
+        $storageDirs = [storage_path(), storage_path() . '/app', storage_path() . '/framework'];
         if (File::isDirectory($path) && !in_array(File::isDirectory($path), $storageDirs)) {
             File::deleteDirectory($path);
         }
         return $this;
     }
-
-
 }

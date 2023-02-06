@@ -1,0 +1,22 @@
+{
+    "enabled": true,
+    "name": "Blog",
+    "schema": "database/schema.json",
+    "migration": "database/create_blogs_table.php",
+    "views": {
+        "index": "Views/index.blade.php"
+    },
+    "controllers": [
+        "Http/Controllers/BlogController.php",
+        "Http/Controllers/Api/BlogController.php"
+    ],
+    "requests": [
+        "Http/Requests/BlogStoreRequest.php",
+        "Http/Requests/BlogUpdateRequest.php"
+    ],
+    "models": ["Models/Blog.php"],
+    "routes": {
+        "web": "Routes/web.php",
+        "api": "Routes/api.php"
+    }
+}

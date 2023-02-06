@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * Add admin routes here if needed
  */
-Route::group(['prefix' => config('adminr.route_prefix'), 'middleware' => ['web', 'auth', 'admin'], 'as' => config('adminr.route_prefix').'.'], function() {
+Route::group(['prefix' => config('adminr.route_prefix'), 'middleware' => ['web', 'auth', 'admin'], 'as' => 'adminr.'], function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 
@@ -48,7 +48,7 @@ Route::group(['prefix' => config('adminr.route_prefix'), 'middleware' => ['web',
         Route::resource('/templates', TemplateController::class);
 
         // Settings routes
-        Route::group(['prefix' => 'settings', 'as' => 'settings.'], function (){
+        Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
             Route::post('/', [SettingController::class, 'store'])->name('store');
             Route::get('/general', [SettingController::class, 'general'])->name('general');
             Route::get('/email', [SettingController::class, 'email'])->name('email');
@@ -58,5 +58,4 @@ Route::group(['prefix' => config('adminr.route_prefix'), 'middleware' => ['web',
 
     // Send Test Mail
     Route::post('/test-mail', [MailTestController::class, 'send'])->name('test-mail');
-
 });

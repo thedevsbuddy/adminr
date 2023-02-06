@@ -1,7 +1,11 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
+mix.js("resources/js/app.js", "public/js").css(
+    "resources/css/app.css",
+    "public/css"
+);
 
-mix.js('resources/js/app.js', 'public/js')
+/// Adminr System Related Assets
+mix.js("system/resources/js/system.js", "public/adminr/js")
     .vue()
-    .sass('resources/sass/coreui/coreui.scss', 'public/adminr/css')
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass("system/resources/sass/system.scss", "public/adminr/css");

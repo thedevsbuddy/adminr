@@ -1,0 +1,15 @@
+{
+    "id" : "{{CRUD_ID}}",
+    "model" : "{{MODEL_CLASS}}",
+    "files" : [
+        //FILE_LINES
+    ],
+    "migration" : "{{MIGRATION_FILE_NAME}}",
+    "original_request": [
+    	"{{REQUEST_LINES}}"
+    ],
+    "revisions": [
+    	"{{REVISIONS}}"
+    ], 
+    "successful" : false
+}

@@ -1,4 +1,4 @@
-@extends('adminr.layouts.master')
+@extends('adminr::layouts.master')
 
 @section('title', __('Email Settings'))
 
@@ -30,7 +30,7 @@
 								</a> service for testing emails
 							</div>
 						@endif
-						<form action="{{ route(config('adminr.route_prefix').'.settings.store') }}" method="POST"
+						<form action="{{ route('adminr.settings.store') }}" method="POST"
 						      enctype="multipart/form-data">
 							@csrf
 							<div class="pr-4">
@@ -169,7 +169,7 @@
 	     aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
-				<form action="{{ route(config('adminr.route_prefix').'.test-mail') }}" method="POST">
+				<form action="{{ route('adminr.test-mail') }}" method="POST">
 					@csrf
 					<div class="modal-header">
 						<h5 class="modal-title" id="sendTestMailModalLabel">Send Test Mail</h5>

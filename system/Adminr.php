@@ -2,16 +2,19 @@
 
 namespace Adminr\System;
 
+use Adminr\System\Traits\WorksWithStubs;
 use Illuminate\Support\Facades\File;
 
 class Adminr
 {
-    public static function isInDev(): bool
+    use WorksWithStubs;
+
+    public static function inDev(): bool
     {
         return config('adminr.app_mode') == 'dev';
     }
 
-    public static function isInPublic(): bool
+    public static function inPublic(): bool
     {
         return config('adminr.app_mode') == 'public';
     }

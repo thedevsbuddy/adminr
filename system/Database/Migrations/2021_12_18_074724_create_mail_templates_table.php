@@ -24,7 +24,7 @@ return new class extends Migration
         });
 
         /// Run The seeder
-        MailTemplateSeeder::run();
+        (new MailTemplateSeeder)->run();
     }
 
     /**
