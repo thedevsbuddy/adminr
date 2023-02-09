@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class BuildViewsService extends AdminrEngineService
+class BuildViewsService extends AdminrBuilderService
 {
     protected string $viewIndexTargetPath;
     protected string $viewCreateTargetPath;

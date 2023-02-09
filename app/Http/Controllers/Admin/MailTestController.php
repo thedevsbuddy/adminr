@@ -21,7 +21,7 @@ class MailTestController extends Controller
             }
             return $this->backSuccess(message: 'Mail send successfully!');
         } catch (\Exception | \Error $e){
-            info($e->getMessage());
+            adminr()->log($e);
             return $this->backError(message: 'Something went wrong!');
         }
     }

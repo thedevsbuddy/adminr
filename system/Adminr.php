@@ -4,6 +4,7 @@ namespace Adminr\System;
 
 use Adminr\System\Traits\WorksWithStubs;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class Adminr
 {
@@ -17,6 +18,11 @@ class Adminr
     public static function inPublic(): bool
     {
         return config('adminr.app_mode') == 'public';
+    }
+
+    public static function log(mixed $data, string $type = 'info'): void
+    {
+        if (self::inDev()) Log::{$type}($data);
     }
 
     public static function version(?string $prefix = null): string

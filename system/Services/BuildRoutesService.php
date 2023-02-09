@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class BuildRoutesService extends AdminrEngineService
+class BuildRoutesService extends AdminrBuilderService
 {
     protected string $apiRoutePath;
     protected string $adminRoutePath;

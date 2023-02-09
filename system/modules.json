@@ -1,13 +1,12 @@
 [
-    {
-        "name": "Blog",
-        "path": "Blog",
-        "provider": "BlogRouteServiceProvider",
-        "module": "module.json"
-    },
-    {
-        "name": "Static",
-        "path": "Static",
-        "provider": "StaticRouteServiceProvider"
-    }
+  {
+    "name": "Blog",
+    "provider": "BlogRouteServiceProvider",
+    "module": "module.json"
+  },
+  {
+    "name": "Static",
+    "path": "Static",
+    "provider": "StaticRouteServiceProvider"
+  }
 ]

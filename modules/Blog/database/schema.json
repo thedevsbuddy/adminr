@@ -1,21 +1,29 @@
 {
-    "kind": "migration",
-    "migration": "create_blogs_table.php",
-    "fields": [
-        {
-            "name": "Title",
-            "column": "title",
-            "type": "string",
-            "required": true,
-            "default": null
-        },
-        {
-            "name": "User",
-            "type": "relation",
-            "relation": "belongsTo",
-            "target": "App\\Models\\User",
-            "targetBy": "id",
-            "inversedBy": "articles"
-        }
-    ]
+  "module": "Blog",
+  "migration": "create_blogs_table.php",
+  "fields": [
+    {
+      "name": "Title",
+      "column": "title",
+      "type": "string",
+      "required": true,
+      "default": null
+    },
+    {
+      "name": "Content",
+      "column": "content",
+      "type": "longText",
+      "required": true,
+      "isRich": true,
+      "default": null
+    },
+    {
+      "name": "User",
+      "type": "relation",
+      "relation": "belongsTo",
+      "target": "App\\Models\\User",
+      "targetBy": "id",
+      "inversedBy": "articles"
+    }
+  ]
 }

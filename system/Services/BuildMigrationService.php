@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class BuildMigrationService extends AdminrEngineService
+class BuildMigrationService extends AdminrBuilderService
 {
     protected string $migrationTargetPath;
 

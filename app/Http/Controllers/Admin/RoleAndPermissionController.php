@@ -19,10 +19,9 @@ class RoleAndPermissionController extends Controller
             $permissions = Permission::whereNull('resource')->get();
 
             return view('adminr.roles-and-permissions.index', compact('roles', 'permissions'));
-        } catch (\Exception $e){
-            return $this->backError('Error: ' . $e->getMessage());
-        } catch (\Error $e){
-            return $this->backError('Error: ' . $e->getMessage());
+        } catch (\Exception | \Error $e){
+            adminr()->log($e);
+            return $this->backError('Something went wrong!');
         }
     }
 
@@ -63,10 +62,9 @@ class RoleAndPermissionController extends Controller
                 'name' => $request->get('name')
             ]);
             return $this->backSuccess('Role created successfully!');
-        } catch (\Exception $e){
-            return $this->backError('Error: ' . $e->getMessage());
-        } catch (\Error $e){
-            return $this->backError('Error: ' . $e->getMessage());
+        } catch (\Exception | \Error $e){
+            adminr()->log($e);
+            return $this->backError('Something went wrong!');
         }
     }
 
@@ -82,10 +80,9 @@ class RoleAndPermissionController extends Controller
                 'name' => $request->get('name')
             ]);
             return $this->backSuccess('Permission created successfully!');
-        } catch (\Exception $e){
-            return $this->backError('Error: ' . $e->getMessage());
-        } catch (\Error $e){
-            return $this->backError('Error: ' . $e->getMessage());
+        } catch (\Exception | \Error $e){
+            adminr()->log($e);
+            return $this->backError('Something went wrong!');
         }
     }
 }
