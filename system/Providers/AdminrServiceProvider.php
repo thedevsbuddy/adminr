@@ -20,10 +20,11 @@ class AdminrServiceProvider extends ServiceProvider
         /// Register all the module routes
         $this->app->register(AdminrRouteServiceProvider::class);
 
+        /// Load all the relationships when needed
+        $this->app->register(AdminrRelationshipServiceProvider::class);
+
         // Register the main class to use with the facade
-        $this->app->singleton('adminr', function () {
-            return new Adminr;
-        });
+        $this->app->singleton('adminr', fn() => new Adminr);
 
         $loader = AliasLoader::getInstance();
         $loader->alias('Adminr', AdminrFacade::class);
@@ -40,9 +41,7 @@ class AdminrServiceProvider extends ServiceProvider
         View::composer('adminr::adminr-resource-menus', MenuComposer::class);
 
         // Register Blade directive
-        Blade::directive('adminrResources', function () {
-            return "<?php echo \$__env->make('adminr::adminr-resource-menus')->render(); ?>";
-        });
+        Blade::directive('adminrResources', fn() => "<?php echo \$__env->make('adminr::adminr-resource-menus')->render(); ?>");
 
 
         /// Loading all the views from modules

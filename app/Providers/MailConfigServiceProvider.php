@@ -9,24 +9,12 @@ use Illuminate\Support\ServiceProvider;
 
 class MailConfigServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
     public function register()
     {
-
+        // Keep silence
     }
 
-
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
-    public
-    function boot()
+    public function boot()
     {
         if (Schema::hasTable('settings')) {
             $config = array(
