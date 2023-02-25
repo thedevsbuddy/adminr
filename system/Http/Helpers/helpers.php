@@ -3,7 +3,7 @@
 use Adminr\System\Adminr;
 
 if (!function_exists('module_path')) {
-    function module_path(string $path): ?string
+    function module_path(?string $path = null): ?string
     {
         return base_path('modules/' . $path);
     }
