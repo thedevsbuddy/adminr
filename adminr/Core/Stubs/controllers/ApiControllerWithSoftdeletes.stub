@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
+use Adminr\Resources\{{MODEL_CLASS}}\Models\{{MODEL_CLASS}};
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use App\Http\Resources\{{MODEL_CLASS}}Resource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use App\Models\{{MODEL_CLASS}};
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class {{CONTROLLER_CLASS}} extends Controller
 {
-    protected int $resultLimit = 10;
-
     public function index(Request $request): JsonResponse|AnonymousResourceCollection
     {
         try{
             $page = $request->has('page') ? $request->get('page') : 1;
-            $limit = $request->has('limit') ? $request->get('limit') : $this->resultLimit;
+            $limit = $request->has('limit') ? $request->get('limit') : 10;
 
             ${{MODEL_ENTITIES}} = {{MODEL_CLASS}}::query();
 

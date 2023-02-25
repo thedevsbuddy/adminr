@@ -2,6 +2,7 @@
 
 use Adminr\Core\Adminr;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 if (!function_exists('resourcesPath')) {
     function resourcesPath(?string $path = null): ?string
@@ -58,5 +59,12 @@ if (!function_exists('adminrIcon')) {
     function adminrIcon(?string $id = null): string
     {
         return asset('adminr/icons/ui-icons.svg#' . $id);
+    }
+}
+
+if (!function_exists('sanitizePath')) {
+    function sanitizePath($path): string
+    {
+        return Str::replace('\\', '/', $path);
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 interface AdminrBuilderInterface
 {
-    public function prepare(Request $request): static;
+    public function prepare(): static;
 
     public function processStub(string $stub): array|string;
 
@@ -15,5 +15,5 @@ interface AdminrBuilderInterface
 
     public function rollback(): static;
 
-    public function inject(AdminrBuilderService $service): void;
+    public function inject(AdminrBuilderService $service): static;
 }

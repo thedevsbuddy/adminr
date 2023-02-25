@@ -17,7 +17,7 @@
 .toaster-container {
   position: fixed;
   width: 100%;
-  max-width: 300px;
+  max-width: 320px;
   z-index: 9999 !important;
 }
 .toaster-container.top-right {

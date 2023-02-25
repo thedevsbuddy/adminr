@@ -413,13 +413,13 @@ function generateCrud() {
       .then(response => {
         isGenerating.value = false;
         if (response.data.status === 'success') {
-          toast.success(response.data.message);
+          toast.delay(5000).success(response.data.message);
         } else {
-          toast.error(response.data.message);
+          toast.delay(5000).error(response.data.message);
         }
-        setTimeout(() => {
-          window.location.href = ADMINR_URL + "/manage/" + response.data.entities;
-        }, 1500);
+        // setTimeout(() => {
+        //   window.location.href = ADMINR_URL + "/manage/" + response.data.entities;
+        // }, 1500);
       })
       .catch(err => {
         isGenerating.value = false;

@@ -38396,14 +38396,13 @@ __webpack_require__.r(__webpack_exports__);
         isGenerating.value = false;
 
         if (response.data.status === 'success') {
-          _Composables_Toast__WEBPACK_IMPORTED_MODULE_1__["default"].success(response.data.message);
+          _Composables_Toast__WEBPACK_IMPORTED_MODULE_1__["default"].delay(5000).success(response.data.message);
         } else {
-          _Composables_Toast__WEBPACK_IMPORTED_MODULE_1__["default"].error(response.data.message);
-        }
+          _Composables_Toast__WEBPACK_IMPORTED_MODULE_1__["default"].delay(5000).error(response.data.message);
+        } // setTimeout(() => {
+        //   window.location.href = ADMINR_URL + "/manage/" + response.data.entities;
+        // }, 1500);
 
-        setTimeout(function () {
-          window.location.href = ADMINR_URL + "/manage/" + response.data.entities;
-        }, 1500);
       })["catch"](function (err) {
         isGenerating.value = false;
         _Composables_Toast__WEBPACK_IMPORTED_MODULE_1__["default"].error(err);
@@ -40100,7 +40099,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".toaster-container[data-v-d9af6f74] {\n  position: fixed;\n  width: 100%;\n  max-width: 300px;\n  z-index: 9999 !important;\n}\n.toaster-container.top-right[data-v-d9af6f74] {\n  top: 1rem;\n  right: 1rem;\n}\n.toaster-container.bottom-right[data-v-d9af6f74] {\n  bottom: 1rem;\n  right: 1rem;\n}\n.toaster-container.top-left[data-v-d9af6f74] {\n  top: 1rem;\n  left: 1rem;\n}\n.toaster-container.bottom-left[data-v-d9af6f74] {\n  bottom: 1rem;\n  left: 1rem;\n}\n.toaster-container.top-center[data-v-d9af6f74] {\n  top: 1rem;\n  left: 50%;\n  transform: translateX(-50%);\n}\n.toaster-container.bottom-center[data-v-d9af6f74] {\n  bottom: 1rem;\n  left: 50%;\n  transform: translateX(-50%);\n}\n.toasters-from[data-v-d9af6f74] {\n  transform: scale(0.9) translateX(100%);\n  opacity: 0;\n}\n.toasters-to[data-v-d9af6f74] {\n  transform: scale(1) translateX(0);\n  opacity: 1;\n}\n\n/* Placements */\n.top-left .toasters-from[data-v-d9af6f74],\n.bottom-left .toasters-from[data-v-d9af6f74] {\n  transform: scale(0.9) translateX(-100%);\n}\n.top-center .toasters-from[data-v-d9af6f74] {\n  transform: scale(0.9) translateY(-100%);\n}\n.bottom-center .toasters-from[data-v-d9af6f74] {\n  transform: scale(0.9) translateY(100%);\n}\n.top-center .toasters-to[data-v-d9af6f74],\n.bottom-center .toasters-to[data-v-d9af6f74] {\n  transform: scale(1) translateY(0);\n}\n.toasters-active[data-v-d9af6f74] {\n  transition: all 300ms ease-in-out;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".toaster-container[data-v-d9af6f74] {\n  position: fixed;\n  width: 100%;\n  max-width: 320px;\n  z-index: 9999 !important;\n}\n.toaster-container.top-right[data-v-d9af6f74] {\n  top: 1rem;\n  right: 1rem;\n}\n.toaster-container.bottom-right[data-v-d9af6f74] {\n  bottom: 1rem;\n  right: 1rem;\n}\n.toaster-container.top-left[data-v-d9af6f74] {\n  top: 1rem;\n  left: 1rem;\n}\n.toaster-container.bottom-left[data-v-d9af6f74] {\n  bottom: 1rem;\n  left: 1rem;\n}\n.toaster-container.top-center[data-v-d9af6f74] {\n  top: 1rem;\n  left: 50%;\n  transform: translateX(-50%);\n}\n.toaster-container.bottom-center[data-v-d9af6f74] {\n  bottom: 1rem;\n  left: 50%;\n  transform: translateX(-50%);\n}\n.toasters-from[data-v-d9af6f74] {\n  transform: scale(0.9) translateX(100%);\n  opacity: 0;\n}\n.toasters-to[data-v-d9af6f74] {\n  transform: scale(1) translateX(0);\n  opacity: 1;\n}\n\n/* Placements */\n.top-left .toasters-from[data-v-d9af6f74],\n.bottom-left .toasters-from[data-v-d9af6f74] {\n  transform: scale(0.9) translateX(-100%);\n}\n.top-center .toasters-from[data-v-d9af6f74] {\n  transform: scale(0.9) translateY(-100%);\n}\n.bottom-center .toasters-from[data-v-d9af6f74] {\n  transform: scale(0.9) translateY(100%);\n}\n.top-center .toasters-to[data-v-d9af6f74],\n.bottom-center .toasters-to[data-v-d9af6f74] {\n  transform: scale(1) translateY(0);\n}\n.toasters-active[data-v-d9af6f74] {\n  transition: all 300ms ease-in-out;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

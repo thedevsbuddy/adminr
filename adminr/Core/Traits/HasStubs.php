@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 trait HasStubs {
-    public string $stubsDirectory = __DIR__ . '/../../resources/stubs';
+    public string $stubsDirectory = __DIR__ . '/../Stubs';
 
     public function getControllerStub($controller, $getPath = false): ?string
     {

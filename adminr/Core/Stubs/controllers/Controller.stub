@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\{{MODEL_CLASS}};
+use Adminr\Resources\{{MODEL_CLASS}}\Models\{{MODEL_CLASS}};
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
@@ -12,15 +12,13 @@ use Illuminate\View\View;
 
 class {{CONTROLLER_CLASS}} extends Controller
 {
-    protected int $resultLimit = 10;
-
     public function index(Request $request): View|RedirectResponse
     {
         try {
             ${{MODEL_ENTITIES}} = {{MODEL_CLASS}}::query();
             {{SEARCH_STATEMENTS}}
             {{TRASHED_FILTER}}
-            ${{MODEL_ENTITIES}} = ${{MODEL_ENTITIES}}->paginate($this->resultLimit);
+            ${{MODEL_ENTITIES}} = ${{MODEL_ENTITIES}}->paginate(10);
             return view('adminr.{{MODEL_ENTITIES}}.index', compact('{{MODEL_ENTITIES}}'));
         } catch(\Exception $e){
             return $this->backError('Error: ' . $e->getMessage());
