@@ -19,7 +19,7 @@ const toast = reactive({
     info: function (message, autoHide = true) {
         this.add(message, 'info', autoHide)
     },
-    danger: function (message, autoHide = true) {
+    error: function (message, autoHide = true) {
         this.add(message, 'danger', autoHide)
     },
     remove: function (item) {

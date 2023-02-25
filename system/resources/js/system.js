@@ -3,7 +3,9 @@ window._ = require("lodash");
 
 require("./bs-md-editor");
 require("./pluralize");
+
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+window.axios.defaults.baseURL = ADMINR_URL;
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
 if (token) {

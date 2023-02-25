@@ -20,12 +20,6 @@
     @include('adminr::includes.header')
     <div class="c-body">
         <main class="c-main pt-3">
-            <div class="d-flex">
-                <button onClick="toast.success('Task was successful!', false)" class="btn btn-success">Success</button>
-                <button onClick="toast.info('You got a message from Sarah.')" class="btn btn-info">Info</button>
-                <button onClick="toast.warning('Please update email details to use emails')" class="btn btn-warning">Warning</button>
-                <button onClick="toast.danger('Critical issue found on Auth Module please check it.')" class="btn btn-danger">Danger</button>
-            </div>
             @yield('content')
         </main>
         @include('adminr::includes.footer')
@@ -33,9 +27,9 @@
     <toast-list />
 </div>
 <script>
-    var BASE_URL = "{{ url('/') }}";
-    var BASE_PATH = "{{ base_path() }}";
-    var ROUTE_PREFIX = "adminr";
+    const BASE_URL = "{{ url('/') }}";
+    const ADMINR_URL = BASE_URL + '/' + "{{ config('adminr.path') }}";
+    const BASE_PATH = "{{ base_path() }}";
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

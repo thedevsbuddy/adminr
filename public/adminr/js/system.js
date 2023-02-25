@@ -202,13 +202,9 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     function getModelList() {
-      axios.get(BASE_URL + "/" + ROUTE_PREFIX + "/get-model-list").then(function (response) {
+      axios.get("/get-model-list").then(function (response) {
         modelList.value = response.data;
       });
-    }
-
-    function showToast(message) {
-      _Composables_Toast__WEBPACK_IMPORTED_MODULE_1__["default"].add(message, ['info', 'success', 'warning', 'danger'][Math.round(Math.random() * 3)]);
     }
 
     function addInput(index) {
@@ -242,7 +238,7 @@ __webpack_require__.r(__webpack_exports__);
 
     function generateCrud() {
       if (model.value == null || model.value === '') {
-        toastr.error("Please type model name to continue!");
+        _Composables_Toast__WEBPACK_IMPORTED_MODULE_1__["default"].error("Please type model name to continue!");
         errors.value = {
           model: true
         };
@@ -256,21 +252,21 @@ __webpack_require__.r(__webpack_exports__);
         softdeletes: softdeletes.value,
         build_api: build_api.value
       };
-      axios.post(BASE_URL + "/" + ROUTE_PREFIX + "/generate", postData).then(function (response) {
+      axios.post("/generate", postData).then(function (response) {
         isGenerating.value = false;
 
         if (response.data.status === 'success') {
-          toastr.success(response.data.message);
+          _Composables_Toast__WEBPACK_IMPORTED_MODULE_1__["default"].success(response.data.message);
         } else {
-          toastr.error(response.data.message);
+          _Composables_Toast__WEBPACK_IMPORTED_MODULE_1__["default"].error(response.data.message);
         }
 
         setTimeout(function () {
-          window.location.href = BASE_URL + "/" + ROUTE_PREFIX + "/manage/" + response.data.entities;
+          window.location.href = ADMINR_URL + "/manage/" + response.data.entities;
         }, 1500);
       })["catch"](function (err) {
         isGenerating.value = false;
-        toastr.error(err);
+        _Composables_Toast__WEBPACK_IMPORTED_MODULE_1__["default"].error(err);
         console.error(err);
       });
     }
@@ -298,7 +294,7 @@ __webpack_require__.r(__webpack_exports__);
       var postData = {
         "model": model
       };
-      axios.post(BASE_URL + "/" + ROUTE_PREFIX + "/get-model-columns", postData).then(function (response) {
+      axios.post("/get-model-columns", postData).then(function (response) {
         migrations.value[index].related_model_label = null;
         migrations.value[index].related_model_columns = response.data;
       })["catch"](function (err) {
@@ -338,7 +334,6 @@ __webpack_require__.r(__webpack_exports__);
       migrations: migrations,
       errors: errors,
       getModelList: getModelList,
-      showToast: showToast,
       addInput: addInput,
       removeInput: removeInput,
       generateCrud: generateCrud,
@@ -1095,7 +1090,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS, HYDRATE_EVENTS */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.model]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "checkbox",
-    name: "resource_has_softdeletes",
     "class": "custom-control-input",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $setup.softdeletes = $event;
@@ -1875,7 +1869,7 @@ var toast = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
     var autoHide = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
     this.add(message, 'info', autoHide);
   },
-  danger: function danger(message) {
+  error: function error(message) {
     var autoHide = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
     this.add(message, 'danger', autoHide);
   },
@@ -40859,6 +40853,7 @@ __webpack_require__(/*! ./bs-md-editor */ "./system/resources/js/bs-md-editor.js
 __webpack_require__(/*! ./pluralize */ "./system/resources/js/pluralize.js");
 
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+window.axios.defaults.baseURL = ADMINR_URL;
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {

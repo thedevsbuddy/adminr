@@ -12,7 +12,7 @@ if (!function_exists('getSetting')) {
     {
         return Cache::remember(
             key: 'getSetting' . Str::studly($option),
-            ttl: config('adminr.cache_remember_time'),
+            ttl: config('adminr.cache_ttl'),
             callback: fn () => Setting::where('option', $option)->value('value')
         );
     }

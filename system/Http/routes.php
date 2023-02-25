@@ -5,7 +5,7 @@ use Adminr\System\Http\Controllers\ResourceController;
 use Adminr\System\Http\Controllers\RolePermissionController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'adminr', 'middleware' => ['web'], 'as' => 'adminr.'], function () {
+Route::group(['prefix' => config('adminr.path'), 'middleware' => ['web'], 'as' => 'adminr.'], function () {
     Route::redirect('/', 'adminr/dashboard', 301);
     Route::group(['middleware' => ['auth', 'admin']], function () {
         Route::get('/builder', [BuilderController::class, 'index'])->name('builder');

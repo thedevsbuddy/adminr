@@ -10,7 +10,7 @@ class ModuleHelper
 {
     static public function getModules(): ?array
     {
-        return Cache::remember('modulesList', config('adminr.cache_remember_time'), fn () => json_decode(File::get(__DIR__ . "/../../modules.json")));
+        return Cache::remember('modulesList', config('adminr.cache_ttl'), fn () => json_decode(File::get(__DIR__ . "/../../modules.json")));
     }
 
     static public function getModulesInfo(string $module): ?object

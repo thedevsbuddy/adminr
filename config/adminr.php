@@ -16,13 +16,13 @@ return [
     * routes it will be used as the
     * name and as an endpoint for entire admin panel
     ===================================*/
-    "route_prefix" => env('ADMINR_ROUTE_PREFIX', 'adminr'),
+    "path" => env('ADMINR_PATH', 'adminr'),
 
     /*===================================
-    *  Adminr panel cache remember time
+    *  Adminr panel cache time to live
     * -----------------------------------
     * Configure the time in seconds to make
     * cache remember in system
     ===================================*/
-    "cache_remember_time" => env('ADMINR_CACHE_REMEMBER_TIME', 60 * 60 * 24 * 30 * 12), // In seconds [1 Year by default]
+    "cache_ttl" => env('ADMINR_CACHE_REMEMBER_TIME', 60 * 60 * 24 * 30 * 12), // In seconds [1 Year by default]
 ];

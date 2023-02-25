@@ -91,3 +91,9 @@ textarea.form-control {
 .c-app{
     background-color: #ebedff !important;
 }
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: $white;
+  border-color: $primary;
+  background-color: $primary;
+}

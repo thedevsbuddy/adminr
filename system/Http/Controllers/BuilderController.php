@@ -6,12 +6,12 @@ use Adminr\System\Database;
 use App\Http\Controllers\Controller;
 use Adminr\System\Models\{AdminrResource};
 use Adminr\System\Services\{
-    BuildApiResourceService,
-    BuildControllersService,
-    BuildMigrationService,
-    BuildModelService,
-    BuildRoutesService,
-    BuildViewsService,
+    BuildApiResourceInterface,
+    AdminrControllersBuilderInterface,
+    BuildMigrationInterface,
+    BuildModelInterface,
+    BuildRoutesInterface,
+    BuildViewsInterface,
     ResourceService,
 };
 use Adminr\System\Traits\HasStubs;
@@ -25,22 +25,22 @@ class BuilderController extends Controller
     use HasStubs;
 
     public ResourceService $resourceService;
-    public BuildControllersService $buildControllersService;
-    public BuildModelService $buildModelService;
-    public BuildMigrationService $buildMigrationService;
-    public BuildRoutesService $buildRouteService;
-    public BuildViewsService $buildViewsService;
-    public BuildApiResourceService $buildApiResourceService;
+    public AdminrControllersBuilderInterface $buildControllersService;
+    public BuildModelInterface $buildModelService;
+    public BuildMigrationInterface $buildMigrationService;
+    public BuildRoutesInterface $buildRouteService;
+    public BuildViewsInterface $buildViewsService;
+    public BuildApiResourceInterface $buildApiResourceService;
 
     public function __construct()
     {
         $this->resourceService = new ResourceService();
-        $this->buildControllersService = new BuildControllersService();
-        $this->buildModelService = new BuildModelService();
-        $this->buildMigrationService = new BuildMigrationService();
-        $this->buildRouteService = new BuildRoutesService();
-        $this->buildViewsService = new BuildViewsService();
-        $this->buildApiResourceService = new BuildApiResourceService();
+        $this->buildControllersService = new AdminrControllersBuilderInterface();
+        $this->buildModelService = new BuildModelInterface();
+        $this->buildMigrationService = new BuildMigrationInterface();
+        $this->buildRouteService = new BuildRoutesInterface();
+        $this->buildViewsService = new BuildViewsInterface();
+        $this->buildApiResourceService = new BuildApiResourceInterface();
     }
 
     public function index(): View|RedirectResponse
@@ -55,11 +55,30 @@ class BuilderController extends Controller
 
     public function build(Request $request): JsonResponse
     {
-        if ($this->resourceExists($request)) {
+        if ($this->resourceExists($request) && $request->get('override_resource') != 'true') {
             return response()->json(['status' => 'error', 'message' => 'Resource already exist!'], 200);
         }
 
         try {
+            /// Create an instance of [AdminrBuilderService]
+            ///
+
+            /// Prepare Controllers
+            /// Prepare Models
+            /// Prepare Migrations
+            /// Prepare Views
+            /// Prepare Routes
+
+            /// ================================
+            /// Build Controllers
+            /// Build Models
+            /// Build Migrations
+            /// Build Views
+            /// Build Routes
+
+            /// ================================
+            /// Store Resources
+
             $this->resourceService->store($request);
 
             $this->buildControllersService

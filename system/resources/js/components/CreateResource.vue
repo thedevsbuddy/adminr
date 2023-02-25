@@ -14,7 +14,7 @@
           <div class="form-group text-center">
             <label>Has SoftDeletes?</label>
             <div class="custom-control text-center custom-switch">
-              <input type="checkbox" name="resource_has_softdeletes" class="custom-control-input"
+              <input type="checkbox" class="custom-control-input"
                      v-model="softdeletes" id="resource_has_softdeletes">
               <label class="custom-control-label" for="resource_has_softdeletes"></label>
             </div>
@@ -28,7 +28,6 @@
                      id="resource_has_media">
               <label class="custom-control-label" for="resource_has_media"></label>
             </div>
-
           </div>
         </div>
         <div class="col-lg-4">
@@ -247,25 +246,16 @@
                            v-if="migration.configuring">
                         <h5 class="mb-4">Configure form view for admin panel.</h5>
                         <div class="form-group mb-3">
-                          <label class="text-dark">Col LG ({{
-                              migration.col_lg
-                            }})</label>
-                          <input class="form-control-range" type="range"
-                                 min="1" max="12" step="1" v-model="migration.col_lg"/>
+                          <label class="text-dark">Col LG ({{ migration.col_lg }})</label>
+                          <input class="form-control-range" type="range" min="1" max="12" step="1" v-model="migration.col_lg"/>
                         </div>
                         <div class="form-group mb-3">
-                          <label class="text-dark">Col MD ({{
-                              migration.col_md
-                            }})</label>
-                          <input class="form-control-range bg-primary" type="range"
-                                 min="1" max="12" step="1" v-model="migration.col_md"/>
+                          <label class="text-dark">Col MD ({{ migration.col_md }})</label>
+                          <input class="form-control-range bg-primary" type="range" min="1" max="12" step="1" v-model="migration.col_md"/>
                         </div>
                         <div class="form-group mb-3">
-                          <label class="text-dark">Col SM ({{
-                              migration.col_sm
-                            }})</label>
-                          <input class="form-control-range bg-primary" type="range"
-                                 min="1" max="12" step="1" v-model="migration.col_sm"/>
+                          <label class="text-dark">Col SM ({{ migration.col_sm }})</label>
+                          <input class="form-control-range bg-primary" type="range" min="1" max="12" step="1" v-model="migration.col_sm"/>
                         </div>
                       </div>
                     </transition>
@@ -361,14 +351,10 @@ const migrations = ref([
 const errors = reactive({model: false})
 
 function getModelList() {
-  axios.get(BASE_URL + "/" + ROUTE_PREFIX + "/get-model-list")
+  axios.get("/get-model-list")
       .then(response => {
         modelList.value = response.data;
       })
-}
-
-function showToast(message){
-  toast.add(message, ['info', 'success', 'warning', 'danger'][Math.round(Math.random() * 3)]);
 }
 
 function addInput(index) {
@@ -403,7 +389,7 @@ function removeInput(index) {
 
 function generateCrud() {
   if (model.value == null || model.value === '') {
-    toastr.error("Please type model name to continue!");
+    toast.error("Please type model name to continue!");
     errors.value = {model: true};
     return;
   }
@@ -416,21 +402,21 @@ function generateCrud() {
     build_api: build_api.value,
   };
 
-  axios.post(BASE_URL + "/" + ROUTE_PREFIX + "/generate", postData)
+  axios.post("/generate", postData)
       .then(response => {
         isGenerating.value = false;
         if (response.data.status === 'success') {
-          toastr.success(response.data.message);
+          toast.success(response.data.message);
         } else {
-          toastr.error(response.data.message);
+          toast.error(response.data.message);
         }
         setTimeout(() => {
-          window.location.href = BASE_URL + "/" + ROUTE_PREFIX + "/manage/" + response.data.entities;
+          window.location.href = ADMINR_URL+ "/manage/" + response.data.entities;
         }, 1500);
       })
       .catch(err => {
         isGenerating.value = false;
-        toastr.error(err);
+        toast.error(err);
         console.error(err);
       });
 }
@@ -456,7 +442,7 @@ function onModelSelect(index, model) {
   let postData = {
     "model": model,
   }
-  axios.post(BASE_URL + "/" + ROUTE_PREFIX + "/get-model-columns", postData)
+  axios.post("/get-model-columns", postData)
       .then(response => {
         migrations.value[index].related_model_label = null;
         migrations.value[index].related_model_columns = response.data;
