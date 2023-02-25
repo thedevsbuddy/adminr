@@ -11,6 +11,14 @@ if (!function_exists('resourcesPath')) {
 }
 
 
+if (!function_exists('stubsPath')) {
+    function stubsPath($stub): ?string
+    {
+        return base_path('adminr/Core/Stubs/' . $stub . '.stub');
+    }
+}
+
+
 if (!function_exists('adminr')) {
     function adminr(?string $method = null, ...$args): Adminr|string
     {

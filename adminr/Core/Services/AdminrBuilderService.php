@@ -10,10 +10,10 @@ class AdminrBuilderService
 {
     use HasStubs, CanManageFiles;
 
-    public Fluent $moduleInfo;
+    public Fluent $resourceInfo;
 
     public Request $request;
-    public string $moduleName;
+    public string $resourceName;
     public string $modelName;
     public string $modelPluralName;
     public string $modelEntity;
@@ -49,11 +49,29 @@ class AdminrBuilderService
         File::copyDirectory(__DIR__ . '/../../resources/stubs/', storage_path($this->operationDirectory . '/stubs'));
     }
 
-    protected function makeDirectory($path, $commit = false): void
+    protected function makeDirectory($path): void
     {
-        $permission = $commit ? 0775 : 0775;
         if (!File::isDirectory(dirname($path))) {
-            File::makeDirectory(dirname($path), $permission, true, true);
+            File::makeDirectory(dirname($path), 0775, true, true);
+        }
+    }
+
+    protected function createStubsDirectories(): void
+    {
+        foreach ($this->resourceInfo->get('filePaths') as $tempPath){
+            if(!is_array($tempPath) || !is_object($tempPath)){
+                $dir = collect(explode('/', $tempPath));
+                $dir->pop();
+                $dir = $dir->join('/');
+                File::makeDirectory(dirname($dir), 0775, true, true);
+            } else {
+                foreach ($tempPath as $path){
+                    $dir = collect(explode('/', $path));
+                    $dir->pop();
+                    $dir = $dir->join('/');
+                    File::makeDirectory(dirname($dir), 0775, true, true);
+                }
+            }
         }
     }
 
@@ -66,22 +84,34 @@ class AdminrBuilderService
 
     private function prepareModule(): void
     {
-        $this->moduleInfo = new Fluent([
-            'migrationFilePath' => resourcesPath("/$this->moduleName/Models/$this->modelEntity.php"),
-            'schemaFilePath' => resourcesPath("/$this->moduleName/Models/$this->modelEntity.php"),
-            'apiControllerFilePath' => resourcesPath("/$this->moduleName/Http/Controllers/Api/$this->controllerName.php"),
-            'controllerFilePath' => resourcesPath("/$this->moduleName/Http/Controllers/$this->controllerName.php"),
-            'createRequestFilePath' => resourcesPath("/$this->moduleName/Models/$this->modelEntity.php"),
-            'updateRequestFilePath' => resourcesPath("/$this->moduleName/Models/$this->modelEntity.php"),
-            'modelFilePath' => resourcesPath("/$this->moduleName/Models/$this->modelEntity.php"),
-            'routesFilePath' => resourcesPath("/$this->moduleName/Models/$this->modelEntity.php"),
-            'apiRoutesFilePath' => resourcesPath("/$this->moduleName/Models/$this->modelEntity.php"),
-            'viewsFilePath' => [
-                'index' => resourcesPath("/$this->moduleName/Models/$this->modelEntity.php"),
-                'create' => resourcesPath("/$this->moduleName/Models/$this->modelEntity.php"),
-                'edit' => resourcesPath("/$this->moduleName/Models/$this->modelEntity.php"),
-            ],
-            'moduleFilePath' => resourcesPath("/$this->moduleName/Models/$this->modelEntity.php"),
+        $this->resourceInfo = new Fluent([
+            'name' => $this->resourceName,
+            'filePaths' => [
+                'migrationFilePath' => resourcesPath("/$this->resourceName/Models/$this->modelEntity.php"),
+                'schemaFilePath' => resourcesPath("/$this->resourceName/Models/$this->modelEntity.php"),
+                'apiControllerFilePath' => resourcesPath("/$this->resourceName/Http/Controllers/Api/$this->controllerName.php"),
+                'controllerFilePath' => resourcesPath("/$this->resourceName/Http/Controllers/$this->controllerName.php"),
+                'createRequestFilePath' => resourcesPath("/$this->resourceName/Models/$this->modelEntity.php"),
+                'updateRequestFilePath' => resourcesPath("/$this->resourceName/Models/$this->modelEntity.php"),
+                'modelFilePath' => resourcesPath("/$this->resourceName/Models/$this->modelEntity.php"),
+                'routesFilePath' => resourcesPath("/$this->resourceName/Models/$this->modelEntity.php"),
+                'apiRoutesFilePath' => resourcesPath("/$this->resourceName/Models/$this->modelEntity.php"),
+                'viewsFilePath' => [
+                    'index' => resourcesPath("/$this->resourceName/Models/$this->modelEntity.php"),
+                    'create' => resourcesPath("/$this->resourceName/Models/$this->modelEntity.php"),
+                    'edit' => resourcesPath("/$this->resourceName/Models/$this->modelEntity.php"),
+                ],
+                'moduleFilePath' => resourcesPath("/$this->resourceName/Models/$this->modelEntity.php"),
+            ]
         ]);
     }
 }
+
+
+//$stub = \Illuminate\Support\Facades\File::get(stubsPath('models/Model'));
+//$stub = \Illuminate\Support\Str::replace('{{MODEL_CLASS}}', 'TestModel', $stub);
+//$tempModel = storage_path('.temp/Model.stub');
+//\Illuminate\Support\Facades\File::put($tempModel, $stub);
+//\Illuminate\Support\Facades\File::copy($tempModel, app_path('Models/TestModel.php'));
+//\Illuminate\Support\Facades\File::delete($tempModel);
+//dump($stub);

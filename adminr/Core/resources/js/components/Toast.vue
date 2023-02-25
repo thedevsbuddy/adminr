@@ -4,10 +4,6 @@ import {computed, onMounted} from "vue";
 const props = defineProps({
   item: Object,
   index: Number,
-  delay: {
-    type: Number,
-    default: 3000
-  }
 })
 const emit = defineEmits(['remove']);
 
@@ -16,14 +12,14 @@ onMounted(() => {
     if(props.item.autoHide){
       emit('remove');
     }
-  }, props.delay);
+  }, props.item.duration);
 });
 
 
 </script>
 <template>
   <div :class="`toaster-item ${props.item.type}`" role="alert">
-    <div class="icon">
+    <div class="icon" v-if="props.item.hasIcon">
       <svg v-if="props.item.type === 'warning'" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
            stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round"
@@ -45,7 +41,7 @@ onMounted(() => {
       </svg>
     </div>
     <div class="message">{{ item.message }}</div>
-    <button type="button" @click.stop="emit('remove')" class="" data-dismiss-target="#toast-default" aria-label="Close">
+    <button type="button" v-if="props.item.canClose" @click.stop="emit('remove')" class="" data-dismiss-target="#toast-default" aria-label="Close">
       <span class="sr-only">Close</span>
       <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd"
@@ -68,6 +64,7 @@ onMounted(() => {
   --danger-bg-color: #ffe9e9;
   --fg-color: var(--info-color);
   --bg-color: var(--info-bg-color);
+
   position: relative;
   display: flex;
   align-items: center;
@@ -99,6 +96,12 @@ onMounted(() => {
     --bg-color: var(--danger-bg-color);
   }
 
+  &.default {
+    --fg-color: #fff;
+    --bg-color: #161927;
+    background: #27293a;
+    color: #fff;
+  }
 
   .icon {
     padding: .5rem;

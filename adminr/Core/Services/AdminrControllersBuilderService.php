@@ -10,7 +10,7 @@ class AdminrControllersBuilderService implements AdminrBuilderInterface
 {
     protected string $apiControllerTargetPath;
     protected string $adminControllerTargetPath;
-    protected Fluent $module;
+    protected Fluent $resource;
     private AdminrBuilderService $builderService;
 
     /**
@@ -19,7 +19,7 @@ class AdminrControllersBuilderService implements AdminrBuilderInterface
     public function inject(AdminrBuilderService $service): void
     {
         $this->builderService = $service;
-        $this->module = $this->builderService->moduleInfo;
+        $this->resource = $this->builderService->resourceInfo;
     }
 
     public function prepare(Request $request): static

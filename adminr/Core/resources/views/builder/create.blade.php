@@ -22,8 +22,12 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <p class="card-title m-0">{{ __('Generate new resource') }}</p>
+                <div class="card-header d-flex justify-content-between">
+                    <p class="card-title m-0">{{ __('Build awesome resource') }}</p>
+                    <div class="font-weight-bold">
+                        <strong>Note:</strong> <code>id</code> field and <code>timestamps</code> field will be generated
+                        by default!
+                    </div>
                 </div>
                 <div class="card-body">
                     <create-resource :datatypes="{{ json_encode($dataTypes) }}"></create-resource>

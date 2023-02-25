@@ -2,9 +2,9 @@
   <div class="create-resource-component">
     <form method="post" @submit.prevent="generateCrud">
       <div class="row justify-content-start align-items-center">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
           <div class="form-group">
-            <label for="model_name">Model name</label>
+            <label for="model_name">Model name <span class="text-danger font-weight-bold">*</span></label>
             <input type="text" id="model_name" @input="validateModelName" v-model="model"
                    class="form-control" :class="{ 'is-invalid': errors.model === true }"
                    placeholder="E.g: Article">
@@ -30,10 +30,14 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4">
-          <div class="font-weight-bold">
-            <strong>Note:</strong> <code>id</code> field and <code>timestamps</code> field will be generated
-            by default!
+        <div class="col-lg-2">
+          <div class="form-group text-center">
+            <label title="Do you want to create API resources?" data-toggle="tooltip">API Resource?</label>
+            <div class="custom-control text-center custom-switch">
+              <input type="checkbox" class="custom-control-input" v-model="api_resource"
+                     id="api_resource">
+              <label class="custom-control-label" for="api_resource"></label>
+            </div>
           </div>
         </div>
       </div>
@@ -63,7 +67,7 @@
               </option>
             </select>
 
-            <div class="form-group" v-if="migration.data_type === 'slug'">
+            <div class="form-group" v-show="migration.data_type === 'slug'">
               <label>Select field</label>
               <small class="text-danger d-block mb-3">Generate slug / Unique Identifier from.</small>
               <select v-model="migration.slug_from" class="form-control">
@@ -74,7 +78,7 @@
               </select>
             </div>
 
-            <div class="form-group" v-if="migration.data_type === 'file'">
+            <div class="form-group" v-show="migration.data_type === 'file'">
               <label>File Type</label>
               <select v-model="migration.file_type" class="form-control" :id="'file_type_' + index">
                 <option value="single">Single File</option>
@@ -82,14 +86,14 @@
               </select>
             </div>
 
-            <div class="form-group" v-if="migration.data_type === 'file'">
-              <label>Accepted file Types</label>
+            <div class="form-group" v-show="migration.data_type === 'file'">
+              <label title="Default is all file type" data-toggle="tooltip">Accepted file Types</label>
               <input type="text" v-model="migration.accept" placeholder="E.g .png, .jpg, .svg"
                      class="form-control" :id="'accept_' + index">
             </div>
 
             <div class="form-group"
-                 v-if="migration.data_type === 'text' || migration.data_type === 'longText'">
+                 v-show="migration.data_type === 'text' || migration.data_type === 'longText'">
               <label>Rich text editor</label>
               <div class="custom-control custom-switch">
                 <input type="checkbox" v-model="migration.is_rich_text" class="custom-control-input"
@@ -98,7 +102,7 @@
               </div>
             </div>
 
-            <div class="form-group" v-if="migration.data_type === 'foreignId'">
+            <div class="form-group" v-show="migration.data_type === 'foreignId'">
               <label>Select Model</label>
               <select v-model="migration.related_model" class="form-control"
                       :id="'related_model_' + index"
@@ -112,7 +116,7 @@
             </div>
 
             <div class="form-group"
-                 v-if="migration.related_model != null && migration.related_model != 'auth'">
+                 v-show="migration.related_model != null && migration.related_model != 'auth'">
               <label>Show column in dropdown</label>
               <select v-model="migration.related_model_label" class="form-control"
                       :id="'related_model_label_' + index">
@@ -122,7 +126,7 @@
               </select>
             </div>
 
-            <div class="form-group" v-if="migration.data_type === 'enum'">
+            <div class="form-group" v-show="migration.data_type === 'enum'">
               <label>Enum values</label>
               <small class="text-danger d-block mb-3">Please use comma separated values.</small>
               <input type="text" v-model="migration.enum_values" class="form-control"/>
@@ -239,7 +243,7 @@
                             class="btn btn-sm btn-primary d-inline-flex align-items-center"
                             :class="{ 'disabled': migration.data_type === 'file' }"
                             :disabled="migration.data_type === 'file'">
-                      <a-icon name="build" class="h-4 w-4 mr-2" />
+                      <a-icon name="build" class="h-4 w-4 mr-2"/>
                       Configure
                     </button>
                     <transition name="fade">
@@ -301,7 +305,7 @@
       <div class="form-group mb-0">
         <button class="btn btn-primary btn-sm d-flex align-items-center" type="submit" :disabled="isGenerating">
           <i class="fas fa-spinner fa-spin mr-2" v-if="isGenerating"></i>
-          <a-icon name="sitemap" class="h-4 w-4 mr-2" v-else />
+          <a-icon name="sitemap" class="h-4 w-4 mr-2" v-else/>
           {{ isGenerating ? "Generating..." : "Generate" }}
         </button>
       </div>
@@ -325,6 +329,7 @@ const isGenerating = ref(false);
 const model = ref('');
 const softdeletes = ref(false);
 const build_api = ref(true);
+const api_resource = ref(false);
 const dataTypes = ref(props.datatypes);
 const migrations = ref([
   {
@@ -413,7 +418,7 @@ function generateCrud() {
           toast.error(response.data.message);
         }
         setTimeout(() => {
-          window.location.href = ADMINR_URL+ "/manage/" + response.data.entities;
+          window.location.href = ADMINR_URL + "/manage/" + response.data.entities;
         }, 1500);
       })
       .catch(err => {
