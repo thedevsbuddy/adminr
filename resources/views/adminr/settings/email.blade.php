@@ -26,7 +26,7 @@
 							<div class="alert alert-info">
 								You can use the <a href="https://mailtrap.io" style="text-decoration: underline"
 								                   target="_blank">mailtrap.io
-									<x-cicon name="external-link" style="width: 10px"/>
+									<x-aicon name="external-link" style="width: 10px"/>
 								</a> service for testing emails
 							</div>
 						@endif

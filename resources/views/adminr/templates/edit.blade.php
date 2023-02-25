@@ -13,7 +13,7 @@
             <div>
                 <a href="{{ route('adminr.templates.index') }}"
                    class="btn btn-primary btn-sm d-none d-sm-inline-block">
-                    <x-cicon name="list" class="c-icon mr-1" />
+                    <x-aicon name="list" class="c-icon mr-1" />
                     {{ __('View all templates') }}
                 </a>
             </div>
@@ -91,7 +91,7 @@
                         </div>
                         <div class="card-footer">
                             <button class="btn btn-primary" type="submit">
-                                <x-cicon name="save" class="c-icon mr-1" />
+                                <x-aicon name="save" class="c-icon mr-1" />
                                 {{ __('Save') }}
                             </button>
                         </div>

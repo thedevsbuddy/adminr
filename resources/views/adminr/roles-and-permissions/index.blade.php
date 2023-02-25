@@ -13,12 +13,12 @@
 			<div class="d-flex align-items-center">
 				<a href="javascript:void(0)" data-toggle="modal" data-target="#addNewRoleModal"
 				   class="btn btn-primary btn-sm d-none d-sm-inline-block mr-3">
-                    <x-cicon name="plus" class="c-icon mr-1" />
+                    <x-aicon name="plus" class="c-icon mr-1" />
 					Add new role
 				</a>
 				<a href="javascript:void(0)" data-toggle="modal" data-target="#addNewPermissionModal"
 				   class="btn btn-primary btn-sm d-none d-sm-inline-block">
-                    <x-cicon name="plus" class="c-icon mr-1" />
+                    <x-aicon name="plus" class="c-icon mr-1" />
 					Add new permission
 				</a>
 			</div>

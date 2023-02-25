@@ -1,6 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
-    "/adminr/js/system.js": "/adminr/js/system.js",
-    "/css/app.css": "/css/app.css",
-    "/adminr/css/system.css": "/adminr/css/system.css"
+    "/adminr/js/adminr-core.js": "/adminr/js/adminr-core.js",
+    "/adminr/css/adminr-core.css": "/adminr/css/adminr-core.css",
+    "/css/app.css": "/css/app.css"
 }

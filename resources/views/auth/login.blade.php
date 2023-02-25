@@ -16,7 +16,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <svg class="c-icon">
-                                                <use xlink:href="{{ coreUiIcon('cil-user') }}"></use>
+                                                <use xlink:href="{{ adminrIcon('cil-user') }}"></use>
                                             </svg>
                                         </span>
                                     </div>
@@ -35,7 +35,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <svg class="c-icon">
-                                                <use xlink:href="{{ coreUiIcon('cil-lock-locked') }}"></use>
+                                                <use xlink:href="{{ adminrIcon('cil-lock-locked') }}"></use>
                                             </svg>
                                         </span>
                                     </div>

@@ -1,6 +1,6 @@
 <?php
 
-use Adminr\System\Adminr;
+use Adminr\Core\Adminr;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;

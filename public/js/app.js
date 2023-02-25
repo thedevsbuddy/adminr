@@ -36783,10 +36783,10 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./system/resources/sass/system.scss":
-/*!*******************************************!*\
-  !*** ./system/resources/sass/system.scss ***!
-  \*******************************************/
+/***/ "./adminr/Core/resources/sass/adminr-core.scss":
+/*!*****************************************************!*\
+  !*** ./adminr/Core/resources/sass/adminr-core.scss ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37470,7 +37470,7 @@ webpackContext.id = "./resources/js sync recursive \\.vue$/";
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
-/******/ 			"adminr/css/system": 0,
+/******/ 			"adminr/css/adminr-core": 0,
 /******/ 			"css/app": 0
 /******/ 		};
 /******/ 		
@@ -37521,9 +37521,9 @@ webpackContext.id = "./resources/js sync recursive \\.vue$/";
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["adminr/css/system","css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["adminr/css/system","css/app"], () => (__webpack_require__("./system/resources/sass/system.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["adminr/css/system","css/app"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["adminr/css/adminr-core","css/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["adminr/css/adminr-core","css/app"], () => (__webpack_require__("./adminr/Core/resources/sass/adminr-core.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["adminr/css/adminr-core","css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

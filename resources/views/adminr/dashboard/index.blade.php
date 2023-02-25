@@ -17,7 +17,7 @@
             <div class="card text-white bg-primary">
                 <div class="card-body">
                     <div class="text-muted text-right mb-4">
-                        <x-cicon name="people" class="c-icon c-icon-2xl" />
+                        <x-aicon name="people" class="c-icon c-icon-2xl" />
                     </div>
                     <div class="text-value-lg">{{ $usersCount }}</div>
                     <small class="text-muted text-uppercase font-weight-bold">Users Registered</small>

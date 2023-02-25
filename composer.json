@@ -34,12 +34,12 @@
       "App\\": "app/",
       "Database\\Factories\\": "database/factories/",
       "Database\\Seeders\\": "database/seeders/",
-      "Adminr\\Resource\\": "modules/",
-      "Adminr\\System\\": "system/"
+      "Adminr\\Resources\\": "adminr/Resources/",
+      "Adminr\\Core\\": "adminr/Core/"
     },
     "files": [
       "app/Http/helpers.php",
-      "system/Http/Helpers/helpers.php"
+      "adminr/Core/Http/Helpers/helpers.php"
     ]
   },
   "autoload-dev": {

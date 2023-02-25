@@ -6,6 +6,6 @@ mix.js("resources/js/app.js", "public/js").css(
 );
 
 /// Adminr System Related Assets
-mix.js("system/resources/js/system.js", "public/adminr/js")
+mix.js("adminr/Core/resources/js/adminr-core.js", "public/adminr/js")
     .vue()
-    .sass("system/resources/sass/system.scss", "public/adminr/css");
+    .sass("adminr/Core/resources/sass/adminr-core.scss", "public/adminr/css");

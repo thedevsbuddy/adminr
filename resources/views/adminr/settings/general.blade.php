@@ -80,7 +80,7 @@
                                                    style="--aspect-ratio: 1; width: 100px; background-image: url({{ asset(getSetting('app_logo')) }})">
                                                 <div class="custom-file-content">
                                     <span class="text-dark">
-                                        <x-cicon name="camera" class="text-dark w-100 file-input-icon"
+                                        <x-aicon name="camera" class="text-dark w-100 file-input-icon"
                                                  style="height: 25px;"/>
                                     </span>
                                                     <input name="app_logo" class="file-input" id="app_logo" type="file"
@@ -97,7 +97,7 @@
                                                    style="--aspect-ratio: 1; width: 100px; background-image: url({{ asset(getSetting('app_logo')) }})">
                                                 <div class="custom-file-content">
                                     <span class="text-dark">
-                                        <x-cicon name="camera" class="text-dark w-100 file-input-icon"
+                                        <x-aicon name="camera" class="text-dark w-100 file-input-icon"
                                                  style="height: 25px;"/>
                                     </span>
                                                     <input name="app_favicon" class="file-input" id="app_favicon" type="file"

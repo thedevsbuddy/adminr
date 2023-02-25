@@ -30,7 +30,7 @@
             <div>
                 <a href="{{ route('adminr.users.index') }}"
                    class="btn btn-primary btn-sm d-none d-sm-inline-block">
-                    <x-cicon name="user" class="c-icon mr-1" />
+                    <x-aicon name="user" class="c-icon mr-1" />
                     View all users
                 </a>
             </div>
@@ -146,7 +146,7 @@
                                                    accept=".jpg, .png, .webp, .gif, .svg">
                                             <span class="ml-2 mb-2">
                                         <svg class="mr-1 text-white" style="height: 25px;">
-                                            <use xlink:href="{{ coreUiIcon('cil-user-plus') }}"></use>
+                                            <use xlink:href="{{ adminrIcon('cil-user-plus') }}"></use>
                                         </svg>
                                     </span>
                                         </label>
@@ -157,7 +157,7 @@
                         </div>
                         <div class="card-footer">
                             <button class="btn btn-primary" type="submit">
-                                <x-cicon name="save" class="c-icon mr-1" />
+                                <x-aicon name="save" class="c-icon mr-1" />
                                 Save
                             </button>
                         </div>
