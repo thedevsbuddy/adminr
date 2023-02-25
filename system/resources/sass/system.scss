@@ -1,4 +1,5 @@
 @import "./variables";
+@import "~select2/dist/css/select2.min.css";
 
 @import "./coreui/coreui";
 
@@ -6,7 +7,9 @@
 @import "~bootstrap/scss/bootstrap";
 
 @import "./bs-md-editor";
-
+body{
+    font-family: "Work Sans", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
 .custom-file-button {
     position: relative;
     border: 1px dashed #aaa;
@@ -160,4 +163,15 @@
 button:focus,
 button:active {
     outline: none !important;
+}
+
+.form-control-range{
+    accent-color: $primary;
+}
+.h-3 {
+    height: .75rem;
+}
+
+.w-3 {
+    width: .75rem;
 }

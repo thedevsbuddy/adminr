@@ -77,7 +77,7 @@ class UserController extends Controller
 
             $user->assignRole(Role::where('id', $request->get('role'))->first());
 
-            return $this->redirectSuccess(route(config('adminr.route_prefix') . '.users.index'), 'User created successfully!');
+            return $this->redirectSuccess(route( 'adminr.users.index'), 'User created successfully!');
         } catch (\Exception $e) {
             return $this->backError('Error : ' . $e->getMessage());
         } catch (\Error $e) {

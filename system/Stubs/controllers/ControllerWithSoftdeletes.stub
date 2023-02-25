@@ -56,7 +56,7 @@ class {{CONTROLLER_CLASS}} extends Controller
                 {{SAVE_DATA_STATEMENT}}
             ]);
 
-            return $this->redirectSuccess(route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.index'), "{{MODEL_ENTITY}} saved successfully!");
+            return $this->redirectSuccess(route( 'adminr.{{MODEL_ENTITIES}}.index'), "{{MODEL_ENTITY}} saved successfully!");
         } catch(\Exception $e){
             return $this->backError("Error: " . $e->getMessage());
         }
@@ -82,7 +82,7 @@ class {{CONTROLLER_CLASS}} extends Controller
                 {{UPDATE_DATA_STATEMENT}}
             ]);
 
-            return $this->redirectSuccess(route(config('adminr.route_prefix').'.{{MODEL_ENTITIES}}.index'), "{{MODEL_ENTITY}} updated successfully!");
+            return $this->redirectSuccess(route( 'adminr.{{MODEL_ENTITIES}}.index'), "{{MODEL_ENTITY}} updated successfully!");
         } catch(\Exception $e){
             return $this->backError("Error: " . $e->getMessage());
         }

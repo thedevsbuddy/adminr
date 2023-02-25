@@ -7,7 +7,7 @@
 @endpush
 
 @section('content')
-<div class="container-fluid" id="app">
+<div class="container-fluid">
     <div class="d-sm-flex justify-content-between align-items-center mb-3">
         <h3 class="text-dark mb-0">{{ __('Configure') }} {{ $resource->name }}</h3>
         <div>

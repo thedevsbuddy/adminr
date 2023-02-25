@@ -29,7 +29,7 @@ class ResourceController extends Controller
     public function index(): View
     {
         $resources = AdminrResource::with('menu')->paginate(10);
-        return view('adminr-engine::resources.index', compact('resources'));
+        return view('adminr::resources.index', compact('resources'));
     }
 
     public function store(Request $request): void
