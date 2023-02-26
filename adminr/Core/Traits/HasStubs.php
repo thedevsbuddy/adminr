@@ -8,13 +8,13 @@ use Illuminate\Support\Str;
 trait HasStubs {
     public string $stubsDirectory = __DIR__ . '/../Stubs';
 
-    public function getControllerStub($controller, $getPath = false): ?string
+    public function getControllerStub($filePath, $getPath = false): ?string
     {
-        if(File::exists($this->stubsDirectory . '/controllers/' . $controller . '.stub')){
+        if(File::exists($this->stubsDirectory . '/controllers/' . $filePath . '.stub')){
             if($getPath){
-                return $this->stubsDirectory . '/controllers/' . $controller . '.stub';
+                return $this->stubsDirectory . '/controllers/' . $filePath . '.stub';
             }
-           return File::get($this->stubsDirectory . '/controllers/' . $controller . '.stub');
+           return File::get($this->stubsDirectory . '/controllers/' . $filePath . '.stub');
         }
         return null;
     }

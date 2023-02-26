@@ -43,12 +43,13 @@ class AdminrBuilderService
 
         /// Prepares module info
         $this->prepareResourceInfo();
-
         $this->createStubsDirectories();
-
-//        File::copyDirectory(__DIR__ . '/../../resources/stubs/', storage_path($this->operationDirectory . '/stubs'));
     }
 
+    public function finalize(): void
+    {
+        File::copyDirectory(storage_path(".temp/$this->currentSessionId/$this->resourceName"), resourcesPath($this->resourceName));
+    }
 
     public function cleanUp(): void
     {
@@ -59,6 +60,7 @@ class AdminrBuilderService
 
     private function createStubsDirectories(): void
     {
+        File::deleteDirectory(storage_path(".temp"));
         File::makeDirectory(storage_path(".temp"), 0775, true, true);
         foreach ($this->resourceInfo->file->toArray() as $tempPath) {
             if (gettype($tempPath->path->temp) == 'object') {
@@ -69,12 +71,6 @@ class AdminrBuilderService
                 File::makeDirectory($tempPath->path->temp, 0775, true, true);
             }
         }
-//        File::copyDirectory(storage_path(".temp/" . $this->resourceName), resourcesPath($this->resourceName));
-    }
-
-    public function finalize(): void
-    {
-        File::copyDirectory(storage_path(".temp/$this->currentSessionId/$this->resourceName"), resourcesPath($this->resourceName));
     }
 
     private function prepareResourceInfo(): void

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace Adminr\Resources\{{RESOURCE_NAME}}\Http\Controllers;
 
 use Adminr\Resources\{{MODEL_CLASS}}\Models\{{MODEL_CLASS}};
 use Illuminate\Http\Request;
@@ -15,12 +15,9 @@ class {{CONTROLLER_CLASS}} extends Controller
     public function index(Request $request): View|RedirectResponse
     {
         try {
-            ${{MODEL_ENTITIES}} = {{MODEL_CLASS}}::query();
-            {{SEARCH_STATEMENTS}}
-            {{TRASHED_FILTER}}
-            ${{MODEL_ENTITIES}} = ${{MODEL_ENTITIES}}->paginate(10);
+            {{INDEX_QUERY}}
             return view('adminr.{{MODEL_ENTITIES}}.index', compact('{{MODEL_ENTITIES}}'));
-        } catch(\Exception $e){
+        } catch(\Exception | \Error $e){
             return $this->backError('Error: ' . $e->getMessage());
         }
     }
@@ -29,7 +26,7 @@ class {{CONTROLLER_CLASS}} extends Controller
     {
         try{
             return view('adminr.{{MODEL_ENTITIES}}.show', compact('{{MODEL_ENTITY}}'));
-        } catch(\Exception $e){
+        } catch(\Exception | \Error $e){
             return $this->backError("Error: " . $e->getMessage());
         }
     }
@@ -39,7 +36,7 @@ class {{CONTROLLER_CLASS}} extends Controller
         try{
             {{FOREIGN_ENTITY_DATA}}
             return view('adminr.{{MODEL_ENTITIES}}.create'{{FOREIGN_ENTITY_CREATE}});
-        } catch(\Exception $e){
+        } catch(\Exception | \Error $e){
             return $this->backError("Error: " . $e->getMessage());
         }
     }
@@ -47,15 +44,13 @@ class {{CONTROLLER_CLASS}} extends Controller
     public function store(Request $request): RedirectResponse
     {
         try{
-            {{VALIDATION_STATEMENT}}
-
             {{FILE_UPLOAD_STATEMENT}}
             {{MODEL_CLASS}}::create([
                 {{SAVE_DATA_STATEMENT}}
             ]);
 
-            return $this->redirectSuccess(route( 'adminr.{{MODEL_ENTITIES}}.index'), "{{MODEL_ENTITY}} saved successfully!");
-        } catch(\Exception $e){
+            return $this->redirectSuccess(route('adminr.{{MODEL_ENTITIES}}.index'), "{{MODEL_CLASS}} saved successfully!");
+        } catch(\Exception | \Error $e){
             return $this->backError("Error: " . $e->getMessage());
         }
     }
@@ -65,7 +60,7 @@ class {{CONTROLLER_CLASS}} extends Controller
         try{
             {{FOREIGN_ENTITY_DATA}}
             return view('adminr.{{MODEL_ENTITIES}}.edit', compact('{{MODEL_ENTITY}}'{{FOREIGN_ENTITY}}));
-        } catch(\Exception $e){
+        } catch(\Exception | \Error $e){
             return $this->backError("Error: " . $e->getMessage());
         }
     }
@@ -73,15 +68,13 @@ class {{CONTROLLER_CLASS}} extends Controller
     public function update(Request $request, {{MODEL_CLASS}} ${{MODEL_ENTITY}}): RedirectResponse
     {
         try{
-            {{UPDATE_VALIDATION_STATEMENT}}
-
             {{FILE_UPDATE_STATEMENT}}
             ${{MODEL_ENTITY}}->update([
                 {{UPDATE_DATA_STATEMENT}}
             ]);
 
             return $this->redirectSuccess(route( 'adminr.{{MODEL_ENTITIES}}.index'), "{{MODEL_ENTITY}} updated successfully!");
-        } catch(\Exception $e){
+        } catch(\Exception | \Error $e){
             return $this->backError("Error: " . $e->getMessage());
         }
     }
@@ -90,10 +83,11 @@ class {{CONTROLLER_CLASS}} extends Controller
     {
         try{
             ${{MODEL_ENTITY}} = {{MODEL_CLASS}}::findOrFail($id);
-            ${{MODEL_ENTITY}}->delete();
 
+            {{DELETE_FILE_STATEMENT}}
+            ${{MODEL_ENTITY}}->delete();
             return $this->backSuccess("{{MODEL_ENTITY}} deleted successfully!");
-        } catch(\Exception $e){
+        } catch(\Exception | \Error $e){
             return $this->backError("Error: " . $e->getMessage());
         }
     }
@@ -105,7 +99,7 @@ class {{CONTROLLER_CLASS}} extends Controller
             ${{MODEL_ENTITY}}->restore();
 
             return $this->backSuccess("{{MODEL_ENTITY}} restored successfully!");
-        } catch(\Exception $e){
+        } catch(\Exception | \Error $e){
             return $this->backError("Error: " . $e->getMessage());
         }
     }
@@ -117,7 +111,7 @@ class {{CONTROLLER_CLASS}} extends Controller
             {{DELETE_FILE_STATEMENT}}
             ${{MODEL_ENTITY}}->forceDelete();
             return $this->backSuccess("{{MODEL_ENTITY}} deleted successfully!");
-        } catch(\Exception $e){
+        } catch(\Exception | \Error $e){
             return $this->backError("Error: " . $e->getMessage());
         }
     }

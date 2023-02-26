@@ -3,14 +3,11 @@
 namespace Adminr\Core\Http\Controllers;
 
 use Adminr\Core\Database;
-use Adminr\Core\Services\AdminrBuilderService;
-use Adminr\Core\Services\AdminrControllersBuilderService;
-use Adminr\Core\Utility\Rayson;
+use Adminr\Core\Services\{AdminrBuilderService, AdminrControllersBuilderService, AdminrModelBuilderService};
 use App\Http\Controllers\Controller;
 use Adminr\Core\Models\{AdminrResource};
 use Adminr\Core\Traits\HasStubs;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Fluent;
 use Illuminate\Http\{JsonResponse, RedirectResponse, Request};
 use Illuminate\Support\Facades\{File, Artisan};
 use Illuminate\Support\Str;
@@ -44,19 +41,19 @@ class BuilderController extends Controller
             $builderService = new AdminrBuilderService($request);
 
             /// Prepare Controllers
-            $controllerService = (new AdminrControllersBuilderService())->inject($builderService);
-            /// Prepare Models
+            $controllerService = new AdminrControllersBuilderService($builderService);
             $controllerService->prepare();
+
+            /// Prepare Models
+            $modelService = new AdminrModelBuilderService($builderService);
+            $modelService->prepare();
             /// Prepare Migrations
             /// Prepare Views
             /// Prepare Routes
 
             /// ================================
-            /// Build Controllers
-            /// Build Models
-            /// Build Migrations
-            /// Build Views
-            /// Build Routes
+            /// Finalize and create resource
+            $builderService->finalize();
 
             /// ================================
             /// Store Resources

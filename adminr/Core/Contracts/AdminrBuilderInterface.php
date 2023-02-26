@@ -14,6 +14,4 @@ interface AdminrBuilderInterface
     public function build(): static;
 
     public function rollback(): static;
-
-    public function inject(AdminrBuilderService $service): static;
 }
