@@ -40,7 +40,6 @@ class BuilderController extends Controller
 //        }
 
         try {
-
             /// Create an instance of [AdminrBuilderService]
             $builderService = new AdminrBuilderService($request);
 

@@ -11,15 +11,15 @@ class Rayson extends Fluent
         $attrs = new self($attrs);
         if($recursive){
             foreach ($attrs->toArray() as $key => $attr){
-                if(gettype($attr) == 'object'){
-                    $attrs[$key] = new self($attr);
+                if(is_array($attr)){
+                    $attrs->{$key} = new self($attr);
                 } else{
-                    $attrs[$key] = $attr;
+                    $attrs->$key = $attr;
                 }
             }
         } else {
             foreach ($attrs->toArray() as $key => $attr){
-                $attrs[$key] = $attr;
+                $attrs->$key = $attr;
             }
         }
 

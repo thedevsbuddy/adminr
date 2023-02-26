@@ -38310,6 +38310,7 @@ __webpack_require__.r(__webpack_exports__);
     var pattern2 = /[\s|\-\.\d*@#$%^&()!~`/\\,+=]/;
     var modelList = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
     var isGenerating = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    var savingDraft = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var model = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
     var softdeletes = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var build_api = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
@@ -38457,8 +38458,38 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
 
+    function saveDraft() {
+      if (model.value !== "" && !savingDraft.value) {
+        savingDraft.value = true;
+        var resourceInfo = {
+          migrations: migrations.value,
+          model: model.value,
+          softdeletes: softdeletes.value,
+          build_api: build_api.value
+        };
+        localStorage.setItem('rapid_resource', JSON.stringify(resourceInfo));
+        setTimeout(function () {
+          return savingDraft.value = false;
+        }, 2000);
+      }
+    }
+
+    function loadDraft() {
+      var data = localStorage.getItem('rapid_resource');
+
+      if (data != null) {
+        data = JSON.parse(data);
+        migrations.value = data.migrations;
+        model.value = data.model;
+        build_api.value = data.build_api;
+        softdeletes.value = data.softdeletes;
+      }
+    }
+
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       getModelList();
+      loadDraft();
+      setInterval(saveDraft, 10000);
     });
     var __returned__ = {
       props: props,
@@ -38466,6 +38497,7 @@ __webpack_require__.r(__webpack_exports__);
       pattern2: pattern2,
       modelList: modelList,
       isGenerating: isGenerating,
+      savingDraft: savingDraft,
       model: model,
       softdeletes: softdeletes,
       build_api: build_api,
@@ -38482,6 +38514,8 @@ __webpack_require__.r(__webpack_exports__);
       validateModelName: validateModelName,
       onModelSelect: onModelSelect,
       onDataTypeSelect: onDataTypeSelect,
+      saveDraft: saveDraft,
+      loadDraft: loadDraft,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
@@ -39232,10 +39266,15 @@ var _hoisted_111 = /*#__PURE__*/_withScopeId(function () {
 
 var _hoisted_112 = [_hoisted_111];
 var _hoisted_113 = {
-  "class": "form-group mb-0"
+  "class": "form-group mb-0 d-flex justify-content-between"
 };
 var _hoisted_114 = ["disabled"];
 var _hoisted_115 = {
+  key: 0,
+  "class": "fas fa-spinner fa-spin mr-2"
+};
+var _hoisted_116 = ["disabled"];
+var _hoisted_117 = {
   key: 0,
   "class": "fas fa-spinner fa-spin mr-2"
 };
@@ -39637,7 +39676,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )], 8
   /* PROPS */
-  , _hoisted_114)])], 40
+  , _hoisted_114), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    style: {
+      "all": "unset"
+    },
+    "class": "btn-sm d-flex align-items-center",
+    type: "button",
+    onClick: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+      return $setup.saveDraft();
+    }, ["prevent"])),
+    disabled: $setup.savingDraft
+  }, [$setup.savingDraft ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("i", _hoisted_117)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_a_icon, {
+    key: 1,
+    name: "save",
+    "class": "h-4 w-4 mr-2"
+  })), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.savingDraft ? "Drafting..." : "Save Draft"), 1
+  /* TEXT */
+  )], 8
+  /* PROPS */
+  , _hoisted_116)])], 40
   /* PROPS, HYDRATE_EVENTS */
   , _hoisted_2)]);
 }

@@ -109,7 +109,7 @@
                       @change="(e) => onModelSelect(index, e.target.value)">
                 <option value="auth">Auth User</option>
                 <option v-for="(model, x) in modelList" :key="x" :value="model.name">{{
-                    model.name
+                  model.name
                   }}
                 </option>
               </select>
@@ -302,11 +302,16 @@
         </tr>
         </tbody>
       </table>
-      <div class="form-group mb-0">
+      <div class="form-group mb-0 d-flex justify-content-between">
         <button class="btn btn-primary btn-sm d-flex align-items-center" type="submit" :disabled="isGenerating">
           <i class="fas fa-spinner fa-spin mr-2" v-if="isGenerating"></i>
           <a-icon name="sitemap" class="h-4 w-4 mr-2" v-else/>
           {{ isGenerating ? "Generating..." : "Generate" }}
+        </button>
+        <button style="all: unset" class="btn-sm d-flex align-items-center" type="button" @click.prevent="saveDraft()" :disabled="savingDraft">
+          <i class="fas fa-spinner fa-spin mr-2" v-if="savingDraft"></i>
+          <a-icon name="save" class="h-4 w-4 mr-2" v-else/>
+          {{ savingDraft ? "Drafting..." : "Save Draft" }}
         </button>
       </div>
     </form>
@@ -326,6 +331,7 @@ const pattern = /[\s|\-\.\d_*@#$%^&()!~`/\\,+=]/;
 const pattern2 = /[\s|\-\.\d*@#$%^&()!~`/\\,+=]/;
 const modelList = ref([]);
 const isGenerating = ref(false);
+const savingDraft = ref(false);
 const model = ref('');
 const softdeletes = ref(false);
 const build_api = ref(true);
@@ -475,8 +481,35 @@ function onDataTypeSelect(e, index) {
   }
 }
 
+function saveDraft() {
+  if(model.value !== "" && !savingDraft.value){
+    savingDraft.value = true;
+    let resourceInfo = {
+      migrations: migrations.value,
+      model: model.value,
+      softdeletes: softdeletes.value,
+      build_api: build_api.value,
+    };
+    localStorage.setItem('rapid_resource', JSON.stringify(resourceInfo));
+    setTimeout(() => savingDraft.value = false, 2000);
+  }
+}
+
+function loadDraft() {
+  let data =  localStorage.getItem('rapid_resource');
+  if (data != null) {
+    data = JSON.parse(data);
+    migrations.value = data.migrations;
+    model.value = data.model;
+    build_api.value = data.build_api;
+    softdeletes.value = data.softdeletes;
+  }
+}
+
 onMounted(() => {
   getModelList();
+  loadDraft();
+  setInterval(saveDraft, 10000);
 })
 </script>
 
