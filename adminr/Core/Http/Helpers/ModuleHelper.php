@@ -8,9 +8,10 @@ use Illuminate\Support\Str;
 
 class ModuleHelper
 {
-    static public function getModules(): ?array
+    static public function getResources(): ?array
     {
-        return Cache::remember('modulesList', config('adminr.cache_ttl'), fn () => json_decode(File::get(__DIR__ . "/../../modules.json")));
+        Cache::forget('modulesList');
+        return Cache::remember('modulesList', config('adminr.cache_ttl'), fn () => json_decode(File::get(__DIR__ . "/../../resources.json")));
     }
 
     static public function getModulesInfo(string $module): ?object

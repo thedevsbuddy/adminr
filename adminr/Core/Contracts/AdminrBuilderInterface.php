@@ -2,9 +2,6 @@
 
 namespace Adminr\Core\Contracts;
 
-use Adminr\Core\Services\AdminrBuilderService;
-use Illuminate\Http\Request;
-
 interface AdminrBuilderInterface
 {
     public function prepare(): static;

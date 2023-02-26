@@ -1,6 +1,0 @@
-<?php
-
-
-
-Route::controller()->get('');
-

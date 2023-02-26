@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+{{USE_PAGINATION}}
 
 class {{MODEL_CLASS}} extends Model
 {
-    use HasFactory;
+    use HasFactory{{USED_PAGINATION}};
     protected $table = "{{TABLE_NAME}}";
     protected $guarded = ['id'];
 

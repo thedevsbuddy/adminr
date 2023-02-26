@@ -3,7 +3,14 @@
 namespace Adminr\Core\Http\Controllers;
 
 use Adminr\Core\Database;
-use Adminr\Core\Services\{AdminrBuilderService, AdminrControllersBuilderService, AdminrModelBuilderService};
+use Adminr\Core\Services\{AdminrApiResourcesBuilderService,
+    AdminrBuilderService,
+    AdminrControllersBuilderService,
+    AdminrMigrationBuilderService,
+    AdminrModelBuilderService,
+    AdminrRequestsBuilderService,
+    AdminrRoutesBuilderService,
+    AdminrViewsBuilderService};
 use App\Http\Controllers\Controller;
 use Adminr\Core\Models\{AdminrResource};
 use Adminr\Core\Traits\HasStubs;
@@ -15,10 +22,6 @@ use Illuminate\Support\Str;
 class BuilderController extends Controller
 {
     use HasStubs;
-
-    public function __construct()
-    {
-    }
 
     public function index(): View|RedirectResponse
     {
@@ -44,19 +47,33 @@ class BuilderController extends Controller
             $controllerService = new AdminrControllersBuilderService($builderService);
             $controllerService->prepare();
 
+            /// Prepare ApiResource
+            $requestService = new AdminrApiResourcesBuilderService($builderService);
+            $requestService->prepare();
+
+            /// Prepare Requests
+            $apiResourceService = new AdminrRequestsBuilderService($builderService);
+            $apiResourceService->prepare();
+
             /// Prepare Models
             $modelService = new AdminrModelBuilderService($builderService);
             $modelService->prepare();
+
             /// Prepare Migrations
+            $migrationService = new AdminrMigrationBuilderService($builderService);
+            $migrationService->prepare();
+
             /// Prepare Views
+            $viewsService = new AdminrViewsBuilderService($builderService);
+            $viewsService->prepare();
+
             /// Prepare Routes
+            $routesService = new AdminrRoutesBuilderService($builderService);
+            $routesService->prepare();
 
             /// ================================
             /// Finalize and create resource
-            $builderService->finalize();
-
-            /// ================================
-            /// Store Resources
+            $builderService->publish();
 
 //            Artisan::call('migrate');
 

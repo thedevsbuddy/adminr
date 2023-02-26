@@ -13,15 +13,10 @@ class AdminrModelBuilderService implements AdminrBuilderInterface
 {
     use HasStubs;
 
-    protected string $apiControllerTargetPath;
-    protected string $adminControllerTargetPath;
     protected Fluent $resource;
     protected Array $migrations;
     private AdminrBuilderService $builderService;
 
-    /**
-     * Injects [AdminrBuilderService] instance
-     */
     public function __construct(AdminrBuilderService $service)
     {
         $this->builderService = $service;
@@ -34,17 +29,12 @@ class AdminrModelBuilderService implements AdminrBuilderInterface
 
     public function prepare(): static
     {
-        $this->prepareAdminController();
-        return $this;
-    }
-
-    private function prepareAdminController()
-    {
         $stub = $this->builderService->hasSoftDelete
             ? $this->getModelStub('ModelWithSoftdeletes')
             : $this->getModelStub('Model');
         $stub = $this->processStub($stub);
         File::put($this->resource->files->path->temp.'/'.$this->resource->files->files, $stub);
+        return $this;
     }
 
     public function processStub(string $stub): array|string
@@ -52,6 +42,8 @@ class AdminrModelBuilderService implements AdminrBuilderInterface
         $stub = str_replace('{{MODEL_CLASS}}', $this->builderService->modelName, $stub);
         $stub = str_replace('{{TABLE_NAME}}', $this->builderService->tableName, $stub);
         $stub = str_replace('{{RESOURCE_NAME}}', $this->builderService->resourceName, $stub);
+        $stub = str_replace('{{USE_PAGINATION}}', $this->builderService->buildApi ? 'use Adminr\Core\Traits\HasPagination;' : '', $stub);
+        $stub = str_replace('{{USED_PAGINATION}}', $this->builderService->buildApi ? ', HasPagination' : '', $stub);
         return str_replace('{{MEDIA_ATTRIBUTE_STATEMENT}}', $this->getMediaAttributeStatement(), $stub);
     }
 

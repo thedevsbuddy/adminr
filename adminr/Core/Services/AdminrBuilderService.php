@@ -2,13 +2,13 @@
 
 namespace Adminr\Core\Services;
 
-use Adminr\Core\Traits\{CanManageFiles, HasStubs};
+use Adminr\Core\Traits\{HasStubs};
 use Illuminate\Http\Request;
 use Illuminate\Support\{Facades\File, Fluent, Str};
 
 class AdminrBuilderService
 {
-    use HasStubs, CanManageFiles;
+    use HasStubs;
 
     public Fluent $resourceInfo;
 
@@ -46,9 +46,10 @@ class AdminrBuilderService
         $this->createStubsDirectories();
     }
 
-    public function finalize(): void
+    public function publish(): void
     {
         File::copyDirectory(storage_path(".temp/$this->currentSessionId/$this->resourceName"), resourcesPath($this->resourceName));
+        File::deleteDirectory(storage_path(".temp/$this->currentSessionId"));
     }
 
     public function cleanUp(): void
@@ -84,9 +85,16 @@ class AdminrBuilderService
                         'main' => sanitizePath(resourcesPath("$this->resourceName/database")),
                     ]),
                     'files' => new Fluent([
-                        'migration' => Str::snake(now()->format('Y_m_d_his') . "_create_" . $this->modelEntities . "table") . ".php",
+                        'migration' => Str::snake("create_" . $this->modelEntities . "_table") . ".php",
                         'schema' => 'schema.json'
                     ]),
+                ]),
+                'apiResources' => new Fluent([
+                    'path' => new Fluent([
+                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/ApiResources")),
+                        'main' => sanitizePath(resourcesPath("$this->resourceName/Http/ApiResources")),
+                    ]),
+                    'files' => $this->modelName . "Resource.php",
                 ]),
                 'controllers' => new Fluent([
                     'path' => new Fluent([

@@ -5,85 +5,42 @@ namespace Adminr\Core\Traits;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-trait HasStubs {
+trait HasStubs
+{
     public string $stubsDirectory = __DIR__ . '/../Stubs';
 
-    public function getControllerStub($filePath, $getPath = false): ?string
+    public function getControllerStub($filePath): ?string
     {
-        if(File::exists($this->stubsDirectory . '/controllers/' . $filePath . '.stub')){
-            if($getPath){
-                return $this->stubsDirectory . '/controllers/' . $filePath . '.stub';
-            }
-           return File::get($this->stubsDirectory . '/controllers/' . $filePath . '.stub');
-        }
-        return null;
+        return File::get($this->stubsDirectory . '/controllers/' . $filePath . '.stub');
     }
 
-    public function getModelStub($model, $getPath = false): ?string
+    public function getModelStub($model): ?string
     {
-        if(File::exists($this->stubsDirectory . '/models/' . $model . '.stub')){
-            if($getPath){
-                return $this->stubsDirectory . '/models/' . $model . '.stub';
-            }
-            return File::get($this->stubsDirectory . '/models/' . $model . '.stub');
-        }
-        return null;
+        return File::get($this->stubsDirectory . '/models/' . $model . '.stub');
     }
 
-    public function getMigrationStub($migration, $getPath = false): ?string
+    public function getMigrationStub($migration): ?string
     {
-        if(File::exists($this->stubsDirectory . '/database/migrations/' . $migration . '.stub')){
-            if($getPath){
-                return $this->stubsDirectory . '/database/migrations/' . $migration . '.stub';
-            }
-            return File::get($this->stubsDirectory . '/database/migrations/' . $migration . '.stub');
-        }
-        return null;
+        return File::get($this->stubsDirectory . '/database/migrations/' . $migration . '.stub');
     }
 
-    public function getViewStub($view, $getPath = false): ?string
+    public function getViewStub($view): ?string
     {
-        if(File::exists($this->stubsDirectory . '/views/' . $view . '.stub')){
-            if($getPath){
-                return $this->stubsDirectory . '/views/' . $view . '.stub';
-            }
-            return File::get($this->stubsDirectory . '/views/' . $view . '.stub');
-        }
-        return null;
+        return File::get($this->stubsDirectory . '/views/' . $view . '.stub');
     }
 
-    public function getRouteStub($route, $getPath = false): ?string
+    public function getRouteStub($route): ?string
     {
-        if(File::exists($this->stubsDirectory . '/routes/' . $route . '.stub')){
-            if($getPath){
-                return $this->stubsDirectory . '/routes/' . $route . '.stub';
-            }
-            return File::get($this->stubsDirectory . '/routes/' . $route . '.stub');
-        }
-        return null;
+        return File::get($this->stubsDirectory . '/routes/' . $route . '.stub');
     }
 
-    public function getResourceStub($resourceFile, $getPath = false): ?string
+    public function getResourceStub($resourceFile): ?string
     {
-        if(File::exists($this->stubsDirectory . '/resources/' . $resourceFile . '.stub')){
-            if($getPath){
-                return $this->stubsDirectory . '/resources/' . $resourceFile . '.stub';
-            }
-            return File::get($this->stubsDirectory . '/resources/' . $resourceFile . '.stub');
-        }
-        return null;
+        return File::get($this->stubsDirectory . '/resources/' . $resourceFile . '.stub');
     }
 
-    public function getRelationStub($relationFile, $getPath = false): ?string
+    public function getRequestStub($requestFile): ?string
     {
-        if(File::exists($this->stubsDirectory . '/relations/' . $relationFile . '.stub')){
-            if($getPath){
-                return $this->stubsDirectory . '/relations/' . $relationFile . '.stub';
-            }
-            return File::get($this->stubsDirectory . '/relations/' . $relationFile . '.stub');
-        }
-        return null;
+        return File::get($this->stubsDirectory . '/requests/' . $requestFile . '.stub');
     }
-
-
 }

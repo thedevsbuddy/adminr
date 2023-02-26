@@ -8,14 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('{{TABLE_NAME}}', function (Blueprint $table) {
+        Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            {{MIGRATION_STATEMENT}}
+            $table->string("title");
+			$table->string("slug")->unique();
+			$table->foreignId("user_id")->constrained()->cascadeOnDelete();
+			$table->string("featured_image");
+			$table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('{{TABLE_NAME}}');
+        Schema::dropIfExists('articles');
     }
 };

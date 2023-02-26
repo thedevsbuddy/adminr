@@ -47,7 +47,7 @@ class AdminrServiceProvider extends ServiceProvider
         $this->loadComponents();
 
         /// Loading all the views from modules
-        $moduleArray = ModuleHelper::getModules();
+        $moduleArray = ModuleHelper::getResources();
         foreach ($moduleArray as $module) {
             $viewPath = resourcesPath($module->name . '/Views');
 

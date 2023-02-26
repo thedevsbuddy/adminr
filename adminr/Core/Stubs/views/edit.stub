@@ -1,4 +1,4 @@
-@extends('adminr.layouts.master')
+@extends('adminr::layouts.master')
 
 @section('title', 'Edit {{MODEL_ENTITY}}')
 
@@ -35,12 +35,10 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-sm btn-primary m-0">
-                     <svg class="h-3 w-3">
-                         <use xlink:href="{{ adminrIcon('cil-save') }}"></use>
-                     </svg>
-                     Save
-                </button>
+               <button type="submit" class="btn btn-sm btn-primary m-0 d-flex align-items-center">
+                    <x-aicon name="save" class="h-3 w-3 mr-2" />
+                    <span>Save</span>
+               </button>
             </div>
         </form>
     </div>

@@ -1,11 +1,11 @@
 <?php
 
-namespace Adminr\Resources\{{RESOURCE_NAME}}\Http\Resources;
+namespace Adminr\Resources\Article\Http\Resources;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class {{MODEL_CLASS}}Resource extends JsonResource
+class ArticleResource extends JsonResource
 {
 
     public function toArray($request): array|\JsonSerializable|Arrayable

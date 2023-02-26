@@ -14,21 +14,21 @@ class AdminrRouteServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $moduleArray = ModuleHelper::getModules();
-
-        $this->routes(function () use ($moduleArray) {
-            foreach ($moduleArray as $module) {
-                if (File::exists(resourcesPath($module->name . '/Routes/web.php'))) {
+        $resourceArray = ModuleHelper::getResources();
+        info($resourceArray);
+        $this->routes(function () use ($resourceArray) {
+            foreach ($resourceArray as $resource) {
+                if (File::exists(resourcesPath($resource->name . '/Routes/web.php'))) {
                     Route::middleware('web')
-                        ->namespace("Adminr\\Resource\\" . $module->name . "\\Http\\Controllers")
-                        ->group(resourcesPath($module->name . '/Routes/web.php'));
+                        ->namespace("Adminr\\Resources\\" . $resource->name . "\\Http\\Controllers")
+                        ->group(resourcesPath($resource->name . '/Routes/web.php'));
                 }
 
-                if (File::exists(resourcesPath($module->name . '/Routes/api.php'))) {
+                if (File::exists(resourcesPath($resource->name . '/Routes/api.php'))) {
                     Route::middleware('api')
                         ->prefix('api')
-                        ->namespace("Adminr\\Resource\\" . $module->name . "\\Http\\Controllers\\Api")
-                        ->group(resourcesPath($module->name . '/Routes/api.php'));
+                        ->namespace("Adminr\\Resources\\" . $resource->name . "\\Http\\Controllers\\Api")
+                        ->group(resourcesPath($resource->name . '/Routes/api.php'));
                 }
             }
         });

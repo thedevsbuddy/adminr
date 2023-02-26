@@ -4,7 +4,6 @@ namespace Adminr\Core\Services;
 
 use Adminr\Core\Contracts\AdminrBuilderInterface;
 use Adminr\Core\Traits\HasStubs;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Fluent;
 use Illuminate\Support\Str;
@@ -13,15 +12,10 @@ class AdminrControllersBuilderService implements AdminrBuilderInterface
 {
     use HasStubs;
 
-    protected string $apiControllerTargetPath;
-    protected string $adminControllerTargetPath;
     protected Fluent $resource;
     protected Array $migrations;
     private AdminrBuilderService $builderService;
 
-    /**
-     * Injects [AdminrBuilderService] instance
-     */
     public function __construct(AdminrBuilderService $service)
     {
         $this->builderService = $service;
@@ -50,11 +44,11 @@ class AdminrControllersBuilderService implements AdminrBuilderInterface
 
     private function prepareApiController()
     {
-        $controllerStub = $this->builderService->hasSoftDelete
+        $stub = $this->builderService->hasSoftDelete
             ? $this->getControllerStub('ApiControllerWithSoftdeletes')
             : $this->getControllerStub('ApiController');
-        $controllerStub = $this->processStub($controllerStub);
-        File::put($this->resource->files->path->temp->api.'/'.$this->resource->files->files, $controllerStub);
+        $stub = $this->processStub($stub);
+        File::put($this->resource->files->path->temp->api.'/'.$this->resource->files->files, $stub);
     }
 
     public function processStub(string $stub): array|string
@@ -74,6 +68,12 @@ class AdminrControllersBuilderService implements AdminrBuilderInterface
         $stub = str_replace('{{DELETE_FILE_STATEMENT}}', $this->getDeleteFileStatement(), $stub);
         $stub = str_replace('{{FOREIGN_ENTITY_USE}}', $this->getForeignEntityUseStatement(), $stub);
         $stub = str_replace('{{RESOURCE_NAME}}', $this->builderService->resourceName, $stub);
+        $stub = str_replace('{{CREATE_REQUEST_CLASS}}', "Create".$this->builderService->modelName."Request", $stub);
+        $stub = str_replace('{{UPDATE_REQUEST_CLASS}}', "Update".$this->builderService->modelName."Request", $stub);
+
+        /// Api Controller specific
+        $stub = str_replace('{{API_INDEX_QUERY}}', $this->getApiIndexQueryStatement(), $stub);
+        $stub = str_replace('{{FILE_UPLOAD_API_STATEMENT}}', $this->getFileUploadApiStatement(), $stub);
         return $stub;
     }
 
@@ -105,6 +105,26 @@ class AdminrControllersBuilderService implements AdminrBuilderInterface
             })";
         }
         return $indexQueryStmt . "->paginate(10);";
+    }
+
+    private function getApiIndexQueryStatement(): string
+    {
+        $ApiIndexQueryStmt = "\${$this->builderService->modelEntities} = {$this->builderService->modelName}::query()";
+        foreach ($this->migrations as $migration) {
+            if ($migration['field_name'] != 'id' || $migration['data_type'] != 'file') {
+                if ($migration['can_search']) {
+                        $ApiIndexQueryStmt .= "->when(!is_null(request()->get('_{$migration['field_name']}')), function(\$query){
+                \$query->where('{$migration['field_name']}', 'LIKE', '%'.request()->get('_{$migration['field_name']}').'%');
+            })";
+                }
+            }
+        }
+        if ($this->builderService->hasSoftDelete) {
+            $ApiIndexQueryStmt .= "->when(request()->get('_with_trashed') == '1', function(\$query){
+                \$query->withTrashed();
+            })";
+        }
+        return $ApiIndexQueryStmt . "->paginated()->get();";
     }
 
     private function getForeignEntityDataStatement(): string
@@ -284,5 +304,32 @@ class AdminrControllersBuilderService implements AdminrBuilderInterface
             }
         }
         return $foreignEntityUseStmt;
+    }
+
+    private function getFileUploadApiStatement(): string
+    {
+        $fileUploadStmt = "";
+        foreach ($this->migrations as $migration) {
+            if ($migration['data_type'] == 'file') {
+                if ($migration['file_type'] == 'single') {
+                    $fileUploadStmt .= "if(\$request->hasFile(\"" . Str::snake($migration['field_name']) . "\")){\n\t\t\t\t";
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFile(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->builderService->modelEntities . "\")->getFilePath();\n\t\t\t";
+                } else {
+                    $fileUploadStmt .= "if(\$request->file(\"" . Str::snake($migration['field_name']) . "\")){\n\t\t\t\t";
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = \$this->uploadFiles(\$request->file(\"" . Str::snake($migration['field_name']) . "\"), \"" . $this->builderService->modelEntities . "\")->getFilePaths();\n\t\t\t";
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = json_encode(\$" . Str::snake($migration['field_name']) . ");\n\t\t\t";
+                }
+                $fileUploadStmt .= "}";
+                $fileUploadStmt .= " else {\n\t\t\t\t";
+                if (!$migration['nullable']) {
+                    $fileUploadStmt .= "return \$this->error(\"Please select an image for " . Str::title(Str::replace('_', ' ', $migration['field_name'])) . "\");\n\t\t\t";
+                } else {
+                    $fileUploadStmt .= "\$" . Str::snake($migration['field_name']) . " = null;\n\t\t\t";
+                }
+                $fileUploadStmt .= "}\n";
+            }
+        }
+
+        return $fileUploadStmt;
     }
 }

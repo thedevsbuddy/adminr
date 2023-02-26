@@ -1,0 +1,20 @@
+<?php
+
+namespace Adminr\Resources\{{RESOURCE_NAME}}\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class Update{{MODEL_CLASS}}Request extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            {{UPDATE_VALIDATION_RULES}}
+        ];
+    }
+}
