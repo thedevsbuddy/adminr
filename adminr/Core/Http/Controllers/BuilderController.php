@@ -5,10 +5,12 @@ namespace Adminr\Core\Http\Controllers;
 use Adminr\Core\Database;
 use Adminr\Core\Services\AdminrBuilderService;
 use Adminr\Core\Services\AdminrControllersBuilderService;
+use Adminr\Core\Utility\Rayson;
 use App\Http\Controllers\Controller;
 use Adminr\Core\Models\{AdminrResource};
 use Adminr\Core\Traits\HasStubs;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Fluent;
 use Illuminate\Http\{JsonResponse, RedirectResponse, Request};
 use Illuminate\Support\Facades\{File, Artisan};
 use Illuminate\Support\Str;
@@ -38,9 +40,9 @@ class BuilderController extends Controller
 //        }
 
         try {
+
             /// Create an instance of [AdminrBuilderService]
-            $builderService = new AdminrBuilderService();
-            $builderService->init($request);
+            $builderService = new AdminrBuilderService($request);
 
             /// Prepare Controllers
             $controllerService = (new AdminrControllersBuilderService())->inject($builderService);
@@ -63,7 +65,7 @@ class BuilderController extends Controller
 //            Artisan::call('migrate');
 
             return response()->json(['status' => 'success', 'message' => 'Resource generated Successfully!', 'entities' => 'ssd'], 200);
-        } catch (\Exception | \Error $e) {
+        } catch (\Exception|\Error $e) {
             info($e->getMessage());
             $this->rollbackAll();
             return response()->json(['status' => 'error', 'message' => 'Error: ' . $e->getMessage()], 200);

@@ -25,9 +25,8 @@ class AdminrControllersBuilderService implements AdminrBuilderInterface
         $this->builderService = $service;
         $this->resource = new Fluent([
             'name' => $this->builderService->resourceInfo->name,
-            'files' => $this->builderService->resourceInfo->files->controllers,
+            'files' => $this->builderService->resourceInfo->file->controllers,
         ]);
-        info($this->resource->toArray());
         return $this;
     }
 

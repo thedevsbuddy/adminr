@@ -23,12 +23,14 @@ class AdminrBuilderService
     public string $tableName;
     public bool $hasSoftDelete;
     public bool $buildApi;
+    public string $currentSessionId;
 
-    public function init(Request $request): void
+    public function __construct(Request $request)
     {
         $this->request = $request;
 
         $this->modelName = Str::studly(Str::singular($this->request->get('model')));
+        $this->currentSessionId = Str::random();
         $this->resourceName = $this->modelName;
         $this->modelPluralName = Str::plural($this->modelName);
         $this->modelEntity = Str::snake($this->modelName);
@@ -47,13 +49,6 @@ class AdminrBuilderService
 //        File::copyDirectory(__DIR__ . '/../../resources/stubs/', storage_path($this->operationDirectory . '/stubs'));
     }
 
-    protected function makeDirectory($path): void
-    {
-        if (!File::isDirectory(dirname($path))) {
-            File::makeDirectory(dirname($path), 0775, true, true);
-        }
-    }
-
 
     public function cleanUp(): void
     {
@@ -64,27 +59,32 @@ class AdminrBuilderService
 
     private function createStubsDirectories(): void
     {
-        foreach ($this->resourceInfo->get('files') as $tempPath) {
-            if (typeOf($tempPath->path->main) == Fluent::class) {
-                foreach ($tempPath->path->main as $path) {
+        File::makeDirectory(storage_path(".temp"), 0775, true, true);
+        foreach ($this->resourceInfo->file->toArray() as $tempPath) {
+            if (gettype($tempPath->path->temp) == 'object') {
+                foreach ($tempPath->path->temp->toArray() as $path) {
                     File::makeDirectory($path, 0775, true, true);
                 }
             } else {
-                File::makeDirectory($tempPath->path->main, 0775, true, true);
+                File::makeDirectory($tempPath->path->temp, 0775, true, true);
             }
         }
-        if (!File::isDirectory(storage_path(".temp"))) File::makeDirectory(storage_path(".temp"), 0775, true, true);
-        File::copyDirectory(resourcesPath($this->resourceName), storage_path(".temp/" . $this->resourceName));
+//        File::copyDirectory(storage_path(".temp/" . $this->resourceName), resourcesPath($this->resourceName));
+    }
+
+    public function finalize(): void
+    {
+        File::copyDirectory(storage_path(".temp/$this->currentSessionId/$this->resourceName"), resourcesPath($this->resourceName));
     }
 
     private function prepareResourceInfo(): void
     {
         $this->resourceInfo = new Fluent([
             'name' => $this->resourceName,
-            'files' => new Fluent([
+            'file' => new Fluent([
                 'migration' => new Fluent([
                     'path' => new Fluent([
-                        'temp' => sanitizePath(storage_path(".temp/$this->resourceName/database")),
+                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/database")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/database")),
                     ]),
                     'files' => new Fluent([
@@ -95,8 +95,8 @@ class AdminrBuilderService
                 'controllers' => new Fluent([
                     'path' => new Fluent([
                         'temp' => new Fluent([
-                            'admin' => sanitizePath(storage_path(".temp/$this->resourceName/Http/Controllers")),
-                            'api' => sanitizePath(storage_path(".temp/$this->resourceName/Http/Controllers/Api")),
+                            'admin' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Controllers")),
+                            'api' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Controllers/Api")),
                         ]),
                         'main' => new Fluent([
                             'admin' => sanitizePath(resourcesPath("$this->resourceName/Http/Controllers")),
@@ -107,7 +107,7 @@ class AdminrBuilderService
                 ]),
                 'requests' => new Fluent([
                     'path' => new Fluent([
-                        'temp' => sanitizePath(storage_path(".temp/$this->resourceName/Http/Requests")),
+                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Requests")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/Http/Requests")),
                     ]),
                     'files' => new  Fluent([
@@ -117,14 +117,14 @@ class AdminrBuilderService
                 ]),
                 'model' => new Fluent([
                     'path' => new Fluent([
-                        'temp' => sanitizePath(storage_path(".temp/$this->resourceName/Models")),
+                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Models")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/Models")),
                     ]),
                     'files' => $this->modelName . ".php",
                 ]),
                 'routes' => new Fluent([
                     'path' => new Fluent([
-                        'temp' => sanitizePath(storage_path(".temp/$this->resourceName/Routes")),
+                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Routes")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/Routes")),
                     ]),
                     'files' => new Fluent([
@@ -134,7 +134,7 @@ class AdminrBuilderService
                 ]),
                 'views' => new Fluent([
                     'path' => new Fluent([
-                        'temp' => sanitizePath(storage_path(".temp/$this->resourceName/Views")),
+                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Views")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/Views")),
                     ]),
                     'files' => new Fluent([
@@ -145,7 +145,7 @@ class AdminrBuilderService
                 ]),
                 'resource' => new Fluent([
                     'path' => new Fluent([
-                        'temp' => sanitizePath(storage_path(".temp/$this->resourceName")),
+                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName")),
                     ]),
                     'files' => "resource.json",
