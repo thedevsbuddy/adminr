@@ -10,8 +10,9 @@
 
 ## WARNING: This project is in under major changes and will not be available with same name.
 
-As i am working on this project again from ground up to make it more stable and optimized and new project will use new structure for the projects and resource generations. The update will be available with the new name as [`RapidCMS`](https://github.com/thedevsbuddy/rapid-cms). And new project will also use the laravel 10 as the backbone.
+As i am working on this project again from ground up to make it more stable and optimized and new project will use new structure for the projects and resource generations.And new project will also use the laravel 10 as the backbone.
 
+ The update will be available with the new name as [`RapidCMS`](https://github.com/thedevsbuddy/rapid-cms). Which will be completely different project and this project will be abandoned.
 ---
 
 ![AdminR](./public/screenshots/AdminR.svg)
