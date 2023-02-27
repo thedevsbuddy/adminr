@@ -6,6 +6,14 @@
 <a href="https://packagist.org/packages/thedevsbuddy/adminr"><img src="https://img.shields.io/packagist/l/thedevsbuddy/adminr" alt="License"></a>
 </p>
 
+---
+
+## WARNING: This project is in under major changes and will not be available with same name.
+
+As i am working on this project again from ground up to make it more stable and optimized and new project will use new structure for the projects and resource generations. The update will be available with the new name as [`RapidCMS`](https://github.com/thedevsbuddy/rapid-cms). And new project will also use the laravel 10 as the backbone.
+
+---
+
 ![AdminR](./public/screenshots/AdminR.svg)
 
 ## About AdminR
