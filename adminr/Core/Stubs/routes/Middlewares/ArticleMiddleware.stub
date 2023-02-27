@@ -1,0 +1,12 @@
+<?php
+
+namespace Adminr\Resources\{{RESOURCE_NAME}}\Http\Middlewares;
+
+use Adminr\Core\Http\Middlewares\AdminrMiddleware;
+
+class {{RESOURCE_NAME}}Middleware extends AdminrMiddleware
+{
+    protected string $resource = '{{RESOURCE_NAME}}';
+
+    // Its magic
+}
