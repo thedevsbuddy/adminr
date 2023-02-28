@@ -8,11 +8,12 @@
 
 ---
 
-## WARNING: This project is in under major changes and will not be available with same name.
+## WARNING: I would like to inform you that this project is currently undergoing significant modifications, and will soon be released in a stable (`v1.0`).
 
-As i am working on this project again from ground up to make it more stable and optimized and new project will use new structure for the projects and resource generations.And new project will also use the laravel 10 as the backbone.
+I am currently engaged in a comprehensive redevelopment of this project with the aim of improving its stability and optimization. The undertaking involves the implementation of a new project structure as well as the generation of new resources to support its objectives.
 
- The update will be available with the new name as [`RapidCMS`](https://github.com/thedevsbuddy/rapid-cms). Which will be completely different project and this project will be abandoned.
+After careful consideration, I have decided to forego the pursuit of a new project. Given the current breadth of my existing project and my sole contribution to it, I find it unnecessary to initiate a separate undertaking. Additionally, as I am employed full-time, I am unable to dedicate the requisite resources to a new project solely for the purposes of introducing an update. Accordingly, I have concluded that it is most prudent to allow the existing project to evolve under its current name.
+
 ---
 
 ![AdminR](./public/screenshots/AdminR.svg)
