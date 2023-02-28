@@ -8,7 +8,7 @@
 
 ---
 
-## WARNING: I would like to inform you that this project is currently undergoing significant modifications, and will soon be released in a stable (`v1.0`).
+## NOTE: I would like to inform you that this project is currently undergoing significant modifications, and will soon be released in a stable (`v1.0`).
 
 I am currently engaged in a comprehensive redevelopment of this project with the aim of improving its stability and optimization. The undertaking involves the implementation of a new project structure as well as the generation of new resources to support its objectives.
 
