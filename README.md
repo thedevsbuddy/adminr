@@ -12,7 +12,7 @@
 
 I am currently engaged in a comprehensive redevelopment of this project with the aim of improving its stability and optimization. The undertaking involves the implementation of a new project structure as well as the generation of new resources to support its objectives.
 
-After careful consideration, I have decided to forego the pursuit of a new project. Given the current breadth of my existing project and my sole contribution to it, I find it unnecessary to initiate a separate undertaking. Additionally, as I am employed full-time, I am unable to dedicate the requisite resources to a new project solely for the purposes of introducing an update. Accordingly, I have concluded that it is most prudent to allow the existing project to evolve under its current name.
+After careful consideration, I have decided to forego the pursuit of a new project (RapidCMS). Given the current breadth of my existing project and my sole contribution to it, I find it unnecessary to initiate a separate undertaking. Additionally, as I am employed full-time, I am unable to dedicate the requisite resources to a new project solely for the purposes of introducing an update. Accordingly, I have concluded that it is most prudent to allow the existing project to evolve under its current name.
 
 ---
 
