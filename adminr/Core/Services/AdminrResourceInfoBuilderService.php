@@ -39,7 +39,6 @@ class AdminrResourceInfoBuilderService implements AdminrBuilderInterface
         $stub = str_replace('{{FILES}}', $this->builderService->modelName, $stub);
         $stub = str_replace('{{REQUESTED_DATA}}', json_encode($this->builderService->request->all()), $stub);
         $stub = str_replace('{{RESOURCE_INFO_ARRAY}}', $this->getResourceInfoStmt(), $stub);
-        $stub = str_replace('{{FILES}}', $this->getFilesArrayStmt(), $stub);
         return str_replace('{{RESOURCE_NAME}}', $this->builderService->resourceName, $stub);
     }
 
@@ -94,29 +93,6 @@ class AdminrResourceInfoBuilderService implements AdminrBuilderInterface
         }
         $resourceInfoStmt .= "}";
         return $resourceInfoStmt;
-    }
-
-    private function getFilesArrayStmt(): string
-    {
-        $fileArrayStmt = "";
-        foreach ($this->builderService->resourceInfo->file->toArray() as $key => $fileInfo){
-            $fileArrayStmt .= '"'.$key.'":';
-            if(is_array($fileInfo->path) || is_object($fileInfo->path)){
-                $fileArrayStmt .= '[';
-                foreach ($fileInfo->path->toArray() as $path){
-                    $fileArrayStmt .= '"'.$path.'/'.$fileInfo->files.'",';
-                }
-                $fileArrayStmt .= '],';
-            } elseif(is_array($fileInfo->files) || is_object($fileInfo->files)) {
-                $fileArrayStmt .= '[';
-                foreach ($fileInfo->files->toArray() as $file){
-                    $fileArrayStmt .= '"'.$fileInfo->path.'/'.$file.'",';
-                }
-                $fileArrayStmt .= '],';
-            }
-        }
-        $fileArrayStmt .= "}";
-        return $fileArrayStmt;
     }
 
 }

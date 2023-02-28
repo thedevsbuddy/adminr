@@ -1,9 +1,6 @@
 {
     "name" : "{{RESOURCE_NAME}}",
     "model" : "{{MODEL_CLASS}}",
-    "files" : {
-        {{FILES}}
-    },
     "requested_data": [
     	{{REQUESTED_DATA}}
     ],
