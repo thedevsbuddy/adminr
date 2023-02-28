@@ -2,15 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use {{CONTROLLER_NAMESPACE}}{{CONTROLLER_CLASS}};
+use Adminr\Resources\{{RESOURCE_NAME}}\Http\Middlewares\{{RESOURCE_NAME}}Middleware;
 
 Route::group(['as' => 'adminr.{{MODEL_ENTITIES}}.', 'prefix' => config('adminr.path') . '/manage/{{MODEL_ENTITIES}}'], function () {
-    Route::get('/', [{{CONTROLLER_CLASS}}::class, 'index'])->middleware("permission:{{MODEL_ENTITIES}}_list")->name("index");
-    Route::get('/create', [{{CONTROLLER_CLASS}}::class, 'create'])->middleware("permission:{{MODEL_ENTITIES}}_create")->name("create");
-    Route::post('/store', [{{CONTROLLER_CLASS}}::class, 'store'])->middleware("permission:{{MODEL_ENTITIES}}_store")->name("store");
-    Route::get('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'show'])->middleware("permission:{{MODEL_ENTITIES}}_single")->name("show");
-    Route::get('/{{{MODEL_ENTITY}}}/edit', [{{CONTROLLER_CLASS}}::class, 'edit'])->middleware("permission:{{MODEL_ENTITIES}}_edit")->name("edit");
-    Route::put('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'update'])->middleware("permission:{{MODEL_ENTITIES}}_update")->name("update");
-    Route::delete('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'destroy'])->middleware("permission:{{MODEL_ENTITIES}}_destroy")->name("destroy");
-    Route::post('/{{{MODEL_ENTITY}}}/restore', [{{CONTROLLER_CLASS}}::class, 'restore'])->middleware("permission:{{MODEL_ENTITIES}}_restore")->name("restore");
-    Route::delete('/{{{MODEL_ENTITY}}}/force-destroy', [{{CONTROLLER_CLASS}}::class, 'forceDestroy'])->middleware("permission:{{MODEL_ENTITIES}}_force_destroy")->name("force-destroy");
+    /// Register/Instantiate Middleware
+    $middleware = new {{RESOURCE_NAME}}Middleware();
+
+    Route::get('/', [{{CONTROLLER_CLASS}}::class, 'index'])->middleware($middleware->web('index'))->name("index");
+    Route::get('/create', [{{CONTROLLER_CLASS}}::class, 'create'])->middleware($middleware->web('create'))->name("create");
+    Route::post('/store', [{{CONTROLLER_CLASS}}::class, 'store'])->middleware($middleware->web('store'))->name("store");
+    Route::get('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'show'])->middleware($middleware->web('show'))->name("show");
+    Route::get('/{{{MODEL_ENTITY}}}/edit', [{{CONTROLLER_CLASS}}::class, 'edit'])->middleware($middleware->web('edit'))->name("edit");
+    Route::put('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'update'])->middleware($middleware->web('update'))->name("update");
+    Route::delete('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'destroy'])->middleware($middleware->web('destroy'))->name("destroy");
+    Route::post('/{{{MODEL_ENTITY}}}/restore', [{{CONTROLLER_CLASS}}::class, 'restore'])->middleware($middleware->web('restore'))->name("restore");
+    Route::delete('/{{{MODEL_ENTITY}}}/force-destroy', [{{CONTROLLER_CLASS}}::class, 'forceDestroy'])->middleware($middleware->web('forceDestroy'))->name("force-destroy");
 });

@@ -38391,7 +38391,8 @@ __webpack_require__.r(__webpack_exports__);
         migrations: migrations.value,
         model: model.value,
         softdeletes: softdeletes.value,
-        build_api: build_api.value
+        build_api: build_api.value,
+        api_resource: api_resource.value
       };
       axios.post("/generate", postData).then(function (response) {
         isGenerating.value = false;
@@ -38465,7 +38466,8 @@ __webpack_require__.r(__webpack_exports__);
           migrations: migrations.value,
           model: model.value,
           softdeletes: softdeletes.value,
-          build_api: build_api.value
+          build_api: build_api.value,
+          api_resource: api_resource.value
         };
         localStorage.setItem('rapid_resource', JSON.stringify(resourceInfo));
         setTimeout(function () {
@@ -38483,6 +38485,7 @@ __webpack_require__.r(__webpack_exports__);
         model.value = data.model;
         build_api.value = data.build_api;
         softdeletes.value = data.softdeletes;
+        api_resource.value = data.api_resource;
       }
     }
 

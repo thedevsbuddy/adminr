@@ -1,0 +1,11 @@
+{
+    "name" : "{{RESOURCE_NAME}}",
+    "model" : "{{MODEL_CLASS}}",
+    "files" : {
+        {{FILES}}
+    },
+    "requested_data": [
+    	{{REQUESTED_DATA}}
+    ],
+    "resource_info": {{RESOURCE_INFO_ARRAY}}
+}

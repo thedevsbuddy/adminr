@@ -15,7 +15,6 @@ class AdminrRouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $resourceArray = ModuleHelper::getResources();
-        info($resourceArray);
         $this->routes(function () use ($resourceArray) {
             foreach ($resourceArray as $resource) {
                 if (File::exists(resourcesPath($resource->name . '/Routes/web.php'))) {

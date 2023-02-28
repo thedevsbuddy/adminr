@@ -6,6 +6,6 @@ use Illuminate\Support\Fluent;
 
 interface AdminrMiddlewareInterface
 {
-    public function of(string $method): string;
-    public function all(): Fluent;
+    public function api(string $method): null|string|Fluent;
+    public function web(string $method): null|string|Fluent;
 }

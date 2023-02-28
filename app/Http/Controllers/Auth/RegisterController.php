@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Adminr\Core\Http\Controllers\AdminrBaseController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
 
-class RegisterController extends Controller
+class RegisterController extends AdminrBaseController
 {
     public function __construct()
     {

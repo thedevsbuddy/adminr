@@ -13,7 +13,7 @@ class AdminrRoutesBuilderService implements AdminrBuilderInterface
     use HasStubs;
 
     protected Fluent $resource;
-    protected Array $migrations;
+    protected array $migrations;
     private AdminrBuilderService $builderService;
 
     public function __construct(AdminrBuilderService $service)
@@ -54,6 +54,7 @@ class AdminrRoutesBuilderService implements AdminrBuilderInterface
         $stub = str_replace('{{MODEL_CLASS}}', $this->builderService->modelName, $stub);
         $stub = str_replace('{{MODEL_ENTITIES}}', $this->builderService->modelEntities, $stub);
         $stub = str_replace('{{MODEL_ENTITY}}', $this->builderService->modelEntity, $stub);
+        $stub = str_replace('{{RESOURCE_NAME}}', $this->builderService->resourceName, $stub);
         $stub = str_replace('{{API_CONTROLLER_NAMESPACE}}', "Adminr\\Resources\\".$this->builderService->resourceName."\\Http\\Controllers\\Api\\", $stub);
         $stub = str_replace('{{CONTROLLER_NAMESPACE}}', "Adminr\\Resources\\".$this->builderService->resourceName."\\Http\\Controllers\\", $stub);
         $stub = str_replace('{{CONTROLLER_CLASS}}', $this->builderService->controllerName, $stub);

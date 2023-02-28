@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Adminr\Core\Http\Controllers\AdminrBaseController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\VerificationToken;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
-class VerificationController extends Controller
+class VerificationController extends AdminrBaseController
 {
 
     public function index(): View|RedirectResponse
@@ -74,7 +75,7 @@ class VerificationController extends Controller
         $verifyUser = VerificationToken::where('token', request('token'))
             ->with('user')
             ->first();
-        
+
         if (!is_null($verifyUser)) {
             $user = $verifyUser->user;
             if (is_null($user->email_verified_at)) {

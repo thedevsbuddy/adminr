@@ -13,17 +13,25 @@ class AdminrMiddleware implements AdminrMiddlewareInterface
 
     public function __construct()
     {
-        $middlewareFile = File::get(resourcesPath("$this->resource/Http/Middlewares/api.json"));
-        $this->resourceMiddleware = new Fluent(json_decode($middlewareFile));
+        $middlewareFile = File::get(resourcesPath("$this->resource/Http/Middlewares/web.json"));
+        $apiMiddlewareFile = File::get(resourcesPath("$this->resource/Http/Middlewares/api.json"));
+
+        $this->resourceMiddleware = new Fluent([
+            'api' => new Fluent(json_decode($apiMiddlewareFile, true)),
+            'web' => new Fluent(json_decode($middlewareFile, true)),
+        ]);
     }
 
-    public function of(string $method): string
+    public function api(?string $method = null): null|string|Fluent
     {
-        return $this->resourceMiddleware->{$method};
+        if(is_null($method)) return $this->resourceMiddleware->api;
+        return $this->resourceMiddleware->api->{$method};
     }
 
-    public function all(): Fluent
+    public function web(?string $method = null): null|string|Fluent
     {
-        return $this->resourceMiddleware;
+        if(is_null($method)) return $this->resourceMiddleware->web;
+        return $this->resourceMiddleware->web->{$method};
     }
+
 }

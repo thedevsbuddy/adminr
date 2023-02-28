@@ -8,11 +8,11 @@ Route::group(['prefix' => '{{MODEL_ENTITIES}}'], function () {
     /// Register/Instantiate Middleware
     $middleware = new {{RESOURCE_NAME}}Middleware();
 
-    Route::get('/', [{{CONTROLLER_CLASS}}::class, 'index'])->middleware($middleware->of('index'));
-    Route::post('/store', [{{CONTROLLER_CLASS}}::class, 'store'])->middleware($middleware->of('store'));
-    Route::get('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'show'])->middleware($middleware->of('show'));
-    Route::put('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'update'])->middleware($middleware->of('update'));
-    Route::delete('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'destroy'])->middleware($middleware->of('destroy'));
-    Route::post('/{{{MODEL_ENTITY}}}/restore', [{{CONTROLLER_CLASS}}::class, 'restore'])->middleware($middleware->of('restore'));
-    Route::delete('/{{{MODEL_ENTITY}}}/force-destroy', [{{CONTROLLER_CLASS}}::class, 'forceDestroy'])->middleware($middleware->of('forceDestroy'));
+    Route::get('/', [{{CONTROLLER_CLASS}}::class, 'index'])->middleware($middleware->api('index'));
+    Route::post('/store', [{{CONTROLLER_CLASS}}::class, 'store'])->middleware($middleware->api('store'));
+    Route::get('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'show'])->middleware($middleware->api('show'));
+    Route::put('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'update'])->middleware($middleware->api('update'));
+    Route::delete('/{{{MODEL_ENTITY}}}', [{{CONTROLLER_CLASS}}::class, 'destroy'])->middleware($middleware->api('destroy'));
+    Route::post('/{{{MODEL_ENTITY}}}/restore', [{{CONTROLLER_CLASS}}::class, 'restore'])->middleware($middleware->api('restore'));
+    Route::delete('/{{{MODEL_ENTITY}}}/force-destroy', [{{CONTROLLER_CLASS}}::class, 'forceDestroy'])->middleware($middleware->api('forceDestroy'));
 });

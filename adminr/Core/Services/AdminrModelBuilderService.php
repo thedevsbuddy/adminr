@@ -14,7 +14,7 @@ class AdminrModelBuilderService implements AdminrBuilderInterface
     use HasStubs;
 
     protected Fluent $resource;
-    protected Array $migrations;
+    protected array $migrations;
     private AdminrBuilderService $builderService;
 
     public function __construct(AdminrBuilderService $service)

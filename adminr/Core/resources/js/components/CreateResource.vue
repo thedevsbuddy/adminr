@@ -413,6 +413,7 @@ function generateCrud() {
     model: model.value,
     softdeletes: softdeletes.value,
     build_api: build_api.value,
+    api_resource: api_resource.value,
   };
 
   axios.post("/generate", postData)
@@ -489,6 +490,7 @@ function saveDraft() {
       model: model.value,
       softdeletes: softdeletes.value,
       build_api: build_api.value,
+      api_resource: api_resource.value,
     };
     localStorage.setItem('rapid_resource', JSON.stringify(resourceInfo));
     setTimeout(() => savingDraft.value = false, 2000);
@@ -503,6 +505,7 @@ function loadDraft() {
     model.value = data.model;
     build_api.value = data.build_api;
     softdeletes.value = data.softdeletes;
+    api_resource.value = data.api_resource;
   }
 }
 

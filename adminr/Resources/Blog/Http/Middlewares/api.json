@@ -1,9 +1,0 @@
-{
-  "index": "",
-  "show":  "auth:sanctum",
-  "store":  "auth:sanctum",
-  "update":  "auth:sanctum",
-  "destroy":  "auth:sanctum",
-  "restore":  "auth:sanctum",
-  "forceDestroy":  "auth:sanctum"
-}

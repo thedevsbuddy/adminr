@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use Adminr\Core\Http\Controllers\AdminrBaseController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class LoginController extends Controller
+class LoginController extends AdminrBaseController
 {
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
-
     public function showLoginForm(): View|RedirectResponse
     {
         try {
@@ -47,6 +41,7 @@ class LoginController extends Controller
 
     public function logout(): RedirectResponse
     {
+        $this->middleware('auth');
         try {
             if (auth()->check()) {
                 auth()->logout();

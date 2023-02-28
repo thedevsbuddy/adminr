@@ -13,7 +13,7 @@ class AdminrApiResourcesBuilderService implements AdminrBuilderInterface
     use HasStubs;
 
     protected Fluent $resource;
-    protected Array $migrations;
+    protected array $migrations;
     private AdminrBuilderService $builderService;
 
     public function __construct(AdminrBuilderService $service)
@@ -28,8 +28,10 @@ class AdminrApiResourcesBuilderService implements AdminrBuilderInterface
 
     public function prepare(): static
     {
-        $stub = $this->processStub($this->getResourceStub('ApiResource'));
-        File::put($this->resource->files->path->temp.'/'.$this->resource->files->files, $stub);
+        if($this->builderService->hasApiResource) {
+            $stub = $this->processStub($this->getResourceStub('ApiResource'));
+            File::put($this->resource->files->path->temp . '/' . $this->resource->files->files, $stub);
+        }
         return $this;
     }
 

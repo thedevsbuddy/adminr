@@ -6,9 +6,11 @@ use Adminr\Core\Database;
 use Adminr\Core\Services\{AdminrApiResourcesBuilderService,
     AdminrBuilderService,
     AdminrControllersBuilderService,
+    AdminrMiddlewareBuilderService,
     AdminrMigrationBuilderService,
     AdminrModelBuilderService,
     AdminrRequestsBuilderService,
+    AdminrResourceInfoBuilderService,
     AdminrRoutesBuilderService,
     AdminrViewsBuilderService};
 use App\Http\Controllers\Controller;
@@ -70,6 +72,14 @@ class BuilderController extends Controller
             /// Prepare Routes
             $routesService = new AdminrRoutesBuilderService($builderService);
             $routesService->prepare();
+
+            /// Prepare Middlewares
+            $middlewareService = new AdminrMiddlewareBuilderService($builderService);
+            $middlewareService->prepare();
+
+            /// Prepare Resource Info File
+            $resourceInfoService = new AdminrResourceInfoBuilderService($builderService);
+            $resourceInfoService->prepare();
 
             /// ================================
             /// Finalize and create resource

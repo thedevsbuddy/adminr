@@ -1,0 +1,11 @@
+{
+  "index": "permission:{{MODEL_ENTITIES}}_index",
+  "show":  "permission:{{MODEL_ENTITIES}}_show",
+  "create":  "permission:{{MODEL_ENTITIES}}_create",
+  "store":  "permission:{{MODEL_ENTITIES}}_store",
+  "edit":  "permission:{{MODEL_ENTITIES}}_edit",
+  "update":  "permission:{{MODEL_ENTITIES}}_update",
+  "destroy":  "permission:{{MODEL_ENTITIES}}_destroy",
+  "restore":  "permission:{{MODEL_ENTITIES}}_restore",
+  "forceDestroy":  "permission:{{MODEL_ENTITIES}}_force_destroy"
+}

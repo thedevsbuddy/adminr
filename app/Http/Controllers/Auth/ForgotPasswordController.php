@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Adminr\Core\Http\Controllers\AdminrBaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
-class ForgotPasswordController extends Controller
+class ForgotPasswordController extends AdminrBaseController
 {
     /*
     |--------------------------------------------------------------------------

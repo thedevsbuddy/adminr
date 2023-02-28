@@ -23,6 +23,7 @@ class AdminrBuilderService
     public string $tableName;
     public bool $hasSoftDelete;
     public bool $buildApi;
+    public bool $hasApiResource;
     public string $currentSessionId;
 
     public function __construct(Request $request)
@@ -40,6 +41,7 @@ class AdminrBuilderService
         $this->migrationFileName = date('Y_m_d_his') . '_create_' . $this->tableName . '_table';
         $this->hasSoftDelete = $this->request->get('softdeletes');
         $this->buildApi = $this->request->get('build_api');
+        $this->hasApiResource = $this->request->get('api_resource');
 
         /// Prepares module info
         $this->prepareResourceInfo();
@@ -134,6 +136,17 @@ class AdminrBuilderService
                     'files' => new Fluent([
                         'web' => "web.php",
                         'api' => "api.php"
+                    ]),
+                ]),
+                'middlewares' => new Fluent([
+                    'path' => new Fluent([
+                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Middlewares")),
+                        'main' => sanitizePath(resourcesPath("$this->resourceName/Http/Middlewares")),
+                    ]),
+                    'files' => new Fluent([
+                        'web' => "web.json",
+                        'middleware' => $this->resourceName . "Middleware.php",
+                        'api' => "api.json"
                     ]),
                 ]),
                 'views' => new Fluent([

@@ -43,4 +43,14 @@ trait HasStubs
     {
         return File::get($this->stubsDirectory . '/requests/' . $requestFile . '.stub');
     }
+
+    public function getMiddlewareStub($middlewareFile): ?string
+    {
+        return File::get($this->stubsDirectory . '/routes/Middlewares/' . $middlewareFile . '.stub');
+    }
+
+    public function getResourceInfoStub($resourceFile): ?string
+    {
+        return File::get($this->stubsDirectory . '/' . $resourceFile . '.stub');
+    }
 }
