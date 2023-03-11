@@ -1,7 +1,6 @@
 <?php
 
-use Adminr\Core\Adminr;
-use App\Models\Setting;
+use Adminr\Core\Models\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;

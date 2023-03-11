@@ -2,7 +2,7 @@
   <div class="create-resource-component">
     <form method="post" @submit.prevent="generateCrud">
       <div class="row justify-content-start align-items-center">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
           <div class="form-group">
             <label for="model_name">Model name <span class="text-danger font-weight-bold">*</span></label>
             <input type="text" id="model_name" @input="validateModelName" v-model="model"
@@ -30,16 +30,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-2">
-          <div class="form-group text-center">
-            <label title="Do you want to create API resources?" data-toggle="tooltip">API Resource?</label>
-            <div class="custom-control text-center custom-switch">
-              <input type="checkbox" class="custom-control-input" v-model="api_resource"
-                     id="api_resource">
-              <label class="custom-control-label" for="api_resource"></label>
-            </div>
-          </div>
-        </div>
+
       </div>
       <hr>
       <table class="table table-bordered w-100">
@@ -335,7 +326,6 @@ const savingDraft = ref(false);
 const model = ref('');
 const softdeletes = ref(false);
 const build_api = ref(true);
-const api_resource = ref(false);
 const dataTypes = ref(props.datatypes);
 const migrations = ref([
   {
@@ -413,7 +403,6 @@ function generateCrud() {
     model: model.value,
     softdeletes: softdeletes.value,
     build_api: build_api.value,
-    api_resource: api_resource.value,
   };
 
   axios.post("/generate", postData)
@@ -490,7 +479,6 @@ function saveDraft() {
       model: model.value,
       softdeletes: softdeletes.value,
       build_api: build_api.value,
-      api_resource: api_resource.value,
     };
     localStorage.setItem('rapid_resource', JSON.stringify(resourceInfo));
     setTimeout(() => savingDraft.value = false, 2000);
@@ -505,7 +493,6 @@ function loadDraft() {
     model.value = data.model;
     build_api.value = data.build_api;
     softdeletes.value = data.softdeletes;
-    api_resource.value = data.api_resource;
   }
 }
 

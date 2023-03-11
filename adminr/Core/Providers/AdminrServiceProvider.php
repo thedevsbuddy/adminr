@@ -38,7 +38,7 @@ class AdminrServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Http/routes.php');
 
         /// Load menus and compose to all views
-        View::composer('adminr::adminr-resource-menus', MenuComposer::class);
+        View::composer('adminr::includes.sidebar-resources-menu', MenuComposer::class);
 
         // Register Blade directive
         Blade::directive('adminrResources', fn() => "<?php echo \$__env->make('adminr::adminr-resource-menus')->render(); ?>");

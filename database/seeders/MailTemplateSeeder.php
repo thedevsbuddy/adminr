@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\MailTemplate;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Adminr\Core\Models\MailTemplate;
 use Illuminate\Database\Seeder;
 
 class MailTemplateSeeder extends Seeder

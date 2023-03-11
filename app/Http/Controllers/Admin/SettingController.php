@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Adminr\Core\Models\Setting;
 use App\Http\Controllers\Controller;
-use App\Models\Setting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -33,7 +33,7 @@ class SettingController extends Controller
             return $this->backError('Something went wrong!');
         }
     }
-    
+
     public function email(): View|RedirectResponse
     {
         try {

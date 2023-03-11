@@ -28,10 +28,8 @@ class AdminrApiResourcesBuilderService implements AdminrBuilderInterface
 
     public function prepare(): static
     {
-        if($this->builderService->hasApiResource) {
-            $stub = $this->processStub($this->getResourceStub('ApiResource'));
-            File::put($this->resource->files->path->temp . '/' . $this->resource->files->files, $stub);
-        }
+        $stub = $this->processStub($this->getResourceStub('ApiResource'));
+        File::put($this->resource->files->path->temp . '/' . $this->resource->files->files, $stub);
         return $this;
     }
 

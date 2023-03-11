@@ -6,14 +6,13 @@ use Adminr\Resources\{{RESOURCE_NAME}}\Models\{{MODEL_CLASS}};
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Adminr\Core\Http\Controllers\AdminrBaseApiController;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Adminr\Resources\{{RESOURCE_NAME}}\Http\ApiResources\{{MODEL_CLASS}}Resource;
 use Adminr\Resources\{{RESOURCE_NAME}}\Http\Requests\{{{CREATE_REQUEST_CLASS}},{{UPDATE_REQUEST_CLASS}}};
 
 class {{CONTROLLER_CLASS}} extends AdminrBaseApiController
 {
-    public function index(Request $request): JsonResponse|AnonymousResourceCollection
+    public function index(): JsonResponse|AnonymousResourceCollection
     {
         try{
             {{API_INDEX_QUERY}}

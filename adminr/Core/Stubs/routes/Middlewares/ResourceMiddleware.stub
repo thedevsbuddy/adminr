@@ -6,7 +6,7 @@ use Adminr\Core\Http\Middlewares\AdminrMiddleware;
 
 class {{RESOURCE_NAME}}Middleware extends AdminrMiddleware
 {
-    protected string $resource = '{{RESOURCE_NAME}}';
+    protected string $resource = "{{RESOURCE_NAME}}";
 
     // Its magic
 }

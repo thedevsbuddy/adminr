@@ -2,9 +2,9 @@
 
 namespace App\Traits;
 
+use Adminr\Core\Models\MailTemplate;
 use App\Mail\DynamicMail;
 use App\Mail\DynamicMailQueued;
-use App\Models\MailTemplate;
 use Illuminate\Support\Facades\Mail;
 
 trait HasMailable

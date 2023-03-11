@@ -3,16 +3,16 @@
 namespace Adminr\Resources\{{RESOURCE_NAME}}\Http\Controllers;
 
 use Adminr\Resources\{{MODEL_CLASS}}\Models\{{MODEL_CLASS}};
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Controller;
+use Adminr\Core\Http\Controllers\AdminrBaseController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Adminr\Resources\{{RESOURCE_NAME}}\Http\Requests\{{{CREATE_REQUEST_CLASS}},{{UPDATE_REQUEST_CLASS}}};
 {{FOREIGN_ENTITY_USE}}
 
-class {{CONTROLLER_CLASS}} extends Controller
+class {{CONTROLLER_CLASS}} extends AdminrBaseController
 {
-    public function index(Request $request): View|RedirectResponse
+    public function index(): View|RedirectResponse
     {
         try {
             {{INDEX_QUERY}}
@@ -41,7 +41,7 @@ class {{CONTROLLER_CLASS}} extends Controller
         }
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store({{CREATE_REQUEST_CLASS}} $request): RedirectResponse
     {
         try{
             {{FILE_UPLOAD_STATEMENT}}
@@ -65,7 +65,7 @@ class {{CONTROLLER_CLASS}} extends Controller
         }
     }
 
-    public function update(Request $request, {{MODEL_CLASS}} ${{MODEL_ENTITY}}): RedirectResponse
+    public function update({{UPDATE_REQUEST_CLASS}} $request, {{MODEL_CLASS}} ${{MODEL_ENTITY}}): RedirectResponse
     {
         try{
             {{FILE_UPDATE_STATEMENT}}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Adminr\Resources\{{RESOURCE_NAME}}\Http\Resources;
+namespace Adminr\Resources\{{RESOURCE_NAME}}\Http\ApiResources;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Resources\Json\JsonResource;

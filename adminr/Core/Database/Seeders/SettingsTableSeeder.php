@@ -2,12 +2,12 @@
 
 namespace Adminr\Core\Database\Seeders;
 
-use App\Models\Setting;
+use Adminr\Core\Models\Setting;
 
 class SettingsTableSeeder
 {
 
-    public function run()
+    public function run(): void
     {
         Setting::firstOrCreate([
             "option" => "app_name",

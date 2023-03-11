@@ -3,7 +3,7 @@ import {reactive} from "vue";
 const toast = reactive({
     items: [],
     position: 'top-right',
-    timer: 3000,
+    timer: 5000,
     canClose: false,
     show: function (message, type = 'default', autoHide = true) {
         this.items.unshift({

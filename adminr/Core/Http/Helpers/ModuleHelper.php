@@ -10,8 +10,8 @@ class ModuleHelper
 {
     static public function getResources(): ?array
     {
-        Cache::forget('modulesList');
-        return Cache::remember('modulesList', config('adminr.cache_ttl'), fn () => json_decode(File::get(__DIR__ . "/../../resources.json")));
+        Cache::forget('resourceList');
+        return Cache::remember('resourceList', config('adminr.cache_ttl'), fn () => json_decode(File::get(resourcesPath('resources.json'))));
     }
 
     static public function getModulesInfo(string $module): ?object

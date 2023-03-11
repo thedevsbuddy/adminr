@@ -12,7 +12,7 @@ use Adminr\Resources\{{RESOURCE_NAME}}\Http\Requests\{{{CREATE_REQUEST_CLASS}},{
 
 class {{CONTROLLER_CLASS}} extends AdminrBaseController
 {
-    public function index(Request $request): View|RedirectResponse
+    public function index(): View|RedirectResponse
     {
         try {
             {{INDEX_QUERY}}

@@ -25,13 +25,13 @@ class AdminrMiddleware implements AdminrMiddlewareInterface
     public function api(?string $method = null): null|string|Fluent
     {
         if(is_null($method)) return $this->resourceMiddleware->api;
-        return $this->resourceMiddleware->api->{$method};
+        return $this->resourceMiddleware->api->{$method} ?: 'api';
     }
 
     public function web(?string $method = null): null|string|Fluent
     {
         if(is_null($method)) return $this->resourceMiddleware->web;
-        return $this->resourceMiddleware->web->{$method};
+        return $this->resourceMiddleware->web->{$method}  ?: 'web';
     }
 
 }

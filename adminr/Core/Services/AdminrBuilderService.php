@@ -2,15 +2,16 @@
 
 namespace Adminr\Core\Services;
 
-use Adminr\Core\Traits\{HasStubs};
+use Adminr\Core\{Traits\HasStubs, Support\Rayson};
+
 use Illuminate\Http\Request;
-use Illuminate\Support\{Facades\File, Fluent, Str};
+use Illuminate\Support\{Facades\File, Str};
 
 class AdminrBuilderService
 {
     use HasStubs;
 
-    public Fluent $resourceInfo;
+    public Rayson $resourceInfo;
 
     public Request $request;
     public string $resourceName;
@@ -41,7 +42,6 @@ class AdminrBuilderService
         $this->migrationFileName = date('Y_m_d_his') . '_create_' . $this->tableName . '_table';
         $this->hasSoftDelete = $this->request->get('softdeletes');
         $this->buildApi = $this->request->get('build_api');
-        $this->hasApiResource = $this->request->get('api_resource');
 
         /// Prepares module info
         $this->prepareResourceInfo();
@@ -78,96 +78,187 @@ class AdminrBuilderService
 
     private function prepareResourceInfo(): void
     {
-        $this->resourceInfo = new Fluent([
+        $this->resourceInfo = new Rayson([
             'name' => $this->resourceName,
-            'file' => new Fluent([
-                'migration' => new Fluent([
-                    'path' => new Fluent([
+            'file' => [
+                'migration' =>[
+                    'path' =>[
                         'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/database")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/database")),
-                    ]),
-                    'files' => new Fluent([
+                    ],
+                    'files' => [
                         'migration' => Str::snake("create_" . $this->modelEntities . "_table") . ".php",
                         'schema' => 'schema.json'
-                    ]),
-                ]),
-                'apiResources' => new Fluent([
-                    'path' => new Fluent([
+                    ],
+                ],
+                'apiResources' => [
+                    'path' => [
                         'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/ApiResources")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/Http/ApiResources")),
-                    ]),
+                    ],
                     'files' => $this->modelName . "Resource.php",
-                ]),
-                'controllers' => new Fluent([
-                    'path' => new Fluent([
-                        'temp' => new Fluent([
+                ],
+                'controllers' => [
+                    'path' => [
+                        'temp' => [
                             'admin' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Controllers")),
                             'api' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Controllers/Api")),
-                        ]),
-                        'main' => new Fluent([
+                        ],
+                        'main' => [
                             'admin' => sanitizePath(resourcesPath("$this->resourceName/Http/Controllers")),
                             'api' => sanitizePath(resourcesPath("$this->resourceName/Http/Controllers/Api"))
-                        ]),
-                    ]),
+                        ],
+                    ],
                     'files' => $this->controllerName . ".php",
-                ]),
-                'requests' => new Fluent([
-                    'path' => new Fluent([
+                ],
+                'requests' => [
+                    'path' => [
                         'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Requests")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/Http/Requests")),
-                    ]),
-                    'files' => new  Fluent([
+                    ],
+                    'files' => [
                         'create' => "Create" . $this->modelName . "Request.php",
                         'update' => "Update" . $this->modelName . "Request.php"
-                    ]),
-                ]),
-                'model' => new Fluent([
-                    'path' => new Fluent([
+                    ],
+                ],
+                'model' => [
+                    'path' => [
                         'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Models")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/Models")),
-                    ]),
+                    ],
                     'files' => $this->modelName . ".php",
-                ]),
-                'routes' => new Fluent([
-                    'path' => new Fluent([
+                ],
+                'routes' => [
+                    'path' => [
                         'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Routes")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/Routes")),
-                    ]),
-                    'files' => new Fluent([
+                    ],
+                    'files' => [
                         'web' => "web.php",
                         'api' => "api.php"
-                    ]),
-                ]),
-                'middlewares' => new Fluent([
-                    'path' => new Fluent([
+                    ],
+                ],
+                'middlewares' => [
+                    'path' => [
                         'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Middlewares")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/Http/Middlewares")),
-                    ]),
-                    'files' => new Fluent([
+                    ],
+                    'files' => [
                         'web' => "web.json",
                         'middleware' => $this->resourceName . "Middleware.php",
                         'api' => "api.json"
-                    ]),
-                ]),
-                'views' => new Fluent([
-                    'path' => new Fluent([
+                    ],
+                ],
+                'views' => [
+                    'path' => [
                         'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Views")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName/Views")),
-                    ]),
-                    'files' => new Fluent([
+                    ],
+                    'files' => [
                         'index' => "index.blade.php",
                         'create' => "create.blade.php",
                         'edit' => "edit.blade.php"
-                    ]),
-                ]),
-                'resource' => new Fluent([
-                    'path' => new Fluent([
+                    ],
+                ],
+                'resource' => [
+                    'path' => [
                         'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName")),
                         'main' => sanitizePath(resourcesPath("$this->resourceName")),
-                    ]),
+                    ],
                     'files' => "resource.json",
-                ]),
-            ])
+                ],
+            ]
         ]);
+//        $this->resourceInfo = new Fluent([
+//            'name' => $this->resourceName,
+//            'file' => new Fluent([
+//                'migration' => new Fluent([
+//                    'path' => new Fluent([
+//                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/database")),
+//                        'main' => sanitizePath(resourcesPath("$this->resourceName/database")),
+//                    ]),
+//                    'files' => new Fluent([
+//                        'migration' => Str::snake("create_" . $this->modelEntities . "_table") . ".php",
+//                        'schema' => 'schema.json'
+//                    ]),
+//                ]),
+//                'apiResources' => new Fluent([
+//                    'path' => new Fluent([
+//                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/ApiResources")),
+//                        'main' => sanitizePath(resourcesPath("$this->resourceName/Http/ApiResources")),
+//                    ]),
+//                    'files' => $this->modelName . "Resource.php",
+//                ]),
+//                'controllers' => new Fluent([
+//                    'path' => new Fluent([
+//                        'temp' => new Fluent([
+//                            'admin' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Controllers")),
+//                            'api' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Controllers/Api")),
+//                        ]),
+//                        'main' => new Fluent([
+//                            'admin' => sanitizePath(resourcesPath("$this->resourceName/Http/Controllers")),
+//                            'api' => sanitizePath(resourcesPath("$this->resourceName/Http/Controllers/Api"))
+//                        ]),
+//                    ]),
+//                    'files' => $this->controllerName . ".php",
+//                ]),
+//                'requests' => new Fluent([
+//                    'path' => new Fluent([
+//                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Requests")),
+//                        'main' => sanitizePath(resourcesPath("$this->resourceName/Http/Requests")),
+//                    ]),
+//                    'files' => new  Fluent([
+//                        'create' => "Create" . $this->modelName . "Request.php",
+//                        'update' => "Update" . $this->modelName . "Request.php"
+//                    ]),
+//                ]),
+//                'model' => new Fluent([
+//                    'path' => new Fluent([
+//                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Models")),
+//                        'main' => sanitizePath(resourcesPath("$this->resourceName/Models")),
+//                    ]),
+//                    'files' => $this->modelName . ".php",
+//                ]),
+//                'routes' => new Fluent([
+//                    'path' => new Fluent([
+//                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Routes")),
+//                        'main' => sanitizePath(resourcesPath("$this->resourceName/Routes")),
+//                    ]),
+//                    'files' => new Fluent([
+//                        'web' => "web.php",
+//                        'api' => "api.php"
+//                    ]),
+//                ]),
+//                'middlewares' => new Fluent([
+//                    'path' => new Fluent([
+//                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Http/Middlewares")),
+//                        'main' => sanitizePath(resourcesPath("$this->resourceName/Http/Middlewares")),
+//                    ]),
+//                    'files' => new Fluent([
+//                        'web' => "web.json",
+//                        'middleware' => $this->resourceName . "Middleware.php",
+//                        'api' => "api.json"
+//                    ]),
+//                ]),
+//                'views' => new Fluent([
+//                    'path' => new Fluent([
+//                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName/Views")),
+//                        'main' => sanitizePath(resourcesPath("$this->resourceName/Views")),
+//                    ]),
+//                    'files' => new Fluent([
+//                        'index' => "index.blade.php",
+//                        'create' => "create.blade.php",
+//                        'edit' => "edit.blade.php"
+//                    ]),
+//                ]),
+//                'resource' => new Fluent([
+//                    'path' => new Fluent([
+//                        'temp' => sanitizePath(storage_path(".temp/$this->currentSessionId/$this->resourceName")),
+//                        'main' => sanitizePath(resourcesPath("$this->resourceName")),
+//                    ]),
+//                    'files' => "resource.json",
+//                ]),
+//            ])
+//        ]);
     }
 }

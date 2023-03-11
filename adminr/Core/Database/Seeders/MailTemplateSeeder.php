@@ -2,16 +2,16 @@
 
 namespace Adminr\Core\Database\Seeders;
 
-use App\Models\MailTemplate;
+use Adminr\Core\Models\MailTemplate;
 
 class MailTemplateSeeder
 {
-    public function run()
+    public function run(): void
     {
         /**
          * Create registration welcome template
          */
-        MailTemplate::create([
+        MailTemplate::firstOrCreate([
             "subject" => "Welcome to {app.name}.",
             "purpose" => "To be sent when user registers and verification is disabled.",
             "code" => "registration-welcome-mail",
@@ -31,7 +31,7 @@ Password: `your selected password` {br}",
         /**
          * Create registration email verification template
          */
-        MailTemplate::create([
+        MailTemplate::firstOrCreate([
             "subject" => "Welcome to {app.name}.",
             "purpose" => "To be sent when user registers and verification is enabled.",
             "code" => "registration-email-verification-mail",
@@ -58,7 +58,7 @@ You can click below link to verify your account.
         /**
          * Create registration email verification by OTP template
          */
-        MailTemplate::create([
+        MailTemplate::firstOrCreate([
             "subject" => "Welcome to {app.name}.",
             "purpose" => "To be sent when user registers and verification is enabled with OTP method typically it will be for api auth.",
             "code" => "registration-email-verification-with-otp-mail",
@@ -85,7 +85,7 @@ Enter above **OTP** in the verification screen and verify your account.
         /**
          * Create email verification template
          */
-        MailTemplate::create([
+        MailTemplate::firstOrCreate([
             "subject" => "Verify your email.",
             "purpose" => "To be sent when user request for email verification manually.",
             "code" => "email-verification-mail",
@@ -110,7 +110,7 @@ You can click below link to verify your account.
         /**
          * Create email verification OTP template
          */
-        MailTemplate::create([
+        MailTemplate::firstOrCreate([
             "subject" => "Verify your email.",
             "purpose" => "To be sent when user request for email verification manually with OTP method.",
             "code" => "email-verification-otp-mail",
@@ -129,7 +129,7 @@ Verification Code: **{otp}**
         /**
          * Create email verification success template
          */
-        MailTemplate::create([
+        MailTemplate::firstOrCreate([
             "subject" => "Email verified successfully.",
             "purpose" => "To be sent when email verification completed successfully.",
             "code" => "email-verification-success-mail",
@@ -146,7 +146,7 @@ now you can login and use our platform.
         /**
          * Password updated email template
          */
-        MailTemplate::create([
+        MailTemplate::firstOrCreate([
             "subject" => "Your password updated successfully for {email}!",
             "purpose" => "To be sent when password updated.",
             "code" => "password-updated-mail",
