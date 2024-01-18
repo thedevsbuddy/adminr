@@ -8,7 +8,7 @@
 
 ---
 
-## NOTE: I would like to inform you that this project is abandoned and is no longer receiving any update please consider new package for same functionality [Admin Craft](https://github.com/thedevsbuddy/admin-craft)
+## NOTE: I would like to inform you that this project is abandoned and is no longer receiving any update.
 
 ---
 
